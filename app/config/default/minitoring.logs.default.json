@@ -1,0 +1,338 @@
+[
+    {
+        "name": "Apache access",
+        "type": "apache_access",
+        "software":"apache",
+        "paths": [
+            "/var/log/" ,
+            "/var/log/apache/" ,
+            "/var/log/apache2/" ,
+            "/var/log/httpd/" ,
+            "/usr/local/var/log/apache/" ,
+            "/usr/local/var/log/apache2/" ,
+            "/usr/local/var/log/httpd/" ,
+            "/opt/local/apache/logs/" ,
+            "/opt/local/apache2/logs/" ,
+            "/opt/local/httpd/logs/" ,
+            "C:/wamp/logs/"
+        ],
+        "files": [
+            "access.log" ,
+            "access_log" ,
+            "apache.log" ,
+            "apache_access.log" 
+        ],
+        "columns": [
+            {
+                "code":"%t",
+                "name":"time",
+                "display":"Date"
+            },
+            {
+                "code":"%v",
+                "name":"serverName",
+                "display":"Server Name"
+            },
+            {
+                "code":"%V",
+                "name":"canonicalServerName",
+                "display":"Canonical Server Name"
+            },
+            {
+                "code":"%p",
+                "name":"port",
+                "display":"Port"
+            },
+            {
+                "code":"%h",
+                "name":"host",
+                "display":"IP"
+            },
+            {
+                "code":"%a",
+                "name":"remoteIp",
+                "display":"Remote IP"
+            },
+            {
+                "code":"%A",
+                "name":"localIp",
+                "display":"Local IP"
+            },
+            {
+                "code":"%u",
+                "name":"user",
+                "display":"User"
+            },
+            {
+                "code":"%l",
+                "name":"logname",
+                "display":"Log Name"
+            },
+            {
+                "code":"%m",
+                "name":"requestMethod",
+                "display":"Method"
+            },
+            {
+                "code":"%U",
+                "name":"URL",
+                "display":"URL"
+            },
+            {
+                "code":"%H",
+                "name":"requestProtocol",
+                "display":"Protocol"
+            },
+            {
+                "code":"%r",
+                "name":"request",
+                "display":"Request"
+            },
+            {
+                "code":"%>s",
+                "name":"status",
+                "display":"Status"
+            },
+            {
+                "code":"%s",
+                "name":"status",
+                "display":"Status"
+            },
+            {
+                "code":"%O",
+                "name":"sentBytes",
+                "display":"Size"
+            },
+            {
+                "code":"%b",
+                "name":"responseBytes",
+                "display":"Response Size"
+            },
+            {
+                "code":"%T",
+                "name":"requestTime",
+                "display":"Request Time"
+            },
+            {
+                "code":"%D",
+                "name":"timeServeRequest",
+                "display":"Time Server Request"
+            },
+            {
+                "code":"%I",
+                "name":"receivedBytes",
+                "display":"Received Bytes"
+            },
+            {
+                "code":"%{Referer}i",
+                "name":"headerReferer",
+                "display":"Referer"
+            },
+            {
+                "code":"%{User-Agent}i",
+                "name":"headerUserAgent",
+                "display":"User Agent"
+            }
+        ],
+        "formats": [
+            {
+                "name": "default",
+                "format": ""
+            },
+            {
+                "name": "apache_common",
+                "format": "%h %l %u %t \"%r\" %>s %O"
+            },
+            {
+                "name": "apache_combined",
+                "format": "%h %l %u %t \"%r\" %>s %O"
+            },
+            {
+                "name": "apache_combined_vhost",
+                "format": "%v:%p %h %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\""
+            }
+        ]
+    },
+    {
+        "name": "Apache error",
+        "type": "apache_error",
+        "paths": [  
+            "/var/log/" ,
+            "/var/log/apache/" ,
+            "/var/log/apache2/" ,
+            "/var/log/httpd/" ,
+            "/usr/local/var/log/apache/" ,
+            "/usr/local/var/log/apache2/" ,
+            "/usr/local/var/log/httpd/" ,
+            "/opt/local/apache/logs/" ,
+            "/opt/local/apache2/logs/" ,
+            "/opt/local/httpd/logs/" ,
+            "C:/wamp/logs/"
+        ],
+        "files": [
+            "error.log" ,
+            "error_log" ,
+            "apache_error.log" 
+        ],
+        "columns": [
+            {
+                "code":"%t",
+                "name":"time",
+                "display":"Date"
+            },
+            {
+                "code":"%{u}t",
+                "name":"time",
+                "display":"Date"
+            },
+            {
+                "code":"%a",
+                "name":"remoteIp",
+                "display":"Remote IP"
+            },
+            {
+                "code":"%A",
+                "name":"localIp",
+                "display":"Local IP"
+            },
+            {
+                "code":"%-m",
+                "name":"module",
+                "display":"Module"
+            },
+            {
+                "code":"%m",
+                "name":"module",
+                "display":"Module"
+            },
+            {
+                "code":"%l",
+                "name":"level",
+                "display":"Level"
+            },
+            {
+                "code":"%P",
+                "name":"pid",
+                "display":"PID"
+            },
+            {
+                "code":"%T",
+                "name":"tid",
+                "display":"TID"
+            },
+            {
+                "code":"%E:",
+                "name":"errorCode",
+                "display":"ErrorCode"
+            },
+            {
+                "code":"%F:",
+                "name":"fileName",
+                "display":"FileName"
+            },
+            {
+                "code":"%M",
+                "name":"message",
+                "display":"Message"
+            }
+        ],
+        "formats": [
+            {
+                "name": "default",
+                "format": ""
+            }
+        ]
+    },
+    {
+        "name": "Fail2ban",
+        "type": "fail2ban",
+        "paths": [  
+            "/var/log/"
+        ],
+        "files": [
+            "fail2ban.log" 
+        ],
+        "columns": [
+            {
+                "code":"%t",
+                "name":"time",
+                "display":"Date"
+            },
+            {
+                "code":"%s",
+                "name":"service",
+                "display":"Service"
+            },
+            {
+                "code":"%p",
+                "name":"pid",
+                "display":"PID"
+            },
+            {
+                "code":"%l",
+                "name":"level",
+                "display":"Level"
+            },
+            {
+                "code":"%j",
+                "name":"jail",
+                "display":"Jail"
+            },
+            {
+                "code":"%m",
+                "name":"message",
+                "display":"Message"
+            }
+        ],
+        "formats": [
+            {
+                "name": "use default",
+                "format": ""
+            }
+        ]
+    },
+    {
+        "name": "Syslog",
+        "type": "syslog",
+        "paths": [  
+            "/var/log/"
+        ],
+        "files": [
+            "syslog" 
+        ],
+        "columns": [
+            {
+                "code":"%t",
+                "name":"time",
+                "display":"Date"
+            },
+            {
+                "code":"%h",
+                "name":"hostname",
+                "display":"Hostname"
+            },
+            {
+                "code":"%s",
+                "name":"service",
+                "display":"Service"
+            },
+            {
+                "code":"%p",
+                "name":"pid",
+                "display":"PID"
+            },
+            {
+                "code":"%m",
+                "name":"message",
+                "display":"Message"
+            }
+        ],
+        "formats": [
+            {
+                "name": "use default",
+                "format": ""
+            }
+        ]
+    }
+    
+]

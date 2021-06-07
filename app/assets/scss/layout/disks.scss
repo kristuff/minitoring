@@ -1,0 +1,14 @@
+
+table#inodes-table,
+table#disks-table {
+
+    @media only screen and (min-width:768px){
+
+        // fixed header
+        th {
+            position: sticky;
+            top:-10px; // padding 
+        }
+
+    }
+}

@@ -1,0 +1,48 @@
+
+table#fail2ban-server,
+table#fail2ban-jails {
+    display: table;
+    table-layout: auto;
+    font-size: 1.5rem;
+
+    td[data-column="Status"]{
+        font-size: 1.3rem;
+    }
+}
+
+table#iptables-data,
+table#ip6tables-data {
+    display: table;
+    table-layout: auto;
+    font-size: 1.4rem;
+
+    tr.group-row{
+        cursor: pointer;
+    }
+
+    th.group {
+        width: 26px;
+    }
+
+    tr:not(.group-row).hidden {
+        display: none;
+    }
+
+    tr.group-row.expanded td a.toggle i {
+        cursor: pointer;
+        
+        &:after {
+            content: '\f068'; // fa-minus
+            // content: '\f0d7'; // fa-fa-caret-down
+        }
+    }
+
+    tr.group-row:not(.expanded) td a.toggle i {
+        cursor: pointer;
+        &:after {
+            content: '\f067'; // fa-plus
+            // content: '\f0da'; // fa-fa-caret-right
+        }
+    }
+
+}

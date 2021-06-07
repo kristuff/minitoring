@@ -1,0 +1,617 @@
+#!/usr/bin/env php
+<?php
+
+/** 
+ *        _      _ _           _
+ *  _ __ (_)_ _ (_) |_ ___ _ _(_)_ _  __ _
+ * | '  \| | ' \| |  _/ _ \ '_| | ' \/ _` |
+ * |_|_|_|_|_||_|_|\__\___/_| |_|_||_\__, |
+ *                                   |___/
+ * 
+ * This file is part of Kristuff\Minitoring.
+ * (c) Kristuff <kristuff@kristuff.fr>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @version    0.1.1
+ * @copyright  2017-2021 Kristuff
+ */
+
+require_once realpath(__DIR__) .'/../vendor/autoload.php';
+
+use Kristuff\Mishell\Console;
+use Kristuff\Patabase\Driver\Sqlite\SqliteDatabase;
+use Kristuff\Minitoring\Model;
+use Kristuff\Minitoring\Model\System;
+use Kristuff\Minitoring\Model\Services\Fail2banModel;
+use Kristuff\Minitoring\Model\System\SystemModel;
+use Kristuff\Minitoring\Model\System\ServiceModel;
+
+// ok: ✅ ❌ ›  ★ ✦       ✻ ☆ ♣
+// bad:  ✓ ✔ ✗ →
+//
+// x    => no value
+// x:   => value required
+// x::  => optional value
+$arguments = getopt("aiucdmlhspf", 
+                   ["all", "infos", "uptime", "cpu", "disks", "memory", "load", "all", "system", "perf", "help", "f2b", "ftbstatus:"]);
+
+// start prog
+Program::start($arguments);
+
+class Program
+{
+    public static function start($arguments)
+    {
+        // custom tables
+        Console::$horizontalSeparator = '-'; 
+        Console::$verticalSeparator = '  '; 
+        Console::$verticalInnerSeparator = '  ';
+        Console::$tableCellPadding = '';
+
+        // required at least one valid argument
+        if (empty($arguments)){
+            self::banner();
+            self::error('No valid arguments given.');
+            self::help();       
+            exit(1);
+        }
+    
+        //Console::log();
+
+        // build report
+        // self::topBanner();
+        Console::log();    
+        if (self::inArguments($arguments, 'i', 'infos'))  self::systemInfos();
+        if (self::inArguments($arguments, 'u', 'uptime')) self::uptime();
+        if (self::inArguments($arguments, 'c', 'cpu'))    self::cpuInfos();
+        if (self::inArguments($arguments, 'd', 'disks'))  self::diskInfos();
+        if (self::inArguments($arguments, 'm', 'memory')) self::memory();
+        if (self::inArguments($arguments, 'l', 'load'))   self::load();
+
+        if (self::inArguments($arguments, 'h', 'help', '', '')) self::help();
+      
+        if (self::inArguments($arguments, 's', 'system', '', '')){
+            self::systemInfos();
+            self::uptime();
+            self::cpuInfos();
+        } 
+        if (self::inArguments($arguments, 'p', 'perf', '', '')) {
+            self::diskInfos();
+            self::memory();
+            self::load();
+        } 
+      
+        //todo
+        if (self::inArguments($arguments, 'f', 'f2b'))   self::fail2ban();
+
+        $jail = self::getArgumentValue($arguments, '', 'ftbstatus');
+        if (isset($jail)) {
+            self::fail2banStatus($jail);
+        }
+
+        self::footer();
+    }
+
+    /**
+     * Print an error
+     * 
+     * @access protected
+     * @static
+     * @param string    $error      The error message
+     * 
+     * @return void
+     */
+    protected static function error($error)
+    {
+        Console::log('  ' .   Console::text('-ERROR-','white', 'red'));
+        Console::log(
+            Console::text('  ✗ ', 'red') . 
+            Console::text('', 'white') . 
+            Console::text($error, 'white') . 
+            Console::text('', 'white')
+        );    
+        Console::log();    
+    }
+
+    /**
+     * Print the footer banner
+     * 
+     * @access protected
+     * @static
+     * 
+     * @return void
+     */
+    protected static function footer()
+    {
+        Console::log('  _____________________________________________________________________________________________________', 'darkgray');    
+        Console::log(
+            Console::text('  Kristuff\Minitoring v0.1 | Made with ', 'darkgray') . 
+            Console::text('♥', 'red') . 
+            Console::text(' in France | © 2017-2021 Kristuff (', 'darkgray') .
+            Console::text('https://github.com/kristuff', 'darkgray', 'underlined') .
+            Console::text(')', 'darkgray')
+        );
+         Console::log();    
+    }
+
+   /**
+     * Print the top banner
+     * 
+     * @access protected
+     * @static
+     * 
+     * @return void
+     */
+    protected static function topBanner()
+    {
+        Console::log("   __  __ _       _ _             _               ", 'darkgray');
+        Console::log("  |  \/  (_)_ __ (_) |_ ___  _ __(_)_ __   __ _   ", 'darkgray');
+        Console::log("  | |\/| | | '_ \| | __/ _ \| '__| | '_ \ / _` |  ", 'darkgray');
+        Console::log("  | |  | | | | | | | || (_) | |  | | | | | (_| |  ", 'darkgray');
+        Console::log("  |_|  |_|_|_| |_|_|\__\___/|_|  |_|_| |_|\__, |  ", 'darkgray');
+        Console::log("                                          |___/   ", 'darkgray');
+    }
+
+    /**
+     * Print the top banner
+     * 
+     * @access protected
+     * @static
+     * 
+     * @return void
+     */
+    protected static function banner(bool $delimiter = false, $title = false)
+    {
+        //Console::log();    
+        //Console::log('  Minitoring version v0.1', 'darkgray'); 
+        //Console::log('  Made with ♥ in France', 'darkgray'); 
+        //Console::log('  © 2017-2021 Kristuff', 'darkgray'); 
+        //Console::log();  
+        Console::log($delimiter ? '  --------------------------------------------------------------------': '', 'darkgray');    
+        Console::log(
+            Console::text('  Kristuff\Minitoring version v0.1 | Made with ', 'darkgray') . 
+            Console::text('♥', 'red') . 
+            Console::text(' in France | © 2017-2021 Kristuff', 'darkgray')); 
+            //        Console::log(' © 2017-2021 Kristuff', 'darkgray'); 
+        Console::log();    
+    }
+
+    /**
+     * Prints the help
+     * 
+     * @access protected
+     * @static
+     * 
+     * @return void
+     */
+    static function help()
+    {
+        
+        Console::log();    
+        Console::log(' ' . Console::text('SYNOPSIS', 'white', 'underline')); 
+        Console::log(' ' . Console::text('    php minitoring ', 'white') . 
+                           Console::text('[', 'lightgrey') .
+                           Console::text('options', 'yellow') . 
+                           Console::text(']', 'lightgrey')
+        ); 
+        Console::log();    
+        Console::log(' ' . Console::text('OPTIONS', 'white', 'underline')); 
+        Console::log('   -i, --infos     Display general system infos', 'normal');
+        Console::log('   -u, --uptime    Display uptime infos', 'normal');
+        Console::log('   -c, --cpu       Display cpu infos', 'normal');
+        Console::log('   -d, --disks     Display disks usage', 'normal');
+        Console::log('   -m, --memory    Display memory usage', 'normal');
+        Console::log('   -l, --load      Display load average', 'normal');
+        Console::log('   -f, --f2b       Display Fail2ban stats', 'normal');
+        Console::log('   -a, --all       Display all infos messages', 'normal');
+        Console::log('   -s, --system    Display all system infos related', 'normal');
+        Console::log('   -p, --perf      Display all performance infos related', 'normal');
+        Console::log();    
+    }
+
+    /**
+     * helper function to check if a argument is given
+     * 
+     * @access protected
+     * @static
+     * @param array     $arguments      The list of arguments     
+     * @param array     $shortArg       The short argument to check
+     * @param array     $longArg        The long argument to check
+     * @param array     $allValue       The short argument for all 
+     * @param array     $longAllValue   The long argument for all 
+     * 
+     * @return bool     True if the short or long argument exist in the arguments array, otherwise false
+     */
+    protected static function inArguments(array $arguments, string $shortArg, string $longArg, string $allValue = 'a', string $longAllValue = 'all'  )
+    {
+         return (!empty($allValue) && array_key_exists($allValue, $arguments)) || 
+                (!empty($longAllValue) && array_key_exists($longAllValue, $arguments)) || 
+                array_key_exists($shortArg, $arguments) || 
+                array_key_exists($longArg, $arguments);
+    }
+
+    /**
+     * helper function to check if a argument is given and has value
+     * 
+     * @access protected
+     * @static
+     * @param array     $arguments      The list of arguments     
+     * @param array     $shortArg       The short argument to check
+     * @param array     $longArg        The long argument to check
+     * 
+     * @return mixed    
+     */
+    protected static function getArgumentValue(array $arguments, string $shortArg, string $longArg)
+    {
+         return !empty($shortArg) && array_key_exists($shortArg, $arguments) ? $arguments[$shortArg] : 
+               ( !empty($longArg) && array_key_exists($longArg, $arguments)  ? $arguments[$longArg] : null);
+    }
+    
+    
+    protected static function progressBar($percent, $status, $progressLenght = 19)
+    {
+        $start = round($progressLenght * $percent / 100);
+        $color   = self::getColorFromStatus($status);
+        $bgcolor = self::getBgColorFromStatus($status);
+
+       return   Console::text(Console::pad($percent . '% ', 4, ' ', STR_PAD_LEFT),  $color) .
+                Console::text(Console::pad('', $start, '.'),  'white', $bgcolor) .
+                Console::text(Console::pad('', $progressLenght - $start, ' '), 'black', 'darkgray') ;
+    }
+
+    protected static function sectionTitle(string $title)
+    {
+        Console::log('  ' . Console::text(' ' .  $title . ' ', 'white', 'blue'));
+    }
+
+    protected static function getColorFromStatus($status)
+    {
+        switch (strval($status)){
+            case '0': return 'green';
+            case '1': return 'yellow';
+            case '2': return 'red';
+            default: return 'normal';
+        }
+    }
+
+    protected static function getBgColorFromStatus($status)
+    {
+        switch (strval($status)){
+            case '0': return 'green';
+            case '1': return 'yellow';
+            case '2': return 'red';
+            default: return 'normal';
+        }
+    }
+
+   
+
+
+
+    // system functions
+    static function systemInfos()
+    {
+        self::sectionTitle('System');
+        Console::log();
+        $os = System\SystemModel::getOs();
+
+        Console::log(' '. Console::tableRow(['hostname:'          => 20, Console::text($os['hostname'], 'white') => 50]));
+        Console::log(' '. Console::tableRow(['Operating system:'  => 20, Console::text($os['pretty'],   'white') => 50]));
+        Console::log(' '. Console::tableRow([' › System: '        => 20, Console::text($os['system'],   'white') => 50]));
+        Console::log(' '. Console::tableRow([' › Release:'        => 20, Console::text($os['release'],  'white') => 50]));
+        Console::log(' '. Console::tableRow([' › Version:'        => 20, Console::text($os['version'],  'white') => 50]));
+        Console::log(' '. Console::tableRow([' › Arch:'           => 20, Console::text($os['arch'],     'white') => 50]));
+        Console::log();
+    }
+
+    /**
+     * Prints uptime infos
+     * 
+     * @access protected
+     * @static
+     * 
+     * @return void
+     */
+    protected static function uptime()
+    {
+        self::sectionTitle('Uptime');
+        Console::log();
+        $uptime = System\SystemModel::getUptime();
+
+        Console::log(' '. Console::tableRow(['Uptime:'         => 20 , Console::text($uptime['uptimePretty'], 'white') => 50]));
+        Console::log(' '. Console::tableRow([' › Last boot:'   => 20 , Console::text($uptime['lastBoot'],     'white') => 50]));
+        Console::log(' '. Console::tableRow([' › Server date:' => 20 , Console::text($uptime['serverDate'],   'white') => 50]));
+        Console::log();
+    }
+
+    //TODO
+    static function fail2banStatus($jail)
+    {
+        self::sectionTitle('Fail2ban');
+        Console::log();
+
+        $status = Fail2banModel::getJailStatus($jail);
+
+        if (!empty($status)){
+            Console::log(' ' . Console::pad(' Status for the jail: ' . Console::text($jail, 'white', 'underlined'), 100, ' '));
+            Console::log();
+
+            Console::log(Console::text(Console::tableRowStart() . 
+                Console::tableRowCell(Console::text('Currently banned:',  'darkgray'), 30) .
+                Console::tableRowCell(Console::text( Console::text($status['currentlyBanned'], 'white'), 'darkgray'), 15, Console::ALIGN_RIGHT)
+            ));
+            Console::log(Console::text(Console::tableRowStart() . 
+                Console::tableRowCell(Console::text('Total banned:',  'darkgray'), 30) .
+                Console::tableRowCell(Console::text( Console::text($status['totalBanned'], 'white'), 'darkgray'), 15, Console::ALIGN_RIGHT)
+            ));
+
+
+     
+
+        }
+
+//        var_dump($status);
+
+    }
+
+     //TODO
+     static function fail2ban()
+     {
+        self::sectionTitle('Fail2ban');
+        $total = ['totalBanned'=>0,'totalFailed'=>0,'currentlyFailed'=>0,'currentlyBanned'=>0,];
+
+
+        Console::log();
+        Console::log(' '. Console::tableRow(['Version:' => 20, Console::text(Fail2banModel::getVersion(), 'white') => 50]));
+        Console::log('   Jails status:' );
+
+        $jails = Fail2banModel::getJailsInfos();
+        $rowHeaders = [
+                'Name'      => 25, 
+                'Status'    => 12,
+                //    'Bantime'   => 10, 
+                //    'Findtime'  => 10, 
+                //    'MaxRetry'  => 10, 
+                'X'      => 18, 
+                'Xs'      => 18, 
+                'Xss'      => 18, 
+                'Xsss'      => 18, 
+        ];
+ 
+        Console::log(' '.Console::tableRowSeparator($rowHeaders, 'darkgray'));
+        Console::log(' ' . 
+            Console::text(
+                Console::tableRowStart() . 
+                Console::tableRowCell(Console::text('Name',  'darkgray'), 25) .
+                Console::tableRowCell(Console::text('Status', 'darkgray'), 12, Console::ALIGN_CENTER).  
+               // Console::tableRowCell(Console::text('Bantime', 'darkgray'), 10, Console::ALIGN_CENTER) .
+               // Console::tableRowCell(Console::text('Findtime', 'darkgray'), 10, Console::ALIGN_CENTER) .
+               // Console::tableRowCell(Console::text('MaxRetry', 'darkgray'), 10, Console::ALIGN_CENTER) .
+               Console::tableRowCell(Console::text('Currently failed', 'darkgray'), 18, Console::ALIGN_CENTER) .
+               Console::tableRowCell(Console::text('Currently banned', 'darkgray'), 18, Console::ALIGN_CENTER) .
+               Console::tableRowCell(Console::text('Total failed', 'darkgray'), 18, Console::ALIGN_CENTER) .
+               Console::tableRowCell(Console::text('Total banned', 'darkgray'), 18, Console::ALIGN_CENTER) 
+//                Console::tableRowCell(Console::text('Bans', 'darkgray'), 10, Console::ALIGN_CENTER) .
+//                Console::tableRowCell(Console::text('Logs', 'darkgray'), 50, Console::ALIGN_CENTER) 
+            )
+        );
+        Console::log(' '.Console::tableRowSeparator($rowHeaders, 'darkgray'));
+         
+ 
+        foreach ($jails as $item){
+
+            $enabled = ($item['enabled'] == 1);
+            $status = $enabled ? Fail2banModel::getJailStatus($item['name'], false) : null;
+
+            Console::log(
+                ' ' .
+                Console::tableRowStart() .
+                Console::tableRowCell($item['name'], 25) .
+                Console::tableRowCell( $enabled ? 
+                                    Console::text('✓ ', 'green') . 'enabled' : 
+                                    Console::text('✗ ', 'red' ) . 'disabled',
+                                    11, Console::ALIGN_CENTER) .
+           //     Console::tableRowCell($item['bantime'], 10, Console::ALIGN_RIGHT) .
+           //     Console::tableRowCell($item['findtime'], 10, Console::ALIGN_RIGHT) .
+           //     Console::tableRowCell($item['maxretry'], 10, Console::ALIGN_RIGHT) .
+           Console::tableRowCell($enabled ? $status['currentlyFailed'] : '-', 18, Console::ALIGN_RIGHT) .
+           Console::tableRowCell($enabled ? $status['currentlyBanned'] : '-', 18, Console::ALIGN_RIGHT) .
+           Console::tableRowCell($enabled ? $status['totalFailed'] : '-', 18, Console::ALIGN_RIGHT) .
+           Console::tableRowCell($enabled ? $status['totalBanned'] : '-', 18, Console::ALIGN_RIGHT) 
+        );
+        
+        //           Console::tableRowCell('', 50) 
+            if ($enabled){
+                $total['currentlyFailed']   = $total['currentlyFailed'] + $status['currentlyFailed'];
+                $total['currentlyBanned']   = $total['currentlyBanned'] + $status['currentlyBanned'];
+                $total['totalFailed']       = $total['totalFailed']     + $status['totalFailed'];
+                $total['totalBanned']       = $total['totalBanned']     + $status['totalBanned'];
+            }
+
+
+        }
+        Console::log(' '.Console::tableRowSeparator($rowHeaders, 'darkgray'));
+
+        
+        Console::log(
+            ' ' .
+            Console::tableRowStart() .
+            Console::tableRowCell('TOTAL', 25) .
+            Console::tableRowCell('', 11, Console::ALIGN_CENTER) .
+       //     Console::tableRowCell($item['bantime'], 10, Console::ALIGN_RIGHT) .
+       //     Console::tableRowCell($item['findtime'], 10, Console::ALIGN_RIGHT) .
+       //     Console::tableRowCell($item['maxretry'], 10, Console::ALIGN_RIGHT) .
+            Console::tableRowCell($total['currentlyFailed'], 18, Console::ALIGN_RIGHT) .
+            Console::tableRowCell($total['currentlyBanned'], 18, Console::ALIGN_RIGHT) .
+            Console::tableRowCell($total['totalFailed'], 18, Console::ALIGN_RIGHT) .
+            Console::tableRowCell($total['totalBanned'], 18, Console::ALIGN_RIGHT) 
+    );
+//        Console::log(' '.Console::tableRowSeparator($rowHeaders, 'darkgray'));
+        Console::log();
+     }
+
+    /**
+     * Prints disks infos
+     * 
+     * @access protected
+     * @static
+     * 
+     * @return void
+     */
+    protected static function diskInfos()
+    {
+        self::sectionTitle('Disks');
+        // Console::log();
+        
+        $infos = System\DiskModel::getInfos();
+        $rowHeaders = ['Filesystem' => 15, 'Type'  => 8, 'Mount' => 10, 'Used' => 10, 'Free' => 10, 'Total' => 10, '% Used' => 25 ];
+
+        Console::log(' '.Console::tableRowSeparator($rowHeaders, 'darkgray'));
+        Console::log(' ' . 
+            Console::text(
+                Console::tableRowStart() . 
+                Console::tableRowCell(Console::text('File system', 'darkgray'), 15) .
+                Console::tableRowCell(Console::text('Type', 'darkgray'),   8) .
+                Console::tableRowCell(Console::text('Mount', 'darkgray'),  10) .
+                Console::tableRowCell(Console::text('Used', 'darkgray'),   10, Console::ALIGN_CENTER) .
+                Console::tableRowCell(Console::text('Free', 'darkgray'),   10, Console::ALIGN_CENTER) .
+                Console::tableRowCell(Console::text('Total', 'darkgray'),  10, Console::ALIGN_CENTER) .
+                Console::tableRowCell(Console::text('% Used', 'darkgray'), 25, Console::ALIGN_CENTER)
+            )    
+        );
+        Console::log(' '.Console::tableRowSeparator($rowHeaders, 'darkgray'));
+
+        foreach ($infos['disks'] as $item){
+            Console::log(
+                ' ' .
+                Console::tableRowStart() .
+                Console::tableRowCell($item['filesystem'], 15) .
+                Console::tableRowCell($item['type'], 8) .
+                Console::tableRowCell($item['mount'], 10) .
+                Console::tableRowCell(Console::text($item['used'], 'white'), 10, Console::ALIGN_RIGHT) .
+                Console::tableRowCell(Console::text($item['free'], 'white'), 10, Console::ALIGN_RIGHT) .
+                Console::tableRowCell(Console::text($item['total'], 'white'), 10, Console::ALIGN_RIGHT) .
+                Console::tableRowCell(self::progressBar($item['percentUsed'], $item['alertCode'], 21))
+            );
+        }
+        Console::log(' '.Console::tableRowSeparator($rowHeaders, 'darkgray'));
+        Console::log(
+                ' ' .
+                Console::tableRowStart() .
+                Console::tableRowCell('Total ', 15 +8 + 10 + 4 ) .
+                Console::tableRowCell(Console::text($infos['totalUsed'], 'white'), 10, Console::ALIGN_RIGHT) .
+                Console::tableRowCell(Console::text($infos['totalFree'], 'white'), 10, Console::ALIGN_RIGHT) .
+                Console::tableRowCell(Console::text($infos['total'], 'white'), 10, Console::ALIGN_RIGHT) .
+                Console::tableRowCell(self::progressBar($infos['totalPercentUsed'], $infos['alertCode'], 21))
+        );
+     //   Console::log(' '.Console::tableRowSeparator($rowHeaders, 'darkgray'));
+        Console::log();
+    }
+
+    /**
+     * Prints cpu infos
+     * 
+     * @access protected
+     * @static
+     * 
+     * @return void
+     */
+    protected static function cpuInfos()
+    {
+        self::sectionTitle('Cpu');
+        Console::log();
+
+        $infos = System\CpuModel::getInfos();
+    
+        foreach ($infos as $item => $value){
+            Console::log(
+                ' ' .
+                Console::tableRowStart() .
+                Console::tableRowCell($item, 20) .
+                Console::tableRowCell(Console::text(trim($value), 'white'), 50)
+            );
+        }
+        Console::log();
+    }
+
+    /**
+     * Prints memory infos
+     * 
+     * @access protected
+     * @static
+     * 
+     * @return void
+     */
+    protected static function memory()
+    {
+        self::sectionTitle('Memory/Swap usage');
+        $memory = System\MemoryModel::getMemory();
+        $swap = System\MemoryModel::getSwap();
+        
+        $rowHeaders = [' ' => 37, 'Used' => 10, 'Free' => 10, 'Total' => 10, '% Used' => 25];
+
+        Console::log(' ' . Console::tableRowSeparator($rowHeaders), 'darkgray');
+        Console::log(' ' . 
+            Console::text(
+                Console::tableRowStart() . 
+                Console::tableRowCell(' ', 37) .
+                Console::tableRowCell(Console::text('Used'   , 'darkgray'), 10, Console::ALIGN_CENTER) .
+                Console::tableRowCell(Console::text('Free'   , 'darkgray'), 10, Console::ALIGN_CENTER) .
+                Console::tableRowCell(Console::text('Total'  , 'darkgray'), 10, Console::ALIGN_CENTER) .
+                Console::tableRowCell(Console::text('% Used' , 'darkgray'), 25, Console::ALIGN_CENTER)
+            )    
+        );
+        Console::log(' ' . Console::tableRowSeparator($rowHeaders), 'darkgray');
+        Console::log(' ' . 
+                Console::tableRowStart() . 
+                Console::tableRowCell('Memory', 37) .
+                Console::tableRowCell(Console::text($memory['used'] ,  'white'), 10, Console::ALIGN_RIGHT) .
+                Console::tableRowCell(Console::text($memory['free'] ,  'white'), 10, Console::ALIGN_RIGHT) .
+                Console::tableRowCell(Console::text($memory['total'] , 'white'), 10, Console::ALIGN_RIGHT) .
+                Console::tableRowCell(self::progressBar($memory['percentUsed'], $memory['alertCode'], 21))
+        );
+        Console::log(' ' . 
+                Console::tableRowStart() . 
+                Console::tableRowCell('Swap', 37) .
+                Console::tableRowCell(Console::text($swap['used'] ,  'white'), 10, Console::ALIGN_RIGHT) .
+                Console::tableRowCell(Console::text($swap['free'] ,  'white'), 10, Console::ALIGN_RIGHT) .
+                Console::tableRowCell(Console::text($swap['total'] , 'white'), 10, Console::ALIGN_RIGHT) .
+                Console::tableRowCell(self::progressBar($swap['percentUsed'], $swap['alertCode'], 21))
+        );
+        Console::log();
+    }
+
+    /**
+     * Prints load average infos
+     * 
+     * @access protected
+     * @static
+     * 
+     * @return void
+     */
+    protected static function load()
+    {
+        self::sectionTitle('Load average');
+        Console::log();
+        $load = System\CpuModel::getLoadAverage();
+      //  Console::log(' '. 
+      //      Console::tableRow([
+      //          '1 min'  => 6, self::progressBar($load['load1'],  $load['load1AlertCode'],  21) => 25,
+      //          '5 min'  => 6, self::progressBar($load['load5'],  $load['load5AlertCode'],  21) => 25,
+      //          '15 min' => 6, self::progressBar($load['load15'], $load['load15AlertCode'], 21) => 25
+      //          ]
+      //      )
+      //  );
+      //  Console::log(' '. Console::tableRow(['5 min'  => 8, self::progressBar($load['load5'],  $load['load5AlertCode'],  21) => 25]));
+      //  Console::log(' '. Console::tableRow(['15 min' => 8, self::progressBar($load['load15'], $load['load15AlertCode'], 21) => 25]));
+      
+      Console::log('   1 min '  . self::progressBar($load['load1'],  $load['load1AlertCode'],  21) . 
+                   ' | 5 min '  . self::progressBar($load['load5'],  $load['load5AlertCode'],  21) . 
+                   ' | 15 min ' . self::progressBar($load['load15'], $load['load15AlertCode'], 21));
+        Console::log();
+    }
+}
+  
+?>

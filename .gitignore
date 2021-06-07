@@ -1,0 +1,5 @@
+app/vendor/*
+app/view_old/*
+*.old*
+*.local.php
+*.local.json

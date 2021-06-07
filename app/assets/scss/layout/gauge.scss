@@ -1,0 +1,12 @@
+
+.gauge-container {
+    padding:10px 5px; // reduce horinzontal padding
+
+    &:after {
+        display: block;
+        content: attr(data-bottom);
+        margin-top: -50px;
+        text-align: center;
+        font-size: 14px;
+    }
+}

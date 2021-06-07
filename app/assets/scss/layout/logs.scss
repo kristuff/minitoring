@@ -1,0 +1,64 @@
+
+
+table#system-logs-table {
+    display: table;
+    table-layout: auto;
+    font-size: 1.4rem;
+
+    td {
+        vertical-align: top;
+    }
+
+    td[data-column="Status"],
+    td[data-column="Level"]{
+            font-size: 1.3rem ;
+
+        .badge{
+            font-size: unset;
+        }
+    }
+
+    @media only screen and (min-width:768px){
+
+        // fixed header
+        th {
+            position: sticky;
+            top:-10px; // padding 
+        }
+
+        th[data-column="Date"], td[data-column="Date"]{min-width: 150px;max-width: 160px;}
+        th[data-column="Request"], td[data-column="Request"]{ width: 200px; }
+        th[data-column="Size"] {min-width: 60px; text-align: center;}
+        td[data-column="Size"] {min-width: 60px; text-align: right;}
+        th[data-column="Log Name"], td[data-column="Log Name"]{ display: none; }
+
+    }
+
+}
+
+table#settings-logs-table {
+    display: table;
+    font-size: 1.5rem;
+
+    tr {
+        min-height: 40px;
+    }
+
+    @media only screen and (min-width:768px){
+    
+        table-layout: fixed;
+    
+        // fixed header
+        th {
+            position: sticky;
+            top:-10px; // padding 
+        }
+
+        th[data-column="Name"], td[data-column="Name"]{ width:250px;}
+        th[data-column="Actions"], td[data-column="Actions"]{ width: 90px;}
+        th[data-column="Type"], td[data-column="Type"]{ width: 120px;}
+
+
+    }
+
+}

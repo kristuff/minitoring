@@ -1,0 +1,10 @@
+// actions visible on tr:hover
+// set min width keep fixed structure for entire table 
+#section-services table {
+
+    th[data-column="Actions"],
+    td[data-column="Actions"]{
+        min-width: 85px;
+        max-width: 85px;
+    }
+}

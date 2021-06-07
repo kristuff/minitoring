@@ -1,0 +1,25 @@
+{
+  "name": "minitoring",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "caniuse-lite": "^1.0.30001199",
+    "del": "^5.1.0",
+    "gulp": "^4.0.2",
+    "gulp4-run-sequence": "^1.0.1",
+    "merge-stream": "^2.0.0",
+    "sass-glob-importer": "^1.0.1",
+    "gulp-autoprefixer": "^7.0.1",
+    "gulp-clean-css": "^4.3.0",
+    "gulp-concat": "^2.6.1",
+    "gulp-rename": "^2.0.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-uglify": "^3.0.2"
+  }
+}

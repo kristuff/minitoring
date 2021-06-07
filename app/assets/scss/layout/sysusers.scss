@@ -1,0 +1,22 @@
+
+// in sysusers view, show Pid column for currents users
+:not([data-current-view="sysusers/currents"]) {
+    
+    th[data-column="Pid"],
+    td[data-column="Pid"] {
+        display: none;
+    }
+}
+
+table#sysusers-table {
+
+    @media only screen and (min-width:768px){
+
+        // fixed header
+        th {
+            position: sticky;
+            top:-10px; // padding 
+        }
+
+    }
+}

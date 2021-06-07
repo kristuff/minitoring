@@ -1,0 +1,23 @@
+// custom wizard - flat style, no background
+.wizard {
+    background: none!important;
+    border: none;
+    max-width: 750px;
+    
+    .wizard-inner {
+        
+        .wizard-panel {
+            padding: 0;
+        }
+
+        .wizard-bottom {
+            padding-right: 0;
+        }
+    }
+}
+
+.wizard-overlay {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+

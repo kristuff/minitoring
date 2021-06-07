@@ -1,0 +1,19 @@
+#footer-auth {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.bg-tech {
+    background: linear-gradient(black,#000),url(../img/tech-bw.jpg);
+    background-position-x: 0%, 0%;
+    background-position-y: 0%, 0%;
+    background-repeat: repeat, repeat;
+    background-size: auto, auto;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-blend-mode: saturation;
+}
+

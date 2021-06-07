@@ -1,0 +1,43 @@
+{
+    "name": "kristuff/minitoring",
+    "description": "Mini monitoring application and client for Gnu/linux server",
+    "type": "project",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kristuff",
+            "homepage": "https://github.com/kristuff"
+        }
+    ],
+    "require": {
+        "php": ">=7.3",
+        "kristuff/miniweb": ">=0.9.5-stable",
+        "kristuff/parselog": "^0.5-stable",
+        "kristuff/mishell": "^1.5-stable",
+        "kristuff/patabase": "^0.4-stable",
+        "cboden/ratchet": "^0.4-stable",
+        "dragonmantank/cron-expression": "^3.0-stable",
+        "t4web/composer-lock-parser": "1.1.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Kristuff\\Minitoring\\": "app/lib/"
+        }
+    },
+    "config": {
+        "vendor-dir": "app/vendor",
+        "bin-dir": "app/bin"
+    },
+    "scripts": {
+        "update-vendor-config" : [
+            "cp -R 'app/vendor/kristuff/miniweb/config'     'app' ",
+            "cp -R 'app/vendor/kristuff/miniweb/locales'    'app' "
+        ],
+        "post-install-cmd": [
+            "@update-vendor-config"
+         ],
+        "post-update-cmd": [
+            "@update-vendor-config"
+         ]
+    }
+}

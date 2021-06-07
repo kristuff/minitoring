@@ -1,0 +1,6 @@
+Package: minitoring
+Version: 0.1.1
+Maintainer: kristuff <kristuff@kristuff.fr>
+Architecture: all
+Depends: apache2, php7.3
+Description: Mini monitoring web application and client for Gnu/linux server.

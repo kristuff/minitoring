@@ -1,0 +1,27 @@
+
+.button, 
+input[type=button], 
+input[type=reset], 
+input[type=submit] {
+    border: 2px solid;
+}
+
+// button outlined
+.button-o {
+    border: 1px solid;
+}
+
+/* theme - dark */    
+[data-theme="dark"] {
+    
+    //button:not(.theme):not(.button-o):not(.alert-close),
+    .button:not(.theme):not(.button-o), 
+    input[type=button]:not(.theme), 
+    input[type=reset]:not(.theme), 
+    input[type=submit]:not(.theme) {
+
+          &:hover {
+            border-color: rgba(255,255,255,0.3);
+        }
+    } 
+}

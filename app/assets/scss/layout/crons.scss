@@ -1,0 +1,9 @@
+table#users-cron-list,
+table#system-cron-list {
+
+    font-size: 1.5rem;
+
+    @media only screen and (min-width:768px){
+        th[data-column="Next Run Date"], td[data-column="Next Run Date"]{min-width: 165px;max-width: 165px;}
+    }
+}

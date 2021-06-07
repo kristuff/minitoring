@@ -1,0 +1,119 @@
+
+html,
+body,
+.view,
+#main-container,
+.subpanel {
+    height: 100%!important;
+}
+
+.footer {
+    height: 30px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+}
+
+.main-content {
+    height: calc(100% - 55px); // 55px header 
+}
+
+
+// remove padding
+.side-menu ~ .main-content {
+    padding: 0;
+}
+@media only screen and (min-width:768px){
+    .side-menu ~ .main-content {
+        padding: 0;
+    }
+}
+
+.view,
+.subpanel {
+    display: none;
+    overflow-y: auto;
+    padding: 10px 15px;
+   // padding-top: 0;
+}
+.view.active, 
+.subpanel.open {
+    display:block;
+} 
+
+// fix padding
+@media only screen and (min-width:768px){
+    //    .side-menu ~ .main-content {padding:0 10px 10px 10px;} 
+    .side-menu ~ .main-header {padding-left:10px;} 
+    .side-menu ~ .main-header .side-menu-back-trigger {margin-left:-10px;}
+}
+
+
+form {
+    border: none;
+}
+
+// user in header 
+#current-user {
+    float: right;
+    //line-height: 25px;
+    display: flex;
+    align-items: center;
+    //vertical-align: baseline;
+    //display: inline-block;
+    padding: 0 10px;
+    height: 55px;
+    max-height: 55px;
+
+    &:hover {
+        background-color: rgba(0,0,0,0.1);
+    }
+    
+    img.avatar {
+        float: left;
+        //line-height: 55px;
+        //vertical-align: baseline;
+        width: 25px;
+        height: 25px;
+        margin-right: 6px; 
+    }
+
+
+    .user-name {
+        line-height: 1.2;
+        display: block;
+    }    
+    .user-email {
+        display: none;
+        font-size: 75%;
+        line-height: 1.1;
+    }    
+
+}
+
+
+
+@media only screen and (min-width:768px)  {
+
+    .side-menu ~ .main-header .back-trigger.active {display: inline-block;}
+    .side-menu ~ .main-header .back-trigger.active ~ .side-menu-trigger {display: none;}
+
+
+    #current-user {
+        .user-email {
+            display: block;
+        }
+    }
+}
+
+.back-trigger {display: none;}
+.back-trigger.active {display: block;}
+.back-trigger.active ~ .side-menu-trigger {display: none;}
+
+
+.main-header .header-title {
+     font-size: 2.6rem;
+}
+

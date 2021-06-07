@@ -1,0 +1,31 @@
+// actions visible on tr:hover
+// set min width keep fixed structure for entire table 
+table#users-table {
+
+        font-size: 1.5rem;
+    
+    
+
+    th[data-column="Actions"],
+    td[data-column="Actions"]{
+        min-width: 85px;
+        max-width: 85px;
+    }
+
+
+    td[data-column="Avatar"] img {
+        width:30px;
+        height:30px;
+        display: block;
+    }
+
+    @media only screen and (min-width:768px){
+
+        // fixed header
+        th {
+            position: sticky;
+            top:-10px; // padding 
+        }
+
+    }
+}

@@ -1,0 +1,134 @@
+<?php
+
+/** 
+ *        _      _ _           _
+ *  _ __ (_)_ _ (_) |_ ___ _ _(_)_ _  __ _
+ * | '  \| | ' \| |  _/ _ \ '_| | ' \/ _` |
+ * |_|_|_|_|_||_|_|\__\___/_| |_|_||_\__, |
+ *                                   |___/
+ * 
+ * This file is part of Kristuff\Minitoring.
+ * (c) Kristuff <kristuff@kristuff.fr>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @version    0.1.1
+ * @copyright  2017-2021 Kristuff
+ */
+
+namespace Kristuff\Minitoring\Model;
+
+use Kristuff\Miniweb\Auth;
+use Kristuff\Miniweb\Mvc\TaskResponse;
+use Kristuff\Minitoring\Model\Log;
+use Kristuff\Patabase\Driver\Sqlite\SqliteDatabase;
+use Kristuff\Mishell\Console;
+
+/** 
+ * SetupModel
+ */
+class SetupModel extends \Kristuff\Miniweb\Data\Model\SetupModel
+{
+    /** 
+     * Perform some checks 
+     */
+    public static function checkForInstall()
+    {
+       // the return response
+       $response = TaskResponse::create();
+
+       if ($response->assertTrue(self::request()->method() === 'GET', 405, 'Invalid method')) {
+            self::performChecks($response);
+       }
+       
+       if ( $response->success() ){
+           $response->setMessage('All checks was successful');        
+       }
+       return $response;
+    } 
+    
+  
+    /** 
+     * Perform some checks 
+     */
+   public static function performChecks(TaskResponse $response)
+   {
+        $response->assertTrue(file_exists(self::config('DATA_PATH')),                500, sprintf(self::text('ERROR_PATH_MISSING'), 'data'));
+        $response->assertTrue(is_writable(self::config('DATA_PATH')),                500, sprintf(self::text('ERROR_PATH_PERMISSIONS'), 'data'));
+        $response->assertTrue(file_exists(self::config('DATA_CONFIG_PATH')),         500, sprintf(self::text('ERROR_PATH_MISSING'), 'config'));
+        $response->assertTrue(is_writable(self::config('DATA_CONFIG_PATH')),         500, sprintf(self::text('ERROR_PATH_PERMISSIONS'), 'config'));
+        $response->assertTrue(file_exists(self::config('DATA_LOG_PATH')),            500, sprintf(self::text('ERROR_PATH_MISSING'), 'logs'));
+        $response->assertTrue(is_writable(self::config('DATA_LOG_PATH')),            500, sprintf(self::text('ERROR_PATH_PERMISSIONS'), 'logs'));
+        $response->assertTrue(file_exists(Auth\Model\UserAvatarModel::getPath()),    500, sprintf(self::text('ERROR_PATH_MISSING'), 'avatar'));
+        $response->assertTrue(is_writable(Auth\Model\UserAvatarModel::getPath()),    500, sprintf(self::text('ERROR_PATH_PERMISSIONS'), 'avatar'));
+
+        return $response;
+   }
+
+    /**
+     * Install process
+     * 
+     * @access public
+     * 
+     */
+    public static function install(string $adminName, string $adminPassword, string $adminEmail, string $databaseName)
+    {
+        // the return response
+        $response = TaskResponse::create();
+ 
+        $databaseFilePath = realpath(self::config('DATA_DB_PATH')). '/'. $databaseName .'.db';
+    
+        // validate input
+        if (Auth\Model\UserModel::validateUserNamePattern($response, $adminName) && 
+            Auth\Model\UserModel::validateUserEmailPattern($response, $adminEmail, $adminEmail) &&
+            Auth\Model\UserModel::validateUserPassword($response, $adminPassword, $adminPassword)){
+                   
+            
+            // create datatabase, 
+            // create tables
+            $database   = self::createSqliteDatabase($databaseFilePath);
+            if ($response->assertTrue($database !== false, 500, 'Internal error : unable to create database') &&
+                $response->assertTrue(self::createTables($database), 500, 'Internal error : unable to create tables'))  {
+
+                // insert admin user
+                $adminId = Auth\Model\UserAdminModel::insertAdminUser($adminEmail, $adminName, $adminPassword, $database);
+            
+                if (self::isCommandLineInterface()){
+                    Console::log();
+                    Console::log('  '.Console::text('[✓] ', 'green') . Console::text('Database successfully created.', 'white'));
+                }
+                
+                if ($response->assertFalse($adminId === false, 500, 'Internal error : unable to insert admin user')) {
+
+                    if (self::isCommandLineInterface()){
+                        Console::log('  '.Console::text('[✓] ', 'green') . Console::text('Admin user successfully created.', 'white'));
+                    }
+    
+                    // load default settings
+                    // save config file
+                    if ($response->assertTrue(Auth\Model\UserSettingsModel::loadDefaultSettings($database, (int) $adminId), 500, 'Internal error : unable to insert settings data') &&
+                        $response->assertTrue(self::createDatabaseConfigFile('sqlite', 'localhost', $databaseFilePath, '', ''), 500, 'Internal error : unable to create config file')) {
+                        
+                        if (self::isCommandLineInterface()){
+                            Console::log('  '.Console::text('[✓] ', 'green') . Console::text('Defaults settings successfully initialized.', 'white'));
+                        }
+
+                        $response->setMessage('Congratulation! <br>Install was successful. You can now login.');
+                    }
+                }
+            }
+        }
+
+        return $response;
+    }
+
+    private static function createTables(&$database)
+    {
+        return Auth\Model\UserModel::createTable($database) &&
+               Auth\Model\UserSettingsModel::createTableSettings($database) &&
+               Auth\Model\AppSettingsModel::createTableSettings($database) &&
+               Log\LogsCollectionModel::setup($database) &&
+               Services\ServicesCollectionModel::setup($database);
+    }
+}
