@@ -1,6 +1,8 @@
 # ![logo](../public/assets/img/favicon-32x32.png) minitoring
 
-To change anything in configuration, first create a local config file named `minitoring.conf.local.php` in the `app/config` directory with the following content. 
+
+
+To change anything in configuration, first create a local config file named `minitoring.conf.local.php` in the `app/config` directory with the following content: 
 
 ```php
 return array(
@@ -30,7 +32,7 @@ return array(
 ```
 
 
-## Setup a secure webscket server
+## Setup a secure websocket server
 
 Setup your local config file (`app/config/minitoring.conf.local.php`) like this:
 

@@ -79,7 +79,7 @@ ProxyPreserveHost On
 
 ### 4. Optional config changes :
 
-See [config](/config.md) 
+See [config](/doc/config.md) 
 
 
 ### 5.  Restart `minitoring.service`, Enable site and restart Apache:
