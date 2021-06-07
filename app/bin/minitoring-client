@@ -21,16 +21,11 @@
 require_once realpath(__DIR__) .'/../vendor/autoload.php';
 
 use Kristuff\Mishell\Console;
-use Kristuff\Patabase\Driver\Sqlite\SqliteDatabase;
-use Kristuff\Minitoring\Model;
 use Kristuff\Minitoring\Model\System;
 use Kristuff\Minitoring\Model\Services\Fail2banModel;
 use Kristuff\Minitoring\Model\System\SystemModel;
 use Kristuff\Minitoring\Model\System\ServiceModel;
 
-// ok: ✅ ❌ ›  ★ ✦       ✻ ☆ ♣
-// bad:  ✓ ✔ ✗ →
-//
 // x    => no value
 // x:   => value required
 // x::  => optional value
@@ -146,12 +141,11 @@ class Program
      */
     protected static function topBanner()
     {
-        Console::log("   __  __ _       _ _             _               ", 'darkgray');
-        Console::log("  |  \/  (_)_ __ (_) |_ ___  _ __(_)_ __   __ _   ", 'darkgray');
-        Console::log("  | |\/| | | '_ \| | __/ _ \| '__| | '_ \ / _` |  ", 'darkgray');
-        Console::log("  | |  | | | | | | | || (_) | |  | | | | | (_| |  ", 'darkgray');
-        Console::log("  |_|  |_|_|_| |_|_|\__\___/|_|  |_|_| |_|\__, |  ", 'darkgray');
-        Console::log("                                          |___/   ", 'darkgray');
+        Console::log("          _      _ _           _              ", 'darkgray');
+        Console::log("    _ __ (_)_ _ (_) |_ ___ _ _(_)_ _  __ _    ", 'darkgray');
+        Console::log("   | '  \| | ' \| |  _/ _ \ '_| | ' \/ _` |   ", 'darkgray');
+        Console::log("   |_|_|_|_|_||_|_|\__\___/_| |_|_||_\__, |   ", 'darkgray');
+        Console::log("                                     |___/    ", 'darkgray');
     }
 
     /**
