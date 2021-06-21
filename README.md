@@ -7,7 +7,7 @@
 - Check memory/swap usage
 - Check disks/inodes usage
 - Check packages (installed, upgradable, error)
-- Check Fail2ban status check and jail stats
+- Check Fail2ban status and get jail stats
 - Check Iptables/Ip6tables content
 - List all cron jobs (user/system crons, system timers) 
 - Log reader: support for syslog, apache access/error, fail2ban logs
