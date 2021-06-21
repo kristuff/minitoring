@@ -1,0 +1,56 @@
+
+
+// user in header 
+#current-user {
+    
+    float: right;
+    //line-height: 25px;
+    display: none;
+    align-items: center;
+    //vertical-align: baseline;
+    //display: inline-block;
+    padding: 0 10px;
+    height: 55px;
+    max-height: 55px;
+
+    &:hover {
+        background-color: rgba(0,0,0,0.1);
+    }
+    
+    img.avatar {
+        float: left;
+        //line-height: 55px;
+        //vertical-align: baseline;
+        width: 25px;
+        height: 25px;
+        margin-right: 6px; 
+    }
+
+
+    .user-name {
+        line-height: 1.2;
+        display: block;
+    }    
+    .user-email {
+        display: none;
+        font-size: 75%;
+        line-height: 1.1;
+    }    
+
+}
+
+@media only screen and (min-width:768px)  {
+    #current-user {
+        display: flex;
+    }
+}
+
+/* theme - dark */    
+[data-theme="dark"] {
+    #current-user {
+
+        &:hover {
+            background-color: rgba(255,255,255,0.05);
+        }
+    }
+}

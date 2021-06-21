@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.1
+ * @version    0.1.2
  * @copyright  2017-2021 Kristuff
  */
 namespace Kristuff\Minitoring\Model\System;
@@ -29,7 +29,7 @@ class SystemModel extends SystemBaseModel
      * 
      *
      * @access public
-     * @static method
+     * @static
      *
      * @return array
      */
@@ -47,15 +47,15 @@ class SystemModel extends SystemBaseModel
             'lastBoot'              => $uptime['lastBoot'],
          // 'currentUsersNumber'    => self::getCurrentUsersNumber(),
             'serverDate'            => self::getServerDate(),
-
+            'rebootRequired'        => self::isRebootRequired(),
         );
     }
 
-     /** 
+    /** 
      * 
      *
      * @access public
-     * @static method
+     * @static
      *
      * @return array
      */
@@ -68,14 +68,29 @@ class SystemModel extends SystemBaseModel
             'uptimeDays'            => self::splitTime($uptime)['day'],
             'lastBoot'              => self::getLastBoot(),
             'serverDate'            => self::getServerDate(),
+            'rebootRequired'        => self::isRebootRequired(),
         );
+    }
+
+    /** 
+     * 
+     *
+     * @access public
+     * @static
+     *
+     * @return bool
+     */
+    public static function isRebootRequired()
+    {
+        // debian/unbutu
+        return file_exists('/var/run/reboot-required');
     }
 
     /**
      * Returns hostname
      *
      * @access public
-     * @static method
+     * @static
      *
      * @return string
      */
@@ -96,7 +111,7 @@ class SystemModel extends SystemBaseModel
      * 'm': Machine type. eg. i386.
 
      * @access public
-     * @static method
+     * @static
      *
      * @return string
      */
@@ -118,7 +133,7 @@ class SystemModel extends SystemBaseModel
      * Returns Kernel
      *
      * @access public
-     * @static method
+     * @static
      *
      * @return string
      */
@@ -134,7 +149,7 @@ class SystemModel extends SystemBaseModel
      * 
      * 
      * @access public
-     * @static method
+     * @static
      *
      * @return string
      */
@@ -150,7 +165,7 @@ class SystemModel extends SystemBaseModel
      * 
      * 
      * @access public
-     * @static method
+     * @static
      *
      * @return string
      */
@@ -167,7 +182,7 @@ class SystemModel extends SystemBaseModel
      * 
      * 
      * @access public
-     * @static method
+     * @static
      *
      * @return string
      */
@@ -183,7 +198,7 @@ class SystemModel extends SystemBaseModel
      * 
      * 
      * @access public
-     * @static method
+     * @static
      *
      * @return string
      */
@@ -207,7 +222,7 @@ class SystemModel extends SystemBaseModel
      * Returns CPU cores number
      * 
      * @access public
-     * @static method
+     * @static
      *
      * @return int      Number of cores
      */

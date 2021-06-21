@@ -27,8 +27,8 @@
         </section>
 
         <section class="dialog-actions">
-            <a href="#" class="dialog-button button button-o uppercase fw dialog-button-cancel" ><?php echo $this->text('BUTTON_CANCEL'); ?></a>
-            <a href="#" class="dialog-button button uppercase fw dialog-button-ok" data-bind="Minitoring.Settings.Services.handleDialog"><?php echo $this->text('BUTTON_OK'); ?></a>
+            <a href="#" class="dialog-button button button-o fw dialog-button-cancel" ><?php $this->echo('BUTTON_CANCEL'); ?></a>
+            <a href="#" class="dialog-button button fw dialog-button-ok" data-bind="Minitoring.Settings.Services.handleDialog"><?php $this->echo('BUTTON_OK'); ?></a>
         </section>
     </div>
 </div>

@@ -13,3 +13,6 @@ echo -e "Stopping ${YELLOW}minitoring.service${RESET}"
 systemctl stop minitoring
 echo -e "Disable ${YELLOW}minitoring.service${RESET}"
 systemctl disable minitoring.service
+
+echo -e "Remove ${YELLOW}minitoring-client${RESET} from /usr/local/sbin"
+rm -f /usr/local/sbin/minitoring

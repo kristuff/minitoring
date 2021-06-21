@@ -99,11 +99,11 @@ Minitoring.Settings.Services = {
         html += ' <td data-column="Service" class="align-left">' + item.service_name + '</td>';
         html += ' <td class="align-right no-padding" data-column="Actions">';
         html += '  <span class="row-actions visible-hover ">';
-        html += '   <a class="row-button action-link" data-action="edit" data-id="' + item.service_id + '" data-color=""><i class="fa fa-pencil"></i></a>';
-        html += '   <a class="row-button action-link" data-action="delete" data-id="' + item.service_id + '" data-color=""><i class="fa fa-trash"></i></a>';
+        html += '   <a class="row-button action-link" data-action="edit" data-id="' + item.service_id + '" data-color=""><i class="fa fa-pencil"></i><span class="mob-only padding-left-6">Edit</span></a>';
+        html += '   <a class="row-button action-link" data-action="delete" data-id="' + item.service_id + '" data-color=""><i class="fa fa-trash"></i><span class="mob-only padding-left-6">Delete</span></a>';
         html += '  </span>';
         html += ' </td>';
-        html += ' <td data-column="" class="align-right">' + port + '</td>';
+        html += ' <td data-column="Port" class="align-right">' + port + '</td>';
         html += ' <td data-column="Check enabled" class="align-center">';
         html += '  <input type="checkbox" id="'+ checkboxId +'" class="switch" ' + checked + ' data-id="' + item.service_id + '" />';
         html += '  <label for="'+ checkboxId +'"></label>'; 

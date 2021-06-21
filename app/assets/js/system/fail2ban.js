@@ -10,16 +10,20 @@ Minitoring.Fail2ban = {
             key: Minitoring.Api.key
         }, 
         function (result) {
-                var html = '';
-                for (var i = 0; i < result.data.jails.length; i++) {
-                    html += Minitoring.Fail2ban.getHtml(result.data.jails[i]);
-                }
-                document.querySelector('table#fail2ban-jails tbody').innerHTML = html;
-                document.querySelector('#fail2ban-server-version [data-column="Value"]').innerHTML = result.data.version;
-                document.querySelector('#fail2ban-server-dbpath [data-column="Value"]').innerHTML = result.data.databasePath;
-                document.querySelector('#fail2ban-server-dbsize [data-column="Value"]').innerHTML = result.data.databaseSize;
-                document.querySelector('#fail2ban-server-status [data-column="Value"]').innerHTML = result.data.status;
-                document.querySelector('#fail2ban-jails-comment').innerHTML = "* Older ban was recorded " + result.data.olderBanAge;
+            var html = '', badge = "error", status = 'STOPPED';
+            for (var i = 0; i < result.data.jails.length; i++) {
+                html += Minitoring.Fail2ban.getHtml(result.data.jails[i]);
+            }
+            if (result.data.status === 'active' ) {
+                badge = "success";
+                status = 'ACTIVE';
+            }
+            document.querySelector('table#fail2ban-jails tbody').innerHTML = html;
+            document.querySelector('#fail2ban-server-version [data-column="Value"]').innerHTML = result.data.version;
+            document.querySelector('#fail2ban-server-dbpath [data-column="Value"]').innerHTML = result.data.databasePath;
+            document.querySelector('#fail2ban-server-dbsize [data-column="Value"]').innerHTML = result.data.databaseSize;
+            document.querySelector('#fail2ban-server-status [data-column="Value"]').innerHTML = '<span class="badge" data-badge="' + badge + '">' + status + '</span>';
+            document.querySelector('#fail2ban-jails-comment').innerHTML = "* Older ban was recorded " + result.data.olderBanAge;
         }, function (apiResponse) {
             Minitoring.Api.notifyApiResponse(apiResponse);
         });  
@@ -41,7 +45,7 @@ Minitoring.Fail2ban = {
   //      html += ' </td>';
         html += '<td data-column="Status" class="align-center"><span class="badge" data-badge="' + badge + '">' + status + '</span></td>';
         html += '<td data-column="Logs files" class="align-right">' + item.logs + '</td>';
-        html += '<td data-column="Currents Bans" class="align-right">' + item.bans +'</td>';
+        html += '<td data-column="Total bans" class="align-right">' + item.bans +'</td>';
         html += '</tr>';
         return html;
     }

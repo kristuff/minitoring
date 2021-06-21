@@ -1,5 +1,5 @@
 <section id="section-logs" class="view anim-scale-increase" 
-         data-title="<?php echo $this->text('LOGS');?>" 
+         data-title="<?php $this->echo('LOGS');?>" 
          data-view="logs"
          data-refresh="Minitoring.Logs.refresh">
 
@@ -8,21 +8,19 @@
 
         <div class="wrapper mob-whole tab-half desk-half">
         
-            <div class="wrappitem desk-padding-right-12">
+            <div class="wrappitem mob-padding-bottom-6 tab-padding-right-6 desk-padding-right-12">
                 <div class="custom-select">
                     <select id="select-log" data-bind="Minitoring.Logs.refresh"></select>
                 </div>
             </div>
 
-
             <div class="wrappitem">
-
-                <div class="wrapper mob-half">
-                    <div class="wrappitem desk-padding-right-12">
+                <div class="wrapper mob-half ">
+                    <div class="wrappitem mob-padding-right-6 tab-padding-right-6 desk-padding-right-12">
                         <div class="custom-select">
                             <select id="select-log-refresh" data-bind="Minitoring.Logs.setAutoRefresh">
-                                <option value="0"><?php echo $this->text('LOGS_REFRESH_NONE');?></option>  
-                                <option value="5"><?php echo sprintf($this->text('LOGS_REFRESH_XSECONDS'), '5');?></option>  
+                                <option value="0"><?php  $this->echo('LOGS_REFRESH_NONE');?></option>  
+                                <option value="5"><?php  echo sprintf($this->text('LOGS_REFRESH_XSECONDS'), '5');?></option>  
                                 <option value="10"><?php echo sprintf($this->text('LOGS_REFRESH_XSECONDS'), '10');?></option>  
                                 <option value="30"><?php echo sprintf($this->text('LOGS_REFRESH_XSECONDS'), '30');?></option>  
                                 <option value="60"><?php echo sprintf($this->text('LOGS_REFRESH_XSECONDS'), '60');?></option>  
@@ -30,7 +28,7 @@
                         </div>
                     </div>
                     <div class="wrappitem mob-align-center desk-align-left">
-                        <div class="custom-select">
+                        <div class="custom-select  ">
                             <select id="select-log-max" data-bind="Minitoring.Logs.refresh">
                                 <option value="10"><?php echo sprintf($this->text('LOGS_DISPLAY_XLINES'), '10');?></option>  
                                 <option value="20"><?php echo sprintf($this->text('LOGS_DISPLAY_XLINES'), '20');?></option>  
@@ -44,7 +42,6 @@
                 </div>
 
             </div>
-
         </div>
     </section>
 

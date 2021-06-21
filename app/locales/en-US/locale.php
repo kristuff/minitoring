@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.1
+ * @version    0.1.2
  * @copyright  2017-2021 Kristuff
  */
 
@@ -44,21 +44,71 @@ return array(
     'COLOR_MAGENTA'                                     => 'Magenta',
     'COLOR_ORANGE'                                      => 'Orange',
 
-    /* login */
-    'AUTH_LOGIN_NAME_OR_EMAIL_FIELD'                    => 'User name or email:',
-    'AUTH_LOGIN_NAME_OR_EMAIL_PLACEHOLDER'              => 'User name or email',
-    'AUTH_LOGIN_PASSWORD_FIELD'                         => 'Password:',
-    'AUTH_LOGIN_PASSWORD_PLACEHOLDER'                   => 'Password',
+    /* user */
+    'USER_NAME_FIELD'                                   => "Username:",
+    'USER_NAME_PLACEHOLDER'                             => "Username",
+    'USER_NAME_CREATE_PLACEHOLDER'                      => "Username (letters/numbers, 2-64 chars)",
+    'USER_EMAIL_FIELD'                                  => "Email address:",
+    'USER_EMAIL_PLACEHOLDER'                            => "Email address",
+    'USER_NAME_OR_EMAIL_FIELD'                          => "User name or email::",
+    'USER_NAME_OR_EMAIL_PLACEHOLDER'                    => "User name or email:",
+    'USER_PASSWORD_FIELD'                               => 'Password:',
+    'USER_NEW_PASSWORD_FIELD'                           => 'New password:',
+    'USER_PASSWORD_PLACEHOLDER'                         => 'Password',
+    'USER_PASSWORD_CREATE_PLACEHOLDER'                  => "Password (min 8 characters)",
+    'USER_PASSWORD_REPEAT_FIELD'                        => 'Repeat password: :',
+    'USER_PASSWORD_REPEAT_PLACEHOLDER'                  => 'Repeat password',
+    'USER_AVATAR_HEADER'                                => "Avatar",
+    'USER_NAME_HEADER'                                  => "Username",
+    'USER_TYPE_HEADER'                                  => "Type",
+    'USER_EMAIL_HEADER'                                 => "Email",
+    'USER_STATUS_HEADER'                                => "Status",
+    'USER_CREATED_DATE_HEADER'                          => "Created on",
+    'USER_LAST_LOGIN_DATE_HEADER'                       => "Last login",
+
+    /* auth */
     'AUTH_LOGIN_REMEMBER_ME'                            => 'Remember me',
     'AUTH_LOGIN_BUTTON_TEXT'                            => 'Log in',
     'AUTH_LOGOUT_BUTTON_TEXT'                           => 'Log out ',
     'AUTH_FORGOT_PASSWORD_LINK'                         => 'Forgot password?',
+    'AUTH_RECOVERY_BACK_TO_LOGIN'                       => "Back to login",
+    'CAPTCHA_RELOAD_LINK'                               => "Reload captcha",
+    'CAPTCHA_FIELD'                                     => "Captcha:",
+    'CAPTCHA_PLACEHOLDER'                               => "Enter captcha above",
+    'AUTH_REGISTER_BUTTON'                              => "Register",
+    'AUTH_REGISTER_TITLE'                               => "Set your user name and password to complete your registration.",
+    'AUTH_RECOVERY_SUBMIT_PASSWORD'                     => 'Submit new password',
+    'AUTH_RECOVERY_TITLE'                               => "Request a password reset",
+    'AUTH_RECOVERY_TEXT'                                => "Enter your username or email and you'll get a mail with instructions.", 
+    'AUTH_RECOVERY_BUTTON'                              => "Send me a password-reset mail", 
 
+    /* Packages */
+    'PACKAGES'                                          => 'Packages',
+    'PACKAGES_UPGRADE_NONE'                             => 'All packages are up do date',
+  
     /* Logs */
     'LOGS'                                              => 'Logs',
     'LOGS_REFRESH_NONE'                                 => 'No refresh',
     'LOGS_REFRESH_XSECONDS'                             => 'Refresh each %ss',
     'LOGS_DISPLAY_XLINES'                               => 'Display %s lines',
+
+    /* Crons */
+    'CRONS'                                             => "Scheduled tasks",
+    'CRONS_USER'                                        => "User cron jobs",
+    'CRONS_SYSTEM'                                      => "System cron jobs",
+    'CRONS_TIMER'                                       => "System timers",
+    'CRONS_USER_HEADER'                                 => "User",
+    'CRONS_TIME_HEADER'                                 => "Time Expression",
+    'CRONS_COMMAND_HEADER'                              => "Command",
+    'CRONS_NEXT_TIME_HEADER'                            => "Next Run date",
+    'CRONS_SCRIPT_HEADER'                               => "Script",
+    'CRONS_TYPE_HEADER'                                 => "Type",
+
+    /* firewall */
+    'FIREWALL'                                          => 'Firewall',
+    'FAIL2BAN_TEXT'                                     => 'Check Fail2ban status and get jails stats and status',
+    'IPTABLES_TEXT'                                     => 'Get iptables content',
+    'IP6TABLES_TEXT'                                    => 'Get ip6tables content',
 
     /* settings */
     'SETTINGS'                                          => 'Settings',
@@ -83,8 +133,9 @@ return array(
     'SETTINGS_PROFILE'                                  => 'My account',
     'SETTINGS_PROFILE_SUMMARY'                          => "Edit your user account",
     'SETTINGS_PROFILE_NAME_FIELD'                       => "User name:",
+    'SETTINGS_PROFILE_NAME_PLACEHOLDER'                 => "Enter your user name",
     'SETTINGS_PROFILE_EMAIL_FIELD'                      => "Email address:",
-    'SETTINGS_PROFILE_EMAIL_PLACEHOLDER'                => "Enter you email address",
+    'SETTINGS_PROFILE_EMAIL_PLACEHOLDER'                => "Enter your email address",
     'SETTINGS_PROFILE_CARD_TITLE'                       => "Overview",
     'SETTINGS_PROFILE_EDIT_TITLE'                       => 'Profile',
     'SETTINGS_PROFILE_EDIT_NAME_OR_EMAIL_BUTTON'        => 'Update profile',
@@ -122,10 +173,14 @@ return array(
     'SETTINGS_USERS_SUMMARY'                            => "Create or edit user accounts",
     'SETTINGS_USERS_SECTION_CURRENT_ACCOUNTS'           => 'Currents accounts',
     'SETTINGS_USERS_SECTION_NEW_ACCOUNTS'               => 'New accounts',
-    'SETTINGS_USERS_CREATE_ACCOUNT_BUTTON'              => 'Create an account',
+    'SETTINGS_USERS_CREATE_ACCOUNT_DIALOG_TITLE'        => 'Create a new account',
+    'SETTINGS_USERS_CREATE_ACCOUNT_BUTTON'              => 'New account',
     'SETTINGS_USERS_CREATE_ACCOUNT_TEXT'                => 'Creates and activates a new account',
     'SETTINGS_USERS_INVITE_BUTTON'                      => 'Send an invitation',
     'SETTINGS_USERS_INVITE_TEXT'                        => "Sends an invitation to register by email. User will be asked to complete it's profile.",
+    'SETTINGS_USERS_FULL_DELETE_TEXT'                   => "This will delete user and setting from database. This action cannot be canceled.",
+    'SETTINGS_USERS_INVITE_DIALOG_TITLE'                => "Invite a user",
+    'SETTINGS_USERS_INVITE_DIALOG_MAIL_FIELD'           => "Send an invitation by email to:",
 
     'SETTINGS_LOGREADER'                                => 'Logs reader',
     'SETTINGS_LOGREADER_SUMMARY'                        => "Settings for logs reader feature",
@@ -144,7 +199,7 @@ return array(
     'SETTINGS_LOGREADER_FORMAT_PLACEHOLDER'             => "Format (leave blank to use default)",
     'SETTINGS_LOGREADER_BUTTON_ADD'                     => "Add",
     'SETTINGS_LOGREADER_ADVANCED'                       => "Advanced",
-    'SETTINGS_LOGREADER_IP_ACTION_TEXT'                 => "Select an action for IP addresses (works on web access log files):",
+    'SETTINGS_LOGREADER_IP_ACTION_FIELD'                => "Select an action for IP addresses (works on web access log files):",
     'SETTINGS_LOGREADER_IP_ACTION_NONE'                 => "None",
     'SETTINGS_LOGREADER_IP_ACTION_ABUSEIPDB'            => "AbuseIPDB check (external link)",
     'SETTINGS_LOGREADER_IP_ACTION_GEOIP'                => "Geodatatool (external link)",

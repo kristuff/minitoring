@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.1
+ * @version    0.1.2
  * @copyright  2017-2021 Kristuff
  */
 
@@ -42,6 +42,13 @@ class View extends \Kristuff\Miniweb\Mvc\View
        $this->baseUrl = Application::getUrl();
     }
   
+    public function echo(string $key, ?string $locale = null)
+    {
+        $text = $this->text($key, $locale);
+        echo $text;
+    }  
+
+
     //TODO doc
     public function renderFeedback()
     {

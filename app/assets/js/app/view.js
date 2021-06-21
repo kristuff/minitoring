@@ -6,11 +6,15 @@ Minitoring.View = {
     htmlHeaderTitle: {}, 
     htmlHeaderSubTitle: {},
     htmlBackButton: {},
+    sideMenu: {},
   
     // navigate to given url
     navigate: function (url) {
         var target = Minitoring.View.getUrlTarget(url);
         Minitoring.View.updateActiveView(target);
+
+        // make sure we close menu in mobile view 
+        sideMenu.classList.remove('open');
     },
 
     // get the url target 
@@ -132,7 +136,8 @@ Minitoring.View = {
         htmlOverlay     = document.querySelector('main-container > .overlay');
         htmlHeaderTitle = document.querySelector('#header-title');
      // htmlHeaderSubTitle = document.querySelector('#header-subtitle');
-        htmlBackButton = document.querySelector('.back-trigger');
+        htmlBackButton  = document.querySelector('.back-trigger');
+        sideMenu        = document.querySelector('#side-menu');
 
         // detect links
         document.addEventListener('click', Minitoring.View.handleLinkClick);             

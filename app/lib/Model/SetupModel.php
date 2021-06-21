@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.1
+ * @version    0.1.2
  * @copyright  2017-2021 Kristuff
  */
 
@@ -65,6 +65,19 @@ class SetupModel extends \Kristuff\Miniweb\Data\Model\SetupModel
 
         return $response;
    }
+
+    /**
+     * 
+     * @access public
+     * 
+     * @return bool
+     */
+    public static function testConnexion(string $databaseName, string $databaseHost, string $adminName, string $adminPassword)
+    {
+
+
+    }
+
 
     /**
      * Install process

@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.1
+ * @version    0.1.2
  * @copyright  2017-2021 Kristuff
  */
 
@@ -66,9 +66,8 @@ return array(
      */
     'APP_NAME'                  =>  'Minitoring',
     'APP_COPYRIGHT'             =>  'Kristuff',
-    'APP_VERSION'               =>  '0.1.1',
+    'APP_VERSION'               =>  '0.1.2',
     'APP_DEFAULT_LANGUAGE'      =>  'en-US',
-    //'META_AUTHOR'               =>  'Kristuff (kristuff.fr)',
  
     'DATA_PATH'                 => __DIR__ . '/../data/',
     'DATA_CONFIG_PATH'          => __DIR__ . '/../data/config/',
@@ -85,14 +84,15 @@ return array(
      * ***********************************************************
      */
     'AUTH_LOGIN_COOKIE_ENABLED'                  => false,
+    'AUTH_PASSWORD_RESET_ENABLED'                => false,
     'AUTH_INVITATION_ENABLED'                    => true,
     'AUTH_SIGNUP_ENABLED'                        => false, // not implemented
-    'AUTH_EMAIL_HTML'                            => true,
+    'AUTH_EMAIL_HTML'                            => true, // experimental..
 
     'AUTH_EMAIL_FROM_EMAIL'                      => 'no-reply@minitoring.kristuff.fr',
     'AUTH_EMAIL_FROM_NAME'                       => 'The Minitoring team',
 
-    'AUTH_PASSWORD_RESET_ENABLED'                => true,
+    // TODO remove
     'AUTH_PASSWORD_RESET_MAIL_FROM_EMAIL'        => 'no-reply@minitoring.kristuff.fr',
     'AUTH_PASSWORD_RESET_MAIL_FROM_NAME'         => 'The Minitoring team',
     'AUTH_PASSWORD_RESET_MAIL_SUBJECT'           => 'Password reset for Minitoring application',

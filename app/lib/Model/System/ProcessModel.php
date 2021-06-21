@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.1
+ * @version    0.1.2
  * @copyright  2017-2021 Kristuff
  */
 
@@ -24,6 +24,23 @@ namespace Kristuff\Minitoring\Model\System;
  */
 class ProcessModel extends SystemBaseModel
 {
+
+
+    /** 
+     * Get process infos
+     *
+     * @access public
+     * @static
+     * 
+     * @return array
+     */
+    public static function getInfos()
+    {
+        return array(
+            'total'     => self::getTotalProcess(),
+            'running'   => self::getRunningProcess(),
+        );
+    }
 
     /**
      * Returns total process number

@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.1
+ * @version    0.1.2
  * @copyright  2017-2021 Kristuff
  */
 
@@ -139,6 +139,7 @@ class CpuModel extends SystemModel
         $cores = self::getCpuCoresNumber();
         $loadExp = explode(',', $loadTmp);
 
+       
         $load = array_map(
             function ($value, $cores) {
                 $v = (int)((float)$value * 100 / $cores);
@@ -150,11 +151,14 @@ class CpuModel extends SystemModel
             array_fill(0, 3, $cores)
         );
         return [
-            'load1'           => $load[0],
+            'load1'           => trim($loadExp[0]),
+            'load1purcent'    => $load[0],
             'load1AlertCode'  => self::getAlertCode($load[0]),
-            'load5'           => $load[1],
+            'load5'           => trim($loadExp[1]),
+            'load5purcent'    => $load[1],
             'load5AlertCode'  => self::getAlertCode($load[1]),
-            'load15'          => $load[2],
+            'load15'          => trim($loadExp[2]),
+            'load15purcent'   => $load[2],
             'load15AlertCode' => self::getAlertCode($load[2]),
         ];
     }

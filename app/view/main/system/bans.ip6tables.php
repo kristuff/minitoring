@@ -1,6 +1,6 @@
 <section id="section-ip6tables" class="view anim-scale-increase" 
     data-view="bans/ip6tables" 
-    data-title="Iptables"
+    data-title="Ip6tables"
     data-refresh="Minitoring.Iptables.refreshIp6tables">
 
     <div id="bans-overview" class="dashboard">

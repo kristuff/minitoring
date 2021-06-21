@@ -1,4 +1,4 @@
-<header class="main-header ">
+<header class="main-header bg-darker">
     <a href="#" class="back-trigger action-link" data-bind="Minitoring.View.goBack"><i class="fa fa-long-arrow-left"></i></a>
     <a href="#" class="side-menu-trigger"><i class="fa fa-bars"></i></a>
     <span id="header-title" class="h5"><?php echo $this->data('viewTitle'); ?></span>

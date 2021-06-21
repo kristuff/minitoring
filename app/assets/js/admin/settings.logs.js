@@ -38,9 +38,10 @@ Minitoring.Settings.Logs = {
                     html += '<td data-column="Name" class="align-left">' + result.data[i].logName + '</td>';
                     html += ' <td data-column="Actions" class="action-bar align-right tab-no-padding desk-no-padding">';
                     html += ' <span class="row-actions visible-hover">';
-                    html += '   <a class="row-button action-link" title="Edit" data-action="edit" data-log-id="' +  result.data[i].logId + '" ><i class="fa fa-pencil"></i></a>';
-                    html += '   <a class="row-button action-link" title="Delete" data-action="delete" data-log-id="' +  result.data[i].logId + '" ><i class="fa fa-trash"></i></a>';
-                    html += '  </span>';
+                    html += '<a class="row-button action-link" title="Copy" data-action="copy" data-log-id="' +  result.data[i].logId + '"><i class="fa fa-copy"></i></a>';
+                    html += '<a class="row-button action-link" title="Edit" data-action="edit" data-log-id="' +  result.data[i].logId + '"><i class="fa fa-pencil"></i></a>';
+                    html += '<a class="row-button action-link" title="Delete" data-action="delete" data-log-id="' +  result.data[i].logId + '"><i class="fa fa-trash"></i></a>';
+                    html += '</span>';
                     html += ' </td>';
                     html += '<td data-column="Type" class="align-left"><span class="badge" data-badge="dark">' + result.data[i].logType + '</span></td>';
                     html += '<td data-column="Path" class="align-left">' + result.data[i].logPath + '</td>';
@@ -64,6 +65,11 @@ Minitoring.Settings.Logs = {
 
             if (Minikit.isObj(action) && Minikit.isObj(id)) {
                 switch (action) {
+
+                    case 'copy':
+                        alert('TODO');
+                        break;
+
                     case 'delete':
                         Minitoring.Api.delete('api/logs/' + id, null, function(response){
                             document.querySelector('table#settings-logs-table tr[data-id="' + id + '"]').remove();

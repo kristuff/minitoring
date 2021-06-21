@@ -59,7 +59,7 @@ Minitoring.Iptables = {
                     html += '<td data-column="Target">'     + result.data.chains[i].rules[ii].target + '</td>';
                     html += '<td data-column="Protocol">'   + result.data.chains[i].rules[ii].protocol + '</td>';
                     html += '<td data-column="Source">'     + getIpLink(result.data.chains[i].rules[ii].source) + '</td>';
-                    html += '<td data-column="Desination">' + getIpLink(result.data.chains[i].rules[ii].destination) + '</td>';
+                    html += '<td data-column="Destination">' + getIpLink(result.data.chains[i].rules[ii].destination) + '</td>';
                     html += '<td data-column="Options">'    + result.data.chains[i].rules[ii].options + '</td>';
                     html += '</tr>';
                 }

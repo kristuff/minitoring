@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.1
+ * @version    0.1.2
  * @copyright  2017-2021 Kristuff
  */
 
@@ -76,7 +76,6 @@ class CronTabModel extends SystemModel
             'time' => '', 
             'command' => ''
         ];
-
     }
 
     /** 
@@ -88,13 +87,13 @@ class CronTabModel extends SystemModel
      * @return array
      */
     public static function getAll()
-    {   
-       $list = [];
-       $list['users']  = self::getUserCrons();
-       $list['system'] = self::getSystemCron();
-       $list['crond']  = self::getCronD();
-
-       return $list;
+    {  
+        return array(
+            'users'   => self::getUserCrons(),
+            'system'  => self::getSystemCron(),
+            'crond'   => self::getCronD(),
+            'timers'  => self::getSystemTimers(),
+        ); 
     }
 
     /** 
@@ -125,11 +124,10 @@ class CronTabModel extends SystemModel
                         if (!self::isComment($cron) && !self::isEnvVariable($cron)){
 
                             $parsedCron = self::parseCron($cron);
-                            $parsedTime = false;
-        
+                     
                             if (!empty($parsedCron['time'])){
-                                $parsedTime = \Cron\CronExpression::factory($parsedCron['time']);
-                            }
+                                $parser = new \Cron\CronExpression($parsedCron['time']);
+                             }
 
                             $list[] = [
                                 'file'              => $fileinfo->getFilename(),
@@ -137,9 +135,9 @@ class CronTabModel extends SystemModel
                                 'cron'              => $cron,
                                 'timeExpression'    => $parsedCron['time'],
                                 'command'           => $parsedCron['command'],
-                                'nextRun'           => $parsedTime !== false ? $parsedTime->getNextRunDate() : '',
-                                'nextRunDate'       => $parsedTime !== false ? $parsedTime->getNextRunDate()->format('Y-m-d H:i:s') : '',
-                            ]; 
+                                'nextRun'           => !empty($parser) ? $parser->getNextRunDate() : '',
+                                'nextRunDate'       => !empty($parser) ? $parser->getNextRunDate()->format('Y-m-d H:i:s') : '',
+                           ]; 
                         }
                     }
                 }
@@ -201,19 +199,18 @@ class CronTabModel extends SystemModel
                         }
                     }
                     $parsedCron = self::parseCron($cron);
-                    $parsedTime = false;
 
                     if (!empty($parsedCron['time'])){
-                        $parsedTime = \Cron\CronExpression::factory($parsedCron['time']);
+                        $parser = new \Cron\CronExpression($parsedCron['time']);
                     }
 
                     $list[] = [
                         'cron'              => $cron,  // the full line
                         'timeExpression'    => $parsedCron['time'],
                         'command'           => $parsedCron['command'],
-                        'nextRun'           => $parsedTime !== false ? $parsedTime->getNextRunDate() : '',
-                        'nextRunDate'       => $parsedTime !== false ? $parsedTime->getNextRunDate()->format('Y-m-d H:i:s') : '',
-                        'scripts'           => $scripts,
+                        'nextRun'           => !empty($parser) ? $parser->getNextRunDate() : '',
+                        'nextRunDate'       => !empty($parser) ? $parser->getNextRunDate()->format('Y-m-d H:i:s') : '',
+                'scripts'           => $scripts,
                     ]; 
                 }
             }
@@ -255,19 +252,18 @@ class CronTabModel extends SystemModel
                         if (!self::isComment($cron) && !self::isEnvVariable($cron) && !self::isEmptyLine($cron)){
 
                             $parsedCron = self::parseCron($cron);
-                            $parsedTime = false;
         
                             if (!empty($parsedCron['time'])){
-                                $parsedTime = \Cron\CronExpression::factory($parsedCron['time']);
+                                $parser = new \Cron\CronExpression($parsedCron['time']);
                             }
 
                             $list[] = [
-                                'user' => $user,
-                                'cron' => $cron,
+                                'user'              => $user,
+                                'cron'              => $cron,
                                 'timeExpression'    => $parsedCron['time'],
                                 'command'           => $parsedCron['command'],
-                                'nextRun'           => $parsedTime !== false ? $parsedTime->getNextRunDate() : '',
-                                'nextRunDate'       => $parsedTime !== false ? $parsedTime->getNextRunDate()->format('Y-m-d H:i:s') : '',
+                                'nextRun'           => !empty($parser) ? $parser->getNextRunDate() : '',
+                                'nextRunDate'       => !empty($parser) ? $parser->getNextRunDate()->format('Y-m-d H:i:s') : '',
                             ]; 
                         }
                     }
@@ -290,10 +286,43 @@ class CronTabModel extends SystemModel
     public static function getSystemTimers(): array
     {
         $list=[];
+        if (exec('systemctl list-timers', $timers)){
+            
+            // remove header
+            unset($timers[0]);
 
-        //todo
-        if (exec('cut -f1 -d: /etc/passwd', $users)){
+            // loop into filtered array
+            foreach (array_filter($timers) as $line){
+                
+                // skip empty line and end comments
+                if (self::isEmptyLine($line)) break; 
+                
+                $line = trim($line);
 
+                /*
+                    NEXT                          LEFT          LAST                          PASSED       UNIT                         ACTIVATES
+                    Sun 2021-06-20 19:39:00 CEST  12min left    Sun 2021-06-20 19:09:06 CEST  17min ago    phpsessionclean.timer        phpsessionclean.service
+                    Mon 2021-06-21 00:00:00 CEST  4h 33min left Sun 2021-06-20 00:00:45 CEST  19h ago      logrotate.timer              logrotate.service
+                    Mon 2021-06-21 00:00:00 CEST  4h 33min left Sun 2021-06-20 00:00:45 CEST  19h ago      man-db.timer                 man-db.service
+                 */
+                
+                $expr = '#^'.
+                        '(?P<next>[a-zA-Z]+ [0-9\-]+ [0-9:]+ \w+)\s+'.
+                        '(?P<left>.+left)\s+'.
+                        '(?P<last>[a-zA-Z]+ [0-9\-]+ [0-9:]+ \w+)\s+'.
+                        '(?P<passed>.+ago)\s+'.
+                        '(?P<unit>[^ ]+)\s+'.
+                        '(?P<activates>[^ ]+)'.
+                        '#';
+                if (preg_match($expr, $line, $matches)) {
+                    $parsed = [];
+                    foreach (array_filter(array_keys($matches), 'is_string') as $key) {
+                        $parsed[$key] = trim($matches[$key]);
+                    }
+                    $list[] = $parsed;
+                }
+
+            }
         }
 
         return $list;

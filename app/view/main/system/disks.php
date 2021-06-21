@@ -1,16 +1,11 @@
-<section id="section-disks" class="view anim-scale-increase" 
-         data-view="disks" 
-         data-title="Disks" 
-         data-refresh="Minitoring.Disks.get" >
+<section id="section-disks" class="view anim-scale-increase" data-view="disks" data-title="Disks" data-refresh="Minitoring.Disks.refresh" >
 
     <?php $this->renderFeedback(); ?>
 
     <section id="disks-actions" class="section action-bar">
-        <input id="disks_show_tmpfs" type="checkbox" class="switch" 
-               data-bind="Minitoring.Disks.get" data-bind-event="change"/>
+        <input id="disks_show_tmpfs" type="checkbox" class="switch" data-bind="Minitoring.Disks.refresh" data-bind-event="change"/>
         <label for="disks_show_tmpfs"></label>
         <label>Show tmpfs</label>
-
     </section>
 
     <h6>Disks space</h6>
@@ -21,9 +16,9 @@
                 <th>Type</th>
                 <th>Mount</th>
                 <th class="align-center">% used</th>
-                <th class="align-center">Free</th>
-                <th class="align-center">Used</th>
-                <th class="align-center">Total</th>
+                <th class="align-right padding-right-12">Used</th>
+                <th class="align-right padding-right-12">Free</th>
+                <th class="align-right padding-right-12">Total</th>
             </tr>
         </thead>
         <tbody></tbody>
@@ -38,9 +33,9 @@
                 <th>Type</th>
                 <th>Mount</th>
                 <th class="align-center">% used</th>
-                <th class="align-center">Free</th>
-                <th class="align-center">Used</th>
-                <th class="align-center">Total</th>
+                <th class="align-right padding-right-12">Used</th>
+                <th class="align-right padding-right-12">Free</th>
+                <th class="align-right padding-right-12">Total</th>
             </tr>
         </thead>
         <tbody></tbody>

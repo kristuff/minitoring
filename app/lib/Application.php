@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.1
+ * @version    0.1.2
  * @copyright  2017-2021 Kristuff
  */
 
@@ -32,7 +32,7 @@ use Kristuff\Miniweb\Mvc\Model as MvcModel;
 class Application extends Mvc\Application
 {
 
-    const VERSION = "v0.1.1";
+    const VERSION = "v0.1.2";
 
     /** 
      * Constructor
@@ -62,12 +62,7 @@ class Application extends Mvc\Application
         $this->loadConfigFile(__DIR__ . '/../config/minitoring.conf.php');
         $this->loadConfigFile(__DIR__ . '/../config/minitoring.conf.local.php');
 
-        // set default language 
-        $language = self::config('APP_DEFAULT_LANGUAGE');
-        AppModel::feedback("coucouc QSqkslkqlskj" . $language);
-        if (!empty($language)){
-            $this->locales()->setDefault($language);
-        }
+        
        
         // load database config
         if (Model\SetupModel::isInstalled()){

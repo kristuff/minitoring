@@ -15,10 +15,17 @@ Minitoring.SystemUsers = {
             paginatorClicked(e);
         });
     },
-    getNumberActives: function () {
+    getNumberActive: function () {
         Minitoring.Api.get('api/sysusers/currentUsersNumber', null,
             function (result) {
+                document.querySelector('#current-users-number').classList.remove('color-status-ok');
+                document.querySelector('#current-users-number').classList.remove('color-status-warning');
                 document.querySelector('#current-users-number').innerHTML = result.data.currentUsersNumber;
+                if (result.data.currentUsersNumber > 0){
+                    document.querySelector('#current-users-number').classList.add('color-status-warning');
+                } else {
+                    document.querySelector('#current-users-number').classList.add('color-status-ok');
+                }
             }, function (apiResponse) {
                 Minitoring.Api.notifyApiResponse(apiResponse);
             }

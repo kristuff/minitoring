@@ -13,14 +13,17 @@ Minitoring.Users = {
     },
    
     invite:function(){
+        Minitoring.Users.cleanDialog();
         Minitoring.Users.showDialog('invite','');
     },
 
     create:function(){
+        Minitoring.Users.cleanDialog();
         Minitoring.Users.showDialog('create','');
     },
 
     onDialogOkClick:function (e){
+        e.preventDefault();
 
         switch (document.querySelector('#users-dialog .dialog-part.active').getAttribute('data-part')) {
             case 'invite':
@@ -28,6 +31,7 @@ Minitoring.Users = {
                 Minitoring.Api.post('api/users', args, function (result) {
                     Minitoring.Api.notifyApiResponse(result);
                     Minitoring.Users.refresh();
+                    Minitoring.Users.closeDialog();
                 });
                 break;
 
@@ -41,44 +45,13 @@ Minitoring.Users = {
                 Minitoring.Api.post('api/users', args, function (result) {
                     Minitoring.Api.notifyApiResponse(result);
                     Minitoring.Users.refresh();
-                });
-                break;
-
-            case 'delete':
-                var full = document.querySelector('#users-dialog #user-delete-full').checked,
-                    id = document.querySelector('#users-dialog').getAttribute('data-user-id');
-
-                if (full){
-                    Minitoring.Api.delete('api/users/' + id, null, function (result) {
-                        Minitoring.Api.notifyApiResponse(result);
-                        Minitoring.Users.refresh();
-                    });
-                } else {
-                    Minitoring.Api.put('api/users/' + id + '/delete', null, function (result) {
-                        Minitoring.Api.notifyApiResponse(result);
-                        Minitoring.Users.refresh();
-                    });
-                }
-                break;
-
-            case 'suspend':
-                var id = document.querySelector('#users-dialog').getAttribute('data-user-id'),
-                    args = 'suspensionDays=' + document.querySelector('#user-suspend-days').value + '&output=json';
-
-                Minitoring.Api.put('api/users/' + id + '/suspend', args, function (result) {
-                    Minitoring.Api.notifyApiResponse(result);
-                    Minitoring.Users.refresh();
+                    Minitoring.Users.closeDialog();
+                    Minitoring.Users.cleanDialog();
                 });
                 break;
         }
-
-        // close dialog
-        document.querySelector('#users-dialog').classList.remove('active');
-        document.querySelector('#users-dialog').setAttribute('data-user-id', '');
-        e.preventDefault();
-
     },
-
+    
     onPaginatorClick: function(e) {
         e.preventDefault();
         var el = e.target.closest('[data-offset]');
@@ -98,12 +71,42 @@ Minitoring.Users = {
             if (Minikit.isObj(action) && Minikit.isObj(id)) {
                 switch (action) {
                     case 'delete':
-                    case 'suspend':
-                        Minitoring.Users.showDialog(action, id);
+                      //case 'suspend':
+                        Minitoring.Users.deleteUser(id);
                         break;
                 }
             }
         }
+    },
+
+    cleanDialog: function() {
+        document.querySelector('#user-create-email').value = "";
+        document.querySelector('#user-create-name').value = "";
+        document.querySelector('#user-create-password').value = "";
+        document.querySelector('#user-create-password-repeat').value = "";
+        document.querySelector('#user-invite-email').value = "";
+    },
+
+    closeDialog: function() {
+         document.querySelector('#users-dialog').classList.remove('active');
+         document.querySelector('#users-dialog').setAttribute('data-user-id', '');
+    },
+
+    // full delete a user 
+    deleteUser: function (id) {
+        Minikit.dialog({
+            message: document.querySelector("#users-delete-message").value,
+            cancelable: true,
+            type: 'warning',
+            okButtonText: document.querySelector('.dialog-button-ok').innerHTML,
+            cancelButtonText: document.querySelector('.dialog-button-cancel').innerHTML,
+            callback: function(){
+                Minitoring.Api.delete('api/users/' + id, null, function (result) {
+                    Minitoring.Api.notifyApiResponse(result);
+                    Minitoring.Users.refresh();
+                });
+            }
+        });
     },
 
     showDialog: function (section, id) {
@@ -142,25 +145,15 @@ Minitoring.Users = {
     },
 
     getHtml: function (item) {
-        var html = '';
-        var loginDate   = Minitoring.UI.getFormattedDate(item.userLastLoginTimestamp);
-        var suspendDate = Minitoring.UI.getFormattedDate(item.userSuspensionTimestamp);
-        var deletedDate = Minitoring.UI.getFormattedDate(item.userDeletionTimestamp);
-        var createdDate = Minitoring.UI.getFormattedDate(item.userCreationTimestamp);
-        var status = ''
-        var badgeType = 'dark';
+        var html = '',
+            loginDate   = Minitoring.UI.getFormattedDate(item.userLastLoginTimestamp),
+            createdDate = Minitoring.UI.getFormattedDate(item.userCreationTimestamp),
+            status = '',
+            badgeType = 'dark';
+        
         if (item.userActivated > 0 && item.userDeleted < 1) {
             badgeType = 'success';
             status = 'Active';
-
-            if (Minikit.isObj(item.userSuspensionTimestamp)){
-                var date = new Date(item.userSuspensionTimestamp * 1000);
-                var now = Date.now();
-                if (date > now){
-                    badgeType = 'warning';
-                    status = 'Suspended';
-                }
-            }
 
         } else if (item.userDeleted == 1) {
             status = 'Deleted';
@@ -174,18 +167,15 @@ Minitoring.Users = {
         html += ' <td data-column="Avatar"><img src="' + item.userAvatarUrl + '"/></td>';
         html += ' <td data-column="Name">' + item.userName + '</td>';
         html += ' <td data-column="Actions" class="action-bar align-right no-padding">';
-        html += ' <span class="row-actions visible-hover">';
-        html += '   <a class="row-button action-link" title="Suspend" data-action="suspend" data-user-id="' + item.userId + '"><i class="fa fa-ban"></i></a>';
-        html += '   <a class="row-button action-link" title="Delete" data-action="delete" data-user-id="' + item.userId + '" ><i class="fa fa-trash"></i></a>';
-        html += '  </span>';
+        html += '<span class="row-actions visible-hover">';
+        html += '<a class="row-button action-link" title="Delete" data-action="delete" data-user-id="' + item.userId + '" ><i class="fa fa-trash"></i></a>';
+        html += '</span>';
         html += ' </td>';
         html += ' <td data-column="Type">' + item.userAccountTypeRendered + '</td>';
         html += ' <td data-column="Email">' + item.userEmail + '</td>';
         html += ' <td data-column="Created on">' + createdDate + '</td>';
         html += ' <td data-column="LastLogin">' + loginDate + '</td>';
         html += ' <td data-column="Status"><span class="badge" data-badge="' + badgeType + '">' + status + '</span></td>';
-        html += ' <td data-column="Suspended to">' + suspendDate + '</td>';
-        html += ' <td data-column="Deleted on">' + deletedDate + '</td>';
         html += '</tr>';
         return html;
     }

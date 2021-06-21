@@ -13,15 +13,31 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.1
+ * @version    0.1.2
  * @copyright  2017-2021 Kristuff
  */
 
 namespace Kristuff\Minitoring\Controller;
 
 /**
- * SystemController
+ * PackagesController
  */
-class SystemController extends \Kristuff\Minitoring\PrivateController
+class PackagesController extends \Kristuff\Minitoring\PrivateController
 {
+    /** 
+     * 
+     */
+    public function all()
+    {
+        $this->index();
+    }
+
+    /** 
+     * 
+     */
+    public function upgradable()
+    {
+        $this->index();
+    }
+
 }

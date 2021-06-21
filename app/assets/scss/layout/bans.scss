@@ -5,7 +5,7 @@ table#fail2ban-jails {
     table-layout: auto;
     font-size: 1.5rem;
 
-    td[data-column="Status"]{
+    td[data-column="Status"] .badge {
         font-size: 1.3rem;
     }
 }
@@ -45,4 +45,16 @@ table#ip6tables-data {
         }
     }
 
+    td[colspan] {
+        &::before {
+            content: "";
+            width: 0;
+        }
+    }
+
+    @media only screen and (max-width:767px){
+        td[data-column="Group"] {
+            display: none;
+        }
+    }
 }

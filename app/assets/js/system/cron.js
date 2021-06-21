@@ -4,12 +4,13 @@ Minitoring.Cron = {
         // temp loader
         document.querySelector('table#users-cron-list tbody').innerHTML = Minitoring.UI.getTableLoader(4);
         document.querySelector('table#system-cron-list tbody').innerHTML = Minitoring.UI.getTableLoader(5);
+        document.querySelector('table#system-timer-list tbody').innerHTML = Minitoring.UI.getTableLoader(6);
 
         Minitoring.Api.socketApiRequest({
             command:"crons",
             key: Minitoring.Api.key
         }, function (response) {
-            var html = '', htmlSystem = '';
+            var html = '', htmlSystem = '', htmlTimers = '';
             
             // user crons 
             for (var i = 0; i < response.data.users.length; i++) {
@@ -45,10 +46,21 @@ Minitoring.Cron = {
                 htmlSystem += '<td data-column="Next Run Date"><span class="badge" data-badge="info">' + response.data.crond[i].nextRunDate + '</span></td>'; 
                 htmlSystem += '</tr>'; 
             }
-
             document.querySelector('table#system-cron-list tbody').innerHTML = htmlSystem;
-        }, function (apiResponse) {
-            Minitoring.Api.notifyApiResponse(apiResponse);
+
+            // system timers 
+            for (var i = 0; i < response.data.timers.length; i++) {
+                htmlTimers += '<tr>'; 
+                htmlTimers += '<td data-column="Unit">'         + response.data.timers[i].unit      + '</td>'; 
+                htmlTimers += '<td data-column="Activates">'    + response.data.timers[i].activates + '</td>'; 
+                htmlTimers += '<td data-column="Passed">'       + response.data.timers[i].passed    + '</td>'; 
+                htmlTimers += '<td data-column="Last">'         + response.data.timers[i].last      + '</td>'; 
+                htmlTimers += '<td data-column="Left">'         + response.data.timers[i].left + '</td>'; 
+                htmlTimers += '<td data-column="Next"><span class="badge" data-badge="info">' + response.data.timers[i].next + '</span></td>'; 
+                htmlTimers += '</tr>'; 
+            }
+
+            document.querySelector('table#system-timer-list tbody').innerHTML = htmlTimers;
         });
     }
 }

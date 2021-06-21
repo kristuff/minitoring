@@ -30,7 +30,10 @@ table#system-logs-table {
         th[data-column="Request"], td[data-column="Request"]{ width: 200px; }
         th[data-column="Size"] {min-width: 60px; text-align: center;}
         td[data-column="Size"] {min-width: 60px; text-align: right;}
-        th[data-column="Log Name"], td[data-column="Log Name"]{ display: none; }
+        th[data-column="Log Name"], 
+        td[data-column="Log Name"]{ 
+            display: none; 
+        }
 
     }
 
@@ -55,7 +58,7 @@ table#settings-logs-table {
         }
 
         th[data-column="Name"], td[data-column="Name"]{ width:250px;}
-        th[data-column="Actions"], td[data-column="Actions"]{ width: 90px;}
+        th[data-column="Actions"], td[data-column="Actions"]{ width: 126px;}
         th[data-column="Type"], td[data-column="Type"]{ width: 120px;}
 
 

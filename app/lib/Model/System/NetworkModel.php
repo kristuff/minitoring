@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.1
+ * @version    0.1.2
  * @copyright  2017-2021 Kristuff
  */
 
@@ -24,14 +24,26 @@ namespace Kristuff\Minitoring\Model\System;
  */
 class NetworkModel extends SystemBaseModel
 {
-    // Possible commands for ifconfig and ip
+    /**
+     * @access private
+     * @static
+     * @var array $commands     Possible commands for ifconfig and ip
+     */
     private static $commands = array(
         'ifconfig' => array('ifconfig', '/sbin/ifconfig', '/usr/bin/ifconfig', '/usr/sbin/ifconfig'),
         'ip'       => array('ip', '/bin/ip', '/sbin/ip', '/usr/bin/ip', '/usr/sbin/ip'),
     );
 
-    // Returns command line for retreive interfaces
-    protected static function getInterfacesCommand($commands)
+    /**
+     * Returns command line for retreive interfaces
+     * 
+     * @access protected
+     * @static
+     * @param array     $commands     Possible commands for ifconfig and ip
+     * 
+     * @return string|null
+     */
+    protected static function getInterfacesCommand(array $commands): ?string
     {
         $ifconfig = self::whichCommand($commands['ifconfig'], ' | awk -F \'[/  |: ]\' \'{print $1}\' | sed -e \'/^$/d\'');
 
@@ -48,9 +60,17 @@ class NetworkModel extends SystemBaseModel
         return null;
     }
 
-
-    // Returns command line for retreive IP address from interface name
-    protected static function getIpCommand($commands, $interface)
+    /**
+     * Returns command line for retreive IP address from interface name
+     * 
+     * @access protected
+     * @static
+     * @param array     $commands       Possible commands for ifconfig and ip
+     * @param mixed     $interface      
+     * 
+     * @return string|null
+     */
+    protected static function getIpCommand(array $commands, $interface): ?string
     {
         $ifconfig = self::whichCommand($commands['ifconfig'], ' '.$interface.' | awk \'/inet / {print $2}\' | cut -d \':\' -f2');
 
@@ -69,19 +89,24 @@ class NetworkModel extends SystemBaseModel
         return null;
     }
 
-    public static function getNeworkInfos()
+    /**
+     * Get network informations
+     * 
+     * @access public
+     * @static
+     * 
+     * @return array
+     */
+    public static function getNeworkInfos(): array
     {   
 
-        $data = [];
-        $data['network'] = []; 
-      
-        $network = [];
-        $getInterfaces_cmd = self::getInterfacesCommand(self::$commands);
+        $data               = [];
+        $data['network']    = []; 
+        $network            = [];
+        $getInterfaces_cmd  = self::getInterfacesCommand(self::$commands);
 
-        if (is_null($getInterfaces_cmd) || !(exec($getInterfaces_cmd, $getInterfaces)))
-        {
-            return array('interface' => 'N.A', 
-                         'ip' => 'N.A');
+        if (is_null($getInterfaces_cmd) || !(exec($getInterfaces_cmd, $getInterfaces))){
+            return array('interface' => 'N.A', 'ip' => 'N.A');
         }
 
         foreach ($getInterfaces as $name) {
@@ -106,7 +131,6 @@ class NetworkModel extends SystemBaseModel
         }
 
         foreach ($network as $interface) {
-            
             // Get transmit and receive datas by interface
             exec('cat /sys/class/net/'.$interface['name'].'/statistics/tx_bytes', $getBandwidth_tx);
             exec('cat /sys/class/net/'.$interface['name'].'/statistics/rx_bytes', $getBandwidth_rx);

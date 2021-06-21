@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.1
+ * @version    0.1.2
  * @copyright  2017-2021 Kristuff
  */
 
@@ -56,6 +56,18 @@ class Fail2banModel extends DatabaseModel
     /* --- COMMON --- */
     /* -------------- */
 
+    /** 
+     * Get is the fail2ban service is active or not.
+     * 
+     * @access public
+     * @static
+     *
+     * @return bool
+     */
+    public static function isActive()
+    {
+        return self::getExecSingleValue('systemctl is-active --quiet fail2ban.service && echo OK') === 'OK';
+    }
 
     /** 
      * Get the server version 
@@ -193,7 +205,7 @@ class Fail2banModel extends DatabaseModel
         $minDate = self::f2bDatabase()->select()->min('timeofban', 'time')->from('bans')->getColumn();
 
         $data['version']            = self::getVersion();
-        $data['status']             = 'TODO';
+        $data['status']             = self::isActive() ? 'active' : 'stopped';
         $data['jails']              = self::getJails();
         $data['databasePath']       = self::getDatabaseName();
         $data['databaseSize']       = \Kristuff\Miniweb\Core\Format::getSize($dbSize);

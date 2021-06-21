@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.1
+ * @version    0.1.2
  * @copyright  2017-2021 Kristuff
  */
 
@@ -176,6 +176,8 @@ class LogsCollectionModel extends SystemBaseModel
     {
         // the return response
         $response = TaskResponse::create();
+
+
             
         // Check admin permissions, file exists, Name not empty and unique   
         // Do not check file is readable here: in most case its not readable by webserver

@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.1
+ * @version    0.1.2
  * @copyright  2017-2021 Kristuff
  */
 
@@ -34,12 +34,9 @@ class SocketServer implements MessageComponentInterface {
 
     public function __construct()
     {
-        $this->clients = new \SplObjectStorage;
-
-        // server stript is in app/bin folder, root path is the parent folder
-        // $rootPath = dirname(get_included_files()[0], 2);
-        // note: we need an app instance to make model functions working
+        // note: we need an Application instance to make model functions working
         $this->app = new Application();
+        $this->clients = new \SplObjectStorage;
         $this->log(LOG_INFO, 'Started');
     }
 

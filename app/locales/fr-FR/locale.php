@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.1
+ * @version    0.1.2
  * @copyright  2017-2021 Kristuff
  */
 
@@ -44,15 +44,47 @@ return array(
     'COLOR_MAGENTA'                                     => 'Violet',
     'COLOR_ORANGE'                                      => 'Orange',
 
+    /* user */
+    'USER_NAME_FIELD'                                   => "Nom d'utilisateur :",
+    'USER_NAME_PLACEHOLDER'                             => "Entrez votre nom d'utilisateur",
+    'USER_NAME_CREATE_PLACEHOLDER'                      => "Nom d'utilisateur (lettres/nombres, 2-64 caractères)",
+    'USER_EMAIL_FIELD'                                  => "Adresse email :",
+    'USER_EMAIL_PLACEHOLDER'                            => "Adresse email",
+    'USER_NAME_OR_EMAIL_FIELD'                          => "Nom d'utilisateur ou adresse email :",
+    'USER_NAME_OR_EMAIL_PLACEHOLDER'                    => "Nom d'utilisateur ou adresse email",
+    'USER_PASSWORD_FIELD'                               => 'Mot de passe :',
+    'USER_NEW_PASSWORD_FIELD'                           => 'Nouveau mot de passe :',
+    'USER_PASSWORD_PLACEHOLDER'                         => 'Mot de passe',
+    'USER_PASSWORD_CREATE_PLACEHOLDER'                  => "Mot de passe (min. 8 caractères)",
+    'USER_PASSWORD_REPEAT_FIELD'                        => 'Répétez le mot de passe :',
+    'USER_PASSWORD_REPEAT_PLACEHOLDER'                  => 'Mot de passe',
+    'USER_AVATAR_HEADER'                                => "Avatar",
+    'USER_NAME_HEADER'                                  => "Nom",
+    'USER_TYPE_HEADER'                                  => "Type",
+    'USER_EMAIL_HEADER'                                 => "Email",
+    'USER_STATUS_HEADER'                                => "Status",
+    'USER_CREATED_DATE_HEADER'                          => "Créé le",
+    'USER_LAST_LOGIN_DATE_HEADER'                       => "Dernière connexion",
+
     /* login */
-    'AUTH_LOGIN_NAME_OR_EMAIL_FIELD'                    => "Nom d'utilisateur ou adresse email :",
-    'AUTH_LOGIN_NAME_OR_EMAIL_PLACEHOLDER'              => "Nom d'utilisateur ou adresse email",
-    'AUTH_LOGIN_PASSWORD_FIELD'                         => 'Mot de passe :',
-    'AUTH_LOGIN_PASSWORD_PLACEHOLDER'                   => 'Mot de passe',
     'AUTH_LOGIN_REMEMBER_ME'                            => 'Rester connecté',
     'AUTH_LOGIN_BUTTON_TEXT'                            => 'Se connecter',
     'AUTH_LOGOUT_BUTTON_TEXT'                           => 'Déconnexion',
     'AUTH_FORGOT_PASSWORD_LINK'                         => 'Mot de passe oublié ?',
+    'AUTH_RECOVERY_BACK_TO_LOGIN'                       => "Retourner à la page de connexion",
+    'CAPTCHA_RELOAD_LINK'                               => "Recharger l'image",
+    'CAPTCHA_FIELD'                                     => "Code de sécurité :",
+    'CAPTCHA_PLACEHOLDER'                               => "Entrez le code de sécurité",
+    'AUTH_REGISTER_BUTTON'                              => "S'enregistrer",
+    'AUTH_REGISTER_TITLE'                               => "Veuillez définir votre nom d'utilisateur et votre mot de passe pour terminer votre inscription.",
+    'AUTH_RECOVERY_SUBMIT_PASSWORD'                     => 'Changer le mot de passe',
+    'AUTH_RECOVERY_TITLE'                               => "Demander une récupération de mot de passe",
+    'AUTH_RECOVERY_TEXT'                                => "Entrez votre nom d'utilisateur ou votre adresse email et nous vous enverrons un email avec des instructions.", 
+    'AUTH_RECOVERY_BUTTON'                              => "Envoyer un mail de récupération", 
+
+    /* Packages */
+    'PACKAGES'                                          => 'Packages',
+    'PACKAGES_UPGRADE_NONE'                             => 'Tous les paquets sont à jour',
 
     /* Logs */
     'LOGS'                                              => 'Journaux',
@@ -60,12 +92,30 @@ return array(
     'LOGS_REFRESH_XSECONDS'                             => 'Rafraîchir toutes les %ss',
     'LOGS_DISPLAY_XLINES'                               => 'Afficher %s lignes',
 
+    /* Crons */
+    'CRONS'                                             => "Tâches planifiées",
+    'CRONS_USER'                                        => "Tâches utilisateurs (crons)",
+    'CRONS_SYSTEM'                                      => "Tâches système (crons)",
+    'CRONS_TIMER'                                       => "Tâches système (timers)",
+    'CRONS_USER_HEADER'                                 => "Utilisateur",
+    'CRONS_TIME_HEADER'                                 => "Expression",
+    'CRONS_COMMAND_HEADER'                              => "Commande",
+    'CRONS_NEXT_TIME_HEADER'                            => "Prochaine exécution",
+    'CRONS_SCRIPT_HEADER'                               => "Script",
+    'CRONS_TYPE_HEADER'                                 => "Type",
+
+    /* firewall */
+    'FIREWALL'                                          => 'Pare-feu',
+    'FAIL2BAN_TEXT'                                     => 'Vérifie le status du service Fail2ban et affiche des statistiques sur les jails',
+    'IPTABLES_TEXT'                                     => "Affiche le contenu d'iptables",
+    'IP6TABLES_TEXT'                                    => "Affiche le contenu d'ip6tables",
+
     /* settings */
     'SETTINGS'                                          => 'Paramètres',
 
     /* settings customize */
     'SETTINGS_CUSTOMIZE'                                => 'Personnaliser',
-    'SETTINGS_CUSTOMIZE_SUMMARY'                        => 'Changer la langue, l\'apparence et l\'affichage par défaut',
+    'SETTINGS_CUSTOMIZE_SUMMARY'                        => "Changer la langue, l'apparence et l'affichage par défaut",
     'SETTINGS_CUSTOMIZE_LANGUAGE'                       => 'Langue',
     'SETTINGS_CUSTOMIZE_LANGUAGE_TEXT'                  => 'Vous devez recharger la page pour appliquer les changements de langue.',
     'SETTINGS_CUSTOMIZE_LANGUAGE_FIELD'                 => 'Sélectionnez la langue :',
@@ -83,8 +133,9 @@ return array(
     'SETTINGS_PROFILE'                                  => 'Mon compte',
     'SETTINGS_PROFILE_SUMMARY'                          => "Modifier votre compte utilisateur",
     'SETTINGS_PROFILE_NAME_FIELD'                       => "Nom d'utilisateur :",
+    'SETTINGS_PROFILE_NAME_PLACEHOLDER'                 => "Entrez votre nom d'utilisateur",
     'SETTINGS_PROFILE_EMAIL_FIELD'                      => "Adresse email :",
-    'SETTINGS_PROFILE_EMAIL_PLACEHOLDER'                => "Entrer votre adresse email",
+    'SETTINGS_PROFILE_EMAIL_PLACEHOLDER'                => "Entrez votre adresse email",
     'SETTINGS_PROFILE_CARD_TITLE'                       => "Résumé",
     'SETTINGS_PROFILE_EDIT_TITLE'                       => 'Profil',
     'SETTINGS_PROFILE_EDIT_NAME_OR_EMAIL_BUTTON'        => 'Mettre à jour le profil',
@@ -94,8 +145,8 @@ return array(
     'SETTINGS_PROFILE_EDIT_PASS_NEW_REPEAT'             => 'Répetez le nouveau mot de passe :',
     'SETTINGS_PROFILE_EDIT_PASS_BUTTON'                 => 'Mettre à jour le mot de passe',
     'SETTINGS_PROFILE_EDIT_AVATAR_TITLE'                => "Changer d'avatar",
-    'SETTINGS_PROFILE_EDIT_AVATAR_TEXT'                 => "Sélectionnez une image (.jpg or .png) sur votre ordinateur (l'image sera être réduite à 90x90 pixels), et appuyez sur envoyer.",
-    'SETTINGS_PROFILE_EDIT_AVATAR_FILE_SELECT'          => "Sélectionnez un fichier...",
+    'SETTINGS_PROFILE_EDIT_AVATAR_TEXT'                 => "Sélectionnez une image (.jpg or .png) sur votre ordinateur (l'image sera réduite à 90x90 pixels), et appuyez sur envoyer.",
+    'SETTINGS_PROFILE_EDIT_AVATAR_FILE_SELECT'          => "Sélectionner un fichier...",
     'SETTINGS_PROFILE_EDIT_AVATAR_BUTTON'               => "Envoyer",
     'SETTINGS_PROFILE_DELETE_AVATAR_TITLE'              => "Supprimer mon avatar",
     'SETTINGS_PROFILE_DELETE_AVATAR_TEXT'               => "Supprime l'avatar du serveur.",
@@ -119,10 +170,16 @@ return array(
     'SETTINGS_USERS_SUMMARY'                            => "Créer ou modifier les comptes utilisateurs.",
     'SETTINGS_USERS_SECTION_CURRENT_ACCOUNTS'           => 'Comptes utilisateurs',
     'SETTINGS_USERS_SECTION_NEW_ACCOUNTS'               => 'Nouveaux comptes',
+    'SETTINGS_USERS_CREATE_ACCOUNT_DIALOG_TITLE'        => 'Créer un nouveau compte',
     'SETTINGS_USERS_CREATE_ACCOUNT_BUTTON'              => 'Créer un compte',
     'SETTINGS_USERS_CREATE_ACCOUNT_TEXT'                => 'Crée et active un nouveau compte utilisateur.',
     'SETTINGS_USERS_INVITE_BUTTON'                      => 'Envoyer une invitation',
-    'SETTINGS_USERS_INVITE_TEXT'                        => "Envoie une invitation à s'enregister par email. L'utilisateur sera invité à completer son profil.",
+    'SETTINGS_USERS_INVITE_TEXT'                        => "Envoie une invitation à s'enregister par email. L'utilisateur sera invité à compléter son profil.",
+    'SETTINGS_USERS_FULL_DELETE_TEXT'                   => "L'utilisateur et ses données seront définitivement supprimés de la base de données. Cette action ne peut pas être annulée. ",
+    'SETTINGS_USERS_INVITE_DIALOG_TITLE'                => "Inviter un utilisateur",
+    'SETTINGS_USERS_INVITE_DIALOG_MAIL_FIELD'           => "Envoyer une invitation par email à :",
+
+
 
     'SETTINGS_LOGREADER'                                => 'Journaux',
     'SETTINGS_LOGREADER_SUMMARY'                        => "Paramètres du lecteur de journaux",

@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.1
+ * @version    0.1.2
  * @copyright  2017-2021 Kristuff
  */
 
@@ -75,6 +75,36 @@ class ApiController extends \Kristuff\Miniweb\Auth\Controller\ApiController
         $this->view->renderJson($this->response->toArray(), $this->response->code());
     }
 
+     /** 
+     * packages api end points
+     *
+     *  ----------------------------            ------      ------------------------------      --------------------    -------------------------
+     *  End points                              Method      Description                         parameters(s)           Response
+     *  ----------------------------            ------      ------------------------------      --------------------    -------------------------
+     * 
+     *  ----------------------------            ------      ------------------------------      --------------------    -------------------------
+     */
+    public function packages($action = null)
+    {
+        // accept only GET requests
+        if ($this->request()->method() === Request::METHOD_GET) {
+            switch ($action){
+                case '':
+                case 'all':
+                    $this->response =  TaskResponse::create(200, '', System\PackagesModel::getPackages());
+                    break;
+                case 'upgradable':
+                    $this->response =  TaskResponse::create(200, '', System\PackagesModel::getUpgradablePackages());
+                    break;
+
+
+            }
+        }
+
+        // render
+        $this->view->renderJson($this->response->toArray(), $this->response->code());
+    }
+
     /** 
      * System api end points
      *
@@ -128,6 +158,10 @@ class ApiController extends \Kristuff\Miniweb\Auth\Controller\ApiController
                     $this->response = TaskResponse::create(200, '', System\NetworkModel::getNeworkInfos());
                     break;     
 
+                case 'process':
+                    $this->response = TaskResponse::create(200, '', System\ProcessModel::getInfos());
+                    break;
+
                 case 'infos':
                     $this->response = TaskResponse::create(200, '', System\SystemModel::getInfos());
                     break;        
@@ -138,6 +172,7 @@ class ApiController extends \Kristuff\Miniweb\Auth\Controller\ApiController
                     $this->response = TaskResponse::create(200, '', [
                         'infos'     => System\SystemModel::getInfos(),
                         'network'   => System\NetworkModel::getNeworkInfos(),
+                        'process'   => System\ProcessModel::getInfos(),
                         'load'      => System\CpuModel::getLoadAverage(),
                         'swap'      => System\MemoryModel::getSwap(),
                         'memory'    => System\MemoryModel::getMemory(),

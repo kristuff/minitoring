@@ -3,7 +3,7 @@
     data-title="Iptables"
     data-refresh="Minitoring.Iptables.refreshIptables">
 
-        <div class="col mob-whole">
+    <div class="col mob-whole">
             <section class="section">
                 <h6>Iptables</h6>
                 <table id="iptables-data" class="data-table responsive">
@@ -20,10 +20,6 @@
                     <tbody></tbody>
                 </table>
             </section>
-
-        </div>
-
-     
 
     </div>
 

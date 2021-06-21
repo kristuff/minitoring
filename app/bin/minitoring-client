@@ -14,7 +14,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.1
+ * @version    0.1.2
  * @copyright  2017-2021 Kristuff
  */
 
@@ -29,8 +29,8 @@ use Kristuff\Minitoring\Model\System\ServiceModel;
 // x    => no value
 // x:   => value required
 // x::  => optional value
-$arguments = getopt("aiucdmlhspf", 
-                   ["all", "infos", "uptime", "cpu", "disks", "memory", "load", "all", "system", "perf", "help", "f2b", "ftbstatus:"]);
+$arguments = getopt("aiucdnmlhspf", 
+                   ["all", "infos", "uptime", "cpu", "disks", "inodes", "memory", "load", "all", "system", "perf", "help", "f2b", "ftbstatus:"]);
 
 // start prog
 Program::start($arguments);
@@ -47,9 +47,10 @@ class Program
 
         // required at least one valid argument
         if (empty($arguments)){
-            self::banner();
+            self::topBanner();
             self::error('No valid arguments given.');
-            self::help();       
+            //self::help();
+            self::footer();       
             exit(1);
         }
     
@@ -57,15 +58,19 @@ class Program
 
         // build report
         // self::topBanner();
+        if (self::inArguments($arguments, 'h', 'help', '', '')) {
+            self::help();
+            exit(0);
+        } 
+
         Console::log();    
         if (self::inArguments($arguments, 'i', 'infos'))  self::systemInfos();
         if (self::inArguments($arguments, 'u', 'uptime')) self::uptime();
         if (self::inArguments($arguments, 'c', 'cpu'))    self::cpuInfos();
         if (self::inArguments($arguments, 'd', 'disks'))  self::diskInfos();
+        if (self::inArguments($arguments, 'n', 'inodes')) self::inodesInfos();
         if (self::inArguments($arguments, 'm', 'memory')) self::memory();
         if (self::inArguments($arguments, 'l', 'load'))   self::load();
-
-        if (self::inArguments($arguments, 'h', 'help', '', '')) self::help();
       
         if (self::inArguments($arguments, 's', 'system', '', '')){
             self::systemInfos();
@@ -120,9 +125,9 @@ class Program
      */
     protected static function footer()
     {
-        Console::log('  _____________________________________________________________________________________________________', 'darkgray');    
+        Console::log('  ---------------------------------------------------------------------------------------', 'darkgray');    
         Console::log(
-            Console::text('  Kristuff\Minitoring v0.1 | Made with ', 'darkgray') . 
+            Console::text('  Minitoring | Made with ', 'darkgray') . 
             Console::text('♥', 'red') . 
             Console::text(' in France | © 2017-2021 Kristuff (', 'darkgray') .
             Console::text('https://github.com/kristuff', 'darkgray', 'underlined') .
@@ -141,11 +146,11 @@ class Program
      */
     protected static function topBanner()
     {
-        Console::log("          _      _ _           _              ", 'darkgray');
-        Console::log("    _ __ (_)_ _ (_) |_ ___ _ _(_)_ _  __ _    ", 'darkgray');
-        Console::log("   | '  \| | ' \| |  _/ _ \ '_| | ' \/ _` |   ", 'darkgray');
-        Console::log("   |_|_|_|_|_||_|_|\__\___/_| |_|_||_\__, |   ", 'darkgray');
-        Console::log("                                     |___/    ", 'darkgray');
+        Console::log("        _      _ _           _              ", 'darkgray');
+        Console::log("  _ __ (_)_ _ (_) |_ ___ _ _(_)_ _  __ _    ", 'darkgray');
+        Console::log(" | '  \| | ' \| |  _/ _ \ '_| | ' \/ _` |   ", 'darkgray');
+        Console::log(" |_|_|_|_|_||_|_|\__\___/_| |_|_||_\__, |   ", 'darkgray');
+        Console::log("                                   |___/    ", 'darkgray');
     }
 
     /**
@@ -182,7 +187,7 @@ class Program
      */
     static function help()
     {
-        
+        self::topBanner();
         Console::log();    
         Console::log(' ' . Console::text('SYNOPSIS', 'white', 'underline')); 
         Console::log(' ' . Console::text('    php minitoring ', 'white') . 
@@ -196,6 +201,7 @@ class Program
         Console::log('   -u, --uptime    Display uptime infos', 'normal');
         Console::log('   -c, --cpu       Display cpu infos', 'normal');
         Console::log('   -d, --disks     Display disks usage', 'normal');
+        Console::log('   -n, --inodes    Display inodes usage', 'normal');
         Console::log('   -m, --memory    Display memory usage', 'normal');
         Console::log('   -l, --load      Display load average', 'normal');
         Console::log('   -f, --f2b       Display Fail2ban stats', 'normal');
@@ -456,12 +462,34 @@ class Program
      */
     protected static function diskInfos()
     {
-        self::sectionTitle('Disks');
-        // Console::log();
-        
-        $infos = System\DiskModel::getInfos();
-        $rowHeaders = ['Filesystem' => 15, 'Type'  => 8, 'Mount' => 10, 'Used' => 10, 'Free' => 10, 'Total' => 10, '% Used' => 25 ];
+        self::diskorInodesInfos('Disks', System\DiskModel::getInfos(), 'disks');
+    }
 
+    /**
+     * Prints inodes infos
+     * 
+     * @access protected
+     * @static
+     * 
+     * @return void
+     */
+    protected static function inodesInfos()
+    {
+        self::diskorInodesInfos('Inodes', System\DiskModel::getInodesInfos(), 'inodes');
+    }
+
+    /**
+     * Prints disks or inodes infos
+     * 
+     * @access protected
+     * @static
+     * 
+     * @return void
+     */
+    protected static function diskorInodesInfos(string $title, array $infos, string $name)
+    {
+        self::sectionTitle($title);
+        $rowHeaders = ['Filesystem' => 15, 'Type'  => 8, 'Mount' => 10, 'Used' => 10, 'Free' => 10, 'Total' => 10, '% Used' => 25 ];
         Console::log(' '.Console::tableRowSeparator($rowHeaders, 'darkgray'));
         Console::log(' ' . 
             Console::text(
@@ -477,7 +505,7 @@ class Program
         );
         Console::log(' '.Console::tableRowSeparator($rowHeaders, 'darkgray'));
 
-        foreach ($infos['disks'] as $item){
+        foreach ($infos[$name] as $item){
             Console::log(
                 ' ' .
                 Console::tableRowStart() .
@@ -503,6 +531,8 @@ class Program
      //   Console::log(' '.Console::tableRowSeparator($rowHeaders, 'darkgray'));
         Console::log();
     }
+
+
 
     /**
      * Prints cpu infos

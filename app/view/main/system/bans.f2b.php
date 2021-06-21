@@ -34,8 +34,8 @@
                         <tr>
                             <th data-column="Name" class="align-left">Name</th>
                             <th data-column="Status" class="align-center">Status</th>
-                            <th data-column="Logs Files" class="align-right">Logs Files</th>
-                            <th data-column="Total Bans" class="align-right">Total Bans*</th>
+                            <th data-column="Logs Files" class="align-right">Logs files</th>
+                            <th data-column="Total Bans" class="align-right">Total bans*</th>
                         </tr>
                     </thead>
                     <tbody></tbody>

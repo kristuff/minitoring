@@ -34,4 +34,19 @@ find  debian/var/www/minitoring/app/data/log -type f -not -name '*.keep' -delete
 
 # finish through fakeroot so we can adjust ownerships without needing to be root    
 # fakeroot ./finish_package.sh debian .
-fakeroot ./finish_package.sh debian dist
+# fakeroot ./finish_package.sh debian dist
+
+# adjust ownerships
+chown -R root:root debian
+chown -R root:www-data debian/var/www/minitoring
+chmod -R 0750 debian/var/www/minitoring
+chmod -R 0770 debian/var/www/minitoring/app/data
+chmod -R 0644 debian/etc 
+
+# minimal permissions required for scripts
+chmod 755 debian/DEBIAN/postinst
+chmod 755 debian/DEBIAN/prerm
+chmod 755 debian/DEBIAN/postrm
+
+# finally build the package
+dpkg-deb --build debian dist

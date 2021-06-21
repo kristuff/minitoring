@@ -1,10 +1,16 @@
 /* --- Dashboard --- */
 Minitoring.Dashboard = {
     refresh: function () {
-        Minitoring.System.refresh();
+        Minitoring.SystemInfos.get();
+        Minitoring.LoadAverage.get();
+        Minitoring.Cpu.get();
+        Minitoring.Swap.get();
+        Minitoring.Memory.get();
+        Minitoring.Process.get();
         Minitoring.Services.refreshDashBoard();
-        Minitoring.Disks.get();
+        Minitoring.Disks.refresh();
         Minitoring.Network.get();
-        Minitoring.SystemUsers.getNumberActives();    
+        Minitoring.SystemUsers.getNumberActive();
+        Minitoring.Packages.refreshAll();
     }
 }

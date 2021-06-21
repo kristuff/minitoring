@@ -43,6 +43,10 @@ body,
     display:block;
 } 
 
+// reduce anim time..
+.anim-scale-increase { animation: anim-scale-increase 0.35s 0.3s both; }
+
+
 // fix padding
 @media only screen and (min-width:768px){
     //    .side-menu ~ .main-content {padding:0 10px 10px 10px;} 
@@ -55,43 +59,7 @@ form {
     border: none;
 }
 
-// user in header 
-#current-user {
-    float: right;
-    //line-height: 25px;
-    display: flex;
-    align-items: center;
-    //vertical-align: baseline;
-    //display: inline-block;
-    padding: 0 10px;
-    height: 55px;
-    max-height: 55px;
 
-    &:hover {
-        background-color: rgba(0,0,0,0.1);
-    }
-    
-    img.avatar {
-        float: left;
-        //line-height: 55px;
-        //vertical-align: baseline;
-        width: 25px;
-        height: 25px;
-        margin-right: 6px; 
-    }
-
-
-    .user-name {
-        line-height: 1.2;
-        display: block;
-    }    
-    .user-email {
-        display: none;
-        font-size: 75%;
-        line-height: 1.1;
-    }    
-
-}
 
 
 

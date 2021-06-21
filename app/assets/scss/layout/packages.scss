@@ -1,0 +1,19 @@
+table#packages-table {
+  
+    font-size: 1.4rem;
+
+    td {
+        vertical-align: top;
+    }
+
+    @media only screen and (min-width:768px){
+
+        // fixed header
+        th {
+            position: sticky;
+            top:-10px; // padding 
+        }
+
+    }
+
+}

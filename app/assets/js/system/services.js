@@ -1,8 +1,6 @@
 /* --- Services --- */
 Minitoring.Services = {
 
-   
-
 
     init: function () {
         // init paginator
@@ -95,10 +93,10 @@ Minitoring.Services = {
         html += '<tr data-id="' + item.service_id + '">';
         html += '<td data-column="Service" class="align-left">' + item.service_name + '</td>';
         if (withDate) {
-            var sDate = new Date(item.service_check_time * 1000);
-            html += '<td data-column="">' + sDate.toDateString() + ' ' + sDate.toTimeString() + '</td>';
+            var sDate = new Date(item.service_check_timestamp * 1000);
+            html += '<td data-column="Last check">' + sDate.toDateString() + ' ' + sDate.toTimeString() + '</td>';
         }
-        html += '<td data-column="" class="align-center"><span class="badge uppercase" data-badge="' + badge + '">' + status + '</span></td>';
+        html += '<td data-column="Status" class="align-center"><span class="badge uppercase" data-badge="' + badge + '">' + status + '</span></td>';
         html += '</tr>';
         return html;
     },
