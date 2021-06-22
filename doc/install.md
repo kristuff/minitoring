@@ -44,47 +44,47 @@ a2enmod proxy_http
 a2enmod proxy_wstunnel
 ```
 
-### 3. Configure Apache whost:
+### 3. Configure Apache vhost:
 
 The directory `app/config/sample` contains a full vhost sample. The main points are the following: 
 
--  Setup Document root to `/var/www/minitoring/public`
+-   Setup Document root to `/var/www/minitoring/public`
 
-```apache-conf
-DocumentRoot  /var/www/minitoring/public
-```
+    ```apache-conf
+    DocumentRoot  /var/www/minitoring/public
+    ```
 
--  Setup app rooter (require `mod_rewrite`): 
+-   Setup app rooter (require `mod_rewrite`): 
 
-```apache-conf
-<Directory /var/www/minitoring/public/>
-    Options +FollowSymLinks
-    Options -Indexes -Includes
-    AllowOverride None
-    Require all granted
-    RewriteEngine On
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteCond %{REQUEST_FILENAME} !-l
-    RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
-</Directory>
-```
+    ```apache-conf
+    <Directory /var/www/minitoring/public/>
+        Options +FollowSymLinks
+        Options -Indexes -Includes
+        AllowOverride None
+        Require all granted
+        RewriteEngine On
+        RewriteCond %{REQUEST_FILENAME} !-d
+        RewriteCond %{REQUEST_FILENAME} !-f
+        RewriteCond %{REQUEST_FILENAME} !-l
+        RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+    </Directory>
+    ```
 
-- Configure websocket API proxy for the url `/server-api`:
+-   Configure websocket API proxy for the url `/server-api`:
 
-> Adjust the port, here *12443*, the default value.
+    > Adjust the port, here *12443*, the default value.
 
-```apache-conf
-SSLProxyEngine on
-SSLProxyVerify none 
-SSLProxyCheckPeerCN off
-SSLProxyCheckPeerName off
-SSLProxyCheckPeerExpire off
-ProxyPass "/server-api" "wss://localhost:12443"
-ProxyPassReverse "/server-api" "wss://localhost:12443"
-ProxyRequests off
-ProxyPreserveHost On 
-```
+    ```apache-conf
+    SSLProxyEngine on
+    SSLProxyVerify none 
+    SSLProxyCheckPeerCN off
+    SSLProxyCheckPeerName off
+    SSLProxyCheckPeerExpire off
+    ProxyPass "/server-api" "wss://localhost:12443"
+    ProxyPassReverse "/server-api" "wss://localhost:12443"
+    ProxyRequests off
+    ProxyPreserveHost On 
+    ```
 
 ### 4. Optional config changes :
 
