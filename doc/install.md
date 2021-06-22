@@ -11,23 +11,25 @@
 
 ### 1. Install package from packages.kristuff.fr: 
 
--   Add the public key to the APT keyring:
+-   #### Import the repository signing key
+    
+    Add the public key to the APT keyring:
 
     ```
     wget -qO - https://packages.kristuff.fr/kristuff@kristuff.fr.gpg.key | sudo apt-key add -
     ```
 
 
--   Add the APT source list:
+-   #### Setup APT source list:
 
-    create a file `kristuff.list` in `/etc/apt/sources.list.d/` with the following content:
+    Create a file `kristuff.list` in `/etc/apt/sources.list.d/` with the following content:
 
     ```
     deb https://packages.kristuff.fr buster main
     deb-src https://packages.kristuff.fr buster main
     ```
 
--   Install package:
+-   #### Install package:
 
     ```
     apt-get install minitoring
