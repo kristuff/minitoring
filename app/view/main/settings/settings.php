@@ -65,6 +65,16 @@
             </a>
         </div>
 
+
+        <div class="rwd-box">
+            <a class="box-inner" href="<?php echo $this->baseUrl;?>settings/advanced" data-view="settings/advanced" role="button">
+               <span class="box-icon"><i class="fa fa-fw color-theme fa-2x fa-cogs"></i></span>
+               <span class="box-title"><?php $this->echo('SETTINGS_ADVANCED'); ?></span>
+               <span class="box-subtitle"><?php $this->echo('SETTINGS_ADVANCED_SUMMARY'); ?></span>
+            </a>
+        </div>
+
+
 <?php } ?>
 
         <div class="rwd-box">

@@ -34,8 +34,8 @@
 
                     /* ----------------------------- */
                     if ($this->data('userIsAdmin') === true ) { 
-
                         include 'settings/settings.users.php';
+                        include 'settings/settings.advanced.php';
                         include 'settings/settings.logreader.php';
                         include 'settings/settings.services.php';
                     }

@@ -152,8 +152,8 @@ return array(
     'SETTINGS_PROFILE_DELETE_AVATAR_TEXT'               => "Supprime l'avatar du serveur.",
     'SETTINGS_PROFILE_DELETE_AVATAR_BUTTON'             => "Supprimer l'avatar",
 
-
-
+    'SETTINGS_ADVANCED'                                 => 'Avancé', 
+    'SETTINGS_ADVANCED_SUMMARY'                         => 'Paramètres avancés', 
 
     'SETTINGS_INFOS'                                    => 'A propos',
     'SETTINGS_INFOS_TITLE'                              => 'A propos',

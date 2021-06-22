@@ -10,7 +10,7 @@
 - Check Fail2ban status and get jail stats
 - Check Iptables/Ip6tables content
 - List all cron jobs (user/system crons, system timers) 
-- Log reader: support for syslog, apache access/error, fail2ban logs
+- **Log reader**: support for syslog, apache access/error, fail2ban logs
 - Service check 
 - List users/group, last/currently connected users
 - ...
@@ -22,5 +22,5 @@
 
 ## Limitations/known issues/TODO
 - You cannot be logged in with the same account on multiple devices at the same time (won't fix). 
-- Web installer does not honor Mysql and PostgreSQL, Sqlite only (TODO)
+- Web installer does not honor Mysql and PostgreSQL, Sqlite only (**TODO**)
 - **In progress...** 

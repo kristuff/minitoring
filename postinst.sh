@@ -8,8 +8,8 @@ GREEN="\e[0;49;32m"
 YELLOW="\e[0;49;93m"
 RED="\e[0;49;31m"
 
-echo   "-------------------------------------"
-echo -e  "Thanks for installing ${ORANGE}Minitoring${RESET}"
+#echo   "-------------------------------------"
+#echo -e  "Thanks for installing ${ORANGE}Minitoring${RESET}"
 
 # minitoring.service has been created 
 # enable the service (will start on reboot) en start the service

@@ -1,22 +1,39 @@
 # ![logo](../public/assets/img/favicon-32x32.png) minitoring
 
 
-## Install minitoring on debian based server with Apache
+## Install minitoring on debian buster server with Apache
 
 > The following guide supposes:
-> - a debian based server root access
+> - a debian based server with root access
 > - Apache2 with `mod_ssl` enabled and SSL certificate files 
 > - a subdmain with dedicated vhost.  
+> - `apt-transport-https`
 
-### 1. Download and install the latest `.deb` package from [TODO]: 
+### 1. Install package from packages.kristuff.fr: 
 
-```
-wget https://TODO/minitoring_X.X.X_all.deb
-dpkg -i minitoring_X.X.X_all.deb
-```
+-   Add the public key to the APT keyring:
 
-Minitoring  `app` and `public` folders are deployed to `/var/www/minitoring`.
+    ```
+    wget -qO - https://packages.kristuff.fr/kristuff@kristuff.fr.gpg.key | sudo apt-key add -
+    ```
 
+
+-   Add the APT source list:
+
+    create a file `kristuff.list` in `/etc/apt/sources.list.d/` with the following content:
+
+    ```
+    deb https://packages.kristuff.fr buster main
+    deb-src https://packages.kristuff.fr buster main
+    ```
+
+-   Install package:
+
+    ```
+    apt-get install minitoring
+    ```
+
+    Minitoring  `app` and `public` folders are deployed to `/var/www/minitoring`.
 
 ### 2. Enable Apache modules:
 
@@ -45,10 +62,6 @@ DocumentRoot  /var/www/minitoring/public
     Options -Indexes -Includes
     AllowOverride None
     Require all granted
-    
-    # ---------------------- 
-    # --- WEB APP ROOTER --- 
-    # ---------------------- 
     RewriteEngine On
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteCond %{REQUEST_FILENAME} !-f
@@ -57,15 +70,11 @@ DocumentRoot  /var/www/minitoring/public
 </Directory>
 ```
 
-
 - Configure websocket API proxy for the url `/server-api`:
 
 > Adjust the port, here *12443*, the default value.
 
 ```apache-conf
-# --------------------- 
-# --- WEBSOCKET API --- 
-# ---------------------
 SSLProxyEngine on
 SSLProxyVerify none 
 SSLProxyCheckPeerCN off

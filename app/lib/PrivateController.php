@@ -89,7 +89,7 @@ class PrivateController extends \Kristuff\Miniweb\Auth\Controller\PrivateControl
 
         // other data
         $this->view->setData('installedPackages', \Kristuff\Minitoring\Model\DependencyModel::getDependencies());
-
+        $this->view->setData('websocketToken', \Kristuff\Minitoring\Model\TokenCheckerModel::getOrCreateToken());
 
     }
 

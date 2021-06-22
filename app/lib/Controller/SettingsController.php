@@ -58,22 +58,21 @@ class SettingsController extends \Kristuff\Minitoring\PrivateController
     {
         $this->index();
     }
+
+    /** 
+     * 
+     */
+    public function advanced()
+    {
+        $this->index();
+    }
     
     /** 
      * Profile
      */
-    public function profile($action = '', $subaction = '')
+    public function profile()
     {
         $this->index();
-
-        //if ($action === 'avatar') {
-        //    $editResult = UserAvatarModel::createCurrentUserAvatar($this->request()->post('token'), 'user_edit');
-        //    $editResult->toFeedback();
-        //    $this->redirect(\Kristuff\Minitoring\Application::getUrl(). 'settings/profile');
-        //    
-        //} else {
-        //    $this->view->renderHtml('main/index.view.php', [], 'main');
-        //}
     }
        
     /** 

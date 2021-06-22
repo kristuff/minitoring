@@ -152,6 +152,8 @@ return array(
     'SETTINGS_PROFILE_DELETE_AVATAR_TEXT'               => "Remove avatar file from server and use default avatar image.",
     'SETTINGS_PROFILE_DELETE_AVATAR_BUTTON'             => "Delete avatar",
 
+    'SETTINGS_ADVANCED'                                 => 'Advanced', 
+    'SETTINGS_ADVANCED_SUMMARY'                         => 'Advanced parameters', 
 
 
 
