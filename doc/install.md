@@ -38,14 +38,11 @@
 
     Minitoring  `app` and `public` folders are deployed to `/var/www/minitoring`.
 
-### 2. Enable Apache modules:
+### 2. Optional config changes :
 
-```apache-conf
-a2enmod rewrite
-a2enmod proxy
-a2enmod proxy_http
-a2enmod proxy_wstunnel
-```
+See [config](/doc/config.md) 
+
+
 
 ### 3. Configure Apache vhost:
 
@@ -73,7 +70,7 @@ The directory `app/config/sample` contains a full vhost sample. The main points 
     </Directory>
     ```
 
--   Configure websocket API proxy for the url `/wssapi`:
+-   Configure WebSocket API proxy for the url `/wssapi`:
 
     > Adjust the port, here *12443*, the default value.
 
@@ -89,16 +86,31 @@ The directory `app/config/sample` contains a full vhost sample. The main points 
     ProxyPreserveHost On 
     ```
 
-### 4. Optional config changes :
 
-See [config](/doc/config.md) 
+### 4.  Restart `minitoring.service`, Enable apache modules, site and restart Apache:
 
+-   Enable the follwing Apache modules:
 
-### 5.  Restart `minitoring.service`, Enable site and restart Apache:
+    ```apache-conf
+    a2enmod rewrite
+    a2enmod proxy
+    a2enmod proxy_http
+    a2enmod proxy_wstunnel
+    ```
 
-```
- systemctl restart minitoring
-#...
- systemctl restart apache2
-```
+-   `minitoring.service` is started during install. If you have made changes to the default configuration (port, secure server), you need to restart service: 
+
+    ```
+    systemctl restart minitoring
+    ```
+
+-   Restart Apache:
+
+    ```
+    systemctl restart apache2
+    ```
+
+### 5.  Complete install with web installer:
+
+When running the app for the first time and as long as setup is not complete, you will be redirect to `/setup`. You will be asked identifiers to create a database and an admin account.
 
