@@ -100,6 +100,7 @@ Minitoring.Api = {
     delete: function (url, args, callback, errorCallback) {
         Minitoring.Api.apiRequest('DELETE', url, args, callback, errorCallback);
     },
+
     socketApiRequest:function(request, successCallback, errorCallback) {
 
         var handleMessage = function(e, successCallback, errorCallback){
@@ -116,9 +117,12 @@ Minitoring.Api = {
         }
         
         var conn = Minitoring.Api._socketConnection;
+
         // 2 closing / 3 closed 
         if (!Minikit.isObj(conn) || conn.readyState == 2 || conn.readyState == 3){
-            conn = new WebSocket('wss://minitoring.kristuff.fr/server-api');
+            // wss://example.com/wssapi
+            var origin = window.location.origin.replace('https://', 'wss://');
+            conn = new WebSocket(origin + '/wssapi');
             Minitoring.Api._socketConnection = conn;
         }
 

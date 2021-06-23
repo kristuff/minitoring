@@ -73,7 +73,7 @@ The directory `app/config/sample` contains a full vhost sample. The main points 
     </Directory>
     ```
 
--   Configure websocket API proxy for the url `/server-api`:
+-   Configure websocket API proxy for the url `/wssapi`:
 
     > Adjust the port, here *12443*, the default value.
 
@@ -83,8 +83,8 @@ The directory `app/config/sample` contains a full vhost sample. The main points 
     SSLProxyCheckPeerCN off
     SSLProxyCheckPeerName off
     SSLProxyCheckPeerExpire off
-    ProxyPass "/server-api" "wss://localhost:12443"
-    ProxyPassReverse "/server-api" "wss://localhost:12443"
+    ProxyPass "/wssapi" "wss://localhost:12443"
+    ProxyPassReverse "/wssapi" "wss://localhost:12443"
     ProxyRequests off
     ProxyPreserveHost On 
     ```
