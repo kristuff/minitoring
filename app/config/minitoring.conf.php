@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.2
+ * @version    0.1.5
  * @copyright  2017-2021 Kristuff
  */
 
@@ -66,7 +66,7 @@ return array(
      */
     'APP_NAME'                  =>  'Minitoring',
     'APP_COPYRIGHT'             =>  'Kristuff',
-    'APP_VERSION'               =>  '0.1.2',
+    'APP_VERSION'               =>  '0.1.5',
     'APP_DEFAULT_LANGUAGE'      =>  'en-US',
  
     'DATA_PATH'                 => __DIR__ . '/../data/',
@@ -104,9 +104,9 @@ return array(
      * Configuration for: minitoring websocket api
      * *******************************************
      */
-    'WEBCOCKET_PORT'            => 12443,
-    'WEBCOCKET_USE_SECURE'      => false,
-    'WEBCOCKET_CERT_PATH'       => '',
-    'WEBCOCKET_KEY_PATH'        => '',
+    'WEBSOCKET_PORT'            => 12443,
+    'WEBSOCKET_USE_SECURE'      => false,
+    'WEBSOCKET_CERT_PATH'       => '',
+    'WEBSOCKET_KEY_PATH'        => '',
  
 ); 

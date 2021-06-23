@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.2
+ * @version    0.1.5
  * @copyright  2017-2021 Kristuff
  */
 
@@ -152,10 +152,7 @@ return array(
     'SETTINGS_PROFILE_DELETE_AVATAR_TEXT'               => "Remove avatar file from server and use default avatar image.",
     'SETTINGS_PROFILE_DELETE_AVATAR_BUTTON'             => "Delete avatar",
 
-    'SETTINGS_ADVANCED'                                 => 'Advanced', 
-    'SETTINGS_ADVANCED_SUMMARY'                         => 'Advanced parameters', 
-
-
+   
 
     'SETTINGS_PROFILE_ACCOUNT_TYPE_FIELD'               => "Account type:",
 
@@ -200,11 +197,15 @@ return array(
     'SETTINGS_LOGREADER_FORMAT_FIELD'                   => "Format:",
     'SETTINGS_LOGREADER_FORMAT_PLACEHOLDER'             => "Format (leave blank to use default)",
     'SETTINGS_LOGREADER_BUTTON_ADD'                     => "Add",
-    'SETTINGS_LOGREADER_ADVANCED'                       => "Advanced",
-    'SETTINGS_LOGREADER_IP_ACTION_FIELD'                => "Select an action for IP addresses (works on web access log files):",
-    'SETTINGS_LOGREADER_IP_ACTION_NONE'                 => "None",
-    'SETTINGS_LOGREADER_IP_ACTION_ABUSEIPDB'            => "AbuseIPDB check (external link)",
-    'SETTINGS_LOGREADER_IP_ACTION_GEOIP'                => "Geodatatool (external link)",
+   
+    'SETTINGS_ADVANCED'                                 => 'Advanced', 
+    'SETTINGS_ADVANCED_SUMMARY'                         => 'Advanced parameters', 
+    'SETTINGS_TOKEN_FIELD'                              => "Token:",
+    'SETTINGS_TOKEN_RESET_BUTTON'                       => "Create new token",
+    'SETTINGS_IP_ACTION_FIELD'                          => "Select an action for IP addresses (works on web access log files):",
+    'SETTINGS_IP_ACTION_NONE'                           => "None",
+    'SETTINGS_IP_ACTION_ABUSEIPDB'                      => "AbuseIPDB check (external link)",
+    'SETTINGS_IP_ACTION_GEOIP'                          => "Geodatatool (external link)",
     
     'SETTINGS_SERVICES'                              => 'Services',
     'SETTINGS_SERVICES_SUMMARY'                      => "Add or change services to check",

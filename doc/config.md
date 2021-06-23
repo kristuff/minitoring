@@ -7,9 +7,7 @@ To change anything in configuration, first create a local config file named `min
 ```php
 return array(
       // local changes here...
-      // examples:
-      // 'AUTH_LOGIN_COOKIE_ENABLED'  => true,
-      // 'WEBCOCKET_PORT'   => 12345,
+      
 );
 ```
 
@@ -25,7 +23,7 @@ Setup your local config file (`app/config/minitoring.conf.local.php`) like this:
 ```php
 return array(
       // use a custom port
-      'WEBCOCKET_PORT'         => 12345,
+      'WEBSOCKET_PORT'         => 12345,
       
       // other local changes here...
 );
@@ -39,9 +37,9 @@ Setup your local config file (`app/config/minitoring.conf.local.php`) like this:
 ```php
 return array(
       // use a secure websocket server, need to define certificate/key path
-      'WEBCOCKET_USE_SECURE'   => true,
-      'WEBCOCKET_CERT_PATH'    => '/etc/letsencrypt/live/EXAMPLE/fullchain.pem',
-      'WEBCOCKET_KEY_PATH'     => '/etc/letsencrypt/live/EXAMPLE/privkey.pem',
+      'WEBSOCKET_USE_SECURE'   => true,
+      'WEBSOCKET_CERT_PATH'    => '/etc/letsencrypt/live/EXAMPLE/fullchain.pem',
+      'WEBSOCKET_KEY_PATH'     => '/etc/letsencrypt/live/EXAMPLE/privkey.pem',
       
       // other local changes here...
 );

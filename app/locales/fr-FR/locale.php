@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.2
+ * @version    0.1.5
  * @copyright  2017-2021 Kristuff
  */
 
@@ -152,9 +152,7 @@ return array(
     'SETTINGS_PROFILE_DELETE_AVATAR_TEXT'               => "Supprime l'avatar du serveur.",
     'SETTINGS_PROFILE_DELETE_AVATAR_BUTTON'             => "Supprimer l'avatar",
 
-    'SETTINGS_ADVANCED'                                 => 'Avancé', 
-    'SETTINGS_ADVANCED_SUMMARY'                         => 'Paramètres avancés', 
-
+ 
     'SETTINGS_INFOS'                                    => 'A propos',
     'SETTINGS_INFOS_TITLE'                              => 'A propos',
     'SETTINGS_INFOS_SUMMARY'                            => "Informations sur cette application",
@@ -197,11 +195,16 @@ return array(
     'SETTINGS_LOGREADER_FORMAT_FIELD'                   => "Format :",
     'SETTINGS_LOGREADER_FORMAT_PLACEHOLDER'             => "Format (laissez vide pour utiliser le format par défaut)",
     'SETTINGS_LOGREADER_BUTTON_ADD'                     => "Ajouter",
-    'SETTINGS_LOGREADER_ADVANCED'                       => "Avancé",
-    'SETTINGS_LOGREADER_IP_ACTION_FIELD'                => "Sélectionnez une action pour les adresses IP (fonctionne principalement dans les journaux web) :",
-    'SETTINGS_LOGREADER_IP_ACTION_NONE'                 => "Aucune",
-    'SETTINGS_LOGREADER_IP_ACTION_ABUSEIPDB'            => "Vérification sur AbuseIPDB (lien externe)",
-    'SETTINGS_LOGREADER_IP_ACTION_GEOIP'                => "Geodatatool (lien externe)",
+
+    'SETTINGS_ADVANCED'                                 => 'Avancé', 
+    'SETTINGS_ADVANCED_SUMMARY'                         => 'Paramètres avancés', 
+    'SETTINGS_TOKEN_FIELD'                              => "Token :",
+    'SETTINGS_TOKEN_RESET_BUTTON'                       => "Créer une nouvelle clé",
+
+    'SETTINGS_IP_ACTION_FIELD'                          => "Sélectionnez une action pour les adresses IP (fonctionne principalement dans les journaux web) :",
+    'SETTINGS_IP_ACTION_NONE'                           => "Aucune",
+    'SETTINGS_IP_ACTION_ABUSEIPDB'                      => "Vérification sur AbuseIPDB (lien externe)",
+    'SETTINGS_IP_ACTION_GEOIP'                          => "Geodatatool (lien externe)",
 
     'SETTINGS_SERVICES'                                 => 'Services',
     'SETTINGS_SERVICES_SUMMARY'                         => "Créer ou modifier les services à surveiller",

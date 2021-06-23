@@ -34,21 +34,7 @@
     </ul>
     <br>
 
-    <section class="section">
-        <h6><?php $this->echo('SETTINGS_LOGREADER_ADVANCED'); ?></h6>
-        <div class="container medium no-padding">
-            <div class="padding-bottom-6"><?php $this->echo('SETTINGS_LOGREADER_IP_ACTION_FIELD'); ?></div>
-            <div class="custom-select">
-                <select id="select-log-max" data-bind="">
-                    <option value="none"><?php $this->echo('SETTINGS_LOGREADER_IP_ACTION_NONE'); ?></option>
-                    <option value="geoip"><?php $this->echo('SETTINGS_LOGREADER_IP_ACTION_GEOIP'); ?></option>
-                    <option value="abuseipdb"><?php $this->echo('SETTINGS_LOGREADER_IP_ACTION_ABUSEIPDB'); ?></option>
-                </select>
-            </div>
-        </div>
-    </section>
-
-    <br>
+  
     <br>
 
 

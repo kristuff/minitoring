@@ -20,7 +20,7 @@
     ```
 
 
--   #### Setup APT source list:
+-   #### Setup APT sources list:
 
     Create a file `kristuff.list` in `/etc/apt/sources.list.d/` with the following content:
 
@@ -32,6 +32,7 @@
 -   #### Install package:
 
     ```
+    apt-get update
     apt-get install minitoring
     ```
 

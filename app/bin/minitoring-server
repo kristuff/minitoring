@@ -14,7 +14,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.2
+ * @version    0.1.5
  * @copyright  2017-2021 Kristuff
  */
 
@@ -25,13 +25,13 @@ use Ratchet\Http\HttpServer;
 use Ratchet\WebSocket\WsServer;
 use Kristuff\Minitoring\Application;
 
-// required for using static methods
+// required for using static Application methods
 $app = new \Kristuff\Minitoring\Application();
 
-$secureServer   = (bool)   Application::config('WEBCOCKET_USE_SECURE');
-$port           = (int)    Application::config('WEBCOCKET_PORT');
-$certPath       = (string) Application::config('WEBCOCKET_CERT_PATH');
-$keyPath        = (string) Application::config('WEBCOCKET_KEY_PATH');
+$secureServer   = (bool)   Application::config('WEBSOCKET_USE_SECURE');
+$port           = (int)    Application::config('WEBSOCKET_PORT');
+$certPath       = (string) Application::config('WEBSOCKET_CERT_PATH');
+$keyPath        = (string) Application::config('WEBSOCKET_KEY_PATH');
 
 if ($secureServer){
     

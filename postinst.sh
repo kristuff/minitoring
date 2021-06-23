@@ -27,9 +27,6 @@ mkdir -p /usr/local/sbin
 ln -s /var/www/minitoring/app/bin/minitoring-client /usr/local/sbin/minitoring
 
 echo -e "${ORANGE}Minitoring${RESET} is ready"
-echo  "-------------------------------------"
-
-
 
 #echo -e "${GREEN}# To complete installation you need to configure Apache server and ${RESET}"
 #echo -e "${GREEN}# configure the minitoring.service to use https. ${RESET}"
