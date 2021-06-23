@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.5
+ * @version    0.1.6
  * @copyright  2017-2021 Kristuff
  */
 
@@ -198,9 +198,11 @@ return array(
 
     'SETTINGS_ADVANCED'                                 => 'Avancé', 
     'SETTINGS_ADVANCED_SUMMARY'                         => 'Paramètres avancés', 
-    'SETTINGS_TOKEN_FIELD'                              => "Token :",
+    'SETTINGS_SECURITY_TITLE'                           => "Sécurité",
+    'SETTINGS_TOKEN_FIELD'                              => "Clé actuelle :",
+    'SETTINGS_TOKEN_TEXT'                               => "L'application utilise une clé pour vérifier que l'auteur des requêtes vers l'API WebSocket est un utilisateur autorisé. Un utilisateur non connecté mais disposant de la clé pourrait obtenir des informations via cette API. Si vous pensez que cette clé est compromise, vous pouvez la regénérer.",
     'SETTINGS_TOKEN_RESET_BUTTON'                       => "Créer une nouvelle clé",
-
+    'SETTINGS_MISC_TITLE'                               => "Divers",
     'SETTINGS_IP_ACTION_FIELD'                          => "Sélectionnez une action pour les adresses IP (fonctionne principalement dans les journaux web) :",
     'SETTINGS_IP_ACTION_NONE'                           => "Aucune",
     'SETTINGS_IP_ACTION_ABUSEIPDB'                      => "Vérification sur AbuseIPDB (lien externe)",

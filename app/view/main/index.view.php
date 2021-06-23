@@ -16,21 +16,16 @@
                     include 'system/bans.f2b.php'; 
                     include 'system/bans.iptables.php'; 
                     include 'system/bans.ip6tables.php'; 
-                    //include 'system/system.php'; 
                     include 'system/sysusers.php'; 
                     include 'system/logs.php'; 
                     include 'system/cron.php';  
                     include 'system/packages.php';
-                    //include 'system/tools.php'; 
 
                     include 'settings/settings.php';
                     include 'settings/settings.about.php';
-                    include 'settings/settings.bans.php';
                     include 'settings/settings.profile.php';
                     include 'settings/settings.system.php';
                     include 'settings/settings.customize.php';
-                    //include 'settings/settings.preferences.php';
-                    include 'settings/settings.data.php';
 
                     /* ----------------------------- */
                     if ($this->data('userIsAdmin') === true ) { 

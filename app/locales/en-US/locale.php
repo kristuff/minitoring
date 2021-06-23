@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.5
+ * @version    0.1.6
  * @copyright  2017-2021 Kristuff
  */
 
@@ -200,8 +200,11 @@ return array(
    
     'SETTINGS_ADVANCED'                                 => 'Advanced', 
     'SETTINGS_ADVANCED_SUMMARY'                         => 'Advanced parameters', 
-    'SETTINGS_TOKEN_FIELD'                              => "Token:",
+    'SETTINGS_SECURITY_TITLE'                           => "Security",
+    'SETTINGS_TOKEN_FIELD'                              => "Current token:",
+    'SETTINGS_TOKEN_TEXT'                               => "The application uses a key to verify that the author of the requests to the WebSocket API is an authorized user. A not logged in user who has the key could obtain information via this API. If you believe this key is compromised, you can regenerate it.",
     'SETTINGS_TOKEN_RESET_BUTTON'                       => "Create new token",
+    'SETTINGS_MISC_TITLE'                               => "Miscellaneous",
     'SETTINGS_IP_ACTION_FIELD'                          => "Select an action for IP addresses (works on web access log files):",
     'SETTINGS_IP_ACTION_NONE'                           => "None",
     'SETTINGS_IP_ACTION_ABUSEIPDB'                      => "AbuseIPDB check (external link)",

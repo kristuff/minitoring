@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.5
+ * @version    0.1.6
  * @copyright  2017-2021 Kristuff
  */
 
@@ -32,7 +32,7 @@ use Kristuff\Miniweb\Mvc\Model as MvcModel;
 class Application extends Mvc\Application
 {
 
-    const VERSION = "v0.1.5";
+    const VERSION = "v0.1.6";
 
     /** 
      * Constructor
