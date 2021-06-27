@@ -2,28 +2,28 @@
     <div id="settings-services-feedback"></div>
 
     <section class="section">
-        <h6>Registered services</h6>
-        <table id="settings-services-table" class="data-table responsive alternative-row-style">
+        <h6 class="highlight"><?php $this->echo('SETTINGS_SERVICES_REGISTERED_TITLE'); ?></h6>
+        <table id="settings-services-table" class="data-table responsive alternative-row-style" data-dialog-delete-text="<?php $this->echo('SETTINGS_SERVICES_DELETE_MESSAGE'); ?>">
             <thead>
                 <tr class="table-header">
-                    <th data-column="Service"       class="align-left">Service</th>
-                    <th data-column="Actions"       class="align-right"></th>
-                    <th data-column="Port"          class="align-right">Port</th>
-                    <th data-column="Check Enabled" class="align-center">Check enabled</th>
+                    <th data-column="<?php $this->echo('SETTINGS_SERVICES_NAME_HEADER'); ?>" class="align-left"><?php $this->echo('SETTINGS_SERVICES_NAME_HEADER'); ?></th>
+                    <th data-column="Actions" class="align-right"><?php $this->echo(''); ?></th>
+                    <th data-column="<?php $this->echo('SETTINGS_SERVICES_PROTOCOL_HEADER'); ?>" class="align-center"><?php $this->echo('SETTINGS_SERVICES_PROTOCOL_HEADER'); ?></th>
+                    <th data-column="<?php $this->echo('SETTINGS_SERVICES_HOST_HEADER'); ?>" class="align-left"><?php $this->echo('SETTINGS_SERVICES_HOST_HEADER'); ?></th>
+                    <th data-column="<?php $this->echo('SETTINGS_SERVICES_PORT_HEADER'); ?>" class="align-right"><?php $this->echo('SETTINGS_SERVICES_PORT_HEADER'); ?></th>
+                    <th data-column="<?php $this->echo('SETTINGS_SERVICES_CHECK_ENABLED_HEADER'); ?>" class="align-center"><?php $this->echo('SETTINGS_SERVICES_CHECK_ENABLED_HEADER'); ?></th>
                 </tr>
             </thead>
             <tbody class="color-light"></tbody>
         </table>
     </section>
-    
     <div id="settings-services-feedback"></div>
     <ul id="settings-services-actions" class="tool-bar padding-top-12">
         <li>
             <a class="button fw" data-bind="Minitoring.Settings.Services.add" data-action-bar-id="settings-services-actions" href="#">
-                <i class="fa fa-plus icon-left color-theme"></i><span class="bt-title">Add</span>
+                <i class="fa fa-plus icon-left color-theme"></i><span class="bt-title"><?php $this->echo('SETTINGS_SERVICES_BUTTON_ADD'); ?></span>
             </a>
         </li>
     </ul>
     <br>
-
 </section>

@@ -11,7 +11,6 @@
                     /* ----------------------------- */
                     include 'system/dashboard.php'; 
                     include 'system/disks.php'; 
-                    include 'system/services.php'; 
                     include 'system/bans.php'; 
                     include 'system/bans.f2b.php'; 
                     include 'system/bans.iptables.php'; 

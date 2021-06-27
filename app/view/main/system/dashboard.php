@@ -1,5 +1,5 @@
 <section id="section-dashboard" class="view anim-scale-increase section dashboard" data-view="overview"
-    data-title="Overview" data-refresh="Minitoring.Dashboard.refresh">
+    data-title="<?php $this->echo('OVERVIEW'); ?>" data-refresh="Minitoring.Dashboard.refresh">
     
     <div class="dashboard">
 
@@ -336,7 +336,7 @@
                 <span class="title"><i class="fa fa-cogs icon-left"></i>Services</span>
                 <ul class="action-bar">
                     <li>
-                        <a class="action-link" href="#" data-bind="Minitoring.Services.refreshDashBoard" title="Refresh">
+                        <a class="action-link" href="#" data-bind="Minitoring.Services.refresh" title="Refresh">
                             <i class="fa fa-refresh"></i>
                         </a>
                     </li>

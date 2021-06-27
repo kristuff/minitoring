@@ -180,8 +180,3 @@ Minitoring.Users = {
         return html;
     }
 }
-
-// standalone loader, module not available for all users
-Minikit.ready(function () {
-    Minitoring.Users.init();
-});

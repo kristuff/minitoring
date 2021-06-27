@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.6
+ * @version    0.1.7
  * @copyright  2017-2021 Kristuff
  */
 
@@ -22,6 +22,7 @@ namespace Kristuff\Minitoring\Model;
 use Kristuff\Miniweb\Auth;
 use Kristuff\Miniweb\Mvc\TaskResponse;
 use Kristuff\Minitoring\Model\Log;
+use Kristuff\Minitoring\Model\Log\LogsCollectionModel;
 use Kristuff\Patabase\Driver\Sqlite\SqliteDatabase;
 use Kristuff\Mishell\Console;
 

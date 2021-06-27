@@ -20,7 +20,7 @@
         <div class="container medium no-padding">
             <div class="padding-bottom-6"><?php $this->echo('SETTINGS_IP_ACTION_FIELD'); ?></div>
             <div class="custom-select">
-                <select id="select-log-max" data-bind="">
+                <select id="select-log-max" data-bind="Minitoring.Admin.ipActionChanged">
                     <option value="none"><?php $this->echo('SETTINGS_IP_ACTION_NONE'); ?></option>
                     <option value="geoip"><?php $this->echo('SETTINGS_IP_ACTION_GEOIP'); ?></option>
                     <option value="abuseipdb"><?php $this->echo('SETTINGS_IP_ACTION_ABUSEIPDB'); ?></option>

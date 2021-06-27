@@ -7,7 +7,7 @@ Minitoring.Dashboard = {
         Minitoring.Swap.get();
         Minitoring.Memory.get();
         Minitoring.Process.get();
-        Minitoring.Services.refreshDashBoard();
+        Minitoring.Services.refresh();
         Minitoring.Disks.refresh();
         Minitoring.Network.get();
         Minitoring.SystemUsers.getNumberActive();

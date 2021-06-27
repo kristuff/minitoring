@@ -3,7 +3,7 @@ table#fail2ban-server,
 table#fail2ban-jails {
     display: table;
     table-layout: auto;
-    font-size: 1.5rem;
+    font-size: 1.45rem;
 
     td[data-column="Status"] .badge {
         font-size: 1.3rem;
@@ -14,7 +14,7 @@ table#iptables-data,
 table#ip6tables-data {
     display: table;
     table-layout: auto;
-    font-size: 1.4rem;
+    font-size: 1.45rem;
 
     tr.group-row{
         cursor: pointer;
@@ -30,18 +30,21 @@ table#ip6tables-data {
 
     tr.group-row.expanded td a.toggle i {
         cursor: pointer;
-        
+        margin-right: 3px;
+
         &:after {
-            content: '\f068'; // fa-minus
+            // content: '\f068'; // fa-minus
             // content: '\f0d7'; // fa-fa-caret-down
+            content: '\f078'; // fa-chevron-down
         }
     }
 
     tr.group-row:not(.expanded) td a.toggle i {
         cursor: pointer;
         &:after {
-            content: '\f067'; // fa-plus
+            // content: '\f067'; // fa-plus
             // content: '\f0da'; // fa-fa-caret-right
+            content: '\f054'; // fa-chevron-right
         }
     }
 

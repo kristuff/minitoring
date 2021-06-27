@@ -1,5 +1,5 @@
 <section id="section-sysusers" class="view anim-scale-increase" 
-         data-title="System Users" 
+         data-title="<?php $this->echo('SYS_USERS'); ?>" 
          data-view="sysusers" 
          data-subviews="all|currents|lasts|groups" 
          data-refresh="Minitoring.SystemUsers.refresh" 

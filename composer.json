@@ -11,7 +11,7 @@
     ],
     "require": {
         "php": ">=7.3",
-        "kristuff/miniweb": "^0.9.7-stable",
+        "kristuff/miniweb": "^0.9.8-stable",
         "kristuff/parselog": "^0.5-stable",
         "kristuff/mishell": "^1.5-stable",
         "kristuff/patabase": "^1.0-stable",

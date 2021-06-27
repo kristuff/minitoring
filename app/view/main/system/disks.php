@@ -1,6 +1,4 @@
-<section id="section-disks" class="view anim-scale-increase" data-view="disks" data-title="Disks" data-refresh="Minitoring.Disks.refresh" >
-
-    <?php $this->renderFeedback(); ?>
+<section id="section-disks" class="view anim-scale-increase" data-view="disks" data-title="<?php $this->echo('DISKS'); ?>" data-refresh="Minitoring.Disks.refresh" >
 
     <section id="disks-actions" class="section action-bar">
         <input id="disks_show_tmpfs" type="checkbox" class="switch" data-bind="Minitoring.Disks.refresh" data-bind-event="change"/>

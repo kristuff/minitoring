@@ -13,18 +13,17 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.6
+ * @version    0.1.7
  * @copyright  2017-2021 Kristuff
  */
 
 namespace Kristuff\Minitoring\Model\Log;
 
 use Kristuff\Minitoring\Model\System\SystemBaseModel;
-use Kristuff\Minitoring\Model\Log\LogReader;
 use Kristuff\Miniweb\Auth\Model\UserLoginModel;
 use Kristuff\Miniweb\Mvc\TaskResponse;
 use Kristuff\Miniweb\Core\Path;
-use Kristuff\Miniweb\Core\Json;
+use Kristuff\Patabase\Database;
 
 /** 
  * LogsModel
@@ -42,18 +41,68 @@ class LogsCollectionModel extends SystemBaseModel
      * 
      * @return  bool        True if the table has been created, otherwise False
      */
-    public static function setup($db = null): bool
+    public static function setup($database = null): bool
     {
-        $database = $db ? $db: self::database();
-        return $database->table('system_log')
+        $database = $database ? $database: self::database();
+        $executed = $database->table('system_log')
                           ->create()
                           ->column('logId',                 'int',          'NOT NULL', 'PK',  'AI')               
                           ->column('logName',               'varchar(64)',  'NOT NULL')
                           ->column('logType',               'varchar(64)',  'NOT NULL')
                           ->column('logPath',               'varchar(255)', 'NOT NULL')
-                          ->column('logFormat',             'varchar(128)', 'NOT NULL')
+                          ->column('logFormatName',         'varchar(64)',  'NOT NULL')
+                          ->column('logFormat',             'varchar(255)', 'NOT NULL')
                           ->column('logDisplayedColumns',   'varchar(255)', 'NULL')
+                          ->column('logFilters',            'varchar(255)', 'NULL')
                           ->execute();
+
+        if ($executed){
+            self::addDefaultLogs($database);
+        }
+
+        return $executed;
+    }
+
+    /** 
+     * Load default log files
+     *
+     * @access protected
+     * @static
+     * 
+     * @return  void        
+     */
+    protected static function addDefaultLogs($database): void
+    {
+        self::addLogFile($database, 'syslog',   'Syslog',       '/var/log/syslog',       'default');
+        self::addLogFile($database, 'syslog',   'Messages',     '/var/log/messages',     'default');
+        self::addLogFile($database, 'syslog',   'Auth',         '/var/log/auth.log',     'default');
+        self::addLogFile($database, 'syslog',   'Daemon',       '/var/log/daemon.log',   'default');
+        self::addLogFile($database, 'syslog',   'Kernel',       '/var/log/kern.log',     'default');
+        self::addLogFile($database, 'syslog',   'Mail Error',   '/var/log/mail.err',     'default');
+        self::addLogFile($database, 'syslog',   'Mail Info',    '/var/log/mail.info',    'default');
+        self::addLogFile($database, 'syslog',   'Mail Warn',    '/var/log/mail.warn',    'default');
+        self::addLogFile($database, 'fail2ban', 'Fail2Ban',     '/var/log/fail2ban.log', 'default');
+    }
+
+    /** 
+     * Add a default log file
+     *
+     * @access protected
+     * @static
+     * 
+     * @return  void        
+     */
+    protected static function addLogFile(Database $database, string $logType, string $logName, string $logPath, string $formatName = "default"): void
+    {
+        if (file_exists($logPath)){
+            $database->insert('system_log')
+                    ->setValue('logName', $logName)
+                    ->setValue('logPath', $logPath)
+                    ->setValue('logType', $logType)
+                    ->setValue('logFormat', "")
+                    ->setValue('logFormatName', $formatName)
+                    ->execute();
+        }
     }
 
     /** 
@@ -87,7 +136,9 @@ class LogsCollectionModel extends SystemBaseModel
                                  ->column('logType')
                                  ->column('logPath')
                                  ->column('logFormat')
+                                 ->column('logFormatName')
                                  ->column('logDisplayedColumns')
+                                 ->column('logFilters')
                                  ->from('system_log')
                                  ->orderAsc('logName');
 
@@ -110,7 +161,9 @@ class LogsCollectionModel extends SystemBaseModel
                                  ->column('logType')
                                  ->column('logPath')
                                  ->column('logFormat')
+                                 ->column('logFormatName')
                                  ->column('logDisplayedColumns')
+                                 ->column('logFilters')
                                  ->from('system_log')
                                  ->whereEqual('logId', $logId)
                                  ->orderAsc('logName');
@@ -146,17 +199,44 @@ class LogsCollectionModel extends SystemBaseModel
     }
 
     /** 
+     * Gets whether the following logpath exists in database
+     * 
+     * @access public
+     * @static
+     * @param string    $logPath    The log file path to check
+     * @param int       $logId      The current log id. When set, ignore that logId. Default is null.
+     *                              (Needed when editing a log entry).    
+     * 
+     * @return bool
+     */
+    public static function logPathExists(string $logPath, ?int $logId = null): bool
+    {
+        $query = self::database()->select()
+                                 ->column('logName')
+                                 ->from('system_log')
+                                 ->whereEqual('logPath', $logPath);
+
+        if (isset($logId)){
+            $query->where()->notEqual('logId', $logId);
+        }                                 
+                               
+        $items = $query->getAll();
+        return count($items) > 0;
+    }
+
+    /** 
      * Deletes a log entry in database (internal function)
      * 
      * @access public
      * @static
+     * @param int           $id        The log id
      * 
      * @return bool       
      */
-    protected static function deleteById(int $logId)
+    protected static function deleteById(int $id)
     {
         return self::database()->delete('system_log')
-                               ->whereEqual('logId', $logId)
+                               ->whereEqual('logId', $id)
                                ->execute();
     }
 
@@ -168,16 +248,15 @@ class LogsCollectionModel extends SystemBaseModel
      * @param string        $logPath        The log file full path 
      * @param string        $logType        The log file internal type
      * @param string        $logName        The log name 
+     * @param string        $logFormatName  The log file format name 
      * @param string        $logFormat      The log file format
      * 
      * @return  \Kristuff\Miniweb\Mvc\Taskresponse
      */
-    public static function add(string $logPath, string $logType, string $logName, string $logFormat = '')
+    public static function add(string $logPath, string $logType, string $logName, string $logFormatName = '', string $logFormat = '')
     {
         // the return response
         $response = TaskResponse::create();
-
-
             
         // Check admin permissions, file exists, Name not empty and unique   
         // Do not check file is readable here: in most case its not readable by webserver
@@ -198,6 +277,7 @@ class LogsCollectionModel extends SystemBaseModel
                     ->setValue('logPath', $logPath)
                     ->setValue('logType', $logType)
                     ->setValue('logFormat', $logFormat)
+                    ->setValue('logFormatName', $logFormatName)
                     ->execute()
                 , 500, 
                 self::text('ERROR_UNEXPECTED'))){ //todo
@@ -217,11 +297,12 @@ class LogsCollectionModel extends SystemBaseModel
      * @param string        $logPath        The log file full path 
      * @param string        $logType        The log file internal type
      * @param string        $logName        The log name 
+     * @param string        $logFormatName  The log file format name 
      * @param string        $logFormat      The log file format
      * 
      * @return  \Kristuff\Miniweb\Mvc\Taskresponse
      */
-    public static function edit(int $logId, string $logPath, string $logType, string $logName, string $logFormat = '')
+    public static function edit(int $logId, string $logPath, string $logType, string $logName, string $logFormatName = '', string $logFormat = '')
     {
         $response = TaskResponse::create();
             
@@ -243,6 +324,7 @@ class LogsCollectionModel extends SystemBaseModel
                     ->setValue('logPath', $logPath)
                     ->setValue('logType', $logType)
                     ->setValue('logFormat', $logFormat)
+                    ->setValue('logFormatName', $logFormatName)
                     ->whereEqual('logId', $logId)
                     ->execute()
                 , 500, 
@@ -273,16 +355,6 @@ class LogsCollectionModel extends SystemBaseModel
         }
 
         return $response;
-    }
-
-    /**
-     * 
-     * @return array
-     */
-    public function getDefaults(): array
-    {
-       $defaults = Json::fromFile(self::config('CONFIG_DEFAULT_PATH') . 'minitoring.logs.default.json');
-       return empty($defaults) ? [] : $defaults;
     }
 
 }

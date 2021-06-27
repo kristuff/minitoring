@@ -7,31 +7,25 @@
         <li class="menu-item">
             <a class="side-menu-item" href="<?php echo $this->baseUrl;?>overview" data-view="overview">
                 <i class="item-icon fa fa-dashboard Xfa-line-chart fa-fw"></i>
-                <span class="item-title">Overview</span>
+                <span class="item-title"><?php $this->echo('OVERVIEW'); ?></span>
             </a>
         </li>
         <li class="menu-item">
             <a class="side-menu-item" href="<?php echo $this->baseUrl;?>disks" data-view="disks">
                 <i class="item-icon fa fa-pie-chart fa-fw"></i>
-                <span class="item-title">Disks</span>
+                <span class="item-title"><?php $this->echo('DISKS'); ?></span>
             </a>
         </li>
         <li class="menu-item">
             <a class="side-menu-item" href="<?php echo $this->baseUrl;?>sysusers" data-view="sysusers">
                 <i class="item-icon fa fa-users fa-fw"></i>
-                <span class="item-title">Users</span>
-            </a>
-        </li>
-        <li class="menu-item">
-            <a class="side-menu-item" href="<?php echo $this->baseUrl;?>services" data-view="services">
-                <i class="item-icon fa fa-tags fa-fw"></i>
-                <span class="item-title">Services</span>
+                <span class="item-title"><?php $this->echo('SYS_USERS'); ?></span>
             </a>
         </li>
         <li class="menu-item">
             <a class="side-menu-item" href="<?php echo $this->baseUrl;?>packages" data-view="packages">
                 <i class="item-icon fa fa-shopping-bag fa-fw"></i>
-                <span class="item-title">Packages</span>
+                <span class="item-title"><?php $this->echo('PACKAGES'); ?></span>
             </a>
         </li>
         <li class="menu-item">

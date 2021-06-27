@@ -2,13 +2,9 @@
 
 // user in header 
 #current-user {
-    
     float: right;
-    //line-height: 25px;
-    display: none;
+    display: flex;
     align-items: center;
-    //vertical-align: baseline;
-    //display: inline-block;
     padding: 0 10px;
     height: 55px;
     max-height: 55px;
@@ -18,18 +14,13 @@
     }
     
     img.avatar {
-        float: left;
-        //line-height: 55px;
-        //vertical-align: baseline;
         width: 25px;
         height: 25px;
-        margin-right: 6px; 
     }
-
 
     .user-name {
         line-height: 1.2;
-        display: block;
+        display: none;
     }    
     .user-email {
         display: none;
@@ -41,7 +32,22 @@
 
 @media only screen and (min-width:768px)  {
     #current-user {
-        display: flex;
+       // display: flex;
+
+        .user-name {
+            display: block;
+        }  
+        .user-email {
+            display: block;
+        }  
+
+        img.avatar {
+            float: left;
+            margin-right: 6px; 
+        }
+    
+    
+
     }
 }
 

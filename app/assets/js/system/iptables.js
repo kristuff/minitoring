@@ -43,7 +43,7 @@ Minitoring.Iptables = {
                 //}
                 rowId = Minikit.newId();
                 html += '<tr class="group-row" data-rowid="' + rowId + '">';
-                html += '<td class="align-left" colspan="6"><a class="toggle"><i class="fa fa-fw icon-left color-theme"></i>Chain: ' ;
+                html += '<td class="align-left" colspan="6"><a class="toggle"><i class="fa fa-fw color-theme"></i>Chain: ' ;
                 html += result.data.chains[i].chain;
                 html += ' (';
                 html += result.data.chains[i].policy;

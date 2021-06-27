@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.6
+ * @version    0.1.7
  * @copyright  2017-2021 Kristuff
  */
 
@@ -29,8 +29,10 @@ return array(
     'ERROR_LOGFILE_NOT_FOUND'                           => "Le fichier '%s' est introuvable.",
     'ERROR_LOGFILE_NOT_READABLE'                        => "Le fichier '%s' n'est pas accessible en lecture (mauvaises permissions).",
     'ERROR_LOGFILE_WRONG_TYPE'                          => "Le type spécifié '%s' n'est pas un type de log valide.",
-    'ERROR_LOGNAME_ALREADY_EXISTS'                      => "Un journal avec le même nom existe déja. Choisissez un autre nom.",
+    'ERROR_LOGNAME_ALREADY_EXISTS'                      => "Un journal avec le même nom existe déja. Veuillez choisir un autre nom.",
     'ERROR_LOGNAME_EMPTY'                               => "Vous devez définir un nom de journal.",
+    'ERROR_SERVICE_NAME_ALREADY_EXISTS'                 => "Un service avec le même nom existe déja. Veuillez choisir un autre nom.",
+    'ERROR_SERVICE_NAME_EMPTY'                          => "Vous devez définir un nom de service.",
 
     /* UI */
     'BUTTON_OK'                                         => "OK",
@@ -82,8 +84,17 @@ return array(
     'AUTH_RECOVERY_TEXT'                                => "Entrez votre nom d'utilisateur ou votre adresse email et nous vous enverrons un email avec des instructions.", 
     'AUTH_RECOVERY_BUTTON'                              => "Envoyer un mail de récupération", 
 
+    /* Overview */
+    'OVERVIEW'                                          => 'Résumé',
+
+    /* Sysusers */
+    'SYS_USERS'                                         => 'Utilisateurs',
+
+    /* Disks */
+    'DISKS'                                             => 'Disques',
+
     /* Packages */
-    'PACKAGES'                                          => 'Packages',
+    'PACKAGES'                                          => 'Paquets',
     'PACKAGES_UPGRADE_NONE'                             => 'Tous les paquets sont à jour',
 
     /* Logs */
@@ -164,6 +175,7 @@ return array(
     'SETTINGS_DATA'                                     => 'Données',
     'SETTINGS_DATA_SUMMARY'                             => "Données de l'application",
     
+    /* settings users */
     'SETTINGS_USERS'                                    => 'Utilisateurs',
     'SETTINGS_USERS_SUMMARY'                            => "Créer ou modifier les comptes utilisateurs.",
     'SETTINGS_USERS_SECTION_CURRENT_ACCOUNTS'           => 'Comptes utilisateurs',
@@ -177,12 +189,32 @@ return array(
     'SETTINGS_USERS_INVITE_DIALOG_TITLE'                => "Inviter un utilisateur",
     'SETTINGS_USERS_INVITE_DIALOG_MAIL_FIELD'           => "Envoyer une invitation par email à :",
 
+    /* settings services */
+    'SETTINGS_SERVICES'                                 => 'Services',
+    'SETTINGS_SERVICES_SUMMARY'                         => "Créer ou modifier les services à surveiller",
+    'SETTINGS_SERVICES_REGISTERED_TITLE'                => 'Services enregistrés',
+    'SETTINGS_SERVICES_DIALOG_CREATE_TITLE'             => "Ajouter un service",
+    'SETTINGS_SERVICES_DIALOG_EDIT_TITLE'               => "Modifier le service",
+    'SETTINGS_SERVICES_BUTTON_ADD'                      => "Ajouter",
+    'SETTINGS_SERVICES_DELETE_MESSAGE'                  => "Cela supprimera le service et l'historique des vérifications. Cette action ne peut pas être annulée.",
+    'SETTINGS_SERVICES_PROTOCOL_FIELD'                  => "Protocole :",
+    'SETTINGS_SERVICES_PROTOCOL_HEADER'                 => "Protocole",
+    'SETTINGS_SERVICES_NAME_FIELD'                      => "Nom :",
+    'SETTINGS_SERVICES_NAME_HEADER'                     => "Service",
+    'SETTINGS_SERVICES_NAME_PLACEHOLDER'                => "Nom affiché",
+    'SETTINGS_SERVICES_HOST_FIELD'                      => "Host :",
+    'SETTINGS_SERVICES_HOST_HEADER'                     => "Host",
+    'SETTINGS_SERVICES_HOST_PLACEHOLDER'                => "Host (ex. localhost)",
+    'SETTINGS_SERVICES_PORT_FIELD'                      => "Port :",
+    'SETTINGS_SERVICES_PORT_HEADER'                     => "Port",
+    'SETTINGS_SERVICES_PORT_PLACEHOLDER'                => "Port",
+    'SETTINGS_SERVICES_CHECK_ENABLED_HEADER'            => "Vérification activée",
 
-
+    /* settings logreader */
     'SETTINGS_LOGREADER'                                => 'Journaux',
     'SETTINGS_LOGREADER_SUMMARY'                        => "Paramètres du lecteur de journaux",
     'SETTINGS_LOGREADER_LIST_TITLE'                     => "Fichiers journaux enregistrés",
-    'SETTINGS_LOGREADER_DIALOG_CREATE_TITLE'            => "Ajouter un nouveau fichier journal",
+    'SETTINGS_LOGREADER_DIALOG_CREATE_TITLE'            => "Ajouter un fichier journal",
     'SETTINGS_LOGREADER_DIALOG_EDIT_TITLE'              => "Modifier un fichier journal",
     'SETTINGS_LOGREADER_ACTION_HEADER'                  => "Actions",
     'SETTINGS_LOGREADER_NAME_HEADER'                    => "Nom",
@@ -193,7 +225,7 @@ return array(
     'SETTINGS_LOGREADER_TYPE_HEADER'                    => "Type",
     'SETTINGS_LOGREADER_FORMAT_HEADER'                  => "Format",
     'SETTINGS_LOGREADER_FORMAT_FIELD'                   => "Format :",
-    'SETTINGS_LOGREADER_FORMAT_PLACEHOLDER'             => "Format (laissez vide pour utiliser le format par défaut)",
+    'SETTINGS_LOGREADER_FORMAT_PLACEHOLDER'             => "Sélectionnez un format prédéfini ci-dessus ou entrez un format personnalisé",
     'SETTINGS_LOGREADER_BUTTON_ADD'                     => "Ajouter",
 
     'SETTINGS_ADVANCED'                                 => 'Avancé', 
@@ -207,9 +239,6 @@ return array(
     'SETTINGS_IP_ACTION_NONE'                           => "Aucune",
     'SETTINGS_IP_ACTION_ABUSEIPDB'                      => "Vérification sur AbuseIPDB (lien externe)",
     'SETTINGS_IP_ACTION_GEOIP'                          => "Geodatatool (lien externe)",
-
-    'SETTINGS_SERVICES'                                 => 'Services',
-    'SETTINGS_SERVICES_SUMMARY'                         => "Créer ou modifier les services à surveiller",
 
     'SETTINGS_BANS'                                     => 'Parefeu',
     'SETTINGS_BANS_SUMMARY'                             => "Fail2Ban and abuseIPDB API settings",

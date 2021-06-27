@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.6
+ * @version    0.1.7
  * @copyright  2017-2021 Kristuff
  */
 
@@ -31,6 +31,8 @@ return array(
     'ERROR_LOGFILE_WRONG_TYPE'                          => "The specified type '%s' is not a valid log type.",
     'ERROR_LOGNAME_ALREADY_EXISTS'                      => "A log with same name already exists. Please choose another name.",
     'ERROR_LOGNAME_EMPTY'                               => "You must set a log name.",
+    'ERROR_SERVICE_NAME_ALREADY_EXISTS'                 => "A service with same name already exists. Please choose another name.",
+    'ERROR_SERVICE_NAME_EMPTY'                          => "You must set a service name.",
 
     /* UI */
     'BUTTON_OK'                                         => "OK",
@@ -81,6 +83,15 @@ return array(
     'AUTH_RECOVERY_TITLE'                               => "Request a password reset",
     'AUTH_RECOVERY_TEXT'                                => "Enter your username or email and you'll get a mail with instructions.", 
     'AUTH_RECOVERY_BUTTON'                              => "Send me a password-reset mail", 
+
+    /* Overview */
+    'OVERVIEW'                                          => 'Overview',
+
+    /* Sysusers */
+    'SYS_USERS'                                         => 'Users',
+
+    /* Disks */
+    'DISKS'                                             => 'Disks',
 
     /* Packages */
     'PACKAGES'                                          => 'Packages',
@@ -168,6 +179,7 @@ return array(
     'SETTINGS_DATA'                                  => 'Data',
     'SETTINGS_DATA_SUMMARY'                          => "Application data",
 
+    /* settings users */
     'SETTINGS_USERS'                                    => 'Users',
     'SETTINGS_USERS_SUMMARY'                            => "Create or edit user accounts",
     'SETTINGS_USERS_SECTION_CURRENT_ACCOUNTS'           => 'Currents accounts',
@@ -181,10 +193,32 @@ return array(
     'SETTINGS_USERS_INVITE_DIALOG_TITLE'                => "Invite a user",
     'SETTINGS_USERS_INVITE_DIALOG_MAIL_FIELD'           => "Send an invitation by email to:",
 
+    /* settings services */
+    'SETTINGS_SERVICES'                                 => 'Services',
+    'SETTINGS_SERVICES_SUMMARY'                         => "Add or change services to check",
+    'SETTINGS_SERVICES_REGISTERED_TITLE'                => 'Registered services',
+    'SETTINGS_SERVICES_DIALOG_CREATE_TITLE'             => "Add a service",
+    'SETTINGS_SERVICES_DIALOG_EDIT_TITLE'               => "Edit service",
+    'SETTINGS_SERVICES_BUTTON_ADD'                      => "Add",
+    'SETTINGS_SERVICES_DELETE_MESSAGE'                  => "This will remove the service and checks history. This action cannot be canceled.",
+    'SETTINGS_SERVICES_PROTOCOL_FIELD'                  => "Protocol:",
+    'SETTINGS_SERVICES_PROTOCOL_HEADER'                 => "Protocol",
+    'SETTINGS_SERVICES_NAME_FIELD'                      => "Name:",
+    'SETTINGS_SERVICES_NAME_HEADER'                     => "Service",
+    'SETTINGS_SERVICES_NAME_PLACEHOLDER'                => "Display name",
+    'SETTINGS_SERVICES_HOST_FIELD'                      => "Host:",
+    'SETTINGS_SERVICES_HOST_HEADER'                     => "Host",
+    'SETTINGS_SERVICES_HOST_PLACEHOLDER'                => "Host (ex. localhost)",
+    'SETTINGS_SERVICES_PORT_FIELD'                      => "Port :",
+    'SETTINGS_SERVICES_PORT_HEADER'                     => "Port",
+    'SETTINGS_SERVICES_PORT_PLACEHOLDER'                => "Port",
+    'SETTINGS_SERVICES_CHECK_ENABLED_HEADER'            => "Check enabled",
+
+    /* settings logreader */
     'SETTINGS_LOGREADER'                                => 'Logs reader',
     'SETTINGS_LOGREADER_SUMMARY'                        => "Settings for logs reader feature",
     'SETTINGS_LOGREADER_LIST_TITLE'                     => "Registered log files",
-    'SETTINGS_LOGREADER_DIALOG_CREATE_TITLE'            => "Add a new log file",
+    'SETTINGS_LOGREADER_DIALOG_CREATE_TITLE'            => "Add a log file",
     'SETTINGS_LOGREADER_DIALOG_EDIT_TITLE'              => "Edit log file",
     'SETTINGS_LOGREADER_ACTION_HEADER'                  => "Actions",
     'SETTINGS_LOGREADER_NAME_HEADER'                    => "Name",
@@ -195,7 +229,7 @@ return array(
     'SETTINGS_LOGREADER_TYPE_HEADER'                    => "Type",
     'SETTINGS_LOGREADER_FORMAT_HEADER'                  => "Format",
     'SETTINGS_LOGREADER_FORMAT_FIELD'                   => "Format:",
-    'SETTINGS_LOGREADER_FORMAT_PLACEHOLDER'             => "Format (leave blank to use default)",
+    'SETTINGS_LOGREADER_FORMAT_PLACEHOLDER'             => "Select a predefined format above or enter custom format",
     'SETTINGS_LOGREADER_BUTTON_ADD'                     => "Add",
    
     'SETTINGS_ADVANCED'                                 => 'Advanced', 
@@ -210,9 +244,6 @@ return array(
     'SETTINGS_IP_ACTION_ABUSEIPDB'                      => "AbuseIPDB check (external link)",
     'SETTINGS_IP_ACTION_GEOIP'                          => "Geodatatool (external link)",
     
-    'SETTINGS_SERVICES'                              => 'Services',
-    'SETTINGS_SERVICES_SUMMARY'                      => "Add or change services to check",
-   
     'SETTINGS_BANS'                                     => 'Parefeu',
     'SETTINGS_BANS_SUMMARY'                             => "Fail2Ban and abuseIPDB API settings",
 

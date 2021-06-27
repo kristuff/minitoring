@@ -70,6 +70,12 @@ The directory `app/config/sample` contains a full vhost sample. The main points 
     </Directory>
     ```
 
+    > You can enable the `minitoring` apache conf that contains the block code above
+    > 
+    > ```
+    > a2enconf minitoring
+    > ```
+
 -   Configure WebSocket API proxy for the url `/wssapi`:
 
     > Adjust the port, here *12443*, the default value.

@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.6
+ * @version    0.1.7
  * @copyright  2017-2021 Kristuff
  */
 
@@ -21,8 +21,6 @@ namespace Kristuff\Minitoring;
 
 use Kristuff\Miniweb\Mvc;
 use Kristuff\Minitoring\Model;
-use Kristuff\Minitoring\Model\AppModel;
-use Kristuff\Miniweb\Mvc\Model as MvcModel;
 
 /**
  * Class Application
@@ -32,7 +30,7 @@ use Kristuff\Miniweb\Mvc\Model as MvcModel;
 class Application extends Mvc\Application
 {
 
-    const VERSION = "v0.1.6";
+    const VERSION = "v0.1.7";
 
     /** 
      * Constructor
@@ -61,8 +59,6 @@ class Application extends Mvc\Application
         // if file exists: Extract data and complete or overwrite default config
         $this->loadConfigFile(__DIR__ . '/../config/minitoring.conf.php');
         $this->loadConfigFile(__DIR__ . '/../config/minitoring.conf.local.php');
-
-        
        
         // load database config
         if (Model\SetupModel::isInstalled()){

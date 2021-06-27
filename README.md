@@ -3,6 +3,8 @@
 > *Mini* monitoring web app and CLI tool for Gnu/linux server. 
 
 ## Main features
+
+*Monitoring*
 - Get O/S, machine, cpu infos
 - Check memory/swap usage
 - Check disks/inodes usage
@@ -11,9 +13,14 @@
 - Check Iptables/Ip6tables content
 - List all cron jobs (user/system crons, system timers) 
 - **Log reader**: support for syslog, apache access/error, fail2ban logs
-- Service check 
+- Service check (check tcp/udp port)
 - List users/group, last/currently connected users
 - ...
+
+*Web app*
+- Responsive design
+- Dark/Light theme
+- Localization (EN, FR) ***in progress***
 
 ## Requirements
 - A debian based web server with root privileges

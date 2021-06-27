@@ -1,7 +1,5 @@
-<section id="section-services" class="view anim-scale-increase" data-view="packages" 
-         data-title="Packages" 
-         data-subviews="all|upgradable"
-         data-refresh="Minitoring.Packages.refresh">
+<section id="section-services" class="view anim-scale-increase" data-view="packages" data-title="<?php $this->echo('PACKAGES'); ?>" 
+         data-subviews="all|upgradable" data-refresh="Minitoring.Packages.refresh">
 
     <section class="action-bar" id="packages-actions">
         <ul class="tab-items" data-style="flat">

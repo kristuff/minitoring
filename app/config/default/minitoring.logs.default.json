@@ -16,6 +16,7 @@
             "/opt/local/httpd/logs/" ,
             "C:/wamp/logs/"
         ],
+        "default_file": "/var/log/apache2/access.log",
         "files": [
             "access.log" ,
             "access_log" ,
@@ -136,20 +137,32 @@
         ],
         "formats": [
             {
-                "name": "default",
-                "format": ""
-            },
-            {
-                "name": "apache_common",
+                "name": "common",
                 "format": "%h %l %u %t \"%r\" %>s %O"
             },
             {
-                "name": "apache_combined",
+                "name": "vhost_common",
+                "format":"%v %h %l %u %t \"%r\" %>s %O"
+            },
+            {
+                "name": "combined",
                 "format": "%h %l %u %t \"%r\" %>s %O"
             },
             {
-                "name": "apache_combined_vhost",
+                "name": "vhost_combined",
                 "format": "%v:%p %h %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\""
+            },
+            {
+                "name": "referer",
+                "format": "%{Referer}i"
+            },
+            {
+                "name": "agent",
+                "format": "%{User-Agent}i"
+            },
+            {
+                "name": "custom",
+                "format": ""
             }
         ]
     },
@@ -174,6 +187,7 @@
             "error_log" ,
             "apache_error.log" 
         ],
+        "default_file": "/var/log/apache2/error.log",
         "columns": [
             {
                 "code":"%t",
@@ -238,7 +252,23 @@
         ],
         "formats": [
             {
-                "name": "default",
+                "name": "default apache2.2",
+                "format": "[%t] [%l] [client %a] %F: %E: %M"
+            }, 
+            {
+                "name": "default apache2.4",
+                "format": "[%{u}t] [%l] [pid %P] [client %a] %F: %E: %M"
+            }, 
+            {
+                "name": "npm apache2.4",
+                "format": "[%{u}t] [%-m:%l] [pid %P] [client %a] %F: %E: %M"
+            },
+            {
+                "name": "npm tid apache2.4",
+                "format": "[%{u}t] [%-m:%l] [pid %P:tid %T] [client %a] %F: %E: %M"
+            },
+            {
+                "name": "custom",
                 "format": ""
             }
         ]
@@ -252,6 +282,7 @@
         "files": [
             "fail2ban.log" 
         ],
+        "default_file": "/var/log/fail2ban.log",
         "columns": [
             {
                 "code":"%t",
@@ -286,7 +317,11 @@
         ],
         "formats": [
             {
-                "name": "use default",
+                "name": "default",
+                "format": "%t %s %p %l %j %m"
+            },
+            {
+                "name": "custom",
                 "format": ""
             }
         ]
@@ -298,8 +333,16 @@
             "/var/log/"
         ],
         "files": [
-            "syslog" 
+            "syslog",
+            "messages",
+            "auth.log", 
+            "daemon.log", 
+            "kern.log", 
+            "mail.err", 
+            "mail.info", 
+            "mail.warn" 
         ],
+        "default_file": "/var/log/syslog",
         "columns": [
             {
                 "code":"%t",
@@ -329,9 +372,14 @@
         ],
         "formats": [
             {
-                "name": "use default",
+                "name": "default",
+                "format": "%t %h %s%p: %m"
+            },
+            {
+                "name": "custom",
                 "format": ""
             }
+            
         ]
     }
     

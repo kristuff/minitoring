@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.6
+ * @version    0.1.7
  * @copyright  2017-2021 Kristuff
  */
 
@@ -73,6 +73,36 @@ class LogReaderModel extends Model
     public static function getLogTypes(): array
     {
         return self::$logTypes;
+    }
+
+    /** 
+     * Get the list of registered log format in a special array
+     * 
+     * @access public
+     * @static
+     * 
+     * @return array        
+     */
+    public static function getLogFormats(): array
+    {
+        $default = self::getDefaults();
+        $data = [];
+
+        foreach($default as $logInfos){
+            $baseName   = $logInfos['name'];
+            $type       = $logInfos['type'];
+
+            foreach ($logInfos['formats'] as $format){
+                $data[] = [
+                    'type'      => $type,
+                    'name'      => $format['name'],
+                    'longName'  => $baseName . ' (' . $format['name'] . ')',
+                    'format'    => $format['format'],
+                ];
+            }
+        }
+
+        return $data;
     }
 
     /** 
@@ -137,6 +167,44 @@ class LogReaderModel extends Model
         }   
 
         return $response;
+    }
+
+    /** 
+     * Scan and add availables logs 
+     * For now skip logs that need to set format (apache acces and error)
+     * 
+     * @access public
+     * @static
+     * 
+     * @return array        
+     */
+    public static function scanAvailablesLogs(): TaskResponse
+    {
+        $default = self::getDefaults();
+        $numberAdded = 0;
+        
+        foreach($default as $logInfos){
+            foreach($logInfos['paths'] as $path){
+                foreach($logInfos['files'] as $file){
+
+                    if (file_exists($path. $file)){
+
+                        // check if already exists in db
+                        if (!LogsCollectionModel::logPathExists($path. $file)){
+                            // add item TODO FORMAT
+                            LogsCollectionModel::add($path. $file, $logInfos['type'], $logInfos['name']);
+                            $numberAdded++;
+                        }
+                    }
+                }
+            }
+        }
+
+        $data = [
+            'numberAdded' => $numberAdded, 
+        ];
+
+        return TaskResponse::create(200,"",$data);
     }
 }  
 

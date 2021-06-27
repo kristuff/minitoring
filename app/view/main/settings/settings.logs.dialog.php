@@ -10,18 +10,19 @@
                     <form id="frm_log_new" class="color-light">
                         
                     <label><?php $this->echo('SETTINGS_LOGREADER_NAME_FIELD'); ?></label>
-                        <input type="text" id="log-create-name" name="log-create-name" placeholder="<?php $this->echo('SETTINGS_LOGREADER_NAME_HEADER'); ?>" required />
+                        <input type="text" id="log-create-name" placeholder="<?php $this->echo('SETTINGS_LOGREADER_NAME_HEADER'); ?>" required />
                         
                         <label><?php $this->echo('SETTINGS_LOGREADER_PATH_FIELD'); ?></label>
-                        <input type="text" id="log-create-path" name="log-create-path" placeholder="<?php $this->echo('SETTINGS_LOGREADER_PATH_HEADER'); ?>" required />
+                        <input type="text" id="log-create-path" placeholder="<?php $this->echo('SETTINGS_LOGREADER_PATH_HEADER'); ?>" required />
                         
                         <label><?php $this->echo('SETTINGS_LOGREADER_TYPE_FIELD'); ?></label>
                         <div class="custom-select margin-top-6">
-                            <select id="log-create-type" placeholder="Type" required ></select>   
+                            <select id="log-create-format-name" data-bind="Minitoring.Settings.Logs.dialogCreateFormatChanged" required ></select>   
                         </div>
-                        
+                        <input type="hidden" id="log-create-type" value=""/>
+
                         <label class="padding-top-6"><?php $this->echo('SETTINGS_LOGREADER_FORMAT_FIELD'); ?></label>
-                        <input type="text" id="log-create-format" name="log-create-path" placeholder="<?php $this->echo('SETTINGS_LOGREADER_FORMAT_PLACEHOLDER'); ?>"  />
+                        <input type="text" id="log-create-format" placeholder="<?php $this->echo('SETTINGS_LOGREADER_FORMAT_PLACEHOLDER'); ?>"  />
                     </form>
                 </div>
             </section>
@@ -32,18 +33,19 @@
                     <form id="frm_log_new" class="color-light">
                         
                         <label><?php $this->echo('SETTINGS_LOGREADER_NAME_FIELD'); ?></label>
-                        <input type="text" id="log-edit-name" name="log-edit-name" placeholder="<?php $this->echo('SETTINGS_LOGREADER_NAME_HEADER'); ?>" required />
+                        <input type="text" id="log-edit-name" placeholder="<?php $this->echo('SETTINGS_LOGREADER_NAME_HEADER'); ?>" required />
                         
                         <label><?php $this->echo('SETTINGS_LOGREADER_PATH_FIELD'); ?></label>
-                        <input type="text" id="log-edit-path" name="log-edit-path" placeholder="<?php $this->echo('SETTINGS_LOGREADER_PATH_HEADER'); ?>" required />
+                        <input type="text" id="log-edit-path" placeholder="<?php $this->echo('SETTINGS_LOGREADER_PATH_HEADER'); ?>" required />
                         
                         <label><?php $this->echo('SETTINGS_LOGREADER_TYPE_FIELD'); ?></label>
                         <div class="custom-select margin-top-6">
-                            <select id="log-edit-type" placeholder="Type" required ></select>   
+                            <select id="log-edit-format-name" data-bind="Minitoring.Settings.Logs.dialogEditFormatChanged" required ></select>   
                         </div>
+                        <input type="hidden" id="log-edit-type" value=""/>
 
                         <label class="padding-top-6"><?php $this->echo('SETTINGS_LOGREADER_FORMAT_FIELD'); ?></label>
-                        <input type="text" id="log-edit-format" name="log-edit-path" placeholder="<?php $this->echo('SETTINGS_LOGREADER_FORMAT_PLACEHOLDER'); ?>"  />
+                        <input type="text" id="log-edit-format" placeholder="<?php $this->echo('SETTINGS_LOGREADER_FORMAT_PLACEHOLDER'); ?>"  />
                     </form>
                 </div>
 

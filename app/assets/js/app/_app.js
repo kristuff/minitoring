@@ -7,7 +7,6 @@ Minitoring.App = {
         Minitoring.Swap.init();
         Minitoring.Memory.init();
         Minitoring.Disks.init();
-        Minitoring.Services.init();
         Minitoring.SystemUsers.init();
         Minitoring.Logs.init();
         Minitoring.Iptables.init();

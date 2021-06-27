@@ -4,25 +4,30 @@
             <a href="#" class="dialog-button-close"><i class="fa fa-times"></i></a>
         </div>
 
-        <section class="dialog-part" data-part="add">
-            <h5><i class="fa fa-user-plus icon-left"></i>Add a service</h5>
-            <div>This will add and register a service check.</div>
-            <div class="align-center">
-                <form id="frm_user_new" class="">
-                    <input type="text" id="service-add-friendly-name" name="service-add-friendly-name" placeholder="Service Name" />
-                    <input type="text" id="service-add-name" name="service-add-name" placeholder="Service name" />
-                    <input type="text" id="service-add-port" name="service-add-port" placeholder="Port" />
-                </form>
-            </div>
+        <section class="dialog-part" data-part="add" data-add-title="<?php $this->echo('SETTINGS_SERVICES_DIALOG_CREATE_TITLE'); ?>" data-edit-title="<?php $this->echo('SETTINGS_SERVICES_DIALOG_EDIT_TITLE'); ?>" >
+            <div class="h5" id="service-dialog-title"></div>
+            <form id="frm_user_new" class="">
+        
+                <label><?php $this->echo('SETTINGS_SERVICES_NAME_FIELD'); ?></label>
+                <input type="text" id="service-dialog-name" placeholder="<?php $this->echo('SETTINGS_SERVICES_NAME_PLACEHOLDER'); ?>" />
+                    
+                <label><?php $this->echo('SETTINGS_SERVICES_PROTOCOL_FIELD'); ?></label>
+                <div class="custom-select margin-top-6">
+                        <select id="service-dialog-protocol" required >
+                            <option value="tcp">TCP</option>
+                            <option value="udp">UDP</option>
+                        </select>   
+                </div>
+
+                <label><?php $this->echo('SETTINGS_SERVICES_HOST_FIELD'); ?></label>
+                <input type="text" id="service-dialog-host" placeholder="<?php $this->echo('SETTINGS_SERVICES_HOST_PLACEHOLDER'); ?>" />
+                    
+                <label><?php $this->echo('SETTINGS_SERVICES_PORT_FIELD'); ?></label>
+                <input type="text" id="service-dialog-port" placeholder="<?php $this->echo('SETTINGS_SERVICES_PORT_PLACEHOLDER'); ?>" />
+            </form>
         </section>
 
         <section class="dialog-part" data-part="delete">
-            <h5><i class="fa fa-trash icon-left"></i>Delete a user</h5>
-            <p>What do you want to do?</p>
-            <form>
-                <div><input id="" type="radio" name="action" value="full"> Soft delete</div>
-                <div><input id="" type="radio" name="action" value="soft" checked> Delete user</div>
-            </form>
             <br>
         </section>
 

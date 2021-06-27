@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.6
+ * @version    0.1.7
  * @copyright  2017-2021 Kristuff
  */
 
@@ -102,7 +102,7 @@ class SocketServer implements MessageComponentInterface {
             $this->log(LOG_WARNING, 'Request error: Invalid token from IP [' . $remoteIP . ']');
         }
 
-        if ($response->assertTrue($check, 403, 'Invalid token')) {
+        if ($response->assertTrue($check, 401, 'Invalid token')) {
             // Log //TODO
             $this->log(LOG_INFO, 'Request accepted from IP [' . $remoteIP . ']');
             $response = $this->parseCommand($response, $request, $remoteIP);

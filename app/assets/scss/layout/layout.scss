@@ -35,7 +35,7 @@ body,
 .subpanel {
     display: none;
     overflow-y: auto;
-    padding: 10px 15px;
+    padding: 10px 8px;
    // padding-top: 0;
 }
 .view.active, 
@@ -43,15 +43,21 @@ body,
     display:block;
 } 
 
+@media only screen and (min-width:768px)  {
+    .view,
+    .subpanel {
+        padding: 10px 15px;
+    }
+}
+
 // reduce anim time..
 .anim-scale-increase { animation: anim-scale-increase 0.35s 0.3s both; }
-
 
 // fix padding
 @media only screen and (min-width:768px){
     //    .side-menu ~ .main-content {padding:0 10px 10px 10px;} 
     .side-menu ~ .main-header {padding-left:10px;} 
-    .side-menu ~ .main-header .side-menu-back-trigger {margin-left:-10px;}
+    .side-menu ~ .main-header .back-trigger {margin-left:-10px;}
 }
 
 
@@ -64,16 +70,8 @@ form {
 
 
 @media only screen and (min-width:768px)  {
-
     .side-menu ~ .main-header .back-trigger.active {display: inline-block;}
     .side-menu ~ .main-header .back-trigger.active ~ .side-menu-trigger {display: none;}
-
-
-    #current-user {
-        .user-email {
-            display: block;
-        }
-    }
 }
 
 .back-trigger {display: none;}

@@ -46,10 +46,10 @@ Minitoring.SystemUsers = {
                 Minitoring.SystemUsers.get('all', offset);
                 break;
             case 'sysusers/currents':
-                Minitoring.SystemUsers.get('currents', offset);
+                Minitoring.SystemUsers.get('current', offset);
                 break;
             case 'sysusers/lasts':
-                Minitoring.SystemUsers.get('lasts', offset);
+                Minitoring.SystemUsers.get('last', offset);
                 break;
             case 'sysusers/groups':
                 Minitoring.SystemUsers.get('groups', offset);

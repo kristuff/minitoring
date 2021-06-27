@@ -4,6 +4,7 @@ Minitoring.Logs = {
     autoRefreshHandle:0,
     //defaultSettings:{},
     logList:{},
+    $logFormats:{},
 
     init:function(){
         Minitoring.Logs.getLogFilesList();
@@ -150,6 +151,11 @@ Minitoring.Logs = {
         );
 
     },
+
+    
+  
+
+
 
     getLogFilesList: function () {
      

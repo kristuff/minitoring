@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.6
+ * @version    0.1.7
  * @copyright  2017-2021 Kristuff
  */
 
@@ -24,6 +24,7 @@ use Kristuff\Miniweb\Mvc\TaskResponse;
 use Kristuff\Minitoring\Application;
 use Kristuff\Minitoring\Model;
 use Kristuff\Minitoring\Model\DependencyModel;
+use Kristuff\Minitoring\Model\Services\ServicesCollectionModel;
 use Kristuff\Minitoring\Model\System;
 use Kristuff\Minitoring\Model\System\ServiceModel;
 use Kristuff\Minitoring\Model\TokenCheckerModel;
@@ -78,11 +79,13 @@ class ApiController extends \Kristuff\Miniweb\Auth\Controller\ApiController
      /** 
      * packages api end points
      *
-     *  ----------------------------            ------      ------------------------------      --------------------    -------------------------
-     *  End points                              Method      Description                         parameters(s)           Response
-     *  ----------------------------            ------      ------------------------------      --------------------    -------------------------
-     * 
-     *  ----------------------------            ------      ------------------------------      --------------------    -------------------------
+     *  ----------------------------            ------      --------------------------------------------------      
+     *  End points                              Method      Description                         
+     *  ----------------------------            ------      --------------------------------------------------      
+     *  /api/packages                           GET         Get all packages    
+     *  /api/packages/all                       GET         Get all packages    
+     *  /api/packages/upgradable                GET         Get upgradable packages    
+     *  ----------------------------            ------      --------------------------------------------------   
      */
     public function packages($action = null)
     {
@@ -96,8 +99,6 @@ class ApiController extends \Kristuff\Miniweb\Auth\Controller\ApiController
                 case 'upgradable':
                     $this->response =  TaskResponse::create(200, '', System\PackagesModel::getUpgradablePackages());
                     break;
-
-
             }
         }
 
@@ -106,20 +107,22 @@ class ApiController extends \Kristuff\Miniweb\Auth\Controller\ApiController
     }
 
     /** 
-     * System api end points
+     * system api end points
      *
-     *  ----------------------------            ------      ------------------------------      --------------------    -------------------------
-     *  End points                              Method      Description                         parameters(s)           Response
-     *  ----------------------------            ------      ------------------------------      --------------------    -------------------------
+     *  ----------------------------            ------      --------------------------------------------------      
+     *  End points                              Method      Description                         
+     *  ----------------------------            ------      --------------------------------------------------      
      *  /api/system/all                         GET         Get all data from following end points   
-     *  /api/system/infos                       GET         Basics infos about system   
-     *  /api/system/cpu                         GET         Cpu infos         
-     *  /api/system/load                        GET         Current load infos
-     *  /api/system/memory                      GET         Current memory infos    
-     *  /api/system/swap                        GET         Current swap infos
-     *  /api/system/disks                       GET         Disks space infos
-     *  /api/system/inodes                      GET         Inodes usage infos
-     *  ----------------------------            ------      ------------------------------      --------------------    -------------------------
+     *  /api/system/infos                       GET         Get basics infos about system   
+     *  /api/system/cpu                         GET         Get Cpu infos         
+     *  /api/system/load                        GET         Get current load average infos
+     *  /api/system/memory                      GET         Get current memory infos    
+     *  /api/system/swap                        GET         Get current swap infos
+     *  /api/system/process                     GET         Get current processes infos
+     *  /api/system/disks                       GET         Get disks space infos
+     *  /api/system/inodes                      GET         Get inodes usage infos
+     *  /api/system/network                     GET         Get network infos    
+     *  ----------------------------            ------      --------------------------------------------------   
      */
     public function system($action = null)
     {
@@ -191,30 +194,39 @@ class ApiController extends \Kristuff\Miniweb\Auth\Controller\ApiController
     /** 
      * Logs api end points
      *
-     *  ----------------------------            ------      ------------------------------      --------------------    -------------------------
-     *  End points                              Method      Description                         parameters(s)           Response
-     *  ----------------------------            ------      ------------------------------      --------------------    -------------------------
-     *  /api/logs                               GET            
-     *  /api/logs                               POST            
-     *  /api/logs/types                         GET                 
-     *  /api/logs/defaults                      GET                 
+     *  ----------------------------            ------      --------------------------------------------------
+     *  End points                              Method      Description                    
+     *  ----------------------------            ------      --------------------------------------------------
+     *  /api/logs                               GET         Get registered log files list   
+     *  /api/logs                               POST        Add a log file    
+     *  /api/logs/types                         GET         Get registered logtypes         
+     *  /api/logs/defaults                      GET         Get default info for each logtype 
+     *  /api/logs/formats                       GET         Get registered formats of each logtype        
      *  /api/logs/{logId}                       DELETE      Delete given log file      
      *  /api/logs/{logId}                       POST        Edit given log file           
-     *  ----------------------------            ------      ------------------------------      --------------------    -------------------------
+     *  ----------------------------            ------      --------------------------------------------------
      */
     public function logs($param = '')
     {  
         switch ($this->request()->method()) {
             case Request::METHOD_GET:
                 switch ($param) {
+
                     case 'types':
                         $data = Model\Log\LogReaderModel::getLogTypes();
                         $this->response = TaskResponse::create(200, '', $data);
                         break;
+
+                    case 'formats':
+                        $data = Model\Log\LogReaderModel::getLogFormats();
+                        $this->response = TaskResponse::create(200, '', $data);
+                        break;
+
                     case 'defaults':
                         $data = Model\Log\LogReaderModel::getDefaults();
                         $this->response = TaskResponse::create(200, '', $data);
                         break;
+
                      case '':
                         $data = Model\Log\LogsCollectionModel::getList();
                         $this->response = TaskResponse::create(200, '', $data);
@@ -224,15 +236,16 @@ class ApiController extends \Kristuff\Miniweb\Auth\Controller\ApiController
                 break;
 
             case Request::METHOD_POST:
-                $logPath    = $this->request()->post('log_path', true) ?? false; 
-                $logFormat  = $this->request()->post('log_format', true) ?? false; 
-                $logType    = $this->request()->post('log_type', true) ?? false; 
-                $logName    = $this->request()->post('log_name', true) ?? false; 
-                
+                $logPath            = $this->request()->post('log_path', true) ?? false; 
+                $logFormat          = $this->request()->post('log_format', true) ?? false; 
+                $logFormatName      = $this->request()->post('log_format_name', true) ?? false; 
+                $logType            = $this->request()->post('log_type', true) ?? false; 
+                $logName            = $this->request()->post('log_name', true) ?? false; 
+                 
                 if (empty($param)){
-                    $this->response = Model\Log\LogsCollectionModel::add($logPath,$logType,$logName,$logFormat);
+                    $this->response = Model\Log\LogsCollectionModel::add($logPath,$logType,$logName,$logFormatName,$logFormat);
                 } else {
-                    $this->response = Model\Log\LogsCollectionModel::edit(intval($param), $logPath,$logType,$logName,$logFormat);
+                    $this->response = Model\Log\LogsCollectionModel::edit(intval($param), $logPath,$logType,$logName,$logFormatName,$logFormat);
                 }
 
                 break;
@@ -247,7 +260,17 @@ class ApiController extends \Kristuff\Miniweb\Auth\Controller\ApiController
     }
 
     /** 
-     *  System users api
+     *  sysusers api end points
+     * 
+     *  ----------------------------            ------      --------------------------------------------------
+     *  End points                              Method      Description                    
+     *  ----------------------------            ------      --------------------------------------------------
+     *  /api/sysusers                           GET         Get system users list   
+     *  /api/sysusers/all                       GET         Get system users list   
+     *  /api/sysusers/groups                    GET         Get system groups list   
+     *  /api/sysusers/current                   GET         Get currents users list   
+     *  /api/sysusers/last                      GET         Get last logins    
+     *  ----------------------------            ------      --------------------------------------------------
      */
     public function sysusers($action = '')
     {  
@@ -264,12 +287,12 @@ class ApiController extends \Kristuff\Miniweb\Auth\Controller\ApiController
                         ['currentUsersNumber' =>System\SystemUsersModel::getCurrentUsersNumber()]);
                     break;
                 
-                case 'currents' :
+                case 'current' :
                     $data = System\SystemUsersModel::getCurrentsUsers($limit, $offset);
                     $this->response = TaskResponse::create(200, '', $data);
                     break;
 
-                case 'lasts' :
+                case 'last' :
                     $data = System\SystemUsersModel::getUsers(true, $limit, $offset);
                     $this->response = TaskResponse::create(200, '', $data);
                     break;
@@ -292,52 +315,46 @@ class ApiController extends \Kristuff\Miniweb\Auth\Controller\ApiController
         $this->view->renderJson($this->response->toArray(), $this->response->code());
     }
 
-   /** 
-    *  Services api
-    */
-    public function services($action = null, $serviceId = null)
+    /** 
+     *  services api end points  (apply to collection)
+     * 
+     *  ----------------------------            ------      --------------------------------------------------
+     *  End points                              Method      Description                    
+     *  ----------------------------            ------      --------------------------------------------------
+     *  /api/services                           GET         Get XXXXXXXXXXXXXXXXXX   
+     *  /api/services                           POST        XXXXXXXXXXXXXXXXXX   
+     *  /api/services/list                      GET         Get XXXXXXXXXXXXXXXXXX   
+     *  /api/services/check                     GET         Get XXXXXXXXXXXXXXXXXX   
+     *  ----------------------------            ------      --------------------------------------------------
+     */
+    public function services($action = null)
     {
         switch ($this->request()->method()) {
             case Request::METHOD_GET:
                 $data = [];
-                $limit  = $this->request()->arg('limit')  ? (int) $this->request()->arg('limit')  : 50; 
-                $offset = $this->request()->arg('offset') ? (int) $this->request()->arg('offset') : 0; 
                 
                 switch($action){
 
+                    // TODO require admin permissions
                     case 'list':
                     case '':
-                        $data['items'] = ServiceModel::getCheckedServicesList();
+                        $data['items'] = ServicesCollectionModel::getServicesList();
                         break;
 
                     case 'check':
-                        $data['total']  = ServiceModel::countChecks($serviceId); 
-                        $data['limit']  = $limit; 
-                        $data['offset'] = $offset; 
-                        $data['items']  = ServiceModel::getLastChecks($serviceId, $action !== 'history', $limit, $offset);
+                        $data['items']  = ServiceModel::getCheckedServicesList();
                         break;
                 }
                 $this->response = TaskResponse::create(200, '', $data);
                 break;
 
-            case 'POST':
-                //todo
-                break;
-            
-            case 'PUT':
-                switch($action){
-                    case 'activate':
-                        //TODO admin
-                       // $this->view->renderJson(SystemModel::createResponse(200, '', ServiceModel::setCheckState($serviceId, 1)));
-                        break;
-                    case 'desactivate':
-                        //TODO admin ... CODE
-                     //   $this->view->renderJson(SystemModel::createResponse(200, '', ServiceModel::setCheckState($serviceId, 0)));
-                        break;
-                }
-                break;
-            
-            case 'DELETE':
+            case Request::METHOD_POST:
+                $serviceName        = $this->request()->post('service_name', true) ?? ''; 
+                $serviceHost        = $this->request()->post('service_host', true) ?? ''; 
+                $servicePort        = $this->request()->post('service_port', true) ? intval($this->request()->post('service_port')) : null; 
+                $serviceProtocol    = $this->request()->post('service_protocol' , true) ?? 'tcp'; 
+                $serviceCheckPort   = $this->request()->post('service_check_port', true) ? 1 : 0 ; 
+                $this->response = ServicesCollectionModel::add($serviceName, $serviceHost, $servicePort, $serviceCheckPort, $serviceProtocol);
                 break;
          }
 
@@ -346,7 +363,62 @@ class ApiController extends \Kristuff\Miniweb\Auth\Controller\ApiController
     }
 
     /** 
-     *  app api
+     *  service api end points (apply to an item)
+     * 
+     *  ----------------------------            ------      --------------------------------------------------
+     *  End points                              Method      Description                    
+     *  ----------------------------            ------      --------------------------------------------------
+     *  /api/services/{id}                      DELETE      Delete service
+     *  /api/services/{id}                      POST        Edit service
+     *  /api/services/{id}/enable               PUT         Enable service check    
+     *  /api/services/{id}/disable              PUT         Disable service check  
+     *  ----------------------------            ------      --------------------------------------------------
+     */
+    public function service($serviceId = null, $action = null)
+    {
+        switch ($this->request()->method()) {
+                      
+            case Request::METHOD_PUT:
+                switch($action){
+                    case 'enable':
+                        $this->response = ServicesCollectionModel::setCheckState(intval($serviceId), 1);
+                        break;
+
+                    case 'disable':
+                        $this->response = ServicesCollectionModel::setCheckState(intval($serviceId), 0);
+                        break;
+                }
+                break;
+            
+            case Request::METHOD_DELETE:
+                $this->response = ServicesCollectionModel::delete($serviceId);
+                break;
+
+            case Request::METHOD_POST:
+                $serviceName        = $this->request()->post('service_name', true) ?? ''; 
+                $serviceHost        = $this->request()->post('service_host', true) ?? ''; 
+                $servicePort        = $this->request()->post('service_port', true) ? intval($this->request()->post('service_port')) : null; 
+                $serviceProtocol    = $this->request()->post('service_protocol' , true) ?? 'tcp'; 
+                $serviceCheckPort   = $this->request()->post('service_check_port', true) ? 1 : 0 ; 
+                $this->response = ServicesCollectionModel::edit($serviceId, $serviceName, $serviceHost, $servicePort, $serviceCheckPort, $serviceProtocol);
+                break;
+
+         }
+
+        // render
+        $this->view->renderJson($this->response->toArray(), $this->response->code());
+    }
+
+    /** 
+     *  app api end points
+     * 
+     *  ----------------------------            ------      --------------------------------------------------
+     *  End points                              Method      Description                    
+     *  ----------------------------            ------      --------------------------------------------------
+     *  /api/app/auth                           GET         Get the websocket token   
+     *  /api/app/packages                       GET         Get installed packages from composer.lock   
+     *  /api/app/feedback                       GET         Get (and clear) internal feedbacks from Models   
+     *  ----------------------------            ------      --------------------------------------------------
      */
     public function app($action = '')
     {  
@@ -367,7 +439,7 @@ class ApiController extends \Kristuff\Miniweb\Auth\Controller\ApiController
                     
                 case 'feedback':
                     // the feedback function is available in any Model 
-                    $feedbacks =  Model\AppModel::feedback();
+                    $feedbacks      =  Model\AppModel::feedback();
                     $this->response = TaskResponse::create(200, null, [
                         'feedbackNegatives' => $feedbacks->getNegatives(),
                         'feedbackPositives' => $feedbacks->getPositives(),

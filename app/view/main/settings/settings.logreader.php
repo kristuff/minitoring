@@ -2,7 +2,7 @@
     data-refresh="Minitoring.Settings.Logs.getLogFilesDetails" data-view="settings/logreader">
 
     <section class="section">
-        <h6><?php $this->echo('SETTINGS_LOGREADER_LIST_TITLE'); ?></h6>
+        <h6 class="highlight"><?php $this->echo('SETTINGS_LOGREADER_LIST_TITLE'); ?></h6>
 
         <table id="settings-logs-table" class="data-table responsive alternative-row-style">
             <colgroup>
@@ -16,8 +16,8 @@
                 <tr class="table-header">
                     <th data-column="<?php $this->echo('SETTINGS_LOGREADER_NAME_HEADER'); ?>"   ><?php $this->echo('SETTINGS_LOGREADER_NAME_HEADER');   ?></th>
                     <th data-column="<?php $this->echo('SETTINGS_LOGREADER_ACTION_HEADER'); ?>" ></th>
-                    <th data-column="<?php $this->echo('SETTINGS_LOGREADER_TYPE_HEADER'); ?>"   ><?php $this->echo('SETTINGS_LOGREADER_TYPE_HEADER');   ?></th>
                     <th data-column="<?php $this->echo('SETTINGS_LOGREADER_PATH_HEADER'); ?>"   ><?php $this->echo('SETTINGS_LOGREADER_PATH_HEADER');   ?></th>
+                    <th data-column="<?php $this->echo('SETTINGS_LOGREADER_TYPE_HEADER'); ?>"   ><?php $this->echo('SETTINGS_LOGREADER_TYPE_HEADER');   ?></th>
                     <th data-column="<?php $this->echo('SETTINGS_LOGREADER_FORMAT_HEADER'); ?>" ><?php $this->echo('SETTINGS_LOGREADER_FORMAT_HEADER'); ?></th>
                 </tr>
             </thead>

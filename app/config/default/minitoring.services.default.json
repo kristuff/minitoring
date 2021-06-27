@@ -1,43 +1,50 @@
 [
     {
         "name": "Web Server",
-        "host": "localhost",
+        "check_port": true,
         "port": 80,
+        "host": "localhost",
         "protocol": "tcp"
     },
     {
         "name": "Web Server (SSL)",
-        "host": "localhost",
+        "check_port": true,
         "port": 443,
+        "host": "localhost",
         "protocol": "tcp"
     },
     {
         "name": "Email Server (incoming)",
-        "host": "localhost",
+        "check_port": true,
         "port": 993,
+        "host": "localhost",
         "protocol": "tcp"
     },
     {
         "name": "Email Server (outgoing)",
         "host": "localhost",
+        "check_port": true,
         "port": 587,
         "protocol": "tcp"
     },
     {
         "name": "FTP Server",
         "host": "localhost",
+        "check_port": true,
         "port": 21,
         "protocol": "tcp"
     },
     {
         "name": "Database Server",
         "host": "localhost",
+        "check_port": true,
         "port": 3306,
         "protocol": "tcp"
     },
     {
         "name": "SSH",
         "host": "localhost",
+        "check_port": true,
         "port": 22,
         "protocol": "tcp"
     }
