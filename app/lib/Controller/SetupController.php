@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.7
+ * @version    0.1.8
  * @copyright  2017-2021 Kristuff
  */
 
@@ -49,6 +49,21 @@ class SetupController extends \Kristuff\Miniweb\Auth\Controller\BaseController
         $this->view->setData('APP_NAME',        Application::config('APP_NAME')); 
         $this->view->setData('APP_COPYRIGHT',   Application::config('APP_COPYRIGHT')); 
         $this->view->setData('APP_VERSION',     Application::config('APP_VERSION')); 
+
+        $language = Application::config('APP_LANGUAGE');
+        $this->view->setData('APP_LANGUAGE',     $language); 
+        $this->view->setData('CURRENT_LANGUAGE', $language); 
+
+        if (!empty($language)){
+            $application->locales()->setDefault($language);
+        }
+    
+        // possible language overwrite with query string
+        $lang = $this->request()->arg('language');
+        if (!empty($lang) && in_array($lang, ['fr-FR','en-US'])){
+            $this->view->setData('CURRENT_LANGUAGE', $lang); 
+            $application->locales()->setDefault($lang);
+        }
     } 
 
     /** 
@@ -73,11 +88,12 @@ class SetupController extends \Kristuff\Miniweb\Auth\Controller\BaseController
      */
     public function install()
     {
-        $adminName =     $this->request()->post('admin_name') ?? ''; 
-        $adminPassword = $this->request()->post('admin_password') ? $this->request()->post('admin_password') : ''; 
-        $adminEmail =    $this->request()->post('admin_email')    ? $this->request()->post('admin_email') : ''; 
-        $databaseName =  $this->request()->post('db_name')        ? $this->request()->post('db_name') : '';        
-      
+        $adminName =     $this->request()->post('admin_name')     ? $this->request()->post('admin_name', true)  : ''; 
+        $adminPassword = $this->request()->post('admin_password') ? $this->request()->post('admin_password')    : ''; 
+        $adminEmail =    $this->request()->post('admin_email')    ? $this->request()->post('admin_email', true) : ''; 
+        $databaseName =  $this->request()->post('db_name')        ? $this->request()->post('db_name', true)     : '';        
+        //TODO $databaseName =  $this->request()->post('db_name')        ? $this->request()->post('db_name', true)     : '';        
+
         $response = Model\SetupModel::install($adminName, $adminPassword, $adminEmail, $databaseName);
         $this->view->renderJson($response->toArray(), $response->code());
     }

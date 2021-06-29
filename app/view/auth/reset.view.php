@@ -10,10 +10,12 @@
         
         <label for="reset_input_password_new"><?php $this->echo('USER_NEW_PASSWORD_FIELD');?></label>
         <input  id="reset_input_password_new" class="reset_input" type="password" name="user_password_new" pattern=".{8,}" placeholder="<?php $this->echo('USER_PASSWORD_CREATE_PLACEHOLDER');?>" required autocomplete="off" />
-        
+        <i class="fa toggle-password"></i>
+     
         <label for="reset_input_password_repeat"><?php $this->echo('USER_PASSWORD_REPEAT_FIELD');?></label>
         <input  id="reset_input_password_repeat" class="reset_input" type="password" name="user_password_repeat" pattern=".{8,}" placeholder="<?php $this->echo('USER_PASSWORD_REPEAT_PLACEHOLDER');?>" required autocomplete="off" />
-    </section>
+        <i class="fa toggle-password"></i>
+     </section>
     <section class="section">
         <input type="submit" class="button large uppercase full-width theme" name="submit_new_password" value="<?php $this->echo('AUTH_RECOVERY_SUBMIT_PASSWORD');?>" />
     </section>

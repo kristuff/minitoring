@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.7
+ * @version    0.1.8
  * @copyright  2017-2021 Kristuff
  */
 
@@ -376,34 +376,38 @@ class ApiController extends \Kristuff\Miniweb\Auth\Controller\ApiController
      */
     public function service($serviceId = null, $action = null)
     {
-        switch ($this->request()->method()) {
-                      
-            case Request::METHOD_PUT:
-                switch($action){
-                    case 'enable':
-                        $this->response = ServicesCollectionModel::setCheckState(intval($serviceId), 1);
-                        break;
+        if (is_numeric($serviceId)){
+            $serviceId = intval($serviceId);
 
-                    case 'disable':
-                        $this->response = ServicesCollectionModel::setCheckState(intval($serviceId), 0);
-                        break;
-                }
-                break;
-            
-            case Request::METHOD_DELETE:
-                $this->response = ServicesCollectionModel::delete($serviceId);
-                break;
+            switch ($this->request()->method()) {
+                        
+                case Request::METHOD_PUT:
+                    switch($action){
+                        case 'enable':
+                            $this->response = ServicesCollectionModel::setCheckState($serviceId, 1);
+                            break;
 
-            case Request::METHOD_POST:
-                $serviceName        = $this->request()->post('service_name', true) ?? ''; 
-                $serviceHost        = $this->request()->post('service_host', true) ?? ''; 
-                $servicePort        = $this->request()->post('service_port', true) ? intval($this->request()->post('service_port')) : null; 
-                $serviceProtocol    = $this->request()->post('service_protocol' , true) ?? 'tcp'; 
-                $serviceCheckPort   = $this->request()->post('service_check_port', true) ? 1 : 0 ; 
-                $this->response = ServicesCollectionModel::edit($serviceId, $serviceName, $serviceHost, $servicePort, $serviceCheckPort, $serviceProtocol);
-                break;
+                        case 'disable':
+                            $this->response = ServicesCollectionModel::setCheckState($serviceId, 0);
+                            break;
+                    }
+                    break;
+                
+                case Request::METHOD_DELETE:
+                    $this->response = ServicesCollectionModel::delete($serviceId);
+                    break;
 
-         }
+                case Request::METHOD_POST:
+                    $serviceName        = $this->request()->post('service_name', true) ?? ''; 
+                    $serviceHost        = $this->request()->post('service_host', true) ?? ''; 
+                    $servicePort        = $this->request()->post('service_port', true) ? intval($this->request()->post('service_port')) : null; 
+                    $serviceProtocol    = $this->request()->post('service_protocol' , true) ?? 'tcp'; 
+                    $serviceCheckPort   = $this->request()->post('service_check_port', true) ? 1 : 0 ; 
+                    $this->response = ServicesCollectionModel::edit($serviceId, $serviceName, $serviceHost, $servicePort, $serviceCheckPort, $serviceProtocol);
+                    break;
+
+            }
+        }
 
         // render
         $this->view->renderJson($this->response->toArray(), $this->response->code());

@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.7
+ * @version    0.1.8
  * @copyright  2017-2021 Kristuff
  */
 
@@ -45,6 +45,16 @@ return array(
     'COLOR_BLUE'                                        => 'Bleu',
     'COLOR_MAGENTA'                                     => 'Violet',
     'COLOR_ORANGE'                                      => 'Orange',
+
+    /* common */
+    'ACTION_DELETE'                                     => 'Supprimer',
+    'ACTION_EDIT'                                       => 'Modifier',
+    'FREE'                                              => "Libre",
+    'USED'                                              => "Utilisé",
+    'PERCENT_USED'                                      => "% utilisé",
+    'TOTAL'                                             => "Total",
+    'NEXT'                                              => "Suivant",
+    'PREV'                                              => "Précédent",
 
     /* user */
     'USER_NAME_FIELD'                                   => "Nom d'utilisateur :",
@@ -92,6 +102,12 @@ return array(
 
     /* Disks */
     'DISKS'                                             => 'Disques',
+    'INODES'                                            => "Nœuds d'index (inodes)",
+    'DISK_SPACE'                                        => "Espace disque",
+    'DISK_SHOW_TMPFS'                                   => "Afficher les systèmes de fichiers temporaires (tmpfs)",
+    'DISK_FILESYSTEM'                                   => "Système de fichier",
+    'DISK_TYPE'                                         => "Type",
+    'DISK_MOUNT'                                        => "Monté sur",
 
     /* Packages */
     'PACKAGES'                                          => 'Paquets',
@@ -243,6 +259,44 @@ return array(
     'SETTINGS_BANS'                                     => 'Parefeu',
     'SETTINGS_BANS_SUMMARY'                             => "Fail2Ban and abuseIPDB API settings",
 
-
-
+    /* setup */
+    'SETUP_TITLE'                                       => "Installation de Minitoring",
+    'SETUP_SELECT_LANG'                                 => "Sélectionnez votre langue :",
+    'SETUP_INTRO_1'                                     => "L'application n'est pas configurée. Ce programme permet de créer une base de données pour votre application.",
+    'SETUP_INTRO_2'                                     => "Appuyez sur 'Suivant' pour démarrer le programme d'installation.",
+    'SETUP_CHECK_TITLE'                                 => "Vérification des droits et des requirements",
+    'SETUP_DB_CONF_TITLE_1'                             => "Configurer la base de données (1/2)",
+    'SETUP_DB_CONF_TITLE_2'                             => "Configurer la base de données (2/2)",
+    'SETUP_DB_CONF_SELECT_TYPE'                         => "Choisissez le type de base de données :",
+    'SETUP_DB_CONF_SERVER_IDENT_TEXT'                   => "Veuillez renseigner vos identifiants serveur.",
+    'SETUP_DB_SET_NAME_NO_USER_TEXT'                    => "Choisissez un nom pour la base de données.",
+    'SETUP_DB_SET_NAME_WITH_SUSER_TEXT'                 => "Choisissez un nom d'utilisateur et un mot de passe pour la base de données.",
+    'SETUP_SET_ADMIN_ACCOUNT_TITLE'                     => "Ajouter un utilisateur admin",
+    'SETUP_SET_ADMIN_ACCOUNT_TEXT'                      => "Veuillez définir les identifiants de l'utilisateur admin de cette application.", 
+    'SETUP_WIZARD_BUTTON_CLOSE'                         => "Quitter",
+    'SETUP_WIZARD_BUTTON_INSTALL'                       => "Installer",
+    'SETUP_CHECK_SUCCESSFULL'                           => "Toutes les vérifications ont réussi.",
+    'SETUP_INSTALL_SUCCESSFULL'                         => "Félicitations ! <br>L'installation a réussi. Vous pouvez vous connecter dès maintenant.",
+    'SETUP_TERMINATE_TITLE'                             => "Terminer l'installation",
+    'SETUP_TERMINATE_MESSAGE'                           => "Appuyez sur 'Installer' pour démarrer l'installation.",
+    'SETUP_TERMINATE_WARNING'                           => "La configuration va prendre quelques instants. <br>Veillez à maintenir la connexion pendant l'installation.",
+    'SQL_HOST_FIELD'                                    => "Hôte de la base de données :",
+    'SQL_HOST_PLACEHOLDER'                              => "Hôte de la base de données (ex. localhost)",
+    'SQL_ADMIN_NAME_FIELD'                              => "Nom du super-utilisateur :",
+    'SQL_ADMIN_NAME_PLACEHOLDER'                        => "Nom du super-utilisateur (par ex. root)",
+    'SQL_ADMIN_PASSWORD_FIELD'                          => "Mot de passe super-utilisateur :",
+    'SQL_ADMIN_PASSWORD_PLACEHOLDER'                    => "Mot de passe super-utilisateur",
+    'DB_NAME_FIELD'                                     => "Nom de la base de données :",
+    'DB_NAME_PLACEHOLDER'                               => "Nom de la base de données",
+    'DB_USER_NAME_FIELD'                                => "Nom d'utilisateur :",
+    'DB_USER_NAME_PLACEHOLDER'                          => "Nom d'utilisateur",
+    'DB_USER_PASSWORD_FIELD'                            => "Mot de passe :",
+    'DB_USER_PASSWORD_PLACEHOLDER'                      => "Mot de passe",
+    'DB_ADMIN_NAME_FIELD'                               => "Nom d'utilisateur :",
+    'DB_ADMIN_NAME_PLACEHOLDER'                         => "Nom d'utilisateur",
+    'DB_ADMIN_PASSWORD_FIELD'                           => "Mot de passe :",
+    'DB_ADMIN_PASSWORD_PLACEHOLDER'                     => "Mot de passe",
+    'DB_ADMIN_EMAIL_FIELD'                              => "Adresse email :",
+    'DB_ADMIN_EMAIL_PLACEHOLDER'                        => "Adresse email",
+       
 );

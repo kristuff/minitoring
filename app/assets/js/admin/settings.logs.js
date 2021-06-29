@@ -9,12 +9,18 @@ Minitoring.Settings.Logs = {
 
     dialogCreateFormatChanged: function(){
         var selectElement = document.querySelector('select#log-create-format-name');
-        document.querySelector('input#log-create-format').value =selectElement.options[selectElement.selectedIndex].getAttribute('data-log-format');;            
+            logFormat     = selectElement.options[selectElement.selectedIndex].getAttribute('data-log-format');
+
+        document.querySelector('input#log-create-format').value = logFormat;
+        document.querySelector('input#log-create-format').setAttribute('readonly', logFormat != '' ? 'true' : 'false')            
         document.querySelector('input#log-create-type').value = selectElement.options[selectElement.selectedIndex].getAttribute('data-log-type');
     }, 
     dialogEditFormatChanged: function(){
-        var selectElement = document.querySelector('select#log-edit-format-name');
-        document.querySelector('input#log-edit-format').value = selectElement.options[selectElement.selectedIndex].getAttribute('data-log-format');            
+        var selectElement = document.querySelector('select#log-edit-format-name'),
+            logFormat     = selectElement.options[selectElement.selectedIndex].getAttribute('data-log-format');
+
+        document.querySelector('input#log-edit-format').setAttribute('readonly', logFormat != '' ? 'true' : 'false')            
+        document.querySelector('input#log-edit-format').value = logFormat;
         document.querySelector('input#log-edit-type').value = selectElement.options[selectElement.selectedIndex].getAttribute('data-log-type');
     }, 
 
@@ -39,7 +45,7 @@ Minitoring.Settings.Logs = {
     },
 
     setAutocomplete:function(type) {
-        
+
         for ( var i = 0; i < Minitoring.Settings.Logs.logFormats.length; i++) {
             if (Minitoring.Settings.Logs.logFormats[i].logType == type){
 

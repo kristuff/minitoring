@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.7
+ * @version    0.1.8
  * @copyright  2017-2021 Kristuff
  */
 
@@ -49,7 +49,7 @@ class ErrorController extends \Kristuff\Miniweb\Auth\Controller\BaseController
         $this->view->setData('APP_VERSION',     Application::config('APP_VERSION')); 
 
         // set default language 
-        $language = Application::config('APP_DEFAULT_LANGUAGE');
+        $language = Application::config('APP_LANGUAGE');
         if (!empty($language)){
             $this->application->locales()->setDefault($language);
         }

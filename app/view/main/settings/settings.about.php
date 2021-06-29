@@ -8,7 +8,7 @@
     </h5>
     <p class="">
         Version <span class="badge" data-badge="theme">v<?php echo $this->data('APP_VERSION') ;?></span>
-        <br>Copyright <i class="fa fa-copyright"></i> <?php echo ' 2017-'.date("Y").' '.$this->data('APP_COPYRIGHT');?>
+        <br>Copyright <i class="fa fa-copyright"></i> <?php echo $this->data('APP_COPYRIGHT');?>
         <br>Made with <i class="fa fa-heart color-theme"></i> and <i class="fa fa-coffee color-theme"></i> in France.
     </p>
     <br>

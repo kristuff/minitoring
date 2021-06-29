@@ -6,6 +6,8 @@ Minitoring.Setup = {
     // init
     start: function () {
 
+        document.querySelector('#db-select').addEventListener('change', Minitoring.Setup.checkserverIdentVisiblity, false);
+
         var wiz = new Minikit.Wizard(document.querySelector('.wizard'));
         wiz.onIndexChanged(function (e) {
 
@@ -13,7 +15,7 @@ Minitoring.Setup = {
             var current = ((e.detail.newIndex + 1) / e.detail.total) * 100;
             wiz.html.querySelector('.wizard-progress-inner').style.width = current + '%';
 
-            var nextbuttontext = 'Next';
+            var nextbuttontext = wiz.html.querySelector('.wizard-button-next').getAttribute('data-next-text');
 
             switch (e.detail.newIndex) {
                 case 0:
@@ -22,14 +24,14 @@ Minitoring.Setup = {
                     Minitoring.Setup.checkForInstall();
                     break;
                 case 2:
-                    Minitoring.Setup.checkInput();
+                    //Minitoring.Setup.checkInput();
+                    break;
+                case 5:
+                    nextbuttontext = wiz.html.querySelector('.wizard-button-next').getAttribute('data-install-text');
                     break;
                 case 6:
-                    nextbuttontext = 'install'
-                    break;
-                case 7:
                     wiz.html.querySelector('.wizard-button-prev').style.display = 'none';
-                    nextbuttontext = 'close'
+                    nextbuttontext = wiz.html.querySelector('.wizard-button-next').getAttribute('data-close-text');
                     Minitoring.Setup.install();
                     break;
             }
@@ -48,14 +50,25 @@ Minitoring.Setup = {
         document.querySelector('.wizard-overlay').classList.add('active');
 
     },
+
+    languageChanged: function() {
+        var selectedLang = document.querySelector('select#language-select').value,
+            currentLanguage = document.querySelector('body').getAttribute('data-language');
+        if (selectedLang && currentLanguage != selectedLang){
+            window.location.href =  window.location.origin + '/setup?language=' + selectedLang;
+        }
+    },
+
     checkForInstall: function () {
+        var selectedLang = document.querySelector('select#language-select').value,
+            args = '?requestDate=' + new Date().getTime() +
+                   '&language=' + selectedLang ;
+
         // clear message
         document.querySelector('#check-list').innerHTML = '';
         document.querySelector('#check-result').innerHTML = '';
-
-        // perform query
-        var args = '?requestDate=' + new Date().getTime();
-
+        
+                           
         Minikit.ajax({
             url: window.location.origin + '/setup/check' + args,
             method: 'GET',
@@ -82,19 +95,29 @@ Minitoring.Setup = {
             }
         });
     },
-    checkInput: function () {
-      //  var valueDbType = document.getElementById("db_type").value;
-
+ 
+    checkserverIdentVisiblity: function () {
+        var valueDbType = document.getElementById("db-select").value;
+        if (valueDbType == 'mysql' || valueDbType == 'pgsql' ){
+            document.querySelector('#server-idents').classList.add('active');
+            document.querySelector('#db-idents').classList.add('active');
+        } else {
+            document.querySelector('#server-idents').classList.remove('active');
+            document.querySelector('#db-idents').classList.remove('active');
+        }
     },
+
     install: function () {
-        var valueDbName = document.getElementById("db_name").value;
-        var valueAdminName = document.getElementById("admin_name").value;
-        var valueAdminMail = document.getElementById("admin_email").value;
-        var valueAdminPass = document.getElementById("admin_password").value;
-        var requestData = "admin_name=" + valueAdminName + 
+        var selectedLang = document.querySelector('select#language-select').value,
+            valueDbName     = document.getElementById("db_name").value,
+            valueAdminName  = document.getElementById("admin_name").value,
+            valueAdminMail  = document.getElementById("admin_email").value,
+            valueAdminPass  = document.getElementById("admin_password").value,
+            requestData     = "admin_name=" + valueAdminName + 
                           "&admin_email=" + valueAdminMail + 
                           "&admin_password=" + valueAdminPass +
-                          "&db_name=" + valueDbName;
+                          "&db_name=" + valueDbName +
+                          '&language=' + selectedLang ;
 
         Minikit.ajax({
             url: window.location.origin + '/setup/install',

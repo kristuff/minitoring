@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.7
+ * @version    0.1.8
  * @copyright  2017-2021 Kristuff
  */
 
@@ -45,6 +45,16 @@ return array(
     'COLOR_BLUE'                                        => 'Blue',
     'COLOR_MAGENTA'                                     => 'Magenta',
     'COLOR_ORANGE'                                      => 'Orange',
+
+    /* common */
+    'ACTION_DELETE'                                     => 'Delete',
+    'ACTION_EDIT'                                       => 'Edit',
+    'FREE'                                              => "Free",
+    'USED'                                              => "Used",
+    'PERCENT_USED'                                      => "% used",
+    'TOTAL'                                             => "Total",
+    'NEXT'                                              => "Next",
+    'PREV'                                              => "Back",
 
     /* user */
     'USER_NAME_FIELD'                                   => "Username:",
@@ -92,6 +102,12 @@ return array(
 
     /* Disks */
     'DISKS'                                             => 'Disks',
+    'INODES'                                            => "Inodes",
+    'DISK_SPACE'                                        => "Disk space",
+    'DISK_SHOWN_TMPFS'                                  => "Show tmpfs",
+    'DISK_FILESYSTEM'                                   => "File system",
+    'DISK_TYPE'                                         => "Type",
+    'DISK_MOUNT'                                        => "Mount",
 
     /* Packages */
     'PACKAGES'                                          => 'Packages',
@@ -246,5 +262,45 @@ return array(
     
     'SETTINGS_BANS'                                     => 'Parefeu',
     'SETTINGS_BANS_SUMMARY'                             => "Fail2Ban and abuseIPDB API settings",
+
+    /* setup */
+    'SETUP_TITLE'                                       => "Minitoring installer",
+    'SETUP_SELECT_LANG'                                 => "Select your language:",
+    'SETUP_INTRO_1'                                     => "Application is not configured. This program allows you to create a database for your application.",
+    'SETUP_INTRO_2'                                     => "Press 'Next' to start the installer.",
+    'SETUP_CHECK_TITLE'                                 => "Requirements and permissions check",
+    'SETUP_DB_CONF_TITLE_1'                             => "Configure database (1/2)",
+    'SETUP_DB_CONF_TITLE_2'                             => "Configure database (2/2)",
+    'SETUP_DB_CONF_SELECT_TYPE'                         => "Select database type:",
+    'SETUP_DB_CONF_SERVER_IDENT_TEXT'                   => "Please enter your server credentials.",
+    'SETUP_DB_SET_NAME_NO_USER_TEXT'                    => "Choose a name for the database.",
+    'SETUP_DB_SET_NAME_WITH_SUSER_TEXT'                 => "Choose a username and password for the database.",
+    'SETUP_SET_ADMIN_ACCOUNT_TITLE'                     => "Add admin account",
+    'SETUP_SET_ADMIN_ACCOUNT_TEXT'                      => "Please set admin user credentials.", 
+    'SETUP_WIZARD_BUTTON_CLOSE'                         => "Close",
+    'SETUP_WIZARD_BUTTON_INSTALL'                       => "Install",
+    'SETUP_CHECK_SUCCESSFULL'                           => "Fine, all checks passed.",
+    'SETUP_INSTALL_SUCCESSFULL'                         => "Congratulation! <br>Install was successful. You can now login.",
+    'SETUP_TERMINATE_TITLE'                             => "Complete install",
+    'SETUP_TERMINATE_MESSAGE'                           => "Press 'Install' to start the installation.",
+    'SETUP_TERMINATE_WARNING'                           => "The setup will take a few moments. <br> Make sure to maintain the connection during installation. ",
+    'SQL_HOST_FIELD'                                    => "Database host:",
+    'SQL_HOST_PLACEHOLDER'                              => "Database host (ex. localhost)",
+    'SQL_ADMIN_NAME_FIELD'                              => "Admin name:",
+    'SQL_ADMIN_NAME_PLACEHOLDER'                        => "Admin name (ex. root)",
+    'SQL_ADMIN_PASSWORD_FIELD'                          => "Admin password:",
+    'SQL_ADMIN_PASSWORD_PLACEHOLDER'                    => "Admin password",
+    'DB_NAME_FIELD'                                     => "Database name:",
+    'DB_NAME_PLACEHOLDER'                               => "Database name",
+    'DB_USER_NAME_FIELD'                                => "Database user name:",
+    'DB_USER_NAME_PLACEHOLDER'                          => "Database user name",
+    'DB_USER_PASSWORD_FIELD'                            => "Database password:",
+    'DB_USER_PASSWORD_PLACEHOLDER'                      => "Database password:",
+    'DB_ADMIN_NAME_FIELD'                               => "Admin name:",
+    'DB_ADMIN_NAME_PLACEHOLDER'                         => "Admin name",
+    'DB_ADMIN_PASSWORD_FIELD'                           => "Admin password:",
+    'DB_ADMIN_PASSWORD_PLACEHOLDER'                     => "Admin password",
+    'DB_ADMIN_EMAIL_FIELD'                              => "Admin email address:",
+    'DB_ADMIN_EMAIL_PLACEHOLDER'                        => "Admin email address",
 
 );

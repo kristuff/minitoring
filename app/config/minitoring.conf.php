@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.7
+ * @version    0.1.8
  * @copyright  2017-2021 Kristuff
  */
 
@@ -65,9 +65,9 @@ return array(
      * *********************************
      */
     'APP_NAME'                  =>  'Minitoring',
-    'APP_COPYRIGHT'             =>  'Kristuff',
-    'APP_VERSION'               =>  '0.1.7',
-    'APP_DEFAULT_LANGUAGE'      =>  'en-US',
+    'APP_COPYRIGHT'             =>  '2017-' .date("Y") . ' Kristuff',
+    'APP_VERSION'               =>  '0.1.8',
+    'APP_LANGUAGE'              =>  'en-US',
  
     'DATA_PATH'                 => __DIR__ . '/../data/',
     'DATA_CONFIG_PATH'          => __DIR__ . '/../data/config/',
@@ -83,21 +83,13 @@ return array(
      * Configuration for: miniweb auth / login / password recovery
      * ***********************************************************
      */
-    'AUTH_LOGIN_COOKIE_ENABLED'                  => false,
-    'AUTH_PASSWORD_RESET_ENABLED'                => false,
-    'AUTH_INVITATION_ENABLED'                    => true,
-    'AUTH_SIGNUP_ENABLED'                        => false, // not implemented
-    'AUTH_EMAIL_HTML'                            => true, // experimental..
-
-    'AUTH_EMAIL_FROM_EMAIL'                      => 'no-reply@minitoring.kristuff.fr',
+    'AUTH_LOGIN_COOKIE_ENABLED'                  => false,  // experimental, support only one device 
+    'AUTH_PASSWORD_RESET_ENABLED'                => false,  
+    'AUTH_INVITATION_ENABLED'                    => true,   // 
+    'AUTH_SIGNUP_ENABLED'                        => false,  // not implemented, you don't want anybody to register..
+    'AUTH_EMAIL_HTML'                            => true,   // experimental..
+    'AUTH_EMAIL_FROM_EMAIL'                      => 'no-reply@minitoring.EXAMPLE.COM',
     'AUTH_EMAIL_FROM_NAME'                       => 'The Minitoring team',
-
-    // TODO remove
-    'AUTH_PASSWORD_RESET_MAIL_FROM_EMAIL'        => 'no-reply@minitoring.kristuff.fr',
-    'AUTH_PASSWORD_RESET_MAIL_FROM_NAME'         => 'The Minitoring team',
-    'AUTH_PASSWORD_RESET_MAIL_SUBJECT'           => 'Password reset for Minitoring application',
-    'AUTH_PASSWORD_RESET_MAIL_CONTENT'           => 'Please click on this link to reset and set a new password: ',
-
 
     /** 
      * *******************************************

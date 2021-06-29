@@ -15,9 +15,12 @@
                     
                 <label><?php $this->echo('USER_PASSWORD_FIELD');?></label>
                 <input type="password" id="user-create-password" name="user-create-password" pattern=".{8,}" placeholder="<?php $this->echo('USER_PASSWORD_CREATE_PLACEHOLDER');?>" required autocomplete="off" />
+                <i class="fa toggle-password"></i>
 
                 <label><?php $this->echo('USER_PASSWORD_REPEAT_FIELD');?></label>
                 <input type="password" id="user-create-password-repeat" name="user-create-password-repeat" pattern=".{8,}" placeholder="<?php $this->echo('USER_PASSWORD_REPEAT_PLACEHOLDER');?>" required autocomplete="off" />
+                <i class="fa toggle-password"></i>
+
             </form>
         </section>
 

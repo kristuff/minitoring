@@ -88,7 +88,7 @@
         <!-- Uptime -->
         <div class="block col mob-whole tab-4 desk-3 desk-large-2 ">
             <div class="header">
-                <span class="title"><i class="fa fa-calendar-o icon-left"></i>Uptime</span>
+                <span class="title">Uptime</span>
             </div>
             <div class="content align-center">
                 <br>
@@ -104,10 +104,10 @@
         </div>
 
 
-      <!-- Packages -->
-       <div class="block col mob-whole tab-4 desk-3 desk-large-2  ">
+        <!-- Packages -->
+        <div class="block col mob-whole tab-4 desk-3 desk-large-2 ">
             <div class="header">
-                <span class="title"><i class="fa fa-shopping-bag icon-left"></i>Packages</span>
+                <span class="title"><?php $this->echo('PACKAGES'); ?></span>
             </div>
             <div class="content align-left">
                 <br>
@@ -139,7 +139,7 @@
         <!-- Load average -->
         <div class="block col mob-whole tab-8 desk-6  desk-large-4 ">
             <div class="header">
-                <span class="title"><i class="fa fa-line-chart icon-left"></i>Load average</span>
+                <span class="title">Load average</span>
                 <ul class="action-bar">
                     <li>
                         <a class="action-link" href="#" data-bind="Minitoring.LoadAverage.get" title="Refresh">
@@ -164,7 +164,7 @@
         <!-- Memory -->
         <div class="block col mob-whole tab-4 desk-3  desk-large-2 ">
             <div class="header">
-                <span class="title"><i class="fa fa-server icon-left"></i>Memory</span>
+                <span class="title">Memory</span>
                 <ul class="action-bar">
                     <li>
                         <a class="action-link" href="#" data-bind="Minitoring.Memory.get" title="Refresh">
@@ -183,7 +183,7 @@
         <!-- Swap -->
         <div class="block col mob-whole tab-4 desk-3  desk-large-2 ">
             <div class="header">
-                <span class="title"><i class="fa fa-server icon-left"></i>Swap</span>
+                <span class="title">Swap</span>
                 <ul class="action-bar">
                     <li>
                         <a class="action-link" href="#" data-bind="Minitoring.Swap.get" title="Refresh">
@@ -203,7 +203,7 @@
         <!-- Disks -->
         <div class="block col mob-whole tab-4 desk-3 desk-large-2 ">
             <div class="header">
-                <span class="title"><i class="fa fa-pie-chart icon-left"></i>Disks</span>
+                <span class="title">Disks</span>
                 <ul class="action-bar">
                     <li>
                         <a class="action-link" href="#" data-bind="Minitoring.Disks.getDisksUsage" title="Refresh">
@@ -226,7 +226,7 @@
          <!-- Inodes -->
          <div class="block col mob-whole tab-4 desk-3 desk-large-2 ">
             <div class="header">
-                <span class="title"><i class="fa fa-pie-chart icon-left"></i>Inodes</span>
+                <span class="title">Inodes</span>
                 <ul class="action-bar">
                     <li>
                         <a class="action-link" href="#" data-bind="Minitoring.Disks.getInodesUsage" title="Refresh">
@@ -252,7 +252,7 @@
         <!-- Network -->
         <div class="block col mob-whole tab-8 desk-6 desk-large-4 ">
             <div class="header">
-                <span class="title"><i class="fa fa-signal icon-left"></i>Network</span>
+                <span class="title">Network</span>
                 <ul class="action-bar">
                     <li>
                         <a class="action-link" href="#" data-bind="Minitoring.Network.get">
@@ -281,7 +281,7 @@
         <!-- System users -->
          <div class="block col mob-whole tab-4 desk-3 desk-large-2 ">
             <div class="header">
-                <span class="title"><i class="fa fa-users icon-left"></i>Users</span>
+                <span class="title">Users</span>
                 <ul class="action-bar">
                     <li>
                         <a class="action-link" href="#" data-bind="Minitoring.SystemUsers.getNumberActive" title="Refresh">
@@ -304,7 +304,7 @@
          <!-- Process -->
          <div class="block col mob-whole tab-4 desk-3 desk-large-2 ">
             <div class="header">
-                <span class="title"><i class="fa fa-cogs icon-left"></i>Process</span>
+                <span class="title">Process</span>
                 <ul class="action-bar">
                     <li>
                         <a class="action-link" href="#" data-bind="Minitoring.Process.get" title="Refresh">
@@ -333,7 +333,7 @@
         <!-- Services -->
         <div class="block col mob-whole tab-8 desk-6  desk-large-4 ">
             <div class="header">
-                <span class="title"><i class="fa fa-cogs icon-left"></i>Services</span>
+                <span class="title">Services</span>
                 <ul class="action-bar">
                     <li>
                         <a class="action-link" href="#" data-bind="Minitoring.Services.refresh" title="Refresh">

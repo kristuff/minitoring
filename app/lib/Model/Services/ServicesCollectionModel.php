@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.7
+ * @version    0.1.8
  * @copyright  2017-2021 Kristuff
  */
 
@@ -301,7 +301,7 @@ class ServicesCollectionModel extends SystemBaseModel
                                  ->from('system_service')
                                  ->whereEqual('service_name', $name);
 
-        if (isset($logId)){
+        if (isset($id)){
             $query->where()->notEqual('service_id', $id);
         }                                 
                                

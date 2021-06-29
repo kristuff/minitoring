@@ -6,7 +6,7 @@
             <p><?php $this->echo('SETTINGS_TOKEN_TEXT');?></p>
             <br>
             <label><?php $this->echo('SETTINGS_TOKEN_FIELD');?></label>
-            <input id="" type='text' name='' value="<?php echo $this->data('websocketToken'); ?>" readonly />
+            <input class="block" id="" type='text' name='' value="<?php echo $this->data('websocketToken'); ?>" readonly />
             <br>
             <button class="button" data-color="theme" data-style="flat" data-bind="Minitoring.Admin.resetApiKey">
                 <i class="fa fa-refresh icon-left color-theme"></i><?php $this->echo('SETTINGS_TOKEN_RESET_BUTTON');?>

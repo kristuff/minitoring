@@ -8,7 +8,8 @@
         
         <label><?php $this->echo('USER_PASSWORD_FIELD');?></label>
         <input type="password"  id="user_password"      name="user_password" class="password" placeholder="<?php $this->echo('USER_PASSWORD_PLACEHOLDER');?>" required />
-
+        <i class="fa toggle-password"></i>
+     
 <?php if (!empty($this->data('redirect'))) { ?>
         <input type="hidden" name="redirect" value="<?php echo $this->noHTML($this->data('redirect')); ?>" />
 <?php } ?>

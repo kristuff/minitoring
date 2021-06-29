@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "815615a5dc0026828a60e2140c25ec41",
+    "content-hash": "b62d84f8e10de2c1e042f87775914eef",
     "packages": [
         {
             "name": "cboden/ratchet",
@@ -310,25 +310,25 @@
         },
         {
             "name": "kristuff/miniweb",
-            "version": "v0.9.7",
+            "version": "v0.9.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kristuff/miniweb.git",
-                "reference": "79916ec105207e6662c47543b79b71eecd9afb84"
+                "reference": "fe665a8e0ceea7981e3f6b357fa3a6429dc95aa5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kristuff/miniweb/zipball/79916ec105207e6662c47543b79b71eecd9afb84",
-                "reference": "79916ec105207e6662c47543b79b71eecd9afb84",
+                "url": "https://api.github.com/repos/kristuff/miniweb/zipball/fe665a8e0ceea7981e3f6b357fa3a6429dc95aa5",
+                "reference": "fe665a8e0ceea7981e3f6b357fa3a6429dc95aa5",
                 "shasum": ""
             },
             "require": {
-                "gregwar/captcha": ">=1.1-stable",
-                "kristuff/mishell": ">=1.5-stable",
-                "kristuff/patabase": ">=0.3-stable",
-                "kristuff/phtemail": ">=0.2-stable",
+                "gregwar/captcha": "^1.1-stable",
+                "kristuff/mishell": "^1.5-stable",
+                "kristuff/patabase": "^1.0-stable",
+                "kristuff/phtemail": "^0.2-stable",
                 "php": ">=7.3",
-                "phpmailer/phpmailer": ">=6.1-stable"
+                "phpmailer/phpmailer": "^6.1-stable"
             },
             "require-dev": {
                 "phpunit/phpunit": "^6.5 || ^8"
@@ -352,9 +352,9 @@
             "description": "Mini php web framework",
             "support": {
                 "issues": "https://github.com/kristuff/miniweb/issues",
-                "source": "https://github.com/kristuff/miniweb/tree/v0.9.7"
+                "source": "https://github.com/kristuff/miniweb/tree/v0.9.8"
             },
-            "time": "2021-06-11T20:41:28+00:00"
+            "time": "2021-06-26T21:40:36+00:00"
         },
         {
             "name": "kristuff/mishell",
@@ -837,16 +837,16 @@
         },
         {
             "name": "react/dns",
-            "version": "v1.6.0",
+            "version": "v1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp/dns.git",
-                "reference": "bf76d1c312c0c280c4ce53119cd7d08db23ffb4c"
+                "reference": "a45784faebf8fbd59058fad2d8497f71a787d20c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp/dns/zipball/bf76d1c312c0c280c4ce53119cd7d08db23ffb4c",
-                "reference": "bf76d1c312c0c280c4ce53119cd7d08db23ffb4c",
+                "url": "https://api.github.com/repos/reactphp/dns/zipball/a45784faebf8fbd59058fad2d8497f71a787d20c",
+                "reference": "a45784faebf8fbd59058fad2d8497f71a787d20c",
                 "shasum": ""
             },
             "require": {
@@ -901,7 +901,7 @@
             ],
             "support": {
                 "issues": "https://github.com/reactphp/dns/issues",
-                "source": "https://github.com/reactphp/dns/tree/v1.6.0"
+                "source": "https://github.com/reactphp/dns/tree/v1.7.0"
             },
             "funding": [
                 {
@@ -913,7 +913,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2021-06-21T11:56:09+00:00"
+            "time": "2021-06-25T10:54:13+00:00"
         },
         {
             "name": "react/event-loop",
@@ -1070,22 +1070,22 @@
         },
         {
             "name": "react/socket",
-            "version": "v1.6.0",
+            "version": "v1.7.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/reactphp/socket.git",
-                "reference": "e2b96b23a13ca9b41ab343268dbce3f8ef4d524a"
+                "reference": "5d39e3fa56ea7cc443c86f2788a40867cdba1659"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/reactphp/socket/zipball/e2b96b23a13ca9b41ab343268dbce3f8ef4d524a",
-                "reference": "e2b96b23a13ca9b41ab343268dbce3f8ef4d524a",
+                "url": "https://api.github.com/repos/reactphp/socket/zipball/5d39e3fa56ea7cc443c86f2788a40867cdba1659",
+                "reference": "5d39e3fa56ea7cc443c86f2788a40867cdba1659",
                 "shasum": ""
             },
             "require": {
                 "evenement/evenement": "^3.0 || ^2.0 || ^1.0",
                 "php": ">=5.3.0",
-                "react/dns": "^1.1",
+                "react/dns": "^1.7",
                 "react/event-loop": "^1.0 || ^0.5",
                 "react/promise": "^2.6.0 || ^1.2.1",
                 "react/promise-timer": "^1.4.0",
@@ -1138,7 +1138,7 @@
             ],
             "support": {
                 "issues": "https://github.com/reactphp/socket/issues",
-                "source": "https://github.com/reactphp/socket/tree/v1.6.0"
+                "source": "https://github.com/reactphp/socket/tree/v1.7.0"
             },
             "funding": [
                 {
@@ -1150,7 +1150,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2020-08-28T12:49:05+00:00"
+            "time": "2021-06-25T11:05:10+00:00"
         },
         {
             "name": "react/stream",

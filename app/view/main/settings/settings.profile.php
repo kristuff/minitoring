@@ -34,12 +34,19 @@
         <form id="frm-user-password" class="small">
             <h6 class="title light"><?php $this->echo('SETTINGS_PROFILE_EDIT_PASS_TITLE');?></h6>
             <input type="hidden" name="token" value="<?php echo $this->data('token'); ?>"/>
+            
             <label class="" for="input_change_password_current"><?php $this->echo('SETTINGS_PROFILE_EDIT_PASS_CURRENT');?></label>
-            <input id="input_change_password_current" class="reset_input" type='password' name='user_password_current' pattern=".{8,}" autocomplete="off" />
+            <input id="input_change_password_current" class="reset_input" type="password" name='user_password_current' pattern=".{8,}" autocomplete="off" />
+            <i class="fa toggle-password"></i>
+
             <label class="" for="input_change_password_new"><?php $this->echo('SETTINGS_PROFILE_EDIT_PASS_NEW');?></label>
             <input id="input_change_password_new" class="reset_input" type="password" name="user_password_new" pattern=".{8,}" autocomplete="off" />
+            <i class="fa toggle-password"></i>
+
             <label class="" for="input_change_password_repeat"><?php $this->echo('SETTINGS_PROFILE_EDIT_PASS_NEW_REPEAT');?></label>
             <input id="input_change_password_repeat" class="reset_input" type="password" name="user_password_repeat" pattern=".{8,}" autocomplete="off" />
+            <i class="fa toggle-password"></i>
+
             <br>
             <button class="button Xuppercase" data-color="theme" data-style="flat" data-bind="Minitoring.Profile.editPassword">
                 <i class="fa fa-save icon-left color-theme"></i><?php $this->echo('SETTINGS_PROFILE_EDIT_PASS_BUTTON');?>

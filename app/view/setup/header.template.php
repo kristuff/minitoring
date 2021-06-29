@@ -28,4 +28,4 @@
     <script type="application/javascript" src="<?php echo $this->baseUrl; ?>assets/js/kristuff.minikit.min.js"></script>
     <script type="application/javascript" src="<?php echo $this->baseUrl; ?>assets/js/minitoring.setup.min.js"></script>
 </head>   
-<body data-theme="dark" data-color="orange" data-style="flat" class="bg-tech-bw" data-font="">
+<body data-theme="dark" data-color="orange" data-style="flat" class="bg-tech-bw" data-font="" data-language="<?php echo $this->data("CURRENT_LANGUAGE"); ?>">

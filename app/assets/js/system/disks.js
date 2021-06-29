@@ -41,9 +41,11 @@ Minitoring.Disks = {
                     case 'disks':
 
                         var html = '';
+                            //txtTotal = document.querySelector('#')
                         for (var i = 0; i < result.data.disks.length; i++) {
                             html += Minitoring.Disks.getHtml(result.data.disks[i]);
                         }
+
 
                         // total row
                         html += '<tr class="row-total" data-alert-code="' + result.data.alertCode + '">';

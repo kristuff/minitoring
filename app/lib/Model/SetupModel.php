@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.7
+ * @version    0.1.8
  * @copyright  2017-2021 Kristuff
  */
 
@@ -44,7 +44,7 @@ class SetupModel extends \Kristuff\Miniweb\Data\Model\SetupModel
        }
        
        if ( $response->success() ){
-           $response->setMessage('All checks was successful');        
+           $response->setMessage(self::text('SETUP_CHECK_SUCCESSFULL'));        
        }
        return $response;
     } 
@@ -76,7 +76,7 @@ class SetupModel extends \Kristuff\Miniweb\Data\Model\SetupModel
     public static function testConnexion(string $databaseName, string $databaseHost, string $adminName, string $adminPassword)
     {
 
-
+        //todo
     }
 
 
@@ -97,7 +97,6 @@ class SetupModel extends \Kristuff\Miniweb\Data\Model\SetupModel
         if (Auth\Model\UserModel::validateUserNamePattern($response, $adminName) && 
             Auth\Model\UserModel::validateUserEmailPattern($response, $adminEmail, $adminEmail) &&
             Auth\Model\UserModel::validateUserPassword($response, $adminPassword, $adminPassword)){
-                   
             
             // create datatabase, 
             // create tables
@@ -107,28 +106,15 @@ class SetupModel extends \Kristuff\Miniweb\Data\Model\SetupModel
 
                 // insert admin user
                 $adminId = Auth\Model\UserAdminModel::insertAdminUser($adminEmail, $adminName, $adminPassword, $database);
-            
-                if (self::isCommandLineInterface()){
-                    Console::log();
-                    Console::log('  '.Console::text('[✓] ', 'green') . Console::text('Database successfully created.', 'white'));
-                }
-                
                 if ($response->assertFalse($adminId === false, 500, 'Internal error : unable to insert admin user')) {
 
-                    if (self::isCommandLineInterface()){
-                        Console::log('  '.Console::text('[✓] ', 'green') . Console::text('Admin user successfully created.', 'white'));
-                    }
-    
-                    // load default settings
+                    // load default settings app/user
                     // save config file
-                    if ($response->assertTrue(Auth\Model\UserSettingsModel::loadDefaultSettings($database, (int) $adminId), 500, 'Internal error : unable to insert settings data') &&
-                        $response->assertTrue(self::createDatabaseConfigFile('sqlite', 'localhost', $databaseFilePath, '', ''), 500, 'Internal error : unable to create config file')) {
-                        
-                        if (self::isCommandLineInterface()){
-                            Console::log('  '.Console::text('[✓] ', 'green') . Console::text('Defaults settings successfully initialized.', 'white'));
-                        }
-
-                        $response->setMessage('Congratulation! <br>Install was successful. You can now login.');
+                    if (    $response->assertTrue(Auth\Model\AppSettingsModel::loadDefaultAppSettings($database), 500, 'Internal error : unable to insert app settings data') 
+                        &&  $response->assertTrue(Auth\Model\UserSettingsModel::loadDefaultSettings($database, (int) $adminId), 500, 'Internal error : unable to insert user settings data') 
+                        &&  $response->assertTrue(self::createDatabaseConfigFile('sqlite', 'localhost', $databaseFilePath, '', ''), 500, 'Internal error : unable to create config file')
+                    ) {
+                        $response->setMessage(self::text('SETUP_INSTALL_SUCCESSFULL'));
                     }
                 }
             }
