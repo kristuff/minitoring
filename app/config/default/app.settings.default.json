@@ -1,6 +1,6 @@
 [
     {"name": "UI_THEME", "value": "dark"},
-    {"name": "UI_THEME_COLOR", "value": "yellow"},
+    {"name": "UI_THEME_COLOR", "value": "orange"},
     {"name": "UI_LANG", "value": "en-US"},
     {"name": "UI_SIDEBAR_STATE", "value": "expanded"},
     {"name": "IP_ACTION", "value":"abuseipdb"}

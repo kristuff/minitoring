@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.8
+ * @version    0.1.10
  * @copyright  2017-2021 Kristuff
  */
 
@@ -265,6 +265,16 @@ return array(
     'SETUP_INTRO_1'                                     => "L'application n'est pas configurée. Ce programme permet de créer une base de données pour votre application.",
     'SETUP_INTRO_2'                                     => "Appuyez sur 'Suivant' pour démarrer le programme d'installation.",
     'SETUP_CHECK_TITLE'                                 => "Vérification des droits et des requirements",
+    'SETUP_CHECK_SUCCESSFULL'                           => "Toutes les vérifications ont réussi.",
+    'SETUP_CHECK_HAS_ERROR'                             => "Veuillez corriger les erreurs suivantes avant de continuer :",
+    'SETUP_ERROR_DATABASE_EXISTS'                       => "Une base de données avec le même nom existe déjà à cet emplacament. Veuillez choisir un autre nom.",
+    'SETUP_ERROR_CREATE_DATABASE'                       => "Erreur interne : impossible de créer la base de données.",
+    'SETUP_ERROR_CREATE_TABLES'                         => "Erreur interne : impossible de créer les tables.",
+    'SETUP_ERROR_CREATE_ADMIN_USER'                     => "Erreur interne : impossible d'ajouter l'utilisateur admin.",
+    'SETUP_ERROR_CREATE_LOAD_APP_SETTINGS'              => "Erreur interne : impossible d'ajouter les paramètres de l'application dans la base de données.",
+    'SETUP_ERROR_CREATE_LOAD_USER_SETTINGS'             => "Erreur interne : impossible d'ajouter les paramètres utilisateurs dans la base de données.",
+    'SETUP_ERROR_CREATE_CONF_FILE'                      => "Erreur interne : impossible de créer le fichier de configuration.",
+
     'SETUP_DB_CONF_TITLE_1'                             => "Configurer la base de données (1/2)",
     'SETUP_DB_CONF_TITLE_2'                             => "Configurer la base de données (2/2)",
     'SETUP_DB_CONF_SELECT_TYPE'                         => "Choisissez le type de base de données :",
@@ -275,7 +285,6 @@ return array(
     'SETUP_SET_ADMIN_ACCOUNT_TEXT'                      => "Veuillez définir les identifiants de l'utilisateur admin de cette application.", 
     'SETUP_WIZARD_BUTTON_CLOSE'                         => "Quitter",
     'SETUP_WIZARD_BUTTON_INSTALL'                       => "Installer",
-    'SETUP_CHECK_SUCCESSFULL'                           => "Toutes les vérifications ont réussi.",
     'SETUP_INSTALL_SUCCESSFULL'                         => "Félicitations ! <br>L'installation a réussi. Vous pouvez vous connecter dès maintenant.",
     'SETUP_TERMINATE_TITLE'                             => "Terminer l'installation",
     'SETUP_TERMINATE_MESSAGE'                           => "Appuyez sur 'Installer' pour démarrer l'installation.",

@@ -13,6 +13,13 @@
         .wizard-bottom {
             padding-right: 0;
         }
+
+
+        .wizard-button-prev,
+        .wizard-button-next {
+            min-width: 115px;
+        }
+
     }
 }
 

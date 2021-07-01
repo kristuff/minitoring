@@ -37,4 +37,5 @@
     data-style="flat" 
     data-theme="<?php echo htmlentities($this->data('UI_THEME')); ?>" 
     data-color="<?php echo htmlentities($this->data('UI_THEME_COLOR')); ?>" 
+    data-language="<?php echo $this->data("UI_LANG"); ?>" 
     data-api-token="<?php echo $this->data('apiToken'); ?>">

@@ -1,7 +1,6 @@
 /* --- Settings --- */
 Minitoring.Settings = {
 
-    // Load user settings
     loadUserSettings: function () {
         Minitoring.Api.get('api/users/self/settings' , null, function (apiResponse) {
             Minitoring.Settings.setTheme(apiResponse.data.UI_THEME ? apiResponse.data.UI_THEME : 'dark');
@@ -9,17 +8,14 @@ Minitoring.Settings = {
         });
     },
 
-    // set theme
     setTheme:function(theme){
         document.body.setAttribute("data-theme", theme)
     },
     
-    // set theme color
     setThemeColor:function(color){
         document.body.setAttribute("data-color", color)
     },
 
-    // theme changed
     themeChanged: function () {
         var newtheme = document.getElementById('select-theme').value;
         Minitoring.Settings.updateSettingValue('UI_THEME', newtheme, function() {
@@ -28,13 +24,16 @@ Minitoring.Settings = {
     },
 
     languageChanged: function () {
-        var newValue = document.getElementById('select-language').value;
-        Minitoring.Settings.updateSettingValue('UI_LANG', newValue, function() {
-            // Minitoring.Settings.setThemeColor(newcolor);
-        });
+        var newValue = document.getElementById('select-language').value,
+            currentValue = document.querySelector('body').getAttribute('data-language');
+
+            if (newValue && newValue != currentValue){
+                Minitoring.Settings.updateSettingValue('UI_LANG', newValue, function() {
+                    window.location.reload();
+                });
+            }
     },
 
-    // theme color changed
     themeColorChanged: function () {
         var newcolor = document.getElementById('select-theme-color').value;
         Minitoring.Settings.updateSettingValue('UI_THEME_COLOR', newcolor, function() {
@@ -42,10 +41,9 @@ Minitoring.Settings = {
         });
     },
 
-    // udate a setting value 
     updateSettingValue: function (paramName, value, onSuccess) {
          Minitoring.Api.put('api/users/self/settings', 'parameter=' + paramName + '&value=' + value, onSuccess);
-     },
+    },
 
     // reset current user settings  
     resetCurrent: function () {

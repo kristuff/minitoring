@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.8
+ * @version    0.1.10
  * @copyright  2017-2021 Kristuff
  */
 
@@ -92,9 +92,16 @@ class SetupController extends \Kristuff\Miniweb\Auth\Controller\BaseController
         $adminPassword = $this->request()->post('admin_password') ? $this->request()->post('admin_password')    : ''; 
         $adminEmail =    $this->request()->post('admin_email')    ? $this->request()->post('admin_email', true) : ''; 
         $databaseName =  $this->request()->post('db_name')        ? $this->request()->post('db_name', true)     : '';        
+        $language =      $this->request()->post('language')       ? $this->request()->post('language', true)    : '';        
         //TODO $databaseName =  $this->request()->post('db_name')        ? $this->request()->post('db_name', true)     : '';        
 
-        $response = Model\SetupModel::install($adminName, $adminPassword, $adminEmail, $databaseName);
+        $response = Model\SetupModel::install(
+            $databaseName,
+            $adminName, 
+            $adminPassword, 
+            $adminEmail,
+            $language 
+        );
         $this->view->renderJson($response->toArray(), $response->code());
     }
 }

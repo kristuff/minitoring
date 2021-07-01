@@ -27,7 +27,7 @@
                     <label><?php $this->echo("SETUP_SELECT_LANG"); ?></label>
                     <div class="custom-select block">
                         <select id="language-select" data-bind="Minitoring.Setup.languageChanged">
-                            <option value="en-EN" <?php echo $this->data("CURRENT_LANGUAGE") === 'en-EN' ? 'selected' : ''; ?> >English</option>
+                            <option value="en-US" <?php echo $this->data("CURRENT_LANGUAGE") === 'en-US' ? 'selected' : ''; ?> >English</option>
                             <option value="fr-FR" <?php echo $this->data("CURRENT_LANGUAGE") === 'fr-FR' ? 'selected' : ''; ?> >Français</option>
                         </select>
                     </div>
@@ -55,8 +55,8 @@
                     <div class="custom-select">
                         <select name="Provider" id="db-select">
                             <option value="sqlite" selected>Sqlite</option>
-                            <option value="mysql">Mysql</option>
-                            <option value="pgsql">Postgres</option>
+                            <option value="mysql" disabled >Mysql</option>
+                            <option value="pgsql" disabled >Postgres</option>
                         </select>
                     </div>
 
@@ -121,6 +121,7 @@
 
         <div class="wizard-panel anim-from-left" data-wizard-index="6">
             <div class="h5 wizard-panel-title margin-bottom-24"><?php $this->echo("SETUP_TITLE"); ?></div>
+            <div id="install-loader" class="padding-v-24 align-center need-active"><i class="fa fa-2x fa-circle-o-notch fa-spin fa-fw color-theme"></i></div>
             <div id="install-message"></div>
             <div id="install-result"></div>
         </div>

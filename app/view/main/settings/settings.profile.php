@@ -22,10 +22,11 @@
             <label class=""><?php $this->echo('SETTINGS_PROFILE_EMAIL_FIELD');?></label>
             <input type="text" id="profile_user_email" name="user_email" placeholder="<?php $this->echo('SETTINGS_PROFILE_EMAIL_PLACEHOLDER');?>" 
                 required value="<?php echo $this->data('userEmail'); ?>" />
-            <br>
-            <button class="button Xuppercase" data-color="theme" data-style="flat" data-bind="Minitoring.Profile.editUserNameOrEmail">
-                <i class="fa fa-save icon-left color-theme"></i><?php $this->echo('SETTINGS_PROFILE_EDIT_NAME_OR_EMAIL_BUTTON');?>
-            </button>
+            <div class="padding-top-24">
+                <button class="button Xuppercase" data-color="theme" data-style="flat" data-bind="Minitoring.Profile.editUserNameOrEmail">
+                    <i class="fa fa-save icon-left color-theme"></i><?php $this->echo('SETTINGS_PROFILE_EDIT_NAME_OR_EMAIL_BUTTON');?>
+                </button>
+            </div>       
         </form>
     </section>       
     <br>
@@ -47,10 +48,11 @@
             <input id="input_change_password_repeat" class="reset_input" type="password" name="user_password_repeat" pattern=".{8,}" autocomplete="off" />
             <i class="fa toggle-password"></i>
 
-            <br>
-            <button class="button Xuppercase" data-color="theme" data-style="flat" data-bind="Minitoring.Profile.editPassword">
-                <i class="fa fa-save icon-left color-theme"></i><?php $this->echo('SETTINGS_PROFILE_EDIT_PASS_BUTTON');?>
-            </button>
+            <div class="padding-top-24">
+                <button class="button Xuppercase" data-color="theme" data-style="flat" data-bind="Minitoring.Profile.editPassword">
+                    <i class="fa fa-save icon-left color-theme"></i><?php $this->echo('SETTINGS_PROFILE_EDIT_PASS_BUTTON');?>
+                </button>
+            </div>       
         </form>
     </section>       
     <br>

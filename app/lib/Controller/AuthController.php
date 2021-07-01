@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.8
+ * @version    0.1.10
  * @copyright  2017-2021 Kristuff
  */
 
@@ -21,7 +21,9 @@ namespace Kristuff\Minitoring\Controller;
 
 use Kristuff\Minitoring\Application;
 use Kristuff\Minitoring\Model\AppModel;
+use Kristuff\Minitoring\Model\SetupModel;
 use Kristuff\Minitoring\View;
+use Kristuff\Miniweb\Auth\Model\AppSettingsModel;
 
 /**
  * Class AuthController
@@ -38,6 +40,20 @@ class AuthController extends \Kristuff\Miniweb\Auth\Controller\AuthController
      */
     public function __construct(Application $application)
     {
+        /** 
+         * --------------------------------------
+         * Do NOT init parent NOW
+         * we need do check for redirect to setup before parent construct to avoid 
+         * infinite redirect to login
+         */ 
+         //   parent::__construct(); /
+
+        // check for redirect to setup
+        if (!SetupModel::isInstalled() && $this->request()->controllerName() != 'setup'){
+            \Kristuff\Miniweb\Http\Redirect::url(Application::getUrl() . 'setup', false, true);
+        }
+
+        // no redirect, so init parent
         parent::__construct($application);
 
         // use a derived version of view
@@ -48,8 +64,12 @@ class AuthController extends \Kristuff\Miniweb\Auth\Controller\AuthController
         $this->view->setData('APP_COPYRIGHT',   Application::config('APP_COPYRIGHT')); 
         $this->view->setData('APP_VERSION',     Application::config('APP_VERSION')); 
   
+
+        $appSettings = AppSettingsModel::getAppSettings();
+        $language = $appSettings['UI_LANG'];
+
         // set default language 
-        $language = Application::config('APP_LANGUAGE');
+        $language = isset($language) && in_array($language, ['fr-FR','en-US']) ? $language : Application::config('APP_LANGUAGE');
         if (!empty($language)){
             $application->locales()->setDefault($language);
         }

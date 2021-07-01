@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.8
+ * @version    0.1.10
  * @copyright  2017-2021 Kristuff
  */
 
@@ -62,8 +62,8 @@ return array(
     'USER_NAME_CREATE_PLACEHOLDER'                      => "Username (letters/numbers, 2-64 chars)",
     'USER_EMAIL_FIELD'                                  => "Email address:",
     'USER_EMAIL_PLACEHOLDER'                            => "Email address",
-    'USER_NAME_OR_EMAIL_FIELD'                          => "User name or email::",
-    'USER_NAME_OR_EMAIL_PLACEHOLDER'                    => "User name or email:",
+    'USER_NAME_OR_EMAIL_FIELD'                          => "User name or email:",
+    'USER_NAME_OR_EMAIL_PLACEHOLDER'                    => "User name or email",
     'USER_PASSWORD_FIELD'                               => 'Password:',
     'USER_NEW_PASSWORD_FIELD'                           => 'New password:',
     'USER_PASSWORD_PLACEHOLDER'                         => 'Password',
@@ -266,9 +266,19 @@ return array(
     /* setup */
     'SETUP_TITLE'                                       => "Minitoring installer",
     'SETUP_SELECT_LANG'                                 => "Select your language:",
-    'SETUP_INTRO_1'                                     => "Application is not configured. This program allows you to create a database for your application.",
+    'SETUP_INTRO_1'                                     => "Application is not configured. This program allows to create a database for your application.",
     'SETUP_INTRO_2'                                     => "Press 'Next' to start the installer.",
     'SETUP_CHECK_TITLE'                                 => "Requirements and permissions check",
+    'SETUP_CHECK_SUCCESSFULL'                           => "Fine, all checks passed.",
+    'SETUP_CHECK_HAS_ERROR'                             => "Please fix error(s) bellow before continue:",
+    'SETUP_ERROR_DATABASE_EXISTS'                       => "A database with same name already exists. Please choose another database name.",
+    'SETUP_ERROR_CREATE_DATABASE'                       => "Internal error: unable to create database.",
+    'SETUP_ERROR_CREATE_TABLES'                         => "Internal error: unable to create tables.",
+    'SETUP_ERROR_CREATE_ADMIN_USER'                     => "Internal error: unable to insert admin user.",
+    'SETUP_ERROR_CREATE_LOAD_APP_SETTINGS'              => "Internal error: unable to insert app settings data in database.",
+    'SETUP_ERROR_CREATE_LOAD_USER_SETTINGS'             => "Internal error: unable to insert user settings data in database.",
+    'SETUP_ERROR_CREATE_CONF_FILE'                      => "Internal error: unable to create config file.",
+    
     'SETUP_DB_CONF_TITLE_1'                             => "Configure database (1/2)",
     'SETUP_DB_CONF_TITLE_2'                             => "Configure database (2/2)",
     'SETUP_DB_CONF_SELECT_TYPE'                         => "Select database type:",
@@ -279,11 +289,10 @@ return array(
     'SETUP_SET_ADMIN_ACCOUNT_TEXT'                      => "Please set admin user credentials.", 
     'SETUP_WIZARD_BUTTON_CLOSE'                         => "Close",
     'SETUP_WIZARD_BUTTON_INSTALL'                       => "Install",
-    'SETUP_CHECK_SUCCESSFULL'                           => "Fine, all checks passed.",
     'SETUP_INSTALL_SUCCESSFULL'                         => "Congratulation! <br>Install was successful. You can now login.",
     'SETUP_TERMINATE_TITLE'                             => "Complete install",
     'SETUP_TERMINATE_MESSAGE'                           => "Press 'Install' to start the installation.",
-    'SETUP_TERMINATE_WARNING'                           => "The setup will take a few moments. <br> Make sure to maintain the connection during installation. ",
+    'SETUP_TERMINATE_WARNING'                           => "The setup will take a few moments. <br> Make sure to maintain the connection during install.",
     'SQL_HOST_FIELD'                                    => "Database host:",
     'SQL_HOST_PLACEHOLDER'                              => "Database host (ex. localhost)",
     'SQL_ADMIN_NAME_FIELD'                              => "Admin name:",

@@ -8,11 +8,10 @@
             <div class="padding-bottom-6"><?php $this->echo('SETTINGS_CUSTOMIZE_LANGUAGE_FIELD') ;?></div>
             <div class="custom-select full-width">
                 <select id="select-language" data-bind="Minitoring.Settings.languageChanged">
-                    <option value="en-US" <?php echo $this->data('UI_LANG') === 'en-US' ? ' selected' : '' ;?> >en-US</option>
-                    <option value="fr-FR"  <?php echo $this->data('UI_LANG') === 'fr-FR'  ? ' selected' : '' ;?> >fr-FR</option>
+                    <option value="en-US" <?php echo $this->data('UI_LANG') === 'en-US' ? ' selected' : '' ;?> >English (en-US)</option>
+                    <option value="fr-FR" <?php echo $this->data('UI_LANG') === 'fr-FR'  ? ' selected' : '' ;?> >Français (fr-FR)</option>
                 </select>
             </div>
-            <div class="alert alert-no-icon" data-alert="info"><?php $this->echo('SETTINGS_CUSTOMIZE_LANGUAGE_TEXT') ;?></div>
         </form>
     </section>
     <br>
