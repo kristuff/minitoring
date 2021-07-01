@@ -139,6 +139,7 @@ return array(
 
     /* settings */
     'SETTINGS'                                          => 'Settings',
+    'ERROR_DELETE_APP_TOKEN_FILE'                       => 'Enable to delete token file.',
 
     /* settings customize */
     'SETTINGS_CUSTOMIZE'                                => 'Customize',

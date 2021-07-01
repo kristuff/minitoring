@@ -422,38 +422,51 @@ class ApiController extends \Kristuff\Miniweb\Auth\Controller\ApiController
      *  End points                              Method      Description                    
      *  ----------------------------            ------      --------------------------------------------------
      *  /api/app/auth                           GET         Get the websocket token   
+     *  /api/app/auth                           DELETE      Reset the websocket token (get a new key)   
      *  /api/app/packages                       GET         Get installed packages from composer.lock   
      *  /api/app/feedback                       GET         Get (and clear) internal feedbacks from Models   
      *  ----------------------------            ------      --------------------------------------------------
      */
     public function app($action = '')
     {  
-        // accept only GET requests
-        if ($this->request()->method() === Request::METHOD_GET) {
+        switch ($this->request()->method()) {
+            case Request::METHOD_GET:
             
-            switch($action){
+                switch($action){
 
-                case 'auth':
-                    $data =  ['key' => TokenCheckerModel::getOrCreateToken()];
-                    $this->response = TaskResponse::create(200, null, $data);
-                    break;
-                
-                case 'packages':
-                    $data =  ['packages' => DependencyModel::getDependencies()];
-                    $this->response = TaskResponse::create(200, null, $data);
-                    break;
+                    case 'auth':
+                        $data =  ['key' => TokenCheckerModel::getOrCreateToken()];
+                        $this->response = TaskResponse::create(200, null, $data);
+                        break;
                     
-                case 'feedback':
-                    // the feedback function is available in any Model 
-                    $feedbacks      =  Model\AppModel::feedback();
-                    $this->response = TaskResponse::create(200, null, [
-                        'feedbackNegatives' => $feedbacks->getNegatives(),
-                        'feedbackPositives' => $feedbacks->getPositives(),
-                    ]);
-                    // reset after printing messages
-                    $feedbacks->clear();
-                    break;
-            }
+                    case 'packages':
+                        $data =  ['packages' => DependencyModel::getDependencies()];
+                        $this->response = TaskResponse::create(200, null, $data);
+                        break;
+                        
+                    case 'feedback':
+                        // the feedback function is available in any Model 
+                        $feedbacks      =  Model\AppModel::feedback();
+                        $this->response = TaskResponse::create(200, null, [
+                            'feedbackNegatives' => $feedbacks->getNegatives(),
+                            'feedbackPositives' => $feedbacks->getPositives(),
+                        ]);
+                        // reset after printing messages
+                        $feedbacks->clear();
+                        break;
+                }
+                break;
+            
+            case Request::METHOD_DELETE:
+                switch($action){
+
+                    case 'auth':
+                        $this->response =TokenCheckerModel::resetToken();
+                        break;
+                }
+                break;
+
+
         }
         
         $this->view->renderJson($this->response->toArray(), $this->response->code());

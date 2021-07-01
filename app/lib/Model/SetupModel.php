@@ -34,7 +34,6 @@ class SetupModel extends \Kristuff\Miniweb\Data\Model\SetupModel
      */
     public static function checkForInstall()
     {
-       // the return response
        $response = TaskResponse::create();
 
         if ($response->assertTrue(self::request()->method() === 'GET', 405, 'Invalid method')) {

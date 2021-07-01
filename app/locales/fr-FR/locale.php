@@ -139,6 +139,7 @@ return array(
 
     /* settings */
     'SETTINGS'                                          => 'Paramètres',
+    'ERROR_DELETE_APP_TOKEN_FILE'                       => 'Impossible de supprimer le fichier de clé.',
 
     /* settings customize */
     'SETTINGS_CUSTOMIZE'                                => 'Personnaliser',

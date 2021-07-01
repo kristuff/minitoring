@@ -19,10 +19,12 @@
 
 namespace Kristuff\Minitoring\Model;
 
+use Kristuff\Miniweb\Mvc\TaskResponse;
+
 /** 
  * TokenCheckerModel
  */
-class TokenCheckerModel extends \Kristuff\Miniweb\Mvc\Model
+class TokenCheckerModel extends \Kristuff\Miniweb\Auth\Model\UserModel
 {
     /**
      * 
@@ -43,6 +45,31 @@ class TokenCheckerModel extends \Kristuff\Miniweb\Mvc\Model
 
         $json = json_decode(file_get_contents($filePath));
         return $json->key;
+    }
+
+    /**
+     * Delete the token (delete key file)
+     * 
+     * @access public
+     * @static
+     * 
+     * @return TaskReponse
+     */
+    public static function resetToken(): TaskResponse  
+    {
+        $response = TaskResponse::create();
+        $filePath = self::config('DATA_CONFIG_PATH') . 'key.json';
+
+        if (self::validateAdminPermissions($response)) {
+            if (file_exists($filePath)) {
+                if ($response->assertTrue(unlink($filePath), 500, self::text('ERROR_DELETE_APP_TOKEN_FILE'))){
+                    $data =  ['key' => TokenCheckerModel::getOrCreateToken()];
+                    $response->setData($data);
+                }
+            }
+        }
+
+        return $response;
     }
 
     /**
