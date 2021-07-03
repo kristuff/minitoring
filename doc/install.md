@@ -95,7 +95,7 @@ The directory `app/config/sample` contains a full vhost sample. The main points 
 
 ### 4.  Restart `minitoring.service`, Enable apache modules, site and restart Apache:
 
--   Enable the follwing Apache modules:
+-   Enable the following Apache modules:
 
     ```apache-conf
     a2enmod rewrite
@@ -119,4 +119,3 @@ The directory `app/config/sample` contains a full vhost sample. The main points 
 ### 5.  Complete install with web installer:
 
 When running the app for the first time and as long as setup is not complete, you will be redirect to `/setup`. You will be asked identifiers to create a database and an admin account.
-
