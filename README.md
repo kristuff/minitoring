@@ -38,19 +38,19 @@
 ## How it works ?
 Minitoring is inspired from [ezservermonitor-web](https://github.com/shevabam/ezservermonitor-web). 
 
-Basic monitoring commands can be made by web server process without admin permissions. Such data are available via a *standard* web API (protected by a login system). 
+Basic monitoring commands can be executed by web server process without admin permissions. Such data are available via a *standard* web API (protected by a login system). 
 
 For some features (logs reader, packages, fail2ban stats...), app must be run with root privileges: Minitoring comes with a WebSocket server wich is run as service and completes the web API (protected by a token). 
 
 
 ## Install
-For now Minitoring is only available as `.deb` packages. 
+For now Minitoring is only available as `.deb` package. 
 
 See [Install minitoring on debian buster with Apache](/doc/install.md).
 
 For others systems, you will have to build the package:
-- run `composer` to install dependencies and build autoloader.
-- Compile css/js (requires `NodeJS`)
+- Install dependencies and build autoloader using `composer`.
+- Install dev dependencies and compile css/js (requires `nmp`)
 
 
 ## Config
@@ -59,8 +59,8 @@ Most config tasks are done by web installer or can be changed from web interface
 
 ## Limitations/known issues/TODO
 - You cannot be logged in with the same account on multiple devices at the same time (won't fix). 
-- Web installer does not honor Mysql and PostgreSQL, for now Sqlite only (**TODO** but for now no periodic monitoring so marge database not needed)
+- Web installer does not honor Mysql and PostgreSQL, for now Sqlite only (**TODO** but for now no periodic monitoring so large database not needed)
 - Packages: deb only, support for other systems?
-- Suppose Fail2ban installed (**TODO** option)
+- Supposes Fail2ban installed (**TODO** option)
 - Translation in progress
 - **In progress...** 
