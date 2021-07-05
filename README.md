@@ -27,12 +27,13 @@
 
 
 ## Requirements
-- A Linux[^1] web server[^2] with root privileges
+- A Linux<sup>1</sup> web server<sup>2</sup> with root privileges
 - PHP >=7.3
 - pdo_sqlite extension
 
-[^1]: *for now tested only on Debian.* 
-[^2]: *for now tested only with Apache.*
+<sup>1</sup> *for now tested only on Debian.* 
+
+<sup>2</sup> *for now tested only with Apache.*
 
 ## How it works ?
 Minitoring is inspired from [ezservermonitor-web](https://github.com/shevabam/ezservermonitor-web). 
