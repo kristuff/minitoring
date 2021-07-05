@@ -27,12 +27,12 @@
 
 
 ## Requirements
-- A Linux* web server** with root privileges
+- A Linux[^1] web server[^2] with root privileges
 - PHP >=7.3
 - pdo_sqlite extension
 
-* *for now tested only on Debian.* 
-** *for now tested only with Apache.*
+[^1]: *for now tested only on Debian.* 
+[^2]: *for now tested only with Apache.*
 
 ## How it works ?
 Minitoring is inspired from [ezservermonitor-web](https://github.com/shevabam/ezservermonitor-web). 
@@ -44,10 +44,11 @@ For some features (logs reader, packages, fail2ban stats...), app must be run wi
 
 ## Install
 For now Minitoring is only available as `.deb` packages. 
+
 See [Install minitoring on debian buster with Apache](/doc/install.md).
 
 For others systems, you will have to build the package:
-- run `composer install` to install dependencies and build autoloader.
+- run `composer` to install dependencies and build autoloader.
 - Compile css/js (requires `NodeJS`)
 
 
@@ -57,7 +58,7 @@ Most config tasks are done by web installer or can be changed from web interface
 
 ## Limitations/known issues/TODO
 - You cannot be logged in with the same account on multiple devices at the same time (won't fix). 
-- Web installer does not honor Mysql and PostgreSQL, for now Sqlite only (**TODO** but for now no periodic monitoring so no need to a large database)
+- Web installer does not honor Mysql and PostgreSQL, for now Sqlite only (**TODO** but for now no periodic monitoring so marge database not needed)
 - Packages: deb only, support for other systems?
 - Suppose Fail2ban installed (**TODO** option)
 - Translation in progress
