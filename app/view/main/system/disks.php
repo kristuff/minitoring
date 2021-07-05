@@ -1,11 +1,5 @@
 <section id="section-disks" class="view anim-scale-increase" data-view="disks" data-title="<?php $this->echo('DISKS'); ?>" data-refresh="Minitoring.Disks.refresh" >
 
-    <section id="disks-actions" class="section action-bar">
-        <input id="disks_show_tmpfs" type="checkbox" class="switch" data-bind="Minitoring.Disks.refresh" data-bind-event="change"/>
-        <label for="disks_show_tmpfs"></label>
-        <label><?php $this->echo('DISK_SHOW_TMPFS'); ?></label>
-    </section>
-
     <h6><?php $this->echo('DISK_SPACE'); ?></h6>
     <table id="disks-table" class="data-table responsive">
         <thead>

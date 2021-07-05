@@ -1,6 +1,7 @@
 /* --- Utils --- */
 Minitoring.Utils={
-    
+    ipAction: {},
+
     getIpLink: function (IP, service) {
         switch(service){
             case 'abuseipdb':

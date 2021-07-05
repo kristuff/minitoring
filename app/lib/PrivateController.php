@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.10
+ * @version    0.1.11
  * @copyright  2017-2021 Kristuff
  */
 
@@ -23,6 +23,7 @@ use Kristuff\Miniweb\Http\Server;
 use Kristuff\Miniweb\Auth\Model\UserLoginModel;
 use Kristuff\Minitoring\PublicController;
 use Kristuff\Miniweb\Auth;
+use Kristuff\Miniweb\Auth\Model\AppSettingsModel;
 
 /**
  * Class PrivateController
@@ -68,6 +69,9 @@ class PrivateController extends \Kristuff\Miniweb\Auth\Controller\PrivateControl
         foreach ($this->session()->get('userSettings') as $key => $value){
             $this->view->setData($key, $value);
         }
+
+        // load app settings
+        $this->view->setData('appSettings', AppSettingsModel::getAppSettings());
 
         // Handle local 
         $lang = $this->session()->get('userSettings')['UI_LANG'];

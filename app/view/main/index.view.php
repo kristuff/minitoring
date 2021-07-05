@@ -23,7 +23,6 @@
                     include 'settings/settings.php';
                     include 'settings/settings.about.php';
                     include 'settings/settings.profile.php';
-                    include 'settings/settings.system.php';
                     include 'settings/settings.customize.php';
 
                     /* ----------------------------- */

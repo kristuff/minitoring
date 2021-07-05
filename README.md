@@ -35,7 +35,7 @@
 
 
 ## How it works ?
-Minitoring is primarily based on [ezservermonitor-web](https://github.com/shevabam/ezservermonitor-web) and extends it with more features. 
+Minitoring is inspired from [ezservermonitor-web](https://github.com/shevabam/ezservermonitor-web). 
 
 Basic monitoring commands can be made by web server process without admin permissions. Such data are available via a *standard* web API (protected by a login system). 
 For some features (logs reader, packages, fail2ban stats...), app must be run with root privileges: Minitoring comes with a WebSocket server wich is run as service and completes the web API (protected by a token). 

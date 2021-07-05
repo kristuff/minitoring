@@ -10,6 +10,7 @@ Minitoring.App = {
         Minitoring.SystemUsers.init();
         Minitoring.Logs.init();
         Minitoring.Iptables.init();
+        Minitoring.Packages.init();
         Minitoring.App.getApiKey(function () {
             Minitoring.Settings.loadUserSettings();
             Minitoring.View.updateActiveView(Minitoring.View.getCurrentView());

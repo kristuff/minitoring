@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.10
+ * @version    0.1.11
  * @copyright  2017-2021 Kristuff
  */
 
@@ -25,6 +25,7 @@ namespace Kristuff\Minitoring\Model\System;
 class CronTabModel extends SystemModel
 {
 
+    
     protected static function isComment(string $value) : bool
     {
         return strpos($value, '#') === 0;

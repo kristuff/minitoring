@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.10
+ * @version    0.1.11
  * @copyright  2017-2021 Kristuff
  */
 
@@ -128,11 +128,12 @@ class ServicesCollectionModel extends SystemBaseModel
      *
      * @access public
      * @static
-     * @param int      $enableState         Current state. Default is -1 (all)
+     * @param int       $enableState            Current state. Default is -1 (all)
+     * @param bool      $showPortNumber         Include port number in response
      * 
      * @return array
      */
-    public static function getServicesList(int $enabledState = -1): array
+    public static function getServicesList(int $enabledState = -1, bool $showPortNumber = false): array
     {
         $query = self::database()->select()
                                ->column('service_id')
@@ -140,11 +141,16 @@ class ServicesCollectionModel extends SystemBaseModel
                                ->column('service_ctlname')
                                ->column('service_host')
                                ->column('service_check_port')
-                               ->column('service_port')
                                ->column('service_protocol')
                                ->column('service_check_enabled')
                                ->from('system_service')
                                ->orderAsc('service_name');
+
+        // optional port number column
+        if ($showPortNumber){
+            $query->column('service_port');
+        }
+        
         // filter
         if (in_array($enabledState, [0, 1])){
             $query->whereEqual('service_check_enabled', $enabledState);

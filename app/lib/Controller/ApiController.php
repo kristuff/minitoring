@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.10
+ * @version    0.1.11
  * @copyright  2017-2021 Kristuff
  */
 
@@ -28,6 +28,8 @@ use Kristuff\Minitoring\Model\Services\ServicesCollectionModel;
 use Kristuff\Minitoring\Model\System;
 use Kristuff\Minitoring\Model\System\ServiceModel;
 use Kristuff\Minitoring\Model\TokenCheckerModel;
+use Kristuff\Miniweb\Auth\Model\AppSettingsModel;
+use Kristuff\Miniweb\Auth\Model\UserLoginModel;
 
 /** 
  * Class Api Controller
@@ -50,6 +52,9 @@ use Kristuff\Minitoring\Model\TokenCheckerModel;
  */
 class ApiController extends \Kristuff\Miniweb\Auth\Controller\ApiController
 {
+
+    private $appSettings = [];
+
     /**
      * Constructor
      *
@@ -59,6 +64,8 @@ class ApiController extends \Kristuff\Miniweb\Auth\Controller\ApiController
     public function __construct(Application $application)
     {
         parent::__construct($application);
+
+        $this->appSettings = AppSettingsModel::getAppSettings();
 
         // Handle local 
         $lang = $this->session()->get('userSettings')['UI_LANG'];
@@ -134,13 +141,17 @@ class ApiController extends \Kristuff\Miniweb\Auth\Controller\ApiController
             switch ($action){
 
                 case 'disks':
-                    $showTmpfs = $this->request()->get('tmpfs') ? $this->request()->get('tmpfs') : false; 
-                    $this->response =  TaskResponse::create(200, '', System\DiskModel::getInfos($showTmpfs));
+                    $showTmpfs      = $this->appSettings['DISKS_SHOW_TMPFS']        ?? false; 
+                    $showLoop       = $this->appSettings['DISKS_SHOW_LOOP']         ?? false; 
+                    $showFilesystem = $this->appSettings['DISKS_SHOW_FILE_SYSTEM']  ?? false; 
+                    $this->response = TaskResponse::create(200, '', System\DiskModel::getInfos($showTmpfs, $showLoop, $showFilesystem));
                     break;
 
                 case 'inodes':
-                    $showTmpfs = $this->request()->get('tmpfs') ? $this->request()->get('tmpfs') : false; 
-                    $this->response =  TaskResponse::create(200, '', System\DiskModel::getInodesInfos($showTmpfs));
+                    $showTmpfs      = $this->appSettings['DISKS_SHOW_TMPFS']        ?? false; 
+                    $showLoop       = $this->appSettings['DISKS_SHOW_LOOP']         ?? false; 
+                    $showFilesystem = $this->appSettings['DISKS_SHOW_FILE_SYSTEM']  ?? false; 
+                    $this->response =  TaskResponse::create(200, '', System\DiskModel::getInodesInfos($showTmpfs, $showLoop, $showFilesystem));
                     break;
 
                 case 'cpu':
@@ -159,6 +170,10 @@ class ApiController extends \Kristuff\Miniweb\Auth\Controller\ApiController
                     $this->response = TaskResponse::create(200, '', System\CpuModel::getLoadAverage());
                     break;    
                     
+                case 'ping':
+                    $this->response = TaskResponse::create(200, '', System\PingModel::getPingResults());
+                    break; 
+
                 case 'network':
                     $this->response = TaskResponse::create(200, '', System\NetworkModel::getNeworkInfos());
                     break;     
@@ -184,6 +199,8 @@ class ApiController extends \Kristuff\Miniweb\Auth\Controller\ApiController
                         'cpu'       => System\CpuModel::getInfos(),
                         'disks'     => System\DiskModel::getInfos($showTmpfs),
                         'inodes'    => System\DiskModel::getInodesInfos($showTmpfs),
+                        'ping'      => System\PingModel::getPingResults(),
+        
                     ]);
                     break;   
             }
@@ -337,17 +354,21 @@ class ApiController extends \Kristuff\Miniweb\Auth\Controller\ApiController
                 
                 switch($action){
 
-                    // TODO require admin permissions
                     case 'list':
                     case '':
-                        $data['items'] = ServicesCollectionModel::getServicesList();
+                        if (UserLoginModel::validateAdminPermissions($this->response)){
+                            $data['items'] = ServicesCollectionModel::getServicesList(-1, true);
+                            $this->response->setCode(200);
+                            $this->response->setData($data);
+                        }
                         break;
 
                     case 'check':
-                        $data['items']  = ServiceModel::getCheckedServicesList();
+                        $showPortNumber = $this->appSettings['SERVICES_SHOW_PORT_NUMBER'] ?? false; 
+                        $data['items']  = ServiceModel::getCheckedServicesList($showPortNumber);
+                        $this->response = TaskResponse::create(200, '', $data);
                         break;
                 }
-                $this->response = TaskResponse::create(200, '', $data);
                 break;
 
             case Request::METHOD_POST:
@@ -423,6 +444,7 @@ class ApiController extends \Kristuff\Miniweb\Auth\Controller\ApiController
      *  ----------------------------            ------      --------------------------------------------------
      *  /api/app/auth                           GET         Get the websocket token   
      *  /api/app/auth                           DELETE      Reset the websocket token (get a new key)   
+     *  /api/app/settings                       POST        Update settings parameter value
      *  /api/app/packages                       GET         Get installed packages from composer.lock   
      *  /api/app/feedback                       GET         Get (and clear) internal feedbacks from Models   
      *  ----------------------------            ------      --------------------------------------------------
@@ -457,6 +479,17 @@ class ApiController extends \Kristuff\Miniweb\Auth\Controller\ApiController
                 }
                 break;
             
+            case Request::METHOD_POST:
+                switch($action){
+
+                    case 'settings':
+                        $param = $this->request()->post('parameter', true)  ?? null;  
+                        $value = $this->request()->post('value', true)      ?? null;
+                        $this->response = AppSettingsModel::editAppSettings($param, $value, $this->token, $this->tokenKey); 
+                        break;
+                }
+                break;
+
             case Request::METHOD_DELETE:
                 switch($action){
 
@@ -465,11 +498,10 @@ class ApiController extends \Kristuff\Miniweb\Auth\Controller\ApiController
                         break;
                 }
                 break;
-
-
         }
         
         $this->view->renderJson($this->response->toArray(), $this->response->code());
     }
-  
+    
+
 }

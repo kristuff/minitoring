@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.10
+ * @version    0.1.11
  * @copyright  2017-2021 Kristuff
  */
 
@@ -28,10 +28,27 @@ use Kristuff\Minitoring\Model\System\SystemBaseModel;
 class ServiceModel extends SystemBaseModel
 {
 
-    //todo
-    public static function getCheckedServicesList()
+     //todo
+     public static function countProcess($serviceName)
+     {
+ 
+         $state = exec('pgrep -c ' . $serviceName);
+         //return $state ? true : false;
+     }
+
+     
+    /** 
+     * Get service list with current state
+     *
+     * @access public
+     * @static
+     * @param bool      $showPortNumber         Include port number in response
+     * 
+     * @return array
+     */
+    public static function getCheckedServicesList(bool $showPortNumber = false)
     {
-        $services = ServicesCollectionModel::getServicesList(1);
+        $services = ServicesCollectionModel::getServicesList(1, true);
         foreach($services as &$service){
 
             if ($service['service_check_port'] ){
@@ -40,19 +57,15 @@ class ServiceModel extends SystemBaseModel
             } else {
                 //TODO
             }
+            if (!$showPortNumber){
+                $service['service_port'] = null; 
+            }
 
         }
         return $services;
     }
   
-    //todo
-    public static function countProcess($serviceName)
-    {
-
-        $state = exec('pgrep -c ' . $serviceName);
-        //return $state ? true : false;
-    }
-
+   
     /**
      * Checks if a port is open (TCP or UDP)
      * 
@@ -81,13 +94,16 @@ class ServiceModel extends SystemBaseModel
             socket_set_timeout($handle, $timeout);
 
             $write = fwrite($handle, 'x00');
-            $startTime = time();
-            $header = fread($handle, 1);
-            $endTime = time();
-            $timeDiff = $endTime - $startTime; 
-            fclose($handle);
-
-            return ($timeDiff >= $timeout);
+            if ($write === false){
+                return false;
+            } else {
+                $startTime = time();
+                $header = fread($handle, 1);
+                $endTime = time();
+                $timeDiff = $endTime - $startTime; 
+                fclose($handle);
+                return ($timeDiff >= $timeout);
+            }
         }
 
         return false;

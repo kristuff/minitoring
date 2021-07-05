@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.10
+ * @version    0.1.11
  * @copyright  2017-2021 Kristuff
  */
 
@@ -162,7 +162,7 @@ class SystemBaseModel extends DatabaseModel
         $return = '';
 
         foreach ($cmds as $cmd){
-            if (trim(shell_exec($cmd.$args)) != ''){
+            if (trim(shell_exec($cmd.' 2>/dev/null '.$args)) != ''){
                 $return = $cmd;
                 
                 if ($returnWithArgs){

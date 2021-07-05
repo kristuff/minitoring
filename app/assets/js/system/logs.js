@@ -80,7 +80,8 @@ Minitoring.Logs = {
                             switch(propertyName){
                                 case 'host':
                                 case 'remoteIp':
-                                    cellContent = '<a href="https://www.abuseipdb.com/check/' + log[propertyName]+ '" target="linkout" class="color-theme">' + log[propertyName]+ '</a>'
+                                    cellContent = Minitoring.Utils.getIpLink(log[propertyName], document.querySelector('body').getAttribute('data-ip-action'));
+                                    //cellContent = '<a href="https://www.abuseipdb.com/check/' + log[propertyName]+ '" target="linkout" class="color-theme">' + log[propertyName]+ '</a>'
                                     //cellContent = '<a href="https://www.geodatatool.com/en/?IP=' + log[propertyName]+ '" target="linkout" class="color-theme">' + log[propertyName]+ '</a>'
                                     break;
                             

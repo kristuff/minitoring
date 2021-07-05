@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.10
+ * @version    0.1.11
  * @copyright  2017-2021 Kristuff
  */
 
@@ -21,6 +21,7 @@ namespace Kristuff\Minitoring\Model\System;
 
 use Kristuff\Miniweb\Mvc\Data\DatabaseModel;
 use Kristuff\Minitoring\Model\System\SystemModel;
+use Kristuff\Miniweb\Auth\Model\AppSettingsModel;
 
 /** 
  * DiskModel
@@ -37,7 +38,7 @@ class DiskModel extends SystemModel
      * 
      * @return array
      */
-    public static function getInfos($showTmpfs = 'false', $showFileSystem = true)
+    public static function getInfos(bool $showTmpfs = false, bool $showLoop = false, bool $showFileSystem = true)
     {
         // collected data
         $datas = [];
@@ -60,7 +61,12 @@ class DiskModel extends SystemModel
             list($filesystem, $type, $total, $used, $free, $percent, $mount) = explode(',', $mounted);
 
             // tmpfs
-            if (strpos($type, 'tmpfs') !== false && $showTmpfs !== 'true'){
+            if (strpos($type, 'tmpfs') !== false && $showTmpfs != true){
+                continue;
+            }
+
+            // loop
+            if (strpos($filesystem, '/dev/loop') !== false && $showLoop != true){
                 continue;
             }
             
@@ -118,7 +124,7 @@ class DiskModel extends SystemModel
      * 
      * @return array
      */
-    public static function getInodesInfos($showTmpfs = 'false', $showFileSystem = true)
+    public static function getInodesInfos(bool $showTmpfs = false, bool $showLoop = false, bool $showFileSystem = true)
     {
         // collected data
         $datas = [];
@@ -141,7 +147,12 @@ class DiskModel extends SystemModel
             list($filesystem, $type, $total, $used, $free, $percent, $mount) = explode(',', $mounted);
 
             // tmpfs
-            if (strpos($type, 'tmpfs') !== false && $showTmpfs !== 'true'){
+            if (strpos($type, 'tmpfs') !== false && $showTmpfs != true){
+                continue;
+            }
+
+            // loop
+            if (strpos($filesystem, '/dev/loop') !== false && $showLoop != true){
                 continue;
             }
             

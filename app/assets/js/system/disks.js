@@ -13,10 +13,7 @@ Minitoring.Disks = {
     },
    
     getDisksUsage: function () {
-        var tableBody   = document.querySelector('#disks-table tbody');
-        var args        = Minitoring.View.getCurrentView() === 'disks' ? 'tmpfs=' + (document.querySelector("#disks_show_tmpfs").checked) : '';
-
-        Minitoring.Api.get('api/system/disks', args, function (result) {
+        Minitoring.Api.get('api/system/disks', null, function (result) {
 
                 switch (Minitoring.View.getCurrentView()) {
                     case 'overview':
@@ -56,7 +53,7 @@ Minitoring.Disks = {
                         html += '<td data-column="Total" class="align-right">' + result.data.total     + '</td>';
                         html += '</tr>';
 
-                        tableBody.innerHTML = html;
+                        document.querySelector('#disks-table tbody').innerHTML = html;
                         Minikit.each(document.querySelectorAll('#disks-table tbody .progress-bar'), function (element) {
                             var value = element.getAttribute('data-value');
                             element.querySelector('.progress-bar-inner').style.width = value + '%';
@@ -69,10 +66,7 @@ Minitoring.Disks = {
     },
 
     getInodesUsage: function() {
-        var tableBody = document.querySelector('#inodes-table tbody');
-        var args = Minitoring.View.getCurrentView() === 'disks' ? 'tmpfs=' + (document.querySelector("#disks_show_tmpfs").checked) : '';
-
-        Minitoring.Api.get('api/system/inodes', args, function (result) {
+        Minitoring.Api.get('api/system/inodes', null, function (result) {
             
             switch (Minitoring.View.getCurrentView()) {
                 case 'overview':
@@ -110,7 +104,7 @@ Minitoring.Disks = {
                     html += '<td data-column="Total" class="align-right">' + result.data.total     + '</td>';
                     html += '</tr>';
 
-                    tableBody.innerHTML = html;
+                    document.querySelector('#inodes-table tbody').innerHTML = html;
                     Minikit.each(document.querySelectorAll('#inodes-table tbody .progress-bar'), function (element) {
                         var value = element.getAttribute('data-value');
                         element.querySelector('.progress-bar-inner').style.width = value + '%';

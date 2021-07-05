@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.10
+ * @version    0.1.11
  * @copyright  2017-2021 Kristuff
  */
 
@@ -103,8 +103,6 @@ class SocketServer implements MessageComponentInterface {
         }
 
         if ($response->assertTrue($check, 401, 'Invalid token')) {
-            // Log //TODO
-            $this->log(LOG_INFO, 'Request accepted from IP [' . $remoteIP . ']');
             $response = $this->parseCommand($response, $request, $remoteIP);
         }
    
@@ -117,41 +115,46 @@ class SocketServer implements MessageComponentInterface {
         switch ($request['command']){
 
             case 'crons':
+                $this->log(LOG_INFO, 'Request accepted from IP [' . $remoteIP . '] command [' . $request['command'] . ']');
                 $response->setCode(200);
                 $response->setData(Minitoring\Model\System\CronTabModel::getAll());
                 break;
 
             case 'logs':
+                $this->log(LOG_INFO, 'Request accepted from IP [' . $remoteIP . '] command [' . $request['command'] . ']');
                 $logId    = $request['logId'];
                 $max      = array_key_exists('maxLines', $request) ? intval($request['maxLines']) : 50;
                 $response = Log\LogReaderModel::read($logId, $max);
                 break;
 
             case 'fail2ban_status':
+                $this->log(LOG_INFO, 'Request accepted from IP [' . $remoteIP . '] command [' . $request['command'] . ']');
                 $response->setCode(200);
                 $response->setData(Services\Fail2banModel::getServerInfos());
                 break;
 
             case 'iptables':
-                $response->setCode(200);
+                $this->log(LOG_INFO, 'Request accepted from IP [' . $remoteIP . '] command [' . $request['command'] . ']');
                 $limit  = isset($request['limit'])  ? intval($request['limit'])  : 0;
                 $offset = isset($request['offset']) ? intval($request['offset']) : 0;
                 $chain  = isset($request['chain'])  ? $request['chain'] : '';
+                $response->setCode(200);
                 $response->setData(Services\IptablesModel::getIptablesList($chain,$offset, $limit));
                 break;
 
             case 'ip6tables':
-                $response->setCode(200);
+                $this->log(LOG_INFO, 'Request accepted from IP [' . $remoteIP . '] command [' . $request['command'] . ']');
                 $limit  = isset($request['limit'])  ? intval($request['limit'])  : 0;
                 $offset = isset($request['offset']) ? intval($request['offset']) : 0;
                 $chain  = isset($request['chain'])  ? $request['chain'] : '';
+                $response->setCode(200);
                 $response->setData(Services\IptablesModel::getIp6tablesList($chain,$offset, $limit));
                 break;  
                 
             default:
                 // invalid command, log error
                 $response->assertTrue(false, 400, 'Invalid command');
-                trigger_error($this->appName . 'request error: Invalid token from IP [' . $remoteIP . ']', E_USER_ERROR);
+                $this->log(LOG_ERR, 'Error: Invalid request from IP [' . $remoteIP . '] command [' . $request['command'] . ']');
         }
         return $response;
     }

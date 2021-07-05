@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.10
+ * @version    0.1.11
  * @copyright  2017-2021 Kristuff
  */
 
@@ -47,6 +47,7 @@ return array(
     'COLOR_ORANGE'                                      => 'Orange',
 
     /* common */
+    'FIELD_ENDING'                                      => ':',
     'ACTION_DELETE'                                     => 'Delete',
     'ACTION_EDIT'                                       => 'Edit',
     'FREE'                                              => "Free",
@@ -97,14 +98,34 @@ return array(
     /* Overview */
     'OVERVIEW'                                          => 'Overview',
 
+    /* General */
+    'GENERAL'                                           => "General",
+    'HOSTNAME'                                          => 'Hostname',
+    'OS'                                                => 'Operating system',
+    'KERNEL_VERSION'                                    => "Kernel version",
+    'UPTIME'                                            => "Uptime",
+    'LAST_BOOT'                                         => "Last boot",
+    'SERVER_DATE'                                       => "Server date and time",
+
+    /* CPU */
+    'CPU'                                               => "Cpu",
+    'MODEL'                                             => "Model",
+    'CORES'                                             => "Cores",
+    'SPEED'                                             => "Speed",
+    'CACHE'                                             => "Cache",
+    'BOGOMIPS'                                          => "BogoMips",
+    'TEMPERATURE'                                       => "Temperature",
+
     /* Sysusers */
     'SYS_USERS'                                         => 'Users',
+
+    /* Services */
+    'SERVICES'                                          => 'Services',
 
     /* Disks */
     'DISKS'                                             => 'Disks',
     'INODES'                                            => "Inodes",
     'DISK_SPACE'                                        => "Disk space",
-    'DISK_SHOWN_TMPFS'                                  => "Show tmpfs",
     'DISK_FILESYSTEM'                                   => "File system",
     'DISK_TYPE'                                         => "Type",
     'DISK_MOUNT'                                        => "Mount",
@@ -179,13 +200,9 @@ return array(
     'SETTINGS_PROFILE_DELETE_AVATAR_TITLE'              => "Remove avatar",
     'SETTINGS_PROFILE_DELETE_AVATAR_TEXT'               => "Remove avatar file from server and use default avatar image.",
     'SETTINGS_PROFILE_DELETE_AVATAR_BUTTON'             => "Delete avatar",
+    //'SETTINGS_PROFILE_ACCOUNT_TYPE_FIELD'               => "Account type:",
 
-   
-
-    'SETTINGS_PROFILE_ACCOUNT_TYPE_FIELD'               => "Account type:",
-
-    'SETTINGS_ABOUT'                                    => 'About', 
-
+    /* settings about */
     'SETTINGS_INFOS'                                    => 'About',
     'SETTINGS_INFOS_TITLE'                              => 'About',
     'SETTINGS_INFOS_SUMMARY'                            => "Informations about this application",
@@ -193,8 +210,8 @@ return array(
     'DEPENDENCY_LIBRARY'                                => 'Library',
     'DEPENDENCY_VERSION'                                => 'Version',
 
-    'SETTINGS_DATA'                                  => 'Data',
-    'SETTINGS_DATA_SUMMARY'                          => "Application data",
+    //'SETTINGS_DATA'                                  => 'Data',
+    //'SETTINGS_DATA_SUMMARY'                          => "Application data",
 
     /* settings users */
     'SETTINGS_USERS'                                    => 'Users',
@@ -249,6 +266,7 @@ return array(
     'SETTINGS_LOGREADER_FORMAT_PLACEHOLDER'             => "Select a predefined format above or enter custom format",
     'SETTINGS_LOGREADER_BUTTON_ADD'                     => "Add",
    
+    /* settings advanced */
     'SETTINGS_ADVANCED'                                 => 'Advanced', 
     'SETTINGS_ADVANCED_SUMMARY'                         => 'Advanced parameters', 
     'SETTINGS_SECURITY_TITLE'                           => "Security",
@@ -260,9 +278,13 @@ return array(
     'SETTINGS_IP_ACTION_NONE'                           => "None",
     'SETTINGS_IP_ACTION_ABUSEIPDB'                      => "AbuseIPDB check (external link)",
     'SETTINGS_IP_ACTION_GEOIP'                          => "Geodatatool (external link)",
-    
-    'SETTINGS_BANS'                                     => 'Parefeu',
-    'SETTINGS_BANS_SUMMARY'                             => "Fail2Ban and abuseIPDB API settings",
+    'SETTINGS_SERVICES_SHOW_PORT_NUMBER'                => "Show port number",
+    'SETTINGS_DISK_SHOW_TMPFS'                          => "Show tmpf",
+    'SETTINGS_DISK_SHOW_LOOP'                           => "Show loop",
+    'SETTINGS_DISK_SHOW_FILE_SYSTEM'                    => "Show file system",
+
+    'SETTINGS_DEFAULT_TITLE'                            => 'Default settings',
+    'SETTINGS_DEFAULT_TEXT'                             => "Define default settings. Apply to login/recovery pages",
 
     /* setup */
     'SETUP_TITLE'                                       => "Minitoring installer",
@@ -279,7 +301,6 @@ return array(
     'SETUP_ERROR_CREATE_LOAD_APP_SETTINGS'              => "Internal error: unable to insert app settings data in database.",
     'SETUP_ERROR_CREATE_LOAD_USER_SETTINGS'             => "Internal error: unable to insert user settings data in database.",
     'SETUP_ERROR_CREATE_CONF_FILE'                      => "Internal error: unable to create config file.",
-    
     'SETUP_DB_CONF_TITLE_1'                             => "Configure database (1/2)",
     'SETUP_DB_CONF_TITLE_2'                             => "Configure database (2/2)",
     'SETUP_DB_CONF_SELECT_TYPE'                         => "Select database type:",
@@ -305,7 +326,7 @@ return array(
     'DB_USER_NAME_FIELD'                                => "Database user name:",
     'DB_USER_NAME_PLACEHOLDER'                          => "Database user name",
     'DB_USER_PASSWORD_FIELD'                            => "Database password:",
-    'DB_USER_PASSWORD_PLACEHOLDER'                      => "Database password:",
+    'DB_USER_PASSWORD_PLACEHOLDER'                      => "Database password",
     'DB_ADMIN_NAME_FIELD'                               => "Admin name:",
     'DB_ADMIN_NAME_PLACEHOLDER'                         => "Admin name",
     'DB_ADMIN_PASSWORD_FIELD'                           => "Admin password:",

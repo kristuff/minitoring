@@ -30,7 +30,7 @@ Minitoring.Iptables = {
         function (result) {
             var html = '', rowId, numberItem, strNumber;
             var getIpLink = function(ip){
-                return (ip == "0.0.0.0/0" || ip == "::/0") ? ip : Minitoring.Utils.getIpLink(ip, "abuseipdb");
+                return (ip == "0.0.0.0/0" || ip == "::/0") ? ip : Minitoring.Utils.getIpLink(ip, document.querySelector('body').getAttribute('data-ip-action'));
             };
 
 //alert( result.data.chains.length + ' ' );// + result.data.chains[0] + ' ' + result.data.chains[0].rules.length );

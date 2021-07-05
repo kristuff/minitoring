@@ -3,8 +3,11 @@ Minitoring.Packages = {
 
     init:function() {
         Minikit.Event.add(document.querySelector('#packages-bottom-paginator'), 'click', Minitoring.Packages.onPaginatorClick);
+        Minikit.Event.add(document.querySelector('table#packages-table '), 'click', function (e) {
+            Minitoring.Packages.tableClicked(e);
+        });
     },
-
+    
     onPaginatorClick: function(e) {
         e.preventDefault();
         var el = e.target.closest('[data-offset]');
@@ -29,6 +32,34 @@ Minitoring.Packages = {
                 break;
         }
     },
+
+    groupbyChanged: function () {
+        
+    },
+
+    // "grouped row struff"
+    tableClicked: function (e) {
+        var row = e.target.closest('tr.group-row');
+        if (Minikit.isObj(row)) {
+            var currentlyExpanded   = row.classList.contains('expanded'),
+                expanded            = !currentlyExpanded;
+                id                  = row.getAttribute('data-group-id');
+
+            if (expanded) {
+                row.classList.add('expanded');
+                Array.prototype.forEach.call(document.querySelectorAll('#packages-table tr[data-group-parentid="' + id + '"]'), function (el) {
+                    el.classList.remove('hidden');
+                });
+            } else {
+                row.classList.remove('expanded');
+                Array.prototype.forEach.call(document.querySelectorAll('#packages-table tr[data-group-parentid="' + id + '"]'), function (el) {
+                    el.classList.add('hidden');
+                });
+            }
+
+        }
+    },
+
     getAll: function () {
         document.querySelector('#packages-comment').innerHTML = '';
         document.querySelector('#packages-comment').classList.remove('active');
@@ -37,10 +68,42 @@ Minitoring.Packages = {
         document.querySelector('#packages-table tbody').innerHTML= Minitoring.UI.getTableLoader(10);
         Minitoring.Api.get('api/packages', null, function (result) {
             var bodyHtml = '', 
-                dashboardErrorHtml = '<span class="badge" data-badge="success">0</span>';
+                dashboardErrorHtml = '<span class="badge" data-badge="success">0</span>'
+                currentGroup = '',
+                lastGroup = '',
+                lastGroupCount = 0,
+                groupRowsDetailHtml = '';
 
             for (var i = 0; i < result.data.packages.length; i++) {
-                bodyHtml += Minitoring.Packages.getpackageHtml(result.data.packages[i]);
+                currentGroup = result.data.packages[i].name.charAt(0).toUpperCase();
+                
+                // new group and previous group is not empty, add it
+                if (currentGroup !== lastGroup && lastGroup !== ''){
+                    
+                    bodyHtml += '<tr class="group-row" data-group-id="' + lastGroup + '">';
+                    bodyHtml += '<td class="align-left" colspan="7"><a class="toggle"><i class="fa fa-fw color-theme"></i>' ;
+                    bodyHtml += lastGroup + '<span class="margin-left-6 color-light">(' + lastGroupCount + ')</span></td>';
+                    bodyHtml += '</tr>';
+                    bodyHtml += groupRowsDetailHtml;
+                
+                    // register new group, reset details
+                    lastGroup = currentGroup;
+                    lastGroupCount = 0;
+                    groupRowsDetailHtml = '';
+                }
+
+                lastGroup = currentGroup;
+                lastGroupCount++;
+                groupRowsDetailHtml += Minitoring.Packages.getpackageHtml(result.data.packages[i], lastGroup);
+
+                // last item? add group row and details
+                if (i === result.data.packages.length -1){
+                    bodyHtml += '<tr class="group-row" data-group-id="' + lastGroup + '">';
+                    bodyHtml += '<td class="align-left" colspan="7"><a class="toggle"><i class="fa fa-fw color-theme"></i>' ;
+                    bodyHtml += lastGroup + '<span class="margin-left-6 color-light">(' + lastGroupCount + ')</span></td>';
+                    bodyHtml += '</tr>';
+                    bodyHtml += groupRowsDetailHtml;
+                }
             }
 
             if (result.data.number_error > 0) {
@@ -57,9 +120,9 @@ Minitoring.Packages = {
                                     '<th data-column="Version">Version</th>' +
                                     '<th data-column="Arch">Arch</th>' +
                                     '<th data-column="Description">Description</th>' +
-                                    '<th data-column="State">Action</th>' +
-                                    '<th data-column="State">Status</th>' +
-                                    '<th data-column="State">Error</th>' +
+                                    '<th data-column="Action">Action</th>' +
+                                    '<th data-column="Status">Status</th>' +
+                                    '<th data-column="Error">Error</th>' +
                                 '</tr>'; 
 
             document.querySelector('#packages-bottom-paginator').setAttribute('data-label', result.data.packages.length + ' / ' + result.data.packages.length + ' item(s) displayed');    
@@ -110,8 +173,10 @@ Minitoring.Packages = {
         });
     },
 
-    getpackageHtml: function (item) {
-        var html = '<tr>', errorHtml = '';
+    getpackageHtml: function (item, group) {
+        //data-parentid="' + rowId + '" class="hidden">';
+
+        var html = '<tr data-group-parentid="' + group + '" class="hidden">', errorHtml = '';
         if (Minikit.isObj(item.error)){
             errorHtml = '<span class="badge" data-badge="error">' + item.error + '</span>';
         }

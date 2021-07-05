@@ -33,9 +33,9 @@
 <?php  } ?>
 
 </head>   
-<body class="" 
-    data-style="flat" 
-    data-theme="<?php echo htmlentities($this->data('UI_THEME')); ?>" 
-    data-color="<?php echo htmlentities($this->data('UI_THEME_COLOR')); ?>" 
-    data-language="<?php echo $this->data("UI_LANG"); ?>" 
-    data-api-token="<?php echo $this->data('apiToken'); ?>">
+<body class="" data-style="flat" 
+    data-theme="<?php     echo htmlentities($this->data('UI_THEME'));                   ?>" 
+    data-color="<?php     echo htmlentities($this->data('UI_THEME_COLOR'));             ?>" 
+    data-language="<?php  echo htmlentities($this->data("UI_LANG"));                    ?>"
+    data-ip-action="<?php echo htmlentities($this->data('appSettings')['IP_ACTION']);   ?>"  
+    data-api-token="<?php echo htmlentities($this->data('apiToken'));                   ?>">

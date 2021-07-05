@@ -310,16 +310,16 @@
         },
         {
             "name": "kristuff/miniweb",
-            "version": "v0.9.8",
+            "version": "v0.9.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kristuff/miniweb.git",
-                "reference": "fe665a8e0ceea7981e3f6b357fa3a6429dc95aa5"
+                "reference": "c5e3cd5ece4674446cbce5ac89f92ede00e0004e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kristuff/miniweb/zipball/fe665a8e0ceea7981e3f6b357fa3a6429dc95aa5",
-                "reference": "fe665a8e0ceea7981e3f6b357fa3a6429dc95aa5",
+                "url": "https://api.github.com/repos/kristuff/miniweb/zipball/c5e3cd5ece4674446cbce5ac89f92ede00e0004e",
+                "reference": "c5e3cd5ece4674446cbce5ac89f92ede00e0004e",
                 "shasum": ""
             },
             "require": {
@@ -352,9 +352,9 @@
             "description": "Mini php web framework",
             "support": {
                 "issues": "https://github.com/kristuff/miniweb/issues",
-                "source": "https://github.com/kristuff/miniweb/tree/v0.9.8"
+                "source": "https://github.com/kristuff/miniweb/tree/v0.9.9"
             },
-            "time": "2021-06-26T21:40:36+00:00"
+            "time": "2021-07-03T19:42:57+00:00"
         },
         {
             "name": "kristuff/mishell",

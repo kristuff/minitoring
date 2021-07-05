@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.10
+ * @version    0.1.11
  * @copyright  2017-2021 Kristuff
  */
 
@@ -47,6 +47,7 @@ return array(
     'COLOR_ORANGE'                                      => 'Orange',
 
     /* common */
+    'FIELD_ENDING'                                      => ' :',
     'ACTION_DELETE'                                     => 'Supprimer',
     'ACTION_EDIT'                                       => 'Modifier',
     'FREE'                                              => "Libre",
@@ -95,16 +96,36 @@ return array(
     'AUTH_RECOVERY_BUTTON'                              => "Envoyer un mail de récupération", 
 
     /* Overview */
-    'OVERVIEW'                                          => 'Résumé',
+    'OVERVIEW'                                          => "Vue d'ensemble",
+
+    /* General */
+    'GENERAL'                                           => "Général",
+    'HOSTNAME'                                          => "Nom d'hôte",
+    'OS'                                                => "Système d'exploitation",
+    'KERNEL_VERSION'                                    => "Version du noyau",
+    'UPTIME'                                            => "Durée de fonctionnement",
+    'LAST_BOOT'                                         => "Dernier démarrage",
+    'SERVER_DATE'                                       => "Date du serveur",
+
+    /* CPU */
+    'CPU'                                               => "Processeur",
+    'MODEL'                                             => "Modèle",
+    'CORES'                                             => "Cœurs",
+    'SPEED'                                             => "Vitesse",
+    'CACHE'                                             => "Cache",
+    'BOGOMIPS'                                          => "BogoMips",
+    'TEMPERATURE'                                       => "Température",
 
     /* Sysusers */
     'SYS_USERS'                                         => 'Utilisateurs',
+  
+    /* Services */
+    'SERVICES'                                          => 'Services',
 
     /* Disks */
     'DISKS'                                             => 'Disques',
     'INODES'                                            => "Nœuds d'index (inodes)",
     'DISK_SPACE'                                        => "Espace disque",
-    'DISK_SHOW_TMPFS'                                   => "Afficher les systèmes de fichiers temporaires (tmpfs)",
     'DISK_FILESYSTEM'                                   => "Système de fichier",
     'DISK_TYPE'                                         => "Type",
     'DISK_MOUNT'                                        => "Monté sur",
@@ -179,8 +200,9 @@ return array(
     'SETTINGS_PROFILE_DELETE_AVATAR_TITLE'              => "Supprimer mon avatar",
     'SETTINGS_PROFILE_DELETE_AVATAR_TEXT'               => "Supprime l'avatar du serveur.",
     'SETTINGS_PROFILE_DELETE_AVATAR_BUTTON'             => "Supprimer l'avatar",
+    //'SETTINGS_PROFILE_ACCOUNT_TYPE_FIELD'               => "Type de compte :",
 
- 
+    /* settings about */
     'SETTINGS_INFOS'                                    => 'A propos',
     'SETTINGS_INFOS_TITLE'                              => 'A propos',
     'SETTINGS_INFOS_SUMMARY'                            => "Informations sur cette application",
@@ -189,8 +211,8 @@ return array(
     'DEPENDENCY_VERSION'                                => 'Version',
 
 
-    'SETTINGS_DATA'                                     => 'Données',
-    'SETTINGS_DATA_SUMMARY'                             => "Données de l'application",
+    //'SETTINGS_DATA'                                     => 'Données',
+    //'SETTINGS_DATA_SUMMARY'                             => "Données de l'application",
     
     /* settings users */
     'SETTINGS_USERS'                                    => 'Utilisateurs',
@@ -219,9 +241,9 @@ return array(
     'SETTINGS_SERVICES_NAME_FIELD'                      => "Nom :",
     'SETTINGS_SERVICES_NAME_HEADER'                     => "Service",
     'SETTINGS_SERVICES_NAME_PLACEHOLDER'                => "Nom affiché",
-    'SETTINGS_SERVICES_HOST_FIELD'                      => "Host :",
-    'SETTINGS_SERVICES_HOST_HEADER'                     => "Host",
-    'SETTINGS_SERVICES_HOST_PLACEHOLDER'                => "Host (ex. localhost)",
+    'SETTINGS_SERVICES_HOST_FIELD'                      => "Hôte :",
+    'SETTINGS_SERVICES_HOST_HEADER'                     => "Hôte",
+    'SETTINGS_SERVICES_HOST_PLACEHOLDER'                => "Hôte (ex. localhost)",
     'SETTINGS_SERVICES_PORT_FIELD'                      => "Port :",
     'SETTINGS_SERVICES_PORT_HEADER'                     => "Port",
     'SETTINGS_SERVICES_PORT_PLACEHOLDER'                => "Port",
@@ -245,6 +267,7 @@ return array(
     'SETTINGS_LOGREADER_FORMAT_PLACEHOLDER'             => "Sélectionnez un format prédéfini ci-dessus ou entrez un format personnalisé",
     'SETTINGS_LOGREADER_BUTTON_ADD'                     => "Ajouter",
 
+    /* settings advanced */
     'SETTINGS_ADVANCED'                                 => 'Avancé', 
     'SETTINGS_ADVANCED_SUMMARY'                         => 'Paramètres avancés', 
     'SETTINGS_SECURITY_TITLE'                           => "Sécurité",
@@ -256,9 +279,12 @@ return array(
     'SETTINGS_IP_ACTION_NONE'                           => "Aucune",
     'SETTINGS_IP_ACTION_ABUSEIPDB'                      => "Vérification sur AbuseIPDB (lien externe)",
     'SETTINGS_IP_ACTION_GEOIP'                          => "Geodatatool (lien externe)",
-
-    'SETTINGS_BANS'                                     => 'Parefeu',
-    'SETTINGS_BANS_SUMMARY'                             => "Fail2Ban and abuseIPDB API settings",
+    'SETTINGS_SERVICES_SHOW_PORT_NUMBER'                => "Afficher le numéro de port",
+    'SETTINGS_DISK_SHOW_TMPFS'                          => "Afficher les systèmes de fichiers temporaires (tmpfs)",
+    'SETTINGS_DISK_SHOW_LOOP'                           => "Afficher les systèmes de fichiers loop",
+    'SETTINGS_DISK_SHOW_FILE_SYSTEM'                    => "Afficher les systèmes de fichiers",
+    'SETTINGS_DEFAULT_TITLE'                            => 'Paramètres par défaut',
+    'SETTINGS_DEFAULT_TEXT'                             => "Definit les paramètres par défaut. S'applique aux pages de connexion / récupération de mot de passe.",
 
     /* setup */
     'SETUP_TITLE'                                       => "Installation de Minitoring",
@@ -275,7 +301,6 @@ return array(
     'SETUP_ERROR_CREATE_LOAD_APP_SETTINGS'              => "Erreur interne : impossible d'ajouter les paramètres de l'application dans la base de données.",
     'SETUP_ERROR_CREATE_LOAD_USER_SETTINGS'             => "Erreur interne : impossible d'ajouter les paramètres utilisateurs dans la base de données.",
     'SETUP_ERROR_CREATE_CONF_FILE'                      => "Erreur interne : impossible de créer le fichier de configuration.",
-
     'SETUP_DB_CONF_TITLE_1'                             => "Configurer la base de données (1/2)",
     'SETUP_DB_CONF_TITLE_2'                             => "Configurer la base de données (2/2)",
     'SETUP_DB_CONF_SELECT_TYPE'                         => "Choisissez le type de base de données :",

@@ -6,37 +6,36 @@
         <!-- System -->
         <div class="block col mob-whole tab-half desk-large-third">
             <div class="header">
-                <span class="title">General</span>
+                <span class="title"><?php $this->echo('GENERAL'); ?></span>
                 <ul class="action-bar">
-                    <li><a class="action-link" href="#" data-module="System" title="Refresh"><i
-                                class="fa fa-refresh"></i></a></li>
+                    <li><a class="action-link" href="#" data-module="System" title="Refresh"><i class="fa fa-refresh"></i></a></li>
                 </ul>
             </div>
             <div class="content">
                 <table class="data-table">
                     <tbody>
                         <tr>
-                            <td class="color-light" data-column="title">Hostname:</td>
+                            <td class="color-light" data-column="title"><?php $this->echoField('HOSTNAME'); ?></td>
                             <td id="system-hostname" class="highlight"></td>
                         </tr>
                         <tr>
-                            <td class="color-light" data-column="title">OS:</td>
+                            <td class="color-light" data-column="title"><?php $this->echoField('OS'); ?></td>
                             <td id="system-os" class="highlight"></td>
                         </tr>
                         <tr>
-                            <td class="color-light" data-column="title">Kernel version:</td>
+                            <td class="color-light" data-column="title"><?php $this->echoField('KERNEL_VERSION'); ?></td>
                             <td id="system-kernel" class="highlight"></td>
                         </tr>
                         <tr>
-                            <td class="color-light" data-column="title">Uptime:</td>
+                            <td class="color-light" data-column="title"><?php $this->echoField('UPTIME'); ?></td>
                             <td id="system-uptime" class="highlight"></td>
                         </tr>
                         <tr>
-                            <td class="color-light" data-column="title">Last boot:</td>
+                            <td class="color-light" data-column="title"><?php $this->echoField('LAST_BOOT'); ?></td>
                             <td id="system-last-boot" class="highlight"></td>
                         </tr>
                         <tr>
-                            <td class="color-light" data-column="title">Server date & time:</td>
+                            <td class="color-light" data-column="title"><?php $this->echoField('SERVER_DATE'); ?></td>
                             <td id="system-server-date" class="highlight"></td>
                         </tr>
                     </tbody>
@@ -47,37 +46,36 @@
         <!-- Cpu -->
         <div class="block col mob-whole tab-half desk-large-third">
             <div class="header">
-                <span class="title">Cpu</span>
+                <span class="title"><?php $this->echo('CPU'); ?></span>
                 <ul class="action-bar">
-                    <li><a class="action-link" href="#" data-module="Cpu" title="Refresh"><i class="fa fa-refresh"></i></a>
-                    </li>
+                    <li><a class="action-link" href="#" data-module="Cpu" title="Refresh"><i class="fa fa-refresh"></i></a></li>
                 </ul>
             </div>
             <div class="content">
                 <table class="data-table">
                     <tbody>
                         <tr>
-                            <td  class="color-light" data-column="title">Model:</td>
+                            <td  class="color-light" data-column="title"><?php $this->echoField('MODEL'); ?></td>
                             <td id="cpu-model" class="highlight"></td>
                         </tr>
                         <tr>
-                            <td  class="color-light" data-column="title">Cores:</td>
+                            <td  class="color-light" data-column="title"><?php $this->echoField('CORES'); ?></td>
                             <td id="cpu-cores" class="highlight"></td>
                         </tr>
                         <tr>
-                            <td  class="color-light" data-column="title">Speed:</td>
+                            <td  class="color-light" data-column="title"><?php $this->echoField('SPEED'); ?></td>
                             <td id="cpu-speed" class="highlight"></td>
                         </tr>
                         <tr>
-                            <td  class="color-light" data-column="title">Cache:</td>
+                            <td  class="color-light" data-column="title"><?php $this->echoField('CACHE'); ?></td>
                             <td id="cpu-cache" class="highlight"></td>
                         </tr>
                         <tr>
-                            <td  class="color-light" data-column="title">Bogomips:</td>
+                            <td  class="color-light" data-column="title"><?php $this->echoField('BOGOMIPS'); ?></td>
                             <td id="cpu-bogomips" class="highlight"></td>
                         </tr>
                         <tr>
-                            <td  class="color-light" data-column="title">Temperature:</td>
+                            <td  class="color-light" data-column="title"><?php $this->echoField('TEMPERATURE'); ?></td>
                             <td id="cpu-temperature" class="highlight"></td>
                         </tr>
                     </tbody>
@@ -344,6 +342,7 @@
             </div>
             <div class="content">
                 <table id="services-table" class="data-table">
+                    <thead></thead>
                     <tbody></tbody>
                 </table>
             </div>
