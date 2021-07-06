@@ -2,6 +2,8 @@
 
 > *Mini* monitoring web-based app and CLI tool for Gnu/linux server. 
 
+![preview_dark](/doc/img/overview_dark.png)
+
 ## Main features
 
 *Monitoring*
@@ -50,7 +52,8 @@ See [Install minitoring on debian buster with Apache](/doc/install.md).
 
 For others systems, you will have to build the package:
 - Install dependencies and build autoloader using `composer`.
-- Install dev dependencies and compile css/js (requires `nmp`)
+- Install dev dependencies and compile scss/js (requires `npm`)
+- Run and manage minitoring-server
 
 
 ## Config

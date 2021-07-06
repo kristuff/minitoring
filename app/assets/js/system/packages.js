@@ -74,16 +74,20 @@ Minitoring.Packages = {
                 lastGroupCount = 0,
                 groupRowsDetailHtml = '';
 
+            var groupRow = function(group, count){
+                return '<tr class="group-row" data-group-id="' + group + '">' +
+                        '<td class="align-left" colspan="10"><a class="toggle"><i class="fa fa-fw color-theme"></i><span class="text-bold">' + group + '</span><span class="margin-left-6 color-light">(' + count + ')</span></td>' +
+                        '</tr>'
+            }
+
+
             for (var i = 0; i < result.data.packages.length; i++) {
                 currentGroup = result.data.packages[i].name.charAt(0).toUpperCase();
                 
                 // new group and previous group is not empty, add it
                 if (currentGroup !== lastGroup && lastGroup !== ''){
                     
-                    bodyHtml += '<tr class="group-row" data-group-id="' + lastGroup + '">';
-                    bodyHtml += '<td class="align-left" colspan="7"><a class="toggle"><i class="fa fa-fw color-theme"></i>' ;
-                    bodyHtml += lastGroup + '<span class="margin-left-6 color-light">(' + lastGroupCount + ')</span></td>';
-                    bodyHtml += '</tr>';
+                    bodyHtml += groupRow(lastGroup, lastGroupCount);
                     bodyHtml += groupRowsDetailHtml;
                 
                     // register new group, reset details
@@ -98,10 +102,7 @@ Minitoring.Packages = {
 
                 // last item? add group row and details
                 if (i === result.data.packages.length -1){
-                    bodyHtml += '<tr class="group-row" data-group-id="' + lastGroup + '">';
-                    bodyHtml += '<td class="align-left" colspan="7"><a class="toggle"><i class="fa fa-fw color-theme"></i>' ;
-                    bodyHtml += lastGroup + '<span class="margin-left-6 color-light">(' + lastGroupCount + ')</span></td>';
-                    bodyHtml += '</tr>';
+                    bodyHtml += groupRow(lastGroup, lastGroupCount); 
                     bodyHtml += groupRowsDetailHtml;
                 }
             }
@@ -116,6 +117,7 @@ Minitoring.Packages = {
             document.querySelector('#packages-table tbody').innerHTML = bodyHtml;
             document.querySelector('#packages-table thead').innerHTML = '<tr>' +
 //                                    '<th data-column="State">State</th>' +
+                                    '<th data-column="Group" class="group"></th>' +
                                     '<th data-column="Name">Name</th>' +
                                     '<th data-column="Version">Version</th>' +
                                     '<th data-column="Arch">Arch</th>' +
@@ -180,6 +182,7 @@ Minitoring.Packages = {
         if (Minikit.isObj(item.error)){
             errorHtml = '<span class="badge" data-badge="error">' + item.error + '</span>';
         }
+        html += '<td data-column="Group" class="group"></td>';
         html += '<td data-column="Name">'        + item.name        + '</td>';
         html += '<td data-column="Version">'     + item.version     + '</td>';
         html += '<td data-column="Arch">'        + item.arch        + '</td>';
