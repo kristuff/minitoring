@@ -146,7 +146,7 @@
             },
             {
                 "name": "combined",
-                "format": "%h %l %u %t \"%r\" %>s %O"
+                "format": "%h %l %u %t \"%r\" %>s %O \"%{Referer}i\" \"%{User-Agent}i\""
             },
             {
                 "name": "vhost_combined",

@@ -13,16 +13,18 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.11
+ * @version    0.1.15
  * @copyright  2017-2021 Kristuff
  */
 
 namespace Kristuff\Minitoring\Model;
 
+use Collator;
 use Kristuff\Miniweb\Auth;
 use Kristuff\Miniweb\Mvc\TaskResponse;
 use Kristuff\Minitoring\Model\Log;
 use Kristuff\Patabase\Database;
+use Kristuff\Minitoring\Model\Collection;
 
 /** 
  * SetupModel
@@ -168,7 +170,7 @@ class SetupModel extends \Kristuff\Miniweb\Data\Model\SetupModel
         return Auth\Model\UserModel::createTable($database) &&
                Auth\Model\UserSettingsModel::createTableSettings($database) &&
                Auth\Model\AppSettingsModel::createTableSettings($database) &&
-               Log\LogsCollectionModel::setup($database) &&
-               Services\ServicesCollectionModel::setup($database);
+               Collection\LogsCollectionModel::setup($database) &&
+               Collection\ServicesCollectionModel::setup($database);
     }
 }

@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.11
+ * @version    0.1.15
  * @copyright  2017-2021 Kristuff
  */
 
@@ -21,6 +21,10 @@
  * Texts used in the application.
  */
 return array(
+
+    /* formats */
+    'DATE_FORMAT'                                       => 'd/m/Y',
+    'DATE_TIME_FORMAT'                                  => 'd/m/Y H:i:s',
 
     /* app errors */
     'ERROR_UNEXPECTED'                                  => 'Une erreur inconnue est survenue.',

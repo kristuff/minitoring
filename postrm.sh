@@ -1,16 +1,18 @@
 #!/bin/sh
 
-# colors
-RESET="\e[0m"
-ORANGE="\e[38;5;202m"
-WHITE="\e[0;49;97m"
-GREEN="\e[0;49;32m"
-YELLOW="\e[0;49;93m"
-RED="\e[0;49;31m"
+# systemd ?
+INIT_PROG=$(ps -p 1 -o comm=)
 
-echo "Reload system daemons"
-systemctl daemon-reload
-systemctl reset-failed
+if [ "$INIT_PROG" = "systemd" ]; then 
 
-echo -e  "${ORANGE}Minitoring${RESET} is now uninstalled"
+    echo "Reload system daemons ..."
+    systemctl daemon-reload
+    systemctl reset-failed
+
+#else
+# not systemd
+fi;
+
+
+echo "Minitoring is now uninstalled"
 

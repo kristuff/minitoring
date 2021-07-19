@@ -2,6 +2,8 @@
 
 > *Mini* monitoring web-based app and CLI tool for Gnu/linux server. 
 
+**/!\ In progress...** 
+
 ![preview_dark](/doc/img/overview_dark.png)
 
 ## Main features
@@ -30,6 +32,7 @@
 
 ## Requirements
 - A Linux<sup>1</sup> web server<sup>2</sup> with root privileges
+- A dedicated subdomain 
 - PHP >=7.3
 - pdo_sqlite extension
 
@@ -63,7 +66,8 @@ Most config tasks are done by web installer or can be changed from web interface
 ## Limitations/known issues/TODO
 - You cannot be logged in with the same account on multiple devices at the same time (won't fix). 
 - Web installer does not honor Mysql and PostgreSQL, for now Sqlite only (**TODO** but for now no periodic monitoring so large database not needed)
-- Packages: deb only, support for other systems?
+- Packages: deb only, support for `rpm` packages should come soon (**TODO** config)
 - Supposes Fail2ban installed (**TODO** option)
 - Translation in progress
-- **In progress...** 
+- Logreader: To add a log file, webserver checks file exists first. To add log files like apache logs, located in `/var/log/apache2` on debian, you need to add `execute` permission to that directory (`chmod +x /var/log/apache2`), otherwise, app will refuse to add file saying it doesn't exist. Note: no need to add `read` permission to web server as file will be read by a service launch by root.
+- apt-key is deprecated in debian 11 and will be removed:  

@@ -14,7 +14,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.11
+ * @version    0.1.15
  * @copyright  2017-2021 Kristuff
  */
 
@@ -22,15 +22,15 @@ require_once realpath(__DIR__) .'/../vendor/autoload.php';
 
 use Kristuff\Mishell\Console;
 use Kristuff\Minitoring\Model\System;
-use Kristuff\Minitoring\Model\Services\Fail2banModel;
+use Kristuff\Minitoring\Model\System\Fail2banModel;
 use Kristuff\Minitoring\Model\System\SystemModel;
 use Kristuff\Minitoring\Model\System\ServiceModel;
 
 // x    => no value
 // x:   => value required
 // x::  => optional value
-$arguments = getopt("aiucdnmlhspf", 
-                   ["all", "infos", "uptime", "cpu", "disks", "inodes", "memory", "load", "all", "system", "perf", "help", "f2b", "ftbstatus:"]);
+$arguments = getopt("asucdinmlhpf", 
+                   ["all", "system", "uptime", "cpu", "disks", "inodes", "network", "memory", "load", "help", "ping", "f2b", "ftbstatus:"]);
 
 // start prog
 Program::start($arguments);
@@ -64,27 +64,19 @@ class Program
         } 
 
         Console::log();    
-        if (self::inArguments($arguments, 'i', 'infos'))  self::systemInfos();
-        if (self::inArguments($arguments, 'u', 'uptime')) self::uptime();
-        if (self::inArguments($arguments, 'c', 'cpu'))    self::cpuInfos();
-        if (self::inArguments($arguments, 'd', 'disks'))  self::diskInfos();
-        if (self::inArguments($arguments, 'n', 'inodes')) self::inodesInfos();
-        if (self::inArguments($arguments, 'm', 'memory')) self::memory();
-        if (self::inArguments($arguments, 'l', 'load'))   self::load();
+        if (self::inArguments($arguments, 's', 'system'))   self::systemInfos();
+        if (self::inArguments($arguments, 'u', 'uptime'))   self::uptime();
+        if (self::inArguments($arguments, 'c', 'cpu'))      self::cpuInfos();
+        if (self::inArguments($arguments, 'd', 'disks'))    self::diskInfos();
+        if (self::inArguments($arguments, 'i', 'inodes'))   self::inodesInfos();
+        if (self::inArguments($arguments, 'm', 'memory'))   self::memory();
+        if (self::inArguments($arguments, 'l', 'load'))     self::load();
+        if (self::inArguments($arguments, 'n', 'network'))  self::networkInfos();
+        if (self::inArguments($arguments, 'p', 'ping'))     self::pingInfos();
       
-        if (self::inArguments($arguments, 's', 'system', '', '')){
-            self::systemInfos();
-            self::uptime();
-            self::cpuInfos();
-        } 
-        if (self::inArguments($arguments, 'p', 'perf', '', '')) {
-            self::diskInfos();
-            self::memory();
-            self::load();
-        } 
       
         //todo
-        if (self::inArguments($arguments, 'f', 'f2b'))   self::fail2ban();
+        if (self::inArguments($arguments, 'f', 'f2b', 'NO-ALL!','NO-ALL!'))   self::fail2ban();
 
         $jail = self::getArgumentValue($arguments, '', 'ftbstatus');
         if (isset($jail)) {
@@ -190,24 +182,24 @@ class Program
         self::topBanner();
         Console::log();    
         Console::log(' ' . Console::text('SYNOPSIS', 'white', 'underline')); 
-        Console::log(' ' . Console::text('    php minitoring ', 'white') . 
+        Console::log(' ' . Console::text('    minitoring ', 'white') . 
                            Console::text('[', 'lightgrey') .
                            Console::text('options', 'yellow') . 
                            Console::text(']', 'lightgrey')
         ); 
         Console::log();    
         Console::log(' ' . Console::text('OPTIONS', 'white', 'underline')); 
-        Console::log('   -i, --infos     Display general system infos', 'normal');
-        Console::log('   -u, --uptime    Display uptime infos', 'normal');
-        Console::log('   -c, --cpu       Display cpu infos', 'normal');
-        Console::log('   -d, --disks     Display disks usage', 'normal');
-        Console::log('   -n, --inodes    Display inodes usage', 'normal');
-        Console::log('   -m, --memory    Display memory usage', 'normal');
-        Console::log('   -l, --load      Display load average', 'normal');
-        Console::log('   -f, --f2b       Display Fail2ban stats', 'normal');
-        Console::log('   -a, --all       Display all infos messages', 'normal');
-        Console::log('   -s, --system    Display all system infos related', 'normal');
-        Console::log('   -p, --perf      Display all performance infos related', 'normal');
+        Console::log('   -s, --system    Prints general system infos', 'normal');
+        Console::log('   -u, --uptime    Prints uptime infos', 'normal');
+        Console::log('   -c, --cpu       Prints cpu infos', 'normal');
+        Console::log('   -d, --disks     Prints disks usage', 'normal');
+        Console::log('   -i, --inodes    Prints inodes usage', 'normal');
+        Console::log('   -m, --memory    Prints memory usage', 'normal');
+        Console::log('   -l, --load      Prints load average', 'normal');
+        Console::log('   -f, --f2b       Prints Fail2ban stats', 'normal');
+        Console::log('   -n, --network   Prints all system infos related', 'normal');
+        Console::log('   -p, --ping      Prints ping stats', 'normal');
+        Console::log('   -a, --all       Prints all infos messages', 'normal');
         Console::log();    
     }
 
@@ -286,8 +278,72 @@ class Program
         }
     }
 
+        // system functions
+        static function pingInfos()
+        {
+            self::sectionTitle('Ping');
+            //Console::log();
+    
+            $pings = System\PingModel::getPingResults();
+            $rowHeaders = ['Host' => 20, 'Ping'  => 15];
+            Console::log(' '.Console::tableRowSeparator($rowHeaders, 'darkgray'));
+            Console::log(' ' . 
+                Console::text(
+                    Console::tableRowStart() . 
+                    Console::tableRowCell(Console::text('Host', 'darkgray'), 20) .
+                    Console::tableRowCell(Console::text('Ping', 'darkgray'), 15, Console::ALIGN_CENTER)
+                )    
+            );
+            Console::log(' '.Console::tableRowSeparator($rowHeaders, 'darkgray'));
+    
+            foreach ($pings as $item){
+                Console::log(
+                    ' ' .
+                    Console::tableRowStart() .
+                    Console::tableRowCell($item['host'], 20) .
+                    Console::tableRowCell(Console::text($item['ping'] . ' ms', 'white'), 15, Console::ALIGN_RIGHT)
+                );
+            }
+            //Console::log(' '.Console::tableRowSeparator($rowHeaders, 'darkgray'));
+            Console::log();
+        }
+    
+    
+    
    
+    // system functions
+    static function networkInfos()
+    {
+        self::sectionTitle('Network');
+        //Console::log();
 
+        $network = System\NetworkModel::getNeworkInfos();
+        $rowHeaders = ['Interface' => 15, 'IP'  => 30, 'Receive' => 15, 'Transmit' => 15 ];
+        Console::log(' '.Console::tableRowSeparator($rowHeaders, 'darkgray'));
+        Console::log(' ' . 
+            Console::text(
+                Console::tableRowStart() . 
+                Console::tableRowCell(Console::text('Interface', 'darkgray'), 15) .
+                Console::tableRowCell(Console::text('IP', 'darkgray'),   30) .
+                Console::tableRowCell(Console::text('Transmit', 'darkgray'),  15, Console::ALIGN_CENTER) .
+                Console::tableRowCell(Console::text('Receive', 'darkgray'), 15, Console::ALIGN_CENTER)
+            )    
+        );
+        Console::log(' '.Console::tableRowSeparator($rowHeaders, 'darkgray'));
+
+        foreach ($network['network'] as $item){
+            Console::log(
+                ' ' .
+                Console::tableRowStart() .
+                Console::tableRowCell($item['interface'], 15) .
+                Console::tableRowCell($item['ip'], 30) .
+                Console::tableRowCell(Console::text($item['transmit'], 'white'), 15, Console::ALIGN_RIGHT) .
+                Console::tableRowCell(Console::text($item['receive'], 'white'), 15, Console::ALIGN_RIGHT)
+            );
+        }
+        //Console::log(' '.Console::tableRowSeparator($rowHeaders, 'darkgray'));
+        Console::log();
+    }
 
 
     // system functions
@@ -297,7 +353,7 @@ class Program
         Console::log();
         $os = System\SystemModel::getOs();
 
-        Console::log(' '. Console::tableRow(['hostname:'          => 20, Console::text($os['hostname'], 'white') => 50]));
+        Console::log(' '. Console::tableRow(['Hostname:'          => 20, Console::text($os['hostname'], 'white') => 50]));
         Console::log(' '. Console::tableRow(['Operating system:'  => 20, Console::text($os['pretty'],   'white') => 50]));
         Console::log(' '. Console::tableRow([' › System: '        => 20, Console::text($os['system'],   'white') => 50]));
         Console::log(' '. Console::tableRow([' › Release:'        => 20, Console::text($os['release'],  'white') => 50]));

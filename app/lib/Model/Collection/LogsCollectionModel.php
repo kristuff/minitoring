@@ -13,13 +13,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.11
+ * @version    0.1.15
  * @copyright  2017-2021 Kristuff
  */
 
-namespace Kristuff\Minitoring\Model\Log;
+namespace Kristuff\Minitoring\Model\Collection;
 
 use Kristuff\Minitoring\Model\System\SystemBaseModel;
+use Kristuff\Minitoring\Model\Log\LogReaderModel;
 use Kristuff\Miniweb\Auth\Model\UserLoginModel;
 use Kristuff\Miniweb\Mvc\TaskResponse;
 use Kristuff\Miniweb\Core\Path;

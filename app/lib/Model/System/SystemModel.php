@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.11
+ * @version    0.1.15
  * @copyright  2017-2021 Kristuff
  */
 namespace Kristuff\Minitoring\Model\System;
@@ -87,6 +87,20 @@ class SystemModel extends SystemBaseModel
     }
 
     /**
+     * Returns 
+     *
+     * @access public
+     * @static
+     *
+     * @return string
+     */
+    public static function getInitProgramme()
+    {
+        $init = shell_exec('ps -p 1 -o comm=');
+        return isset($init) ? $init : '';
+    }
+
+    /**
      * Returns hostname
      *
      * @access public
@@ -102,7 +116,6 @@ class SystemModel extends SystemBaseModel
     /**
      * Returns the OS infos
      *
-     * 
      * 'a': This is the default. Contains all modes in the sequence "s n r v m".
      * 's': Operating system name. eg. FreeBSD.
      * 'n': Host name. eg. localhost.example.com.
@@ -175,7 +188,8 @@ class SystemModel extends SystemBaseModel
             return 'N.A';
         }
         $upt = explode(' ', $upt_tmp);
-        return date('Y-m-d H:i:s', time() - intval($upt[0]));
+        $format = self::text('DATE_TIME_FORMAT') ?? 'Y-m-d H:i:s';
+        return date($format, time() - intval($upt[0]));
     }
 
     /**
@@ -189,7 +203,8 @@ class SystemModel extends SystemBaseModel
     public static function getServerDate()
     {
         if (!($serverDate = shell_exec('/bin/date'))){
-            return date('Y-m-d H:i:s');
+            $format = self::text('DATE_TIME_FORMAT') ?? 'Y-m-d H:i:s';
+            return date($format);
         }
         return str_replace("\n", '', $serverDate);
     }

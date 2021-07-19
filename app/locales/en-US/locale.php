@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.11
+ * @version    0.1.15
  * @copyright  2017-2021 Kristuff
  */
 
@@ -22,6 +22,10 @@
  */
 return array(
 
+    /* formats */
+    'DATE_FORMAT'                                       => 'Y-m-d',
+    'DATE_TIME_FORMAT'                                  => 'Y-m-d H:i:s',
+ 
     /* app errors */
     'ERROR_UNEXPECTED'                                  => 'An unexpected error occurred',
     'ERROR_PATH_MISSING'                                => "Path '%s' does not exist",

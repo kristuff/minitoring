@@ -13,13 +13,13 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.11
+ * @version    0.1.15
  * @copyright  2017-2021 Kristuff
  */
 
 namespace Kristuff\Minitoring\Model\System;
 
-use Kristuff\Minitoring\Model\Services\ServicesCollectionModel;
+use Kristuff\Minitoring\Model;
 use Kristuff\Minitoring\Model\System\SystemBaseModel;
 
 /** 
@@ -48,7 +48,7 @@ class ServiceModel extends SystemBaseModel
      */
     public static function getCheckedServicesList(bool $showPortNumber = false)
     {
-        $services = ServicesCollectionModel::getServicesList(1, true);
+        $services = Model\Collection\ServicesCollectionModel::getServicesList(1, true);
         foreach($services as &$service){
 
             if ($service['service_check_port'] ){

@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.11
+ * @version    0.1.15
  * @copyright  2017-2021 Kristuff
  */
 
@@ -24,7 +24,7 @@ use Kristuff\Miniweb\Mvc\TaskResponse;
 use Kristuff\Minitoring\Application;
 use Kristuff\Minitoring\Model;
 use Kristuff\Minitoring\Model\DependencyModel;
-use Kristuff\Minitoring\Model\Services\ServicesCollectionModel;
+use Kristuff\Minitoring\Model\Collection\ServicesCollectionModel;
 use Kristuff\Minitoring\Model\System;
 use Kristuff\Minitoring\Model\System\ServiceModel;
 use Kristuff\Minitoring\Model\TokenCheckerModel;
@@ -247,7 +247,7 @@ class ApiController extends \Kristuff\Miniweb\Auth\Controller\ApiController
                         break;
 
                      case '':
-                        $data = Model\Log\LogsCollectionModel::getList();
+                        $data = Model\Collection\LogsCollectionModel::getList();
                         $this->response = TaskResponse::create(200, '', $data);
                         break;
     
@@ -262,15 +262,15 @@ class ApiController extends \Kristuff\Miniweb\Auth\Controller\ApiController
                 $logName            = $this->request()->post('log_name', true) ?? false; 
                  
                 if (empty($param)){
-                    $this->response = Model\Log\LogsCollectionModel::add($logPath,$logType,$logName,$logFormatName,$logFormat);
+                    $this->response = Model\Collection\LogsCollectionModel::add($logPath,$logType,$logName,$logFormatName,$logFormat);
                 } else {
-                    $this->response = Model\Log\LogsCollectionModel::edit(intval($param), $logPath,$logType,$logName,$logFormatName,$logFormat);
+                    $this->response = Model\Collection\LogsCollectionModel::edit(intval($param), $logPath,$logType,$logName,$logFormatName,$logFormat);
                 }
 
                 break;
 
             case Request::METHOD_DELETE:
-                $this->response = Model\Log\LogsCollectionModel::delete(intval($param));
+                $this->response = Model\Collection\LogsCollectionModel::delete(intval($param));
                 break;                
         }
 
@@ -468,7 +468,7 @@ class ApiController extends \Kristuff\Miniweb\Auth\Controller\ApiController
                         
                     case 'feedback':
                         // the feedback function is available in any Model 
-                        $feedbacks      =  Model\AppModel::feedback();
+                        $feedbacks      =  Model\SetupModel::feedback();
                         $this->response = TaskResponse::create(200, null, [
                             'feedbackNegatives' => $feedbacks->getNegatives(),
                             'feedbackPositives' => $feedbacks->getPositives(),

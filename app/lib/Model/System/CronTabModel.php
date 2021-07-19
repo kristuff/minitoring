@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.11
+ * @version    0.1.15
  * @copyright  2017-2021 Kristuff
  */
 
@@ -109,7 +109,8 @@ class CronTabModel extends SystemModel
     {   
         $list = [];
         $directory = new \DirectoryIterator('/etc/cron.d');
-        
+        $dateTimeFormat = self::text('DATE_TIME_FORMAT') ?? 'Y-m-d H:i:s';
+
         foreach ($directory as $fileinfo) {
             if (!$fileinfo->isDot() && !$fileinfo->isDir() && $fileinfo->getFilename() !== '.placeholder') {
 
@@ -137,7 +138,7 @@ class CronTabModel extends SystemModel
                                 'timeExpression'    => $parsedCron['time'],
                                 'command'           => $parsedCron['command'],
                                 'nextRun'           => !empty($parser) ? $parser->getNextRunDate() : '',
-                                'nextRunDate'       => !empty($parser) ? $parser->getNextRunDate()->format('Y-m-d H:i:s') : '',
+                                'nextRunDate'       => !empty($parser) ? $parser->getNextRunDate()->format($dateTimeFormat) : '',
                            ]; 
                         }
                     }
@@ -159,6 +160,7 @@ class CronTabModel extends SystemModel
     public static function getSystemCron(): array
     {   
         $list = [];
+        $dateTimeFormat = self::text('DATE_TIME_FORMAT') ?? 'Y-m-d H:i:s';
         $systemPaths = [
             '/etc/cron.hourly',
             '/etc/cron.daily',
@@ -210,8 +212,8 @@ class CronTabModel extends SystemModel
                         'timeExpression'    => $parsedCron['time'],
                         'command'           => $parsedCron['command'],
                         'nextRun'           => !empty($parser) ? $parser->getNextRunDate() : '',
-                        'nextRunDate'       => !empty($parser) ? $parser->getNextRunDate()->format('Y-m-d H:i:s') : '',
-                'scripts'           => $scripts,
+                        'nextRunDate'       => !empty($parser) ? $parser->getNextRunDate()->format($dateTimeFormat) : '',
+                        'scripts'           => $scripts,
                     ]; 
                 }
             }
@@ -233,6 +235,7 @@ class CronTabModel extends SystemModel
         //if (!(exec('for user in $(cut -f1 -d: /etc/passwd); do echo $user; crontab -u $user -l; done', $data))){
 
         $list=[];
+        $dateTimeFormat = self::text('DATE_TIME_FORMAT') ?? 'Y-m-d H:i:s';
 
         //todo
         if (exec('cut -f1 -d: /etc/passwd', $users)){
@@ -264,7 +267,7 @@ class CronTabModel extends SystemModel
                                 'timeExpression'    => $parsedCron['time'],
                                 'command'           => $parsedCron['command'],
                                 'nextRun'           => !empty($parser) ? $parser->getNextRunDate() : '',
-                                'nextRunDate'       => !empty($parser) ? $parser->getNextRunDate()->format('Y-m-d H:i:s') : '',
+                                'nextRunDate'       => !empty($parser) ? $parser->getNextRunDate()->format($dateTimeFormat) : '',
                             ]; 
                         }
                     }

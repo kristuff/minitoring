@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.11
+ * @version    0.1.15
  * @copyright  2017-2021 Kristuff
  */
 
@@ -26,6 +26,7 @@ use Kristuff\Minitoring\Model\Log;
 use Kristuff\Minitoring\Model\Services;
 use Kristuff\Minitoring;
 use Kristuff\Minitoring\Model\TokenCheckerModel;
+use Kristuff\Minitoring\Model\System;
 
 class SocketServer implements MessageComponentInterface {
 
@@ -130,7 +131,7 @@ class SocketServer implements MessageComponentInterface {
             case 'fail2ban_status':
                 $this->log(LOG_INFO, 'Request accepted from IP [' . $remoteIP . '] command [' . $request['command'] . ']');
                 $response->setCode(200);
-                $response->setData(Services\Fail2banModel::getServerInfos());
+                $response->setData(System\Fail2banModel::getServerInfos());
                 break;
 
             case 'iptables':
@@ -139,7 +140,7 @@ class SocketServer implements MessageComponentInterface {
                 $offset = isset($request['offset']) ? intval($request['offset']) : 0;
                 $chain  = isset($request['chain'])  ? $request['chain'] : '';
                 $response->setCode(200);
-                $response->setData(Services\IptablesModel::getIptablesList($chain,$offset, $limit));
+                $response->setData(System\IptablesModel::getIptablesList($chain,$offset, $limit));
                 break;
 
             case 'ip6tables':
@@ -148,7 +149,7 @@ class SocketServer implements MessageComponentInterface {
                 $offset = isset($request['offset']) ? intval($request['offset']) : 0;
                 $chain  = isset($request['chain'])  ? $request['chain'] : '';
                 $response->setCode(200);
-                $response->setData(Services\IptablesModel::getIp6tablesList($chain,$offset, $limit));
+                $response->setData(System\IptablesModel::getIp6tablesList($chain,$offset, $limit));
                 break;  
                 
             default:
