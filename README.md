@@ -10,7 +10,7 @@
 
 *Monitoring*
 
-Feature | Web   | CLI
+:Feature | :Web   | :CLI
 ----    |---    |---
 Get **system** infos: O/S, kernel version, uptime/last boot date | ✔️| ✔️ |
 Get **CPU** infos: model, frequency, cores number, bogomips, temperature | ✔️| ✔️ |
@@ -40,11 +40,7 @@ List system **users**/**groups**, last/currently connected users | ✔️| - |
 - PHP >=7.3
 - pdo_sqlite extension
 
-<small>
-<sup>1</sup> *for now tested only on Debian 10, Ubuntu 21.04* 
-
-<sup>2</sup> *for now tested only with Apache.*
-</small>
+<sup>1</sup><small>for now tested only on Debian 10, Ubuntu 21.04</small><sup>2</sup><small>for now tested only with Apache.</small>
 
 ## How it works ?
 Minitoring is inspired from [ezservermonitor-web](https://github.com/shevabam/ezservermonitor-web). 
