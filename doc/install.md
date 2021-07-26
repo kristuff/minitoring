@@ -62,12 +62,12 @@ Packages are available on [packages.kristuff.fr](https://packages.kristuff.fr). 
 
 #### 1.2 Install package:
 
-    ```
-    apt-get update
-    apt-get install minitoring
-    ```
+```
+apt-get update
+apt-get install minitoring
+```
 
-    Minitoring  `app` and `public` folders are deployed to `/var/www/minitoring`.
+Minitoring  `app` and `public` folders are deployed to `/var/www/minitoring`.
 
 
 
