@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.15
+ * @version    0.1.17
  * @copyright  2017-2021 Kristuff
  */
 
@@ -66,7 +66,7 @@ return array(
      */
     'APP_NAME'                  =>  'Minitoring',
     'APP_COPYRIGHT'             =>  '2017-' .date("Y") . ' Kristuff',
-    'APP_VERSION'               =>  '0.1.15',
+    'APP_VERSION'               =>  '0.1.17',
     'APP_LANGUAGE'              =>  'en-US',
  
     'DATA_PATH'                 => __DIR__ . '/../data/',
@@ -83,10 +83,12 @@ return array(
      * Configuration for: miniweb auth / login / password recovery
      * ***********************************************************
      */
+    'AUTH_SIGNUP_ENABLED'                        => false,  // not implemented, you don't want anybody to register..
+    'AUTH_INVITATION_ENABLED'                    => true,   // 
+
+    //
     'AUTH_LOGIN_COOKIE_ENABLED'                  => false,  // experimental, support only one device 
     'AUTH_PASSWORD_RESET_ENABLED'                => false,  
-    'AUTH_INVITATION_ENABLED'                    => true,   // 
-    'AUTH_SIGNUP_ENABLED'                        => false,  // not implemented, you don't want anybody to register..
     'AUTH_EMAIL_HTML'                            => true,   // experimental..
     'AUTH_EMAIL_FROM_EMAIL'                      => 'no-reply@minitoring.EXAMPLE.COM',
     'AUTH_EMAIL_FROM_NAME'                       => 'The Minitoring team',

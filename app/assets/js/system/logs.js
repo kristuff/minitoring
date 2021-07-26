@@ -127,6 +127,10 @@ Minitoring.Logs = {
                                     cellContent = Minikit.Format.date(log['stamp'], '{YYYY}-{MM}-{DD} {hh}:{mm}:{ss}', true)
                                     break    
 
+                                case 'referer':
+                                        cellContent = Minikit.isObj(log[propertyName]) ? log[propertyName] : '';
+                                        break    
+
                                 default:
                                     cellContent = log[propertyName];
                                 }

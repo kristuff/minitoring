@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.15
+ * @version    0.1.17
  * @copyright  2017-2021 Kristuff
  */
 
@@ -111,7 +111,6 @@ class ApiController extends \Kristuff\Miniweb\Auth\Controller\ApiController
             }
         }
 
-        // render
         $this->view->renderJson($this->response->toArray(), $this->response->code());
     }
 
@@ -206,7 +205,6 @@ class ApiController extends \Kristuff\Miniweb\Auth\Controller\ApiController
             }
         }
 
-        // render
         $this->view->renderJson($this->response->toArray(), $this->response->code());
     }
 
@@ -274,7 +272,6 @@ class ApiController extends \Kristuff\Miniweb\Auth\Controller\ApiController
                 break;                
         }
 
-        // render
         $this->view->renderJson($this->response->toArray(), $this->response->code());
     }
 
@@ -330,7 +327,6 @@ class ApiController extends \Kristuff\Miniweb\Auth\Controller\ApiController
             }
         }
 
-        // render
         $this->view->renderJson($this->response->toArray(), $this->response->code());
     }
 
@@ -502,6 +498,4 @@ class ApiController extends \Kristuff\Miniweb\Auth\Controller\ApiController
         
         $this->view->renderJson($this->response->toArray(), $this->response->code());
     }
-    
-
 }

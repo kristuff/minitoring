@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.15
+ * @version    0.1.17
  * @copyright  2017-2021 Kristuff
  */
 
@@ -35,7 +35,7 @@ class SystemBaseModel extends DatabaseModel
      *   1:    %error < 75   (state warning)
      *   2:    %error >= 75  (state error)
      * 
-     * TODO: custome threshold
+     * TODO: custom threshold
      * 
      * @access public
      * @static method
@@ -121,9 +121,14 @@ class SystemBaseModel extends DatabaseModel
     }
 
     /**
-     * TODO
-     * Seconds to human readable text
-     * Eg: for 36545627 seconds => 1 year, 57 days, 23 hours and 33 minutes
+     * Split time (seconds) to array
+     * Eg: for 36545627 seconds:
+     *      [
+     *          'year' => 1,
+     *          'days' => 57,
+     *          'hours' => 23,
+     *          'minutes' => 33
+     *      ]
      * 
      * @return string Text
      */

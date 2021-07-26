@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.15
+ * @version    0.1.17
  * @copyright  2017-2021 Kristuff
  */
 
@@ -301,9 +301,9 @@ class LogsCollectionModel extends SystemBaseModel
      * @param string        $logFormatName  The log file format name 
      * @param string        $logFormat      The log file format
      * 
-     * @return  \Kristuff\Miniweb\Mvc\Taskresponse
+     * @return  TaskResponse
      */
-    public static function edit(int $logId, string $logPath, string $logType, string $logName, string $logFormatName = '', string $logFormat = '')
+    public static function edit(int $logId, string $logPath, string $logType, string $logName, string $logFormatName = '', string $logFormat = ''): TaskResponse
     {
         $response = TaskResponse::create();
             

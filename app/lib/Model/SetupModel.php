@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.15
+ * @version    0.1.17
  * @copyright  2017-2021 Kristuff
  */
 
@@ -118,7 +118,7 @@ class SetupModel extends \Kristuff\Miniweb\Data\Model\SetupModel
 
 
     /**
-     * Install process
+     * Install process (TODO sqlite)
      * 
      * @access public
      * 

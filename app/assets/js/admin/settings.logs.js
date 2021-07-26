@@ -12,15 +12,26 @@ Minitoring.Settings.Logs = {
             logFormat     = selectElement.options[selectElement.selectedIndex].getAttribute('data-log-format');
 
         document.querySelector('input#log-create-format').value = logFormat;
-        document.querySelector('input#log-create-format').setAttribute('readonly', logFormat != '' ? 'true' : 'false')            
+        
+        if (logFormat == ''){
+            document.querySelector('input#log-create-format').removeAttribute('readonly');            
+        } else {
+            document.querySelector('input#log-create-format').setAttribute('readonly', 'readonly');
+        }
         document.querySelector('input#log-create-type').value = selectElement.options[selectElement.selectedIndex].getAttribute('data-log-type');
     }, 
     dialogEditFormatChanged: function(){
         var selectElement = document.querySelector('select#log-edit-format-name'),
             logFormat     = selectElement.options[selectElement.selectedIndex].getAttribute('data-log-format');
 
-        document.querySelector('input#log-edit-format').setAttribute('readonly', logFormat != '' ? 'true' : 'false')            
         document.querySelector('input#log-edit-format').value = logFormat;
+
+        if (logFormat == ''){
+            document.querySelector('input#log-edit-format').removeAttribute('readonly');            
+        } else {
+            document.querySelector('input#log-edit-format').setAttribute('readonly', 'readonly');
+        }
+
         document.querySelector('input#log-edit-type').value = selectElement.options[selectElement.selectedIndex].getAttribute('data-log-type');
     }, 
 

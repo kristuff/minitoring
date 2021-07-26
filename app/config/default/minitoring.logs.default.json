@@ -248,24 +248,69 @@
                 "code":"%M",
                 "name":"message",
                 "display":"Message"
+            },
+            {
+                "code":"referer",
+                "name":"referer",
+                "display":"Referer"
             }
         ],
         "formats": [
             {
-                "name": "default apache2.2",
-                "format": "[%t] [%l] [client %a] %F: %E: %M"
+                "name": "apache2.2 default",
+                "format": "[%t] [%l] %E: [client %a] %M"
             }, 
             {
-                "name": "default apache2.4",
-                "format": "[%{u}t] [%l] [pid %P] [client %a] %F: %E: %M"
+                "name": "apache2.2 extented",
+                "format": "[%t] [%l] %F: %E: [client %a] %M"
             }, 
             {
-                "name": "npm apache2.4",
-                "format": "[%{u}t] [%-m:%l] [pid %P] [client %a] %F: %E: %M"
+                "name": "apache2.2 referer",
+                "format": "[%t] [%l] %E: [client %a] %M , referer %{Referer}i"
+            }, 
+            {
+                "name": "apache2.2 extended referer",
+                "format": "[%t] [%l] %F: %E: [client %a] %M , referer %{Referer}i"
+            }, 
+            {
+                "name": "apache2.4 default",
+                "format": "[%{u}t] [%l] [pid %P] %E: [client %a] %M"
+            }, 
+            {
+                "name": "apache2.4 extended",
+                "format": "[%{u}t] [%l] [pid %P] %F: %E: [client %a] %M"
             },
             {
-                "name": "npm tid apache2.4",
-                "format": "[%{u}t] [%-m:%l] [pid %P:tid %T] [client %a] %F: %E: %M"
+                "name": "apache2.4 referer",
+                "format": "[%{u}t] [%l] [pid %P] %E: [client %a] %M , referer %{Referer}i"
+            }, 
+            {
+                "name": "apache2.4 extended referer",
+                "format": "[%{u}t] [%l] [pid %P] %F: %E: [client %a] %M , referer %{Referer}i"
+            },
+            {
+                "name": "apache2.4 mpm",
+                "format": "[%{u}t] [%-m:%l] [pid %P] %E: [client %a] %M"
+            },
+            {
+                "name": "apache2.4 mpm extented",
+                "format": "[%{u}t] [%-m:%l] [pid %P] %F: %E: [client %a] %M"
+            },
+            {
+                "name": "apache2.4 mpm referer",
+                "format": "[%{u}t] [%-m:%l] [pid %P] %E: [client %a] %M , referer %{Referer}i"
+            },
+            {
+                "name": "apache2.4 mpm extended referer",
+                "format": "[%{u}t] [%-m:%l] [pid %P] %F: %E: [client %a] %M , referer %{Referer}i"
+            },
+            {
+                "name": "apache2.4 mpm tid",
+                "format": "[%{u}t] [%-m:%l] [pid %P:tid %T] %F: %E: [client %a] %M"
+            },
+            {
+                "name": "apache2.4 mpm tid referer",
+                "format": "[%{u}t] [%-m:%l] [pid %P:tid %T] %F: %E: [client %a] %M , referer %{Referer}i"
             },
             {
                 "name": "custom",

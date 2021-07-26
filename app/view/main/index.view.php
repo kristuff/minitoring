@@ -45,7 +45,7 @@ if ($this->data('userIsAdmin') === true ) {
     include 'settings/settings.logs.dialog.php';
     include 'settings/settings.services.dialog.php';
 } else { 
-    // TODO ?>
+    // TODO hidden section to be able to retreive localized button texts... ?>
     <section class="need-active">
         <a href="#" class="dialog-button button button-o uppercase fw dialog-button-cancel" ><?php $this->echo('BUTTON_CANCEL'); ?></a>
         <a href="#" class="dialog-button button uppercase fw dialog-button-ok"><?php $this->echo('BUTTON_OK'); ?></a>

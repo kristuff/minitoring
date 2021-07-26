@@ -1,6 +1,4 @@
-<?php
-
-/** 
+/*
  *        _      _ _           _
  *  _ __ (_)_ _ (_) |_ ___ _ _(_)_ _  __ _
  * | '  \| | ' \| |  _/ _ \ '_| | ' \/ _` |
@@ -16,12 +14,3 @@
  * @version    0.1.17
  * @copyright  2017-2021 Kristuff
  */
-
-namespace Kristuff\Minitoring\Controller;
-
-/**
- * DisksController
- */
-class DisksController extends \Kristuff\Minitoring\PrivateController
-{
-}

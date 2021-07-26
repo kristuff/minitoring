@@ -1,5 +1,5 @@
 Package: minitoring
-Version: 0.1.15
+Version: 0.1.17
 Maintainer: kristuff <kristuff@kristuff.fr>
 Architecture: all
 Depends: apache2, php, php-sqlite3

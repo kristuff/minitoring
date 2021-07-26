@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.15
+ * @version    0.1.17
  * @copyright  2017-2021 Kristuff
  */
 
@@ -28,7 +28,7 @@ class PackagesModel extends SystemModel
 {
 
     /**
-     * Force EN language to standardize output on ant machine
+     * Force EN language to standardize output on any machine
      * 
      * @access protected
      * @static
@@ -43,6 +43,20 @@ class PackagesModel extends SystemModel
     }
 
     /**
+     * Get upgradable packages 
+     * 
+     * @access public
+     * @static
+     * 
+     * @return array
+     */
+    public static function getUpgradablePackages(): array
+    {
+        //TODO
+        return self::getUpgradableDebPackages();
+    }
+
+    /**
      * Get installed packages (include removed packages with conf files still present)
      * 
      * @access public
@@ -51,6 +65,48 @@ class PackagesModel extends SystemModel
      * @return array
      */
     public static function getPackages(): array
+    {
+        //TODO
+        return self::getDebPackages();
+    }
+
+    /**
+     * Get installed deb packages (include removed packages with conf files still present)
+     * 
+     * @access public
+     * @static
+     * 
+     * @return array
+     */
+    public static function getNpmPackages(): array
+    {
+        self::setLanguage();
+        $packages = [];
+        $errors = 0;
+        $installed = 0;
+
+        //dnf repoquery -a --installed --queryformat "%{name} %{arch} %{version} '%{installtime}' '%{reponame}' '%{description}'"
+        //TODO
+
+        return [
+            'packages'  => $packages,
+            'number'    => count($packages),
+            'errors'    => $errors,
+            'number_total'      => count($packages),
+            'number_installed'  => $installed,
+            'number_error'      => $errors,
+        ];
+    }
+
+    /**
+     * Get installed deb packages (include removed packages with conf files still present)
+     * 
+     * @access public
+     * @static
+     * 
+     * @return array
+     */
+    public static function getDebPackages(): array
     {
         self::setLanguage();
 
@@ -139,6 +195,9 @@ class PackagesModel extends SystemModel
         ];
     }
 
+
+
+
     /**
      * Get upgradable packages 
      * 
@@ -147,7 +206,7 @@ class PackagesModel extends SystemModel
      * 
      * @return array
      */
-    public static function getUpgradablePackages(): array
+    public static function getUpgradableDebPackages(): array
     {
         self::setLanguage();
         
