@@ -4,32 +4,63 @@
 ## Install minitoring on debian buster server with Apache
 
 > The following guide supposes:
-> - a debian based server with root access
+> - a debian based server with root access and running systemd
 > - Apache2 with `mod_ssl` enabled and SSL certificate files 
 > - a subdmain with dedicated vhost.  
 > - `apt-transport-https`
 
-### 1. Install package from packages.kristuff.fr: 
+### 1. Install package
 
--   #### Import the repository signing key
+#### 1.1 Configure apt repo
+
+Packages are available on [packages.kristuff.fr](https://packages.kristuff.fr). You can use `apt-key` to configure `apt` but its deprecated (still available in debian 11 then removed and already deprecated in ubuntu 21.04).
+
+[Instructions to connect to a third-party repository](https://wiki.debian.org/DebianRepository/UseThirdParty).
+
+- Configure apt using apt-key
+
+    -   ##### Import the repository signing key
+        
+        Add the public key to the APT keyring:
+
+        ```
+        wget -qO - https://packages.kristuff.fr/kristuff@kristuff.fr.gpg.key | sudo apt-key add -
+        ```
+
+
+    -   ##### Setup APT sources list:
+
+        Create a file `kristuff.list` in `/etc/apt/sources.list.d/` with the following content:
+
+        ```
+        deb https://packages.kristuff.fr buster main
+        deb-src https://packages.kristuff.fr buster main
+        ```
+
+-  Configure apt using [debian instructions to connect to a third-party repository](https://wiki.debian.org/DebianRepository/UseThirdParty).
+
+
+    -   ##### Import the repository signing key
     
-    Add the public key to the APT keyring:
+        Download and store the public key using curl (as root):
 
-    ```
-    wget -qO - https://packages.kristuff.fr/kristuff@kristuff.fr.gpg.key | sudo apt-key add -
-    ```
+        ```
+        curl https://packages.kristuff.fr/kristuff@kristuff.fr.gpg.key | gpg --dearmor > /usr/share/keyrings/kristuff-archive-keyring.gpg
+        ```
+
+    -   ##### Setup APT sources list:
+
+        Create a file `kristuff.list` in `/etc/apt/sources.list.d/` with the following content:
+
+        ```
+        deb [signed-by=/usr/share/keyrings/kristuff-archive-keyring.gpg] https://packages.kristuff.fr/ buster main
+        deb-src [signed-by=/usr/share/keyrings/kristuff-archive-keyring.gpg] https://packages.kristuff.fr/ buster main
+        ```
+
+    > If you want to use a different name, make sure to use the same name in key file and source list file: `<name>-archive-keyring.gpg` + `/etc/apt/sources.list.d/<name>.list` 
 
 
--   #### Setup APT sources list:
-
-    Create a file `kristuff.list` in `/etc/apt/sources.list.d/` with the following content:
-
-    ```
-    deb https://packages.kristuff.fr buster main
-    deb-src https://packages.kristuff.fr buster main
-    ```
-
--   #### Install package:
+#### 1.2 Install package:
 
     ```
     apt-get update
@@ -37,6 +68,8 @@
     ```
 
     Minitoring  `app` and `public` folders are deployed to `/var/www/minitoring`.
+
+
 
 ### 2. Optional config changes :
 
