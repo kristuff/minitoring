@@ -36,9 +36,11 @@
 - PHP >=7.3
 - pdo_sqlite extension
 
-<sup>1</sup> *for now tested only on Debian.* 
+<small>
+<sup>1</sup> *for now tested only on Debian 10, Ubuntu 21.04* 
 
 <sup>2</sup> *for now tested only with Apache.*
+</small>
 
 ## How it works ?
 Minitoring is inspired from [ezservermonitor-web](https://github.com/shevabam/ezservermonitor-web). 
