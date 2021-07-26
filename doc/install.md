@@ -13,11 +13,11 @@
 
 #### 1.1 Configure apt repo
 
-Packages are available on [packages.kristuff.fr](https://packages.kristuff.fr). You can use `apt-key` to configure `apt` but its deprecated (still available in debian 11 then removed and already deprecated in ubuntu 21.04).
-
-[Instructions to connect to a third-party repository](https://wiki.debian.org/DebianRepository/UseThirdParty).
+Packages are available on [packages.kristuff.fr](https://packages.kristuff.fr). 
 
 - Configure apt using apt-key
+
+    > You can use `apt-key` to configure `apt` but its deprecated (still available in debian 11 then removed and already deprecated in ubuntu 21.04).
 
     -   ##### Import the repository signing key
         
