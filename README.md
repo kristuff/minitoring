@@ -9,24 +9,28 @@
 ## Main features
 
 *Monitoring*
-- Get **system** infos: O/S, kernel version, uptime/last boot date, 
-- Get **CPU** infos: model, frequency, cores number, bogomips, temperature
-- Get **Network** usage: displaying the IP address of each network interface with the data transmitted and received 
-- Check **memory**/**swap** usage
-- Check **disks**/**inodes** usage
-- Check **packages**: installed, upgradable, error (*.deb packages only*) 
-- Check **Fail2ban** status and get jails stats
-- Check **Iptables**/**Ip6tables** content
-- List all **cron jobs** (user/system crons, system timers) 
-- **Logs reader**: support for configurable logs list, including `syslog`, `Apache` access/error, `Fail2ban` logs
-- **Services** status check (check tcp/udp port) for configurable services list.
-- List system **users**/**groups**, last/currently connected users
+
+Feature | Web   | CLI
+----    |---    |---
+Get **system** infos: O/S, kernel version, uptime/last boot date | ✔️| ✔️ |
+Get **CPU** infos: model, frequency, cores number, bogomips, temperature | ✔️| ✔️ |
+Get **Network** usage: displaying the IP address of each network interface with the data transmitted and received | ✔️| ✔️ |
+Check **memory**/**swap** usage | ✔️| ✔️ |
+Check **disks**/**inodes** usage  | ✔️| ✔️ |
+Check **packages**: installed, upgradable, error (*.deb packages only*) | ✔️| - |
+Check **Fail2ban** status and get jails stats | ✔️ (*stats based on db*)| ✔️ (*currents bans*)|
+Check **Iptables**/**Ip6tables** content | ✔️| - |
+Check **ping** stats for a configurable host list  | **TODO** | ✔️ |
+List all **cron jobs** (user/system crons, system timers) | ✔️| - |
+**Logs reader**: support for configurable logs list, including `syslog`, `Apache` access/error, `Fail2ban` logs | ✔️| - |
+**Services** status check (check tcp/udp port) for configurable services list | ✔️| - |
+List system **users**/**groups**, last/currently connected users | ✔️| - |
 
 *Web app*
 - Lightweight and smooth javascript navigation system
 - Responsive design
 - Dark/Light theme
-- Localization (EN, FR) ***in progress***
+- Localization (EN, FR)
 - Web installer
 
 
