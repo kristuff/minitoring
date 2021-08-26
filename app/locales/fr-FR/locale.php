@@ -42,6 +42,7 @@ return array(
     'BUTTON_OK'                                         => "OK",
     'BUTTON_CANCEL'                                     => "Annuler",
     'THEME_DARK'                                        => 'Foncé',
+    'THEME_DARK_BLUE'                                   => 'Foncé (bleu)',
     'THEME_LIGHT'                                       => 'Clair',
     'COLOR_YELLOW'                                      => 'Jaune',
     'COLOR_RED'                                         => 'Rouge',

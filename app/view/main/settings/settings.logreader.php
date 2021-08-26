@@ -4,7 +4,7 @@
     <section class="section">
         <h6 class="highlight"><?php $this->echo('SETTINGS_LOGREADER_LIST_TITLE'); ?></h6>
 
-        <table id="settings-logs-table" class="data-table responsive alternative-row-style">
+        <table id="settings-logs-table" class="data-table responsive XXalternative-row-style">
             <colgroup>
                 <col>
                 <col>

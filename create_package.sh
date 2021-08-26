@@ -9,12 +9,14 @@ mkdir -p debian/DEBIAN
 mkdir -p debian/var/www/minitoring
 mkdir -p debian/etc/systemd/system
 mkdir -p debian/etc/apache2/conf-available
+mkdir -p debian/usr/share/doc/minitoring
 
 # populate the debian directory
-cp control              debian/DEBIAN
-cp postinst.sh          debian/DEBIAN/postinst
-cp postrm.sh            debian/DEBIAN/postrm
-cp prerm.sh             debian/DEBIAN/prerm
+cp deb/control          debian/DEBIAN
+cp deb/postinst.sh      debian/DEBIAN/postinst
+cp deb/postrm.sh        debian/DEBIAN/postrm
+cp deb/prerm.sh         debian/DEBIAN/prerm
+cp deb/copyright        debian/usr/share/doc/minitoring
 
 cp LICENSE              debian/var/www/minitoring
 cp composer.lock        debian/var/www/minitoring

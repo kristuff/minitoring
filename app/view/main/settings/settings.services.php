@@ -3,7 +3,7 @@
 
     <section class="section">
         <h6 class="highlight"><?php $this->echo('SETTINGS_SERVICES_REGISTERED_TITLE'); ?></h6>
-        <table id="settings-services-table" class="data-table responsive alternative-row-style" data-dialog-delete-text="<?php $this->echo('SETTINGS_SERVICES_DELETE_MESSAGE'); ?>">
+        <table id="settings-services-table" class="data-table responsive XXalternative-row-style" data-dialog-delete-text="<?php $this->echo('SETTINGS_SERVICES_DELETE_MESSAGE'); ?>">
             <thead>
                 <tr class="table-header">
                     <th data-column="<?php $this->echo('SETTINGS_SERVICES_NAME_HEADER'); ?>" class="align-left"><?php $this->echo('SETTINGS_SERVICES_NAME_HEADER'); ?></th>

@@ -7,7 +7,7 @@
         M<span class="color-theme">i</span>nitoring
     </h5>
     <p class="">
-        Version <span class="badge" data-badge="theme">v<?php echo $this->data('APP_VERSION') ;?></span>
+        Version <span class="badge" data-badge="black">v<?php echo $this->data('APP_VERSION') ;?></span>
         <br>Copyright <i class="fa fa-copyright"></i> <?php echo $this->data('APP_COPYRIGHT');?>
         <br>Made with <i class="fa fa-heart color-theme"></i> and <i class="fa fa-coffee color-theme"></i> in France.
     </p>

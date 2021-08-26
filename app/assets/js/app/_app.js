@@ -28,10 +28,24 @@ Minitoring.App = {
         });
     },
     getFeedback: function () {
-        Minitoring.Api.apiRequest('GET', 'api/app/feedback', null, function(response) {
-            if (Minikit.isObj(response.message) || (Minikit.isObj(response.errors) && response.errors.lenght > 0)){
-                Minitoring.Api.notifyApiResponse(response);
+        Minitoring.Api.apiRequest('GET', 'api/app/feedback', null, function(apiResponse) {
+
+            var type = apiResponse.data.feedbackNegatives.length > 0 ? 'error' : 'success';
+            var msg = '';
+
+            if (apiResponse.data.feedbackNegatives && apiResponse.data.feedbackNegatives.length > 0){
+                msg += apiResponse.data.feedbackNegatives.map(function (msg){
+                    return msg;
+                }).join('<br>');
             }
+            if (apiResponse.data.feedbackPositives && apiResponse.data.feedbackPositives.length > 0){
+                msg += apiResponse.data.feedbackPositives.map(function (msg){
+                    return msg;
+                }).join('<br>');
+            }
+            if (Minikit.isObj(msg)) {
+                Minitoring.App.setNotif(type, msg);
+            } 
         });
     },
 };

@@ -11,64 +11,16 @@
 
 ### 1. Install package
 
-#### 1.1 Configure apt repo
+Packages (`.deb`) are available on [packages.kristuff.fr/debian/](https://packages.kristuff.fr/debian/). You can configure `apt` to connect kristuff repository (see instructions here: [packages.kristuff.fr/](https://packages.kristuff.fr/)) and install it: 
 
-Packages are available on [packages.kristuff.fr](https://packages.kristuff.fr). 
-
-- Configure apt using apt-key
-
-    > You can use `apt-key` to configure `apt` but its deprecated (still available in debian 11 then removed and already deprecated in ubuntu 21.04).
-
-    -   ##### Import the repository signing key
-        
-        Add the public key to the APT keyring:
-
-        ```
-        wget -qO - https://packages.kristuff.fr/kristuff@kristuff.fr.gpg.key | sudo apt-key add -
-        ```
-
-
-    -   ##### Setup APT sources list:
-
-        Create a file `kristuff.list` in `/etc/apt/sources.list.d/` with the following content:
-
-        ```
-        deb https://packages.kristuff.fr buster main
-        deb-src https://packages.kristuff.fr buster main
-        ```
-
--  Configure apt using [debian instructions to connect to a third-party repository](https://wiki.debian.org/DebianRepository/UseThirdParty).
-
-
-    -   ##### Import the repository signing key
-    
-        Download and store the public key using curl (as root):
-
-        ```
-        curl https://packages.kristuff.fr/kristuff@kristuff.fr.gpg.key | gpg --dearmor > /usr/share/keyrings/kristuff-archive-keyring.gpg
-        ```
-
-    -   ##### Setup APT sources list:
-
-        Create a file `kristuff.list` in `/etc/apt/sources.list.d/` with the following content:
-
-        ```
-        deb [signed-by=/usr/share/keyrings/kristuff-archive-keyring.gpg] https://packages.kristuff.fr/ buster main
-        deb-src [signed-by=/usr/share/keyrings/kristuff-archive-keyring.gpg] https://packages.kristuff.fr/ buster main
-        ```
-
-    > If you want to use a different name, make sure to use the same name in key file and source list file: `<name>-archive-keyring.gpg` + `/etc/apt/sources.list.d/<name>.list` 
-
-
-#### 1.2 Install package:
-
-```
+```.language-bash
 apt-get update
 apt-get install minitoring
 ```
+    
+Alternatively, you can download the latest `.deb` package from release tags and install it using `dpkg -i`.
 
 Minitoring  `app` and `public` folders are deployed to `/var/www/minitoring`.
-
 
 
 ### 2. Optional config changes :
@@ -124,6 +76,15 @@ The directory `app/config/sample` contains a full vhost sample. The main points 
     ProxyRequests off
     ProxyPreserveHost On 
     ```
+
+    If you want to test app from localhost, configure ProxyPass like this (note `ws`instead of `wss`):
+
+     ```apache-conf
+    ProxyPass "/wssapi" "ws://localhost:12443"
+    ProxyPassReverse "/wssapi" "ws://localhost:12443"
+    ProxyRequests off
+    ProxyPreserveHost On 
+    ``` 
 
 
 ### 4.  Restart `minitoring.service`, Enable apache modules, site and restart Apache:

@@ -31,7 +31,7 @@
         </ul> 
     </section>
     <section class="section">
-        <table id="sysusers-table"  class="data-table responsive alternative-row-style">
+        <table id="sysusers-table"  class="data-table responsive XXalternative-row-style">
             <thead>
                 <tr class="table-header">
                     <th data-column="User">User</th>

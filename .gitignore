@@ -1,7 +1,4 @@
 app/vendor/*
-app/_old/*
-app/view_old/*
-app/install_old/*
 *.old*
 *.local.php
 *.local.json

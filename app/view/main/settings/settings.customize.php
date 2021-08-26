@@ -25,6 +25,7 @@
                 <select id="select-theme" data-bind="Minitoring.Settings.themeChanged">
                     <option value="light" <?php echo $this->data('UI_THEME') === 'light' ? ' selected' : '' ;?> ><?php $this->echo('THEME_LIGHT');?></option>
                     <option value="dark"  <?php echo $this->data('UI_THEME') === 'dark'  ? ' selected' : '' ;?> ><?php $this->echo('THEME_DARK');?></option>
+                    <option value="darkblue"  <?php echo $this->data('UI_THEME') === 'darkblue'  ? ' selected' : '' ;?> ><?php $this->echo('THEME_DARK_BLUE');?></option>
                 </select>
             </div>
 

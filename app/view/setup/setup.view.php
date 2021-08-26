@@ -9,7 +9,7 @@
         <section class="wizard-inner ">
             <button class="wizard-button-close need-active "><i class="fa fa-times"></i></button>
             <section class="wizard-bottom bg-transp-light" >
-                <a href="#" class="button button-o fw theme uppercase wizard-button-prev"><?php $this->echo("PREV"); ?></a>                    
+                <a href="#" class="button button-o fw XXtheme uppercase wizard-button-prev"><?php $this->echo("PREV"); ?></a>                    
                 <a href="#" class="button uppercase fw theme wizard-button-next" data-visible="true" 
                     data-next-text="<?php $this->echo("NEXT"); ?>" 
                     data-close-text="<?php $this->echo("SETUP_WIZARD_BUTTON_CLOSE"); ?>"

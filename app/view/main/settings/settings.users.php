@@ -29,7 +29,7 @@
     <section id="users-actions" class="section action-bar">
         <h6><?php $this->echo('SETTINGS_USERS_SECTION_NEW_ACCOUNTS'); ?></h6>
         <section class="section">
-            <div class="container medium"><?php $this->echo('SETTINGS_USERS_CREATE_ACCOUNT_TEXT'); ?></div>
+            <div class="container-medium"><?php $this->echo('SETTINGS_USERS_CREATE_ACCOUNT_TEXT'); ?></div>
             <div class="padding-top-12 container x-small">
                 <a href="#" class="button full-width" data-bind="Minitoring.Users.create">
                     <i class="fa fa-user-plus icon-left color-theme"></i><span class="bt-title"><?php $this->echo('SETTINGS_USERS_CREATE_ACCOUNT_BUTTON'); ?></span>
@@ -37,7 +37,7 @@
             </div>
         </section>
         <section class="section">
-            <div class="container medium"><?php $this->echo('SETTINGS_USERS_INVITE_TEXT'); ?></div>
+            <div class="container-medium"><?php $this->echo('SETTINGS_USERS_INVITE_TEXT'); ?></div>
             <div class="padding-top-12 container x-small">
                <a href="#" class="button full-width" data-bind="Minitoring.Users.invite">
                     <i class="fa fa-envelope icon-left color-theme"></i><span class="bt-title"><?php $this->echo('SETTINGS_USERS_INVITE_BUTTON'); ?></span>

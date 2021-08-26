@@ -45,7 +45,7 @@
         </div>
     </section>
 
-    <table id="system-logs-table" class="data-table responsive alternative-row-style">
+    <table id="system-logs-table" class="data-table responsive XXalternative-row-style">
         <thead></thead>
         <tbody class=""></tbody>
     </table>                

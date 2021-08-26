@@ -11,7 +11,9 @@ Minitoring.Api = {
                 return error.message;
             }).join('<br>');
         }
-        Minitoring.App.setNotif(apiResponse.code >= 400 ? 'error' : 'success', msg);
+        if (Minikit.isObj(msg)) {
+            Minitoring.App.setNotif(apiResponse.code >= 400 ? 'error' : 'success', msg);
+        } 
     },
     apiRequest: function (method, url, args, successCallback, errorCallback) {
         var nocache = 'requestDate=' + new Date().getTime() + 
@@ -120,14 +122,16 @@ Minitoring.Api = {
 
         // 2 closing / 3 closed 
         if (!Minikit.isObj(conn) || conn.readyState == 2 || conn.readyState == 3){
-            // wss://example.com/wssapi
-            var origin = window.location.origin.replace('https://', 'wss://');
+            
+            // create a (secure) websocket connexion like       wss://example.com/wssapi
+            // should work as well with localhost with no SSL   ws://localhost/wssapi
+            var origin = (window.location.protocol = 'https:' ? 'wss://' : 'ws://') +  window.location.host; 
             conn = new WebSocket(origin + '/wssapi');
             Minitoring.Api._socketConnection = conn;
         }
 
         conn.onmessage = function(e) {
-            // console.log(e.data);
+            // DEBUG console.log(e.data);
             handleMessage(e, successCallback, errorCallback);
         };
 

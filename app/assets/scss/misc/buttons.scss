@@ -3,16 +3,16 @@
 input[type=button], 
 input[type=reset], 
 input[type=submit] {
-    border: 2px solid;
+    border: 2px solid var(--color-button-border);
 }
 
 // button outlined
-.button-o {
-    border: 1px solid;
-}
+//.button-o {
+    //.border: 1px solid var(--color-button-border);
+//}
 
 /* theme - dark */    
-[data-theme="dark"] {
+[data-theme*="dark"] {
     
     //button:not(.theme):not(.button-o):not(.alert-close),
     .button:not(.theme):not(.button-o), 
