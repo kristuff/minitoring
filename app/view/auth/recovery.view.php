@@ -5,18 +5,16 @@
     
     <section class="section">
         <label for="user_name_or_email"><?php $this->echo('USER_NAME_OR_EMAIL_FIELD');?></label>
-        <input type="text" placeholder="<?php $this->echo('USER_NAME_OR_EMAIL_PLACEHOLDER');?>" name="user_name_or_email" required />
+        <input type="text" placeholder="" name="user_name_or_email" required />
     </section>
     
     <section class="section">
-        <div class="columns-2">
-            <img width="190px" height="60px" alt="captcha..." id="captcha" src="<?php echo $this->baseUrl ; ?>auth/recovery/captcha" />
-            <a id="captcha_reload"  class="link txt-small" href="" onclick="document.getElementById('captcha').src = '<?php echo $this->baseUrl; ?>auth/recovery/captcha?' + Math.random(); return false">
-                <i class="fa fa-refresh icon-left"></i><?php $this->echo('CAPTCHA_RELOAD_LINK');?>
-            </a>
-        </div>
         <label><?php $this->echo('CAPTCHA_FIELD'); ?></label> 
-        <input type="text" name="captcha_value" placeholder="<?php $this->echo('CAPTCHA_PLACEHOLDER'); ?>" required />
+        <div class="margin-v-6 flex flex-wrap">
+            <a class="button button-flat button-small" title="Reload captcha" href="#!" data-bind="Minitoring.App.getNewRecoveryCaptcha"><i class="fa fa-refresh"></i></a>
+            <img height="35" alt="captcha" id="recovery_captcha_img" class="margin-h-6" src="<?php echo $this->baseUrl; ?>auth/recovery/captcha" />
+            <input type="text" class="inline-block width-50px" name="captcha_value" placeholder="" required />
+        </div>
     </section>
 
     <?php  $this->renderFeedback(); ?>

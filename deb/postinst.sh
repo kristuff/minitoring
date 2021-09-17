@@ -18,13 +18,9 @@ else
     echo "[warning] Systemd is not the init program, minitoring.service has not been configured. See doc for more infos."
 fi;
 
-
-
 # client
 echo "Deploying minitoring-client ..."
 mkdir -p /usr/local/sbin
-
-
 
 ln -s /var/www/minitoring/app/bin/minitoring-client /usr/local/sbin/minitoring
 if [ $? -eq 0 ]; then
@@ -33,9 +29,9 @@ else
     echo "[Error] Unable to create symlink /usr/local/sbin/minitoring."
 fi
 
-echo "Minitoring is ready"
+# run updater (for db schema changes in already installed app)
+echo "Running minitoring-updater ..."
+php /var/www/minitoring/app/bin/minitoring-updater
 
-#echo -e "${GREEN}# To complete installation you need to configure Apache server and "
-#echo -e "${GREEN}# configure the minitoring.service to use https. "
-#echo -e "${GREEN}# Check out the documentation."
+echo "Minitoring is ready"
 

@@ -1,7 +1,7 @@
 <section id="side-menu" class="side-menu expanded">
     <div class="side-menu-header">
         <a href="#" class="side-menu-trigger"><i class="fa fa-bars"></i></a>
-        <a href="#" class="side-menu-pin-trigger"><i class="fa fa-thumb-tack"></i></a>
+        <div class="side-menu-title text-light">M<span class="color-theme">i</span>nitoring</div>
     </div>
     <ul id="side-menus" class="side-menu-items">
         <li class="menu-item">

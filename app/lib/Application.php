@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.17
+ * @version    0.1.19
  * @copyright  2017-2021 Kristuff
  */
 
@@ -30,7 +30,10 @@ use Kristuff\Minitoring\Model;
 class Application extends Mvc\Application
 {
 
-    const VERSION = "v0.1.17";
+    /** 
+     * current version 
+     */
+    const VERSION = "v0.1.19";
 
     /** 
      * Constructor

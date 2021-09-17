@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.17
+ * @version    0.1.19
  * @copyright  2017-2021 Kristuff
  */
 
@@ -48,11 +48,11 @@ class ServicesCollectionModel extends SystemBaseModel
     {
         if (!$database){
             $database = self::database();
-            $database->table('service_check_detail')->drop(true);
-            $database->table('service_check')->drop(true);
-            $database->table('system_service')->drop(true);
-            $database->table('system_service_check')->drop(true);
-            $database->table('service')->drop(true);
+            $database->table('service_check_detail')->drop();
+            $database->table('service_check')->drop();
+            $database->table('system_service')->drop();
+            $database->table('system_service_check')->drop();
+            $database->table('service')->drop();
         }
         $serviceTableQuery = $database->table('system_service')
                     ->create()

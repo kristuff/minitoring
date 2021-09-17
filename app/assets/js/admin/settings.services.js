@@ -17,12 +17,12 @@ Minitoring.Settings.Services = {
     edit:function(id){
         document.querySelector('#services-dialog [data-part="add"]').setAttribute('data-action','edit');
         document.querySelector('#service-dialog-title').innerHTML = document.querySelector('#services-dialog [data-part="add"]').getAttribute('data-edit-title');
-        currentItem =  document.querySelector('#settings-services-table tr[data-id="' + id + '"');
+        var currentItem =  document.querySelector('#settings-services-table tr[data-id="' + id + '"');
         document.querySelector('#services-dialog #service-dialog-name').value       = currentItem.getAttribute('data-service-name');
         document.querySelector('#services-dialog #service-dialog-host').value       = currentItem.getAttribute('data-service-host');
         document.querySelector('#services-dialog #service-dialog-protocol').value   = currentItem.getAttribute('data-service-protocol');
         document.querySelector('#services-dialog #service-dialog-port').value       = currentItem.getAttribute('data-service-port');
-        Minitoring.Settings.Services.showDialog('add', id);
+        Minitoring.Settings.Services.showDialog('edit', id);
     },
     
     activate: function (id) {
@@ -117,20 +117,20 @@ Minitoring.Settings.Services = {
             '" data-service-protocol="' + item.service_protocol +   
             '" data-service-host="' + item.service_host + 
             '">';
-        html += ' <td data-column="Service" class="align-left">' + item.service_name + '</td>';
-        html += ' <td class="align-right no-padding" data-column="Actions">';
-        html += '  <span class="row-actions visible-hover ">';
-        html += '   <a class="row-button action-link" data-action="edit" data-id="' + item.service_id + '" data-color=""><i class="fa fa-pencil"></i><span class="mob-only padding-left-6">Edit</span></a>';
-        html += '   <a class="row-button action-link" data-action="delete" data-id="' + item.service_id + '" data-color=""><i class="fa fa-trash"></i><span class="mob-only padding-left-6">Delete</span></a>';
-        html += '  </span>';
-        html += ' </td>';
-        html += ' <td data-column="Protocol" class="align-center">' + item.service_protocol + '</td>';
-        html += ' <td data-column="Host" class="align-left">' + item.service_host + '</td>';
-        html += ' <td data-column="Port" class="align-right">' + port + '</td>';
-        html += ' <td data-column="Check enabled" class="align-center">';
-        html += '  <input type="checkbox" id="'+ checkboxId +'" class="switch" ' + checked + ' data-id="' + item.service_id + '" />';
-        html += '  <label for="'+ checkboxId +'"></label>'; 
-        html += ' </td>';
+        html += '<td data-column="Service" class="align-left">' + item.service_name + '</td>';
+        html += '<td class="align-right tab-no-padding desk-no-padding" data-column="Actions">';
+        html += '<span class="row-actions visible-hover ">';
+        html += '<a class="row-button action-link" data-action="edit" data-id="' + item.service_id + '" data-color=""><i class="fa fa-pencil"></i><span class="mob-only padding-left-6">Edit</span></a>';
+        html += '<a class="row-button action-link" data-action="delete" data-id="' + item.service_id + '" data-color=""><i class="fa fa-trash"></i><span class="mob-only padding-left-6">Delete</span></a>';
+        html += '</span>';
+        html += '</td>';
+        html += '<td data-column="Protocol" class="align-center">' + item.service_protocol + '</td>';
+        html += '<td data-column="Host" class="align-left">' + item.service_host + '</td>';
+        html += '<td data-column="Port" class="align-right">' + port + '</td>';
+        html += '<td data-column="Check enabled" class="align-center">';
+        html += '<input type="checkbox" id="'+ checkboxId +'" class="switch" ' + checked + ' data-id="' + item.service_id + '" />';
+        html += '<label for="'+ checkboxId +'"></label>'; 
+        html += '</td>';
         html += '</tr>';
         return html;
     },

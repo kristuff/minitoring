@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.17
+ * @version    0.1.19
  * @copyright  2017-2021 Kristuff
  */
 
@@ -23,9 +23,11 @@ use Kristuff\Miniweb\Http\Request;
 use Kristuff\Miniweb\Mvc\TaskResponse;
 use Kristuff\Minitoring\Application;
 use Kristuff\Minitoring\Model;
+use Kristuff\Minitoring\Model\Collection\PingCollectionModel;
 use Kristuff\Minitoring\Model\DependencyModel;
 use Kristuff\Minitoring\Model\Collection\ServicesCollectionModel;
 use Kristuff\Minitoring\Model\System;
+use Kristuff\Minitoring\Model\System\PingModel;
 use Kristuff\Minitoring\Model\System\ServiceModel;
 use Kristuff\Minitoring\Model\TokenCheckerModel;
 use Kristuff\Miniweb\Auth\Model\AppSettingsModel;
@@ -169,9 +171,9 @@ class ApiController extends \Kristuff\Miniweb\Auth\Controller\ApiController
                     $this->response = TaskResponse::create(200, '', System\CpuModel::getLoadAverage());
                     break;    
                     
-                case 'ping':
-                    $this->response = TaskResponse::create(200, '', System\PingModel::getPingResults());
-                    break; 
+                //case 'ping':
+                //    $this->response = TaskResponse::create(200, '', System\PingModel::getPingResults());
+                //    break; 
 
                 case 'network':
                     $this->response = TaskResponse::create(200, '', System\NetworkModel::getNeworkInfos());
@@ -431,6 +433,102 @@ class ApiController extends \Kristuff\Miniweb\Auth\Controller\ApiController
         // render
         $this->view->renderJson($this->response->toArray(), $this->response->code());
     }
+
+    /** 
+     *  services api end points  (apply to collection)
+     * 
+     *  ----------------------------            ------      --------------------------------------------------
+     *  End points                              Method      Description                    
+     *  ----------------------------            ------      --------------------------------------------------
+     *  /api/services                           GET         Get XXXXXXXXXXXXXXXXXX   
+     *  /api/services                           POST        XXXXXXXXXXXXXXXXXX   
+     *  /api/services/list                      GET         Get XXXXXXXXXXXXXXXXXX   
+     *  /api/services/check                     GET         Get XXXXXXXXXXXXXXXXXX   
+     *  ----------------------------            ------      --------------------------------------------------
+     */
+    public function pings($action = null)
+    {
+        switch ($this->request()->method()) {
+            case Request::METHOD_GET:
+                $data = [];
+                
+                switch($action){
+
+                    case 'list':
+                    case '':
+                        if (UserLoginModel::validateAdminPermissions($this->response)){
+                            $data['items'] = PingCollectionModel::getList(-1, true);
+                            $this->response->setCode(200);
+                            $this->response->setData($data);
+                        }
+                        break;
+
+                    case 'check':
+                        $data['items']  = PingModel::getPingResults();
+                        $this->response = TaskResponse::create(200, '', $data);
+                        break;
+                }
+                break;
+
+            case Request::METHOD_POST:
+                $host        = $this->request()->post('ping_host', true) ?? ''; 
+                $this->response = PingCollectionModel::add($host);
+                break;
+         }
+
+        // render
+        $this->view->renderJson($this->response->toArray(), $this->response->code());
+    }
+
+
+
+    /** 
+     *  ping api end points (apply to an item)
+     * 
+     *  ----------------------------            ------      --------------------------------------------------
+     *  End points                              Method      Description                    
+     *  ----------------------------            ------      --------------------------------------------------
+     *  /api/services/{id}                      DELETE      Delete service
+     *  /api/services/{id}                      POST        Edit service
+     *  /api/services/{id}/enable               PUT         Enable service check    
+     *  /api/services/{id}/disable              PUT         Disable service check  
+     *  ----------------------------            ------      --------------------------------------------------
+     */
+    public function ping($hostId = null, $action = null)
+    {
+        if (is_numeric($hostId)){
+            $hostId = intval($hostId);
+
+            switch ($this->request()->method()) {
+                        
+                case Request::METHOD_PUT:
+                    switch($action){
+                        case 'enable':
+                            $this->response = PingCollectionModel::setCheckState($hostId, 1);
+                            break;
+
+                        case 'disable':
+                            $this->response = PingCollectionModel::setCheckState($hostId, 0);
+                            break;
+                    }
+                    break;
+                
+                case Request::METHOD_DELETE:
+                    $this->response = PingCollectionModel::delete($hostId);
+                    break;
+
+                case Request::METHOD_POST:
+                    $host        = $this->request()->post('ping_host', true) ?? ''; 
+                    $this->response = PingCollectionModel::edit($hostId, $host);
+                    break;
+
+            }
+        }
+
+        // render
+        $this->view->renderJson($this->response->toArray(), $this->response->code());
+    }
+
 
     /** 
      *  app api end points

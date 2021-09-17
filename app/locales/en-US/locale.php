@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.17
+ * @version    0.1.19
  * @copyright  2017-2021 Kristuff
  */
 
@@ -21,6 +21,8 @@
  * Texts used in the application.
  */
 return array(
+
+    'HOME'                                              => 'Home',
 
     /* formats */
     'DATE_FORMAT'                                       => 'Y-m-d',
@@ -37,6 +39,8 @@ return array(
     'ERROR_LOGNAME_EMPTY'                               => "You must set a log name.",
     'ERROR_SERVICE_NAME_ALREADY_EXISTS'                 => "A service with same name already exists. Please choose another name.",
     'ERROR_SERVICE_NAME_EMPTY'                          => "You must set a service name.",
+    'ERROR_PING_HOST_ALREADY_EXISTS'                    => "This domain already exists. Please set another one.",
+    'ERROR_PING_HOST_EMPTY'                             => "You must set a host name.",
 
     /* UI */
     'BUTTON_OK'                                         => "OK",
@@ -55,6 +59,8 @@ return array(
     'FIELD_ENDING'                                      => ':',
     'ACTION_DELETE'                                     => 'Delete',
     'ACTION_EDIT'                                       => 'Edit',
+    'ACTION_REFRESH'                                    => 'Refresh',
+    'ACTION_SEARCH'                                     => 'Search',
     'FREE'                                              => "Free",
     'USED'                                              => "Used",
     'PERCENT_USED'                                      => "% used",
@@ -252,6 +258,16 @@ return array(
     'SETTINGS_SERVICES_PORT_HEADER'                     => "Port",
     'SETTINGS_SERVICES_PORT_PLACEHOLDER'                => "Port",
     'SETTINGS_SERVICES_CHECK_ENABLED_HEADER'            => "Check enabled",
+
+    /* settings ping */
+    'SETTINGS_PING'                                     => 'Ping',
+    'SETTINGS_PING_SUMMARY'                             => "Add or change hosts to check",
+    'SETTINGS_PING_REGISTERED_TITLE'                    => 'Registered hosts',
+    'SETTINGS_PING_DIALOG_CREATE_TITLE'                 => "New host",
+    'SETTINGS_PING_DIALOG_EDIT_TITLE'                   => "Edit host",
+    'SETTINGS_PING_BUTTON_ADD'                          => "Add",
+    'SETTINGS_PING_HOST'                                => "Host",
+    'SETTINGS_PING_CHECK_ENABLED_HEADER'                => "Check enabled",
 
     /* settings logreader */
     'SETTINGS_LOGREADER'                                => 'Logs reader',

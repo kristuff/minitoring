@@ -31,6 +31,7 @@
                         include 'settings/settings.advanced.php';
                         include 'settings/settings.logreader.php';
                         include 'settings/settings.services.php';
+                        include 'settings/settings.ping.php';
                     }
 
                 ?>
@@ -44,6 +45,7 @@ if ($this->data('userIsAdmin') === true ) {
     include 'settings/settings.users.dialog.php';
     include 'settings/settings.logs.dialog.php';
     include 'settings/settings.services.dialog.php';
+    include 'settings/settings.ping.dialog.php';
 } else { 
     // TODO hidden section to be able to retreive localized button texts... ?>
     <section class="need-active">

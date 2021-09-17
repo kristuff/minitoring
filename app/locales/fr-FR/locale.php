@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.17
+ * @version    0.1.19
  * @copyright  2017-2021 Kristuff
  */
 
@@ -21,6 +21,8 @@
  * Texts used in the application.
  */
 return array(
+
+    'HOME'                                              => 'Accueil',
 
     /* formats */
     'DATE_FORMAT'                                       => 'd/m/Y',
@@ -37,6 +39,8 @@ return array(
     'ERROR_LOGNAME_EMPTY'                               => "Vous devez définir un nom de journal.",
     'ERROR_SERVICE_NAME_ALREADY_EXISTS'                 => "Un service avec le même nom existe déja. Veuillez choisir un autre nom.",
     'ERROR_SERVICE_NAME_EMPTY'                          => "Vous devez définir un nom de service.",
+    'ERROR_PING_HOST_ALREADY_EXISTS'                    => "Ce domaine existe déja. Veuillez entrer un autre domaine.",
+    'ERROR_PING_HOST_EMPTY'                             => "Vous devez définir un nom de domaine.",
 
     /* UI */
     'BUTTON_OK'                                         => "OK",
@@ -55,6 +59,8 @@ return array(
     'FIELD_ENDING'                                      => ' :',
     'ACTION_DELETE'                                     => 'Supprimer',
     'ACTION_EDIT'                                       => 'Modifier',
+    'ACTION_REFRESH'                                    => 'Rafraîchir',
+    'ACTION_SEARCH'                                     => 'Rechercher',
     'FREE'                                              => "Libre",
     'USED'                                              => "Utilisé",
     'PERCENT_USED'                                      => "% utilisé",
@@ -253,6 +259,16 @@ return array(
     'SETTINGS_SERVICES_PORT_HEADER'                     => "Port",
     'SETTINGS_SERVICES_PORT_PLACEHOLDER'                => "Port",
     'SETTINGS_SERVICES_CHECK_ENABLED_HEADER'            => "Vérification activée",
+    
+    /* settings ping */
+    'SETTINGS_PING'                                     => 'Ping',
+    'SETTINGS_PING_SUMMARY'                             => "Créer ou modifier les domaines à vérifier",
+    'SETTINGS_PING_REGISTERED_TITLE'                    => 'Domaines enregistrés',
+    'SETTINGS_PING_DIALOG_CREATE_TITLE'                 => "Nouveau domaine",
+    'SETTINGS_PING_DIALOG_EDIT_TITLE'                   => "Modifier le domaine",
+    'SETTINGS_PING_BUTTON_ADD'                          => "Ajouter",
+    'SETTINGS_PING_HOST'                                => "Domaine",
+    'SETTINGS_PING_CHECK_ENABLED'                       => "Vérification activée",
 
     /* settings logreader */
     'SETTINGS_LOGREADER'                                => 'Journaux',

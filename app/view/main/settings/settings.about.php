@@ -2,21 +2,28 @@
 <section id="settings-about" class="view anim-scale-increase" data-view="settings/about" 
     data-title="<?php $this->echo('SETTINGS_INFOS') ;?>">
 
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a class="" href="<?php echo $this->baseUrl;?>"><?php $this->echo('HOME');?></a></li>
+        <li class="breadcrumb-item"><a class="" href="<?php echo $this->baseUrl;?>settings/" data-view="settings"><?php $this->echo('SETTINGS'); ?></a></li>
+        <li class="breadcrumb-item active"><?php $this->echo('SETTINGS_INFOS');?></li>
+    </ol>
     <br>
-    <h5 class="highlight">
+
+    <div class="h3 color-accent">
+        <img src="<?php echo $this->baseUrl;?>assets/img/favicon.ico" width="25px" height="25px" alt="">
         M<span class="color-theme">i</span>nitoring
-    </h5>
+    </div>
     <p class="">
-        Version <span class="badge" data-badge="black">v<?php echo $this->data('APP_VERSION') ;?></span>
+        Version <span class="badge" data-badge="info">v<?php echo $this->data('APP_VERSION') ;?></span>
         <br>Copyright <i class="fa fa-copyright"></i> <?php echo $this->data('APP_COPYRIGHT');?>
         <br>Made with <i class="fa fa-heart color-theme"></i> and <i class="fa fa-coffee color-theme"></i> in France.
     </p>
     <br>
 
     <section class="section">
-        <h6 class="highlight"><?php $this->echo('SETTINGS_INFOS_DEPENDENCIES') ;?></h6>
+        <h5 class="color-accent text-light"><?php $this->echo('SETTINGS_INFOS_DEPENDENCIES') ;?></h5>
         <form class="large">
-            <table id="dependencies-tables" class="data-table XXresponsive">
+            <table id="dependencies-tables" class="data-table no-border">
                 <thead>
                     <tr class="table-header">
                         <th data-column="<?php $this->echo('DEPENDENCY_LIBRARY') ;?>"><?php $this->echo('DEPENDENCY_LIBRARY') ;?></th>

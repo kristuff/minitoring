@@ -33,7 +33,7 @@
 <?php  } ?>
 
 </head>   
-<body class="" data-style="flat" 
+<body class="bg-darker" data-style="flat" 
     data-theme="<?php     echo htmlentities($this->data('UI_THEME'));                   ?>" 
     data-color="<?php     echo htmlentities($this->data('UI_THEME_COLOR'));             ?>" 
     data-language="<?php  echo htmlentities($this->data("UI_LANG"));                    ?>"

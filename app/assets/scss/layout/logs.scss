@@ -1,5 +1,7 @@
 
 
+
+
 table#system-logs-table {
     display: table;
     table-layout: auto;
@@ -27,7 +29,17 @@ table#system-logs-table {
         }
 
         th[data-column="Date"], td[data-column="Date"]{min-width: 150px;max-width: 160px;}
-        th[data-column="Request"], td[data-column="Request"]{ width: 200px; }
+        th[data-column="Request"], 
+        td[data-column="Request"]{ 
+            word-wrap: break-word ;
+
+        }
+        td[data-column="User Agent"]{ 
+            word-wrap: break-word ;
+
+        }
+
+
         th[data-column="Size"] {min-width: 60px; text-align: center;}
         td[data-column="Size"] {min-width: 60px; text-align: right;}
         th[data-column="Log Name"], 

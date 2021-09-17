@@ -4,10 +4,10 @@
     <section class="section">
 
         <label><?php $this->echo('USER_NAME_OR_EMAIL_FIELD');?></label>
-        <input type="text"      id="user_name_or_email" name="user_name_or_email" placeholder="<?php $this->echo('USER_NAME_OR_EMAIL_PLACEHOLDER');?>" required />
+        <input type="text"      id="user_name_or_email" name="user_name_or_email" placeholder="" required />
         
         <label><?php $this->echo('USER_PASSWORD_FIELD');?></label>
-        <input type="password"  id="user_password"      name="user_password" class="password" placeholder="<?php $this->echo('USER_PASSWORD_PLACEHOLDER');?>" required />
+        <input type="password"  id="user_password"      name="user_password" class="password" placeholder="" required />
         <i class="fa toggle-password"></i>
      
 <?php if (!empty($this->data('redirect'))) { ?>

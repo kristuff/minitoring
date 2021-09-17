@@ -1,7 +1,14 @@
 <section id="settings-advanced" class="view anim-scale-increase" data-view="settings/advanced" data-title="<?php $this->echo('SETTINGS_ADVANCED');?>">
 
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a class="" href="<?php echo $this->baseUrl;?>"><?php $this->echo('HOME');?></a></li>
+        <li class="breadcrumb-item"><a class="" href="<?php echo $this->baseUrl;?>settings/" data-view="settings"><?php $this->echo('SETTINGS'); ?></a></li>
+        <li class="breadcrumb-item active"><?php $this->echo('SETTINGS_ADVANCED');?></li>
+    </ol>
+    <br>
+
     <section class="section">
-        <h6 class="highlight"><?php $this->echo('SETTINGS_SECURITY_TITLE') ;?></h6>
+        <h5 class="color-accent text-light"><?php $this->echo('SETTINGS_SECURITY_TITLE') ;?></h5>
         <div class="container container-medium">
             <form>
                 <p><?php $this->echo('SETTINGS_TOKEN_TEXT');?></p>
@@ -18,7 +25,7 @@
     <br>
 
     <section class="section">
-        <h6 class="highlight"><?php $this->echo('DISKS'); ?></h6>
+        <h5 class="color-accent text-light"><?php $this->echo('DISKS'); ?></h5>
         <div class="container container-medium">
             <div class="padding-top-6">
                 <input id="disks_show_tmpfs" type="checkbox" class="switch"  <?php echo $this->data('appSettings')['DISKS_SHOW_TMPFS'] ? ' checked ' : ''; ?> data-bind="Minitoring.Admin.diskShowTmpfsChanged" data-bind-event="change"/>
@@ -41,7 +48,7 @@
     <br>
 
     <section class="section">
-        <h6 class="highlight"><?php $this->echo('SERVICES'); ?></h6>
+        <h5 class="color-accent text-light"><?php $this->echo('SERVICES'); ?></h5>
         <div class="padding-top-6">
             <input id="services_show_port" type="checkbox" class="switch" <?php echo $this->data('appSettings')['SERVICES_SHOW_PORT_NUMBER'] ? ' checked ' : ''; ?> data-bind="Minitoring.Admin.serviceShowPortChanged" data-bind-event="change"/>
             <label for="services_show_port"></label>
@@ -51,7 +58,7 @@
     <br>
 
     <section class="section">
-        <h6 class="highlight"><?php $this->echo('SETTINGS_MISC_TITLE') ;?></h6>
+        <h5 class="color-accent text-light"><?php $this->echo('SETTINGS_MISC_TITLE') ;?></h5>
         <div class="container container-medium">
             <div class="padding-bottom-6"><?php $this->echo('SETTINGS_IP_ACTION_FIELD'); ?></div>
             <div class="custom-select">
@@ -66,7 +73,7 @@
     <br>
   
     <section class="section">
-        <h6 class="highlight"><?php $this->echo('SETTINGS_DEFAULT_TITLE') ;?></h6>
+        <h5 class="color-accent text-light"><?php $this->echo('SETTINGS_DEFAULT_TITLE') ;?></h5>
         <div class="container container-medium">
         <p><?php $this->echo('SETTINGS_DEFAULT_TEXT') ;?></p>
         <form class="padding-top-12">

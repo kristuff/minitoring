@@ -3,17 +3,20 @@
 table#users-table {
     font-size: 1.45rem;
 
-    th[data-column="Actions"],
-    td[data-column="Actions"]{
-        min-width: 85px;
-        max-width: 85px;
+    @media (min-width: 768px) {
+
+        th[data-column="Actions"],
+        td[data-column="Actions"]{
+            min-width: 85px;
+            max-width: 85px;
+        }
     }
 
-    td[data-column="Avatar"] img {
-        width:30px;
-        height:30px;
-        display: block;
-    }
+   //td[data-column="Avatar"] img {
+        //width:30px;
+        //height:30px;
+        //display: block;
+    //}
 
     @media only screen and (min-width:768px){
 

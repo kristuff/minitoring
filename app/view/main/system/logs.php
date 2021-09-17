@@ -1,10 +1,16 @@
-<section id="section-logs" class="view anim-scale-increase" 
-         data-title="<?php $this->echo('LOGS');?>" 
-         data-view="logs"
-         data-refresh="Minitoring.Logs.refresh">
+<section id="section-logs" class="view anim-scale-increase" data-title="<?php $this->echo('LOGS');?>" data-view="logs" data-refresh="Minitoring.Logs.refresh">
 
-
-    <section class="action-bar padding-bottom-12" id="logs-actions">
+    <ul class="toolbar">
+            <li>
+                <a class="button button-small" href="#" data-bind="Minitoring.Logs.refresh">
+                    <i class="fa fa-refresh icon-left"></i><span class="bt-title"><?php $this->echo('ACTION_REFRESH');?></span>
+                </a>
+            </li>
+            <li class="search">
+                <input class="search" data-table-target="system-logs-table" type="text" placeholder="<?php $this->echo('ACTION_SEARCH');?>"><i class="search fa fa-search"></i>
+            </li>
+    </ul>
+    <section class="xxaction-bar padding-bottom-12" id="logs-actions">
 
         <div class="wrapper mob-whole tab-half desk-half">
         

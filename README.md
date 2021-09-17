@@ -20,7 +20,7 @@ Check **disks**/**inodes** usage  | ✔️| ✔️ |
 Check **packages**: installed, upgradable, error (*.deb packages only*) | ✔️| - |
 Check **Fail2ban** status and get jails stats | ✔️ (*stats based on db*)| ✔️ (*currents bans*)|
 Check **Iptables**/**Ip6tables** content | ✔️| - |
-Check **ping** stats for a configurable host list  | **TODO** | ✔️ |
+Check **ping** stats for a configurable host list  | ✔️ | ✔️ |
 List all **cron jobs** (user/system crons, system timers) | ✔️| - |
 **Logs reader**: support for configurable logs list, including `syslog`, `Apache` access/error, `Fail2ban` logs | ✔️| - |
 **Services** status check (check tcp/udp port) for configurable services list | ✔️| - |
@@ -36,7 +36,7 @@ List system **users**/**groups**, last/currently connected users | ✔️| - |
 
 ## Requirements
 - A Linux<sup>1</sup> web server<sup>2</sup> with root privileges
-- A dedicated subdomain 
+- A dedicated subdomain OR a server with graphical interface to run app in local <sup>3</sup>
 - PHP >=7.3
 - pdo_sqlite extension
 
@@ -44,8 +44,10 @@ List system **users**/**groups**, last/currently connected users | ✔️| - |
 
 <sup>2</sup> For now tested only with Apache.
 
+<sup>3</sup> For now Alias is not supported.
+
 ## How it works ?
-Minitoring is inspired from [ezservermonitor-web](https://github.com/shevabam/ezservermonitor-web) and add additional features.
+Minitoring is inspired from [ezservermonitor-web](https://github.com/shevabam/ezservermonitor-web) and comes with additional features.
 
 Basic monitoring commands can be executed by web server process without admin permissions. Such data are available via a *standard* web API (protected by a login system). 
 
@@ -55,7 +57,7 @@ For some features (logs reader, packages, fail2ban stats...), app must be run wi
 ## Install
 For now Minitoring is only available as `.deb` package. 
 
-See [Install minitoring on debian buster with Apache](/doc/install.md).
+See [Install minitoring on debian buster/bullseye with Apache](/doc/install.md).
 
 For others systems, you will have to build the package:
 - Install dependencies and build autoloader using `composer`.
@@ -68,10 +70,12 @@ Most config tasks are done by web installer or can be changed from web interface
 
 
 ## Limitations/known issues/TODO
-- You cannot be logged in with the same account on multiple devices at the same time (won't fix). 
+- You cannot be logged in with the same account on multiple devices at the same time (**won't fix**). 
+- Message when login with cookie is not localized (?)
 - Web installer does not honor Mysql and PostgreSQL, for now Sqlite only (**TODO** but for now no periodic monitoring so large database not needed)
-- Packages: deb only, support for `rpm` packages should come soon (**TODO** config)
-- Supposes Fail2ban installed (**TODO** option)
+- Packages: deb only, support for `rpm` packages should come soon (**TODO** -> config)
+- Supposes iptables/ip6tables used (**TODO** -> option).
+- Supposes Fail2ban used (**TODO** -> option).
 - Translation in progress
 - Logreader: To add a log file, webserver checks file exists first. To add log files like apache logs, located in `/var/log/apache2` on debian, you need to add `execute` permission to that directory (`chmod +x /var/log/apache2`), otherwise, app will refuse to add file saying it doesn't exist. Note: no need to add `read` permission to web server as file will be read by a service launch by root.
-- apt-key is deprecated in debian 11 and will be removed:  
+- toggle password visibility do not display correctly on mobile (**TODO**).

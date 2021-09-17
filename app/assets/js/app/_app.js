@@ -16,6 +16,7 @@ Minitoring.App = {
             Minitoring.View.updateActiveView(Minitoring.View.getCurrentView());
             Minitoring.App.getFeedback();
         });
+        Minitoring.UI.initTableSearch();
     },
     setNotif: function(type,message) {
         Minitoring.App.toast = Minitoring.App.toast || new Minikit.Toasts();

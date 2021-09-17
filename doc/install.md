@@ -5,8 +5,9 @@
 
 > The following guide supposes:
 > - a debian based server with root access and running systemd
-> - Apache2 with `mod_ssl` enabled and SSL certificate files 
-> - a subdmain with dedicated vhost.  
+> - Apache2 + 
+>   - a dedicated subdomain with its vhost, `mod_ssl` enabled and SSL certificate files 
+>   - OR a server with graphical interface to run app in local 
 > - `apt-transport-https`
 
 ### 1. Install package
@@ -23,10 +24,9 @@ Alternatively, you can download the latest `.deb` package from release tags and 
 Minitoring  `app` and `public` folders are deployed to `/var/www/minitoring`.
 
 
-### 2. Optional config changes :
+### 2. Optional config changes:
 
-See [config](/doc/config.md) 
-
+Most config tasks are done with web installer or can be changed from web inerface. For advanced settings, like using a custom port for websocket service, see [config](/doc/config.md) 
 
 
 ### 3. Configure Apache vhost:
@@ -77,7 +77,7 @@ The directory `app/config/sample` contains a full vhost sample. The main points 
     ProxyPreserveHost On 
     ```
 
-    If you want to test app from localhost, configure ProxyPass like this (note `ws`instead of `wss`):
+    If you want to test app from localhost, configure ProxyPass like this (note `ws://`instead of `wss://`):
 
      ```apache-conf
     ProxyPass "/wssapi" "ws://localhost:12443"
@@ -113,3 +113,7 @@ The directory `app/config/sample` contains a full vhost sample. The main points 
 ### 5.  Complete install with web installer:
 
 When running the app for the first time and as long as setup is not complete, you will be redirect to `/setup`. You will be asked identifiers to create a database and an admin account.
+
+Then you can login with your *admin* account and:
+- configure services to check, logreader, advanced settings 
+- create *guest* accounts: those accounts have a readonly access to all monitoring features

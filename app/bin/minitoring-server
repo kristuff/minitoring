@@ -14,7 +14,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.17
+ * @version    0.1.19
  * @copyright  2017-2021 Kristuff
  */
 
@@ -35,8 +35,14 @@ $keyPath        = (string) Application::config('WEBSOCKET_KEY_PATH');
 
 if ($secureServer){
     
-    $loop = React\EventLoop\Factory::create();
-    $webSock = new React\Socket\Server('127.0.0.1:'.$port, $loop);
+    // deprecated
+    // $loop = React\EventLoop\Factory::create();
+    $loop = React\EventLoop\Loop::get();
+    
+    // deprecated   
+    //$webSock = new React\Socket\Server('127.0.0.1:'.$port, $loop);
+    $webSock = new React\Socket\SocketServer('127.0.0.1:'.$port, [], $loop);
+    
     $swebSock = new React\Socket\SecureServer($webSock, $loop, [
           'local_cert'        => $certPath, // path to your cert
           'local_pk'          => $keyPath,  // path to your server private key

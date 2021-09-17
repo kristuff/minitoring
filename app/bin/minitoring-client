@@ -14,7 +14,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.17
+ * @version    0.1.19
  * @copyright  2017-2021 Kristuff
  */
 
@@ -23,8 +23,7 @@ require_once realpath(__DIR__) .'/../vendor/autoload.php';
 use Kristuff\Mishell\Console;
 use Kristuff\Minitoring\Model\System;
 use Kristuff\Minitoring\Model\System\Fail2banModel;
-use Kristuff\Minitoring\Model\System\SystemModel;
-use Kristuff\Minitoring\Model\System\ServiceModel;
+use Kristuff\Minitoring\Application;
 
 // x    => no value
 // x:   => value required
@@ -37,8 +36,14 @@ Program::start($arguments);
 
 class Program
 {
+
+    private static $app;
+
     public static function start($arguments)
     {
+         // note: we need an Application instance to make model functions working
+         self::$app = new Application();
+
         // custom tables
         Console::$horizontalSeparator = '-'; 
         Console::$verticalSeparator = '  '; 

@@ -1,0 +1,23 @@
+ul.toolbar {
+    
+    li.search {
+        float: right;
+        min-width: 150px;
+        width: 150px;
+
+        input {
+            width: 100%;
+        }
+
+        @media only screen and (min-width:768px){
+            min-width: 180px;
+            width: 180px;
+    
+        }
+        @media only screen and (min-width:1024px){
+            min-width: 200px;
+            width: 200px;
+        }
+
+    }
+}

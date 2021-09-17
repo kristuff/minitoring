@@ -125,7 +125,7 @@ Minitoring.Api = {
             
             // create a (secure) websocket connexion like       wss://example.com/wssapi
             // should work as well with localhost with no SSL   ws://localhost/wssapi
-            var origin = (window.location.protocol = 'https:' ? 'wss://' : 'ws://') +  window.location.host; 
+            var origin = (window.location.protocol == 'https:' ? 'wss://' : 'ws://') +  window.location.host; 
             conn = new WebSocket(origin + '/wssapi');
             Minitoring.Api._socketConnection = conn;
         }

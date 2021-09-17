@@ -13,11 +13,15 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.17
+ * @version    0.1.19
  * @copyright  2017-2021 Kristuff
  */
 
 namespace Kristuff\Minitoring\Model\System;
+
+use Kristuff\Minitoring\Model\Collection\PingCollectionModel;
+use Kristuff\Patabase\Database;
+use Kristuff\Patabase\Output;
 
 /** 
  * PingModel
@@ -33,13 +37,8 @@ class PingModel extends SystemBaseModel
      * @return array
      */
     public static function getPingResults(): array
-    {   
-        //if (count($Config->get('ping:hosts')) > 0) {
-        //    $hosts = $Config->get('ping:hosts');
-        //} else {
-            $hosts = array('google.com', 'wikipedia.org');
-        //}
-        
+    {  
+        $hosts = PingCollectionModel::getList(1);
         return self::pingHosts($hosts);
     }
 
@@ -60,6 +59,7 @@ class PingModel extends SystemBaseModel
 
         foreach ($hosts as $host)
         {
+            $host = $host['ping_host'];
             exec('/bin/ping -qc 1 '.$host.' | awk -F/ \'/^(rtt|round-trip)/ { print $5 }\'', $result);
 
             if (!isset($result[0])){

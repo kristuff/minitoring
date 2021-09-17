@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.17
+ * @version    0.1.19
  * @copyright  2017-2021 Kristuff
  */
 
@@ -45,7 +45,7 @@ class SocketServer implements MessageComponentInterface {
     {
         $headers    = $conn->httpRequest->getHeaders();
         $remoteIP   = $headers['X-Forwarded-For'][0];
-        
+       
         $this->clients->attach($conn);
         $this->log(LOG_INFO, "New connection established (IP: $remoteIP Client Id: {$conn->resourceId})");
     }

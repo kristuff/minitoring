@@ -26,11 +26,9 @@
     <link rel="stylesheet" href="<?php echo $this->baseUrl; ?>assets/css/kristuff.minikit.min.css">
     <link rel="stylesheet" href="<?php echo $this->baseUrl; ?>assets/css/minitoring.min.css">
     <script type="application/javascript" src="<?php echo $this->baseUrl; ?>assets/js/kristuff.minikit.min.js"></script>
+    <script src="<?php echo $this->baseUrl; ?>assets/js/minitoring.auth.min.js"></script> 
 </head>    
-<body   data-theme="dark" 
-        data-color="orange" 
-        data-style="" 
-        class="bg-dark bg-tech" data-font="">
+<body data-theme="dark" data-color="orange" data-style="" class="bg-current">
 <section id="section-auth" class="dialog active">
     <div class="dialog-inner">
         <div class="align-center">

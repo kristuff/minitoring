@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.17
+ * @version    0.1.19
  * @copyright  2017-2021 Kristuff
  */
 
@@ -23,10 +23,11 @@ use Kristuff\Minitoring\Model\System\SystemBaseModel;
 use Kristuff\Miniweb\Auth\Model\UserLoginModel;
 use Kristuff\Miniweb\Core\Json;
 use Kristuff\Miniweb\Mvc\TaskResponse;
-use \Kristuff\Patabase\Output as PatabaseOutput;
+use Kristuff\Patabase\Database;
+use Kristuff\Patabase\Output as PatabaseOutput;
 
 /** 
- * ServiceCheckerModel
+ * PingCollectionModel
  */
 class PingCollectionModel extends SystemBaseModel
 {
@@ -40,11 +41,11 @@ class PingCollectionModel extends SystemBaseModel
      * 
      * @return bool         True if the table has been created, otherwise False
      */
-    public static function setup(&$database = null)
+    public static function setup(Database $database = null)
     {
         if (!$database){
             $database = self::database();
-            $database->table('system_ping')->drop(true);
+            $database->table('system_ping')->drop();
         }
         $pingTableQuery = $database->table('system_ping')
                     ->create()
@@ -65,7 +66,7 @@ class PingCollectionModel extends SystemBaseModel
      * 
      * @return bool         True if the table has been created, otherwise False
      */
-    public static function populateWithDefaults(&$database)
+    public static function populateWithDefaults(Database $database)
     {
         $return = true;
         $query = $database->insert('system_ping')
@@ -95,7 +96,7 @@ class PingCollectionModel extends SystemBaseModel
      * 
      * @return array
      */
-    public static function getServicesList(int $enabledState = -1): array
+    public static function getList(int $enabledState = -1): array
     {
         $query = self::database()->select()
                                ->column('ping_id')
@@ -119,7 +120,7 @@ class PingCollectionModel extends SystemBaseModel
             
         // Check admin permissions, not empty ID and valid state   
         if (UserLoginModel::validateAdminPermissions($response) &&
-            $response->assertFalse(empty($serviceId) || !in_array($state, [0, 1]), 422,'TODO')){
+            $response->assertFalse(empty($pingId) || !in_array($state, [0, 1]), 422,'TODO')){
                   
                 $response->assertTrue(
                     self::database()->update('system_ping')
@@ -146,8 +147,6 @@ class PingCollectionModel extends SystemBaseModel
         return self::database()->delete('system_ping')
                                ->whereEqual('ping_id', $id)
                                ->execute();
-
-                               //todo child 
     }
 
     /** 
@@ -157,7 +156,7 @@ class PingCollectionModel extends SystemBaseModel
      * @static
      * @param int           $id         The host id 
      * 
-     * @return  \Kristuff\Miniweb\Mvc\Taskresponse
+     * @return  Taskresponse
      */
     public static function delete(int $id): TaskResponse
     {
@@ -171,11 +170,70 @@ class PingCollectionModel extends SystemBaseModel
         return $response;
     }
 
+    //todo check
+    public static function add(string $host): TaskResponse
+    {
+        $response = TaskResponse::create();
+        $query = self::database()->insert('system_ping')
+                                 ->setValue('ping_host', $host)
+                                 ->setValue('ping_check_enabled', 1);
 
+        // Check admin permissions, not empty and unique host   
+        if ( UserLoginModel::validateAdminPermissions($response) 
+                && $response->assertFalse(empty($host), 400, self::text('ERROR_PING_HOST_EMPTY')) 
+                && $response->assertFalse(self::hostExists($host), 400, self::text('ERROR_PING_HOST_ALREADY_EXISTS'))
+                && $response->assertTrue($query->execute(), 500, self::text('ERROR_UNEXPECTED'))
+        ){ //todo
+            $response->setMessage(self::text('')); 
+        }
 
-    //todo
-    //...
+        return $response;   
+    }
 
+    //todo check
+    public static function edit(int $id, string $host): TaskResponse
+    {
+        $response = TaskResponse::create();
+        $query = self::database()->update('system_ping')
+                                 ->setValue('ping_host', $host)
+                              // ->setValue('ping_check_enabled', 1)
+                                 ->whereEqual('ping_id', $id);
+        
+        // Check admin permissions, not empty and unique host   
+        if ( UserLoginModel::validateAdminPermissions($response) 
+             && $response->assertFalse(empty($host), 400, self::text('ERROR_PING_HOST_EMPTY')) 
+             && $response->assertFalse(self::hostExists($host, $id), 400, self::text('ERROR_PING_HOST_ALREADY_EXISTS'))
+             && $response->assertTrue($query->execute(), 500, self::text('ERROR_UNEXPECTED'))
+        ){
+            $response->setMessage(self::text('')); 
+        }
 
+        return $response;   
+    }
 
+    /** 
+     * Gets whether the following host exists
+     * 
+     * @access public
+     * @static
+     * @param string    $name           The hostname to check
+     * @param int       $Id             The current id. When set, ignore that Id. Default is null.
+     *                                  (needed when editing an entry).    
+     * 
+     * @return bool
+     */
+    public static function hostExists(string $name, ?int $id = null): bool
+    {
+        $query = self::database()->select()
+                                 ->column('ping_host')
+                                 ->from('system_ping')
+                                 ->whereEqual('ping_host', $name);
+
+        if (isset($id)){
+            $query->where()->notEqual('ping_id', $id);
+        }                                 
+                               
+        $items = $query->getAll();
+        return count($items) > 0;
+    }
 }

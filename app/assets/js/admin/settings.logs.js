@@ -76,8 +76,8 @@ Minitoring.Settings.Logs = {
                     html += ' <td data-column="Actions" class="action-bar align-right tab-no-padding desk-no-padding">';
                     html += ' <span class="row-actions visible-hover">';
 //TODO              html += '<a class="row-button action-link" title="Copy" data-action="copy" data-log-id="' +  result.data[i].logId + '"><i class="fa fa-copy"></i></a>';
-                    html += '<a class="row-button action-link" title="Edit" data-action="edit" data-log-id="' +  result.data[i].logId + '"><i class="fa fa-pencil"></i></a>';
-                    html += '<a class="row-button action-link" title="Delete" data-action="delete" data-log-id="' +  result.data[i].logId + '"><i class="fa fa-trash"></i></a>';
+                    html += '<a class="row-button action-link" title="Edit" data-action="edit" data-log-id="' +  result.data[i].logId + '"><i class="fa fa-pencil"></i><span class="mob-only padding-left-6">Edit</span></a>';
+                    html += '<a class="row-button action-link" title="Delete" data-action="delete" data-log-id="' +  result.data[i].logId + '"><i class="fa fa-trash"></i><span class="mob-only padding-left-6">Delete</span></a>';
                     html += '</span>';
                     html += ' </td>';
                     html += '<td data-column="Path" class="align-left">' + result.data[i].logPath + '</td>';

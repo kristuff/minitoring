@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.17
+ * @version    0.1.19
  * @copyright  2017-2021 Kristuff
  */
 
@@ -66,7 +66,7 @@ return array(
      */
     'APP_NAME'                  =>  'Minitoring',
     'APP_COPYRIGHT'             =>  '2017-' .date("Y") . ' Kristuff',
-    'APP_VERSION'               =>  '0.1.17',
+    'APP_VERSION'               =>  '0.1.19',
     'APP_LANGUAGE'              =>  'en-US',
  
     'DATA_PATH'                 => __DIR__ . '/../data/',

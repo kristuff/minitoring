@@ -12,5 +12,6 @@ Minitoring.Dashboard = {
         Minitoring.Network.get();
         Minitoring.SystemUsers.getNumberActive();
         Minitoring.Packages.refreshAll();
+        Minitoring.Ping.refresh();
     }
 }

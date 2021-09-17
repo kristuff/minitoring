@@ -1,8 +1,15 @@
 <section id="settings-logreader" class="view view anim-scale-increase" data-title="<?php $this->echo('SETTINGS_LOGREADER'); ?>"
     data-refresh="Minitoring.Settings.Logs.getLogFilesDetails" data-view="settings/logreader">
 
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a class="" href="<?php echo $this->baseUrl;?>"><?php $this->echo('HOME');?></a></li>
+        <li class="breadcrumb-item"><a class="" href="<?php echo $this->baseUrl;?>settings/" data-view="settings"><?php $this->echo('SETTINGS'); ?></a></li>
+        <li class="breadcrumb-item active"><?php $this->echo('SETTINGS_LOGREADER');?></li>
+    </ol>
+    <br>
+
     <section class="section">
-        <h6 class="highlight"><?php $this->echo('SETTINGS_LOGREADER_LIST_TITLE'); ?></h6>
+        <h5 class="color-accent text-light"><?php $this->echo('SETTINGS_LOGREADER_LIST_TITLE'); ?></h5>
 
         <table id="settings-logs-table" class="data-table responsive XXalternative-row-style">
             <colgroup>

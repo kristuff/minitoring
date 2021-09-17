@@ -5,14 +5,14 @@
 
         <!-- System -->
         <div class="block col mob-whole tab-half desk-large-third">
-            <div class="header">
-                <span class="title"><?php $this->echo('GENERAL'); ?></span>
+            <div class="header no-background">
+                <span class="title text-light"><?php $this->echo('GENERAL'); ?></span>
                 <ul class="action-bar">
                     <li><a class="action-link" href="#" data-module="System" title="Refresh"><i class="fa fa-refresh"></i></a></li>
                 </ul>
             </div>
-            <div class="content">
-                <table class="data-table">
+            <div class="content no-background">
+                <table class="data-table no-border">
                     <tbody>
                         <tr>
                             <td class="color-light" data-column="title"><?php $this->echoField('HOSTNAME'); ?></td>
@@ -45,14 +45,14 @@
 
         <!-- Cpu -->
         <div class="block col mob-whole tab-half desk-large-third">
-            <div class="header">
-                <span class="title"><?php $this->echo('CPU'); ?></span>
+            <div class="header no-background">
+                <span class="title text-light"><?php $this->echo('CPU'); ?></span>
                 <ul class="action-bar">
                     <li><a class="action-link" href="#" data-module="Cpu" title="Refresh"><i class="fa fa-refresh"></i></a></li>
                 </ul>
             </div>
-            <div class="content">
-                <table class="data-table">
+            <div class="content no-background">
+                <table class="data-table no-border">
                     <tbody>
                         <tr>
                             <td  class="color-light" data-column="title"><?php $this->echoField('MODEL'); ?></td>
@@ -85,10 +85,10 @@
 
         <!-- Uptime -->
         <div class="block col mob-whole tab-4 desk-3 desk-large-2 ">
-            <div class="header">
-                <span class="title">Uptime</span>
+            <div class="header no-background">
+                <span class="title text-light">Uptime</span>
             </div>
-            <div class="content align-center">
+            <div class="content align-center no-background">
                 <br>
                 <p>
                     <span class="main color-status-ok" id="uptime-day">...</span>
@@ -104,13 +104,13 @@
 
         <!-- Packages -->
         <div class="block col mob-whole tab-4 desk-3 desk-large-2 ">
-            <div class="header">
-                <span class="title"><?php $this->echo('PACKAGES'); ?></span>
+            <div class="header no-background">
+                <span class="title text-light"><?php $this->echo('PACKAGES'); ?></span>
             </div>
-            <div class="content align-left">
+            <div class="content align-left no-background">
                 <br>
                 <a href="<?php echo $this->baseUrl;?>packages" data-view="packages">
-                    <table id="package-table" class="data-table">
+                    <table id="package-table" class="data-table no-border">
                         <tbody>
                             <tr>
                                 <td class="color-light">Total:</td>
@@ -136,8 +136,8 @@
         
         <!-- Load average -->
         <div class="block col mob-whole tab-8 desk-6  desk-large-4 ">
-            <div class="header">
-                <span class="title">Load average</span>
+            <div class="header no-background">
+                <span class="title text-light">Load average</span>
                 <ul class="action-bar">
                     <li>
                         <a class="action-link" href="#" data-bind="Minitoring.LoadAverage.get" title="Refresh">
@@ -146,7 +146,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="content align-center">
+            <div class="content align-center no-background">
                 <div id="load-average-1-gauge" class="gauge-container gauge-medium" data-bottom="1 min">
                     <div class="gauge-label"></div>
                 </div>
@@ -161,8 +161,8 @@
 
         <!-- Memory -->
         <div class="block col mob-whole tab-4 desk-3  desk-large-2 ">
-            <div class="header">
-                <span class="title">Memory</span>
+            <div class="header no-background">
+                <span class="title text-light">Memory</span>
                 <ul class="action-bar">
                     <li>
                         <a class="action-link" href="#" data-bind="Minitoring.Memory.get" title="Refresh">
@@ -171,7 +171,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="content align-center">
+            <div class="content align-center no-background">
                 <div id="memory-gauge" class="gauge-container gauge-medium" data-bottom="...">
                     <div class="gauge-label"></div>
                 </div>
@@ -180,8 +180,8 @@
 
         <!-- Swap -->
         <div class="block col mob-whole tab-4 desk-3  desk-large-2 ">
-            <div class="header">
-                <span class="title">Swap</span>
+            <div class="header no-background">
+                <span class="title text-light">Swap</span>
                 <ul class="action-bar">
                     <li>
                         <a class="action-link" href="#" data-bind="Minitoring.Swap.get" title="Refresh">
@@ -190,7 +190,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="content align-center">
+            <div class="content align-center no-background">
                 <div id="swap-gauge" class="gauge-container gauge-medium" data-bottom="...">
                     <div class="gauge-label"></div>
                 </div>
@@ -200,8 +200,8 @@
        
         <!-- Disks -->
         <div class="block col mob-whole tab-4 desk-3 desk-large-2 ">
-            <div class="header">
-                <span class="title">Disks</span>
+            <div class="header no-background">
+                <span class="title text-light">Disks</span>
                 <ul class="action-bar">
                     <li>
                         <a class="action-link" href="#" data-bind="Minitoring.Disks.getDisksUsage" title="Refresh">
@@ -210,7 +210,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="content align-center">
+            <div class="content align-center no-background">
                 <a href="<?php echo $this->baseUrl;?>disks" data-view="disks">
                     <div id="disks-gauge" class="gauge-container gauge-medium" data-bottom="">
                         <div class="gauge-label-bottom"></div>
@@ -223,8 +223,8 @@
 
          <!-- Inodes -->
          <div class="block col mob-whole tab-4 desk-3 desk-large-2 ">
-            <div class="header">
-                <span class="title">Inodes</span>
+            <div class="header no-background">
+                <span class="title text-light">Inodes</span>
                 <ul class="action-bar">
                     <li>
                         <a class="action-link" href="#" data-bind="Minitoring.Disks.getInodesUsage" title="Refresh">
@@ -233,7 +233,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="content align-center">
+            <div class="content align-center no-background">
                 <a href="<?php echo $this->baseUrl;?>disks" data-view="disks">
                     <div id="inodes-gauge" class="gauge-container gauge-medium" data-bottom="">
                         <div class="gauge-label-bottom"></div>
@@ -243,14 +243,10 @@
             </div>
         </div>
 
-       
-
-       
-
         <!-- Network -->
         <div class="block col mob-whole tab-8 desk-6 desk-large-4 ">
-            <div class="header">
-                <span class="title">Network</span>
+            <div class="header no-background">
+                <span class="title text-light">Network</span>
                 <ul class="action-bar">
                     <li>
                         <a class="action-link" href="#" data-bind="Minitoring.Network.get">
@@ -259,8 +255,8 @@
                     </li>
                 </ul>
             </div>
-            <div class="content">
-                <table id="network-table" class="data-table responsive">
+            <div class="content no-background">
+                <table id="network-table" class="data-table responsive no-border">
                     <thead>
                         <tr>
                             <th class="light no-style">Interface</th>
@@ -278,8 +274,8 @@
      
         <!-- System users -->
          <div class="block col mob-whole tab-4 desk-3 desk-large-2 ">
-            <div class="header">
-                <span class="title">Users</span>
+            <div class="header no-background">
+                <span class="title text-light">Users</span>
                 <ul class="action-bar">
                     <li>
                         <a class="action-link" href="#" data-bind="Minitoring.SystemUsers.getNumberActive" title="Refresh">
@@ -288,7 +284,7 @@
                     </li>
                 </ul>
             </div>
-            <div class="content align-center">
+            <div class="content align-center no-background">
                 <br>
                 <p>
                     <a href="<?php echo $this->baseUrl;?>sysusers/currents" data-view="sysusers/currents">
@@ -301,8 +297,8 @@
 
          <!-- Process -->
          <div class="block col mob-whole tab-4 desk-3 desk-large-2 ">
-            <div class="header">
-                <span class="title">Process</span>
+            <div class="header no-background">
+                <span class="title text-light">Process</span>
                 <ul class="action-bar">
                     <li>
                         <a class="action-link" href="#" data-bind="Minitoring.Process.get" title="Refresh">
@@ -311,9 +307,9 @@
                     </li>
                 </ul>
             </div>
-            <div class="content align-left">
+            <div class="content align-left no-background">
                 <br>
-                <table id="process-table" class="data-table ">
+                <table id="process-table" class="data-table no-border">
                         <tbody>
                             <tr>
                                 <td class="color-light">Total:</td>
@@ -330,8 +326,8 @@
 
         <!-- Services -->
         <div class="block col mob-whole tab-8 desk-6  desk-large-4 ">
-            <div class="header">
-                <span class="title">Services</span>
+            <div class="header no-background">
+                <span class="title text-light">Services</span>
                 <ul class="action-bar">
                     <li>
                         <a class="action-link" href="#" data-bind="Minitoring.Services.refresh" title="Refresh">
@@ -340,14 +336,34 @@
                     </li>
                 </ul>
             </div>
-            <div class="content">
-                <table id="services-table" class="data-table">
+            <div class="content no-background">
+                <table id="services-table" class="data-table no-border">
                     <thead></thead>
                     <tbody></tbody>
                 </table>
             </div>
         </div>
 
+
+          <!-- Ping -->
+          <div class="block col mob-whole tab-8 desk-6  desk-large-4 ">
+            <div class="header no-background">
+                <span class="title text-light">Ping</span>
+                <ul class="action-bar">
+                    <li>
+                        <a class="action-link" href="#" data-bind="Minitoring.Ping.refresh" title="Refresh">
+                            <i class="fa fa-refresh"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="content no-background">
+                <table id="ping-table" class="data-table no-border">
+                    <thead></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
 
 
 

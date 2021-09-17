@@ -3,8 +3,15 @@
     data-title="Fail2ban"
     data-refresh="Minitoring.Fail2ban.refresh">
 
+
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a class="" href="<?php echo $this->baseUrl;?>"><?php $this->echo('HOME');?></a></li>
+        <li class="breadcrumb-item"><a class="" href="<?php echo $this->baseUrl;?>bans/" data-view="bans"><?php $this->echo('FIREWALL'); ?></a></li>
+        <li class="breadcrumb-item active">Fail2ban</li>
+    </ol>
+    <br>
     <section class="section">
-        <h6 class="highlight">Fail2ban Server</h6>
+        <h5 class="color-accent text-light">Fail2ban Server</h5>
         <table id="fail2ban-server" class="">
                 <tbody>
                     <tr id="fail2ban-server-version" class="data-row">
@@ -28,7 +35,7 @@
     </section>                  
     <br>
     <section class="section">
-        <h6 class="highlight">Fail2ban Jails</h6>
+        <h5 class="color-accent text-light">Fail2ban Jails</h5>
         <table id="fail2ban-jails" class="data-table responsive">
                     <thead>
                         <tr>
@@ -38,7 +45,7 @@
                             <th data-column="Total Bans" class="align-right">Total bans*</th>
                         </tr>
                     </thead>
-                    <tbody></tbody>
+                    <tbody class=""></tbody>
         </table>
         <div id="fail2ban-jails-comment" class="color-light text-small padding-v-6"></div>
     </section>

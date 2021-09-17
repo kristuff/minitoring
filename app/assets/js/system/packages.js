@@ -80,7 +80,6 @@ Minitoring.Packages = {
                         '</tr>'
             }
 
-
             for (var i = 0; i < result.data.packages.length; i++) {
                 currentGroup = result.data.packages[i].name.charAt(0).toUpperCase();
                 
@@ -142,20 +141,21 @@ Minitoring.Packages = {
                 numberPackages = result.data.number,
                 menuItemUpgradable = document.querySelector('#packages-upgradable-menuitem'),
                 dashboardUpgradableHtml = numberPackages;
-
-            menuItemUpgradable.classList.add('badge');
-            menuItemUpgradable.classList.add('margin-left-6');
                           
             if (numberPackages > 0) {
                 dashboardUpgradableHtml = '<span class="badge" data-badge="warning">' + numberPackages + '</span>';
+                menuItemUpgradable.classList.add('badge');
+                menuItemUpgradable.classList.add('margin-left-6');
                 menuItemUpgradable.setAttribute('data-badge','warning');
                 menuItemUpgradable.innerHTML = numberPackages;
             } else {
                 dashboardUpgradableHtml = '<span class="badge" data-badge="success">' + numberPackages + '</span>';
                 document.querySelector('#packages-comment').innerHTML = result.data.message;
                 document.querySelector('#packages-comment').classList.add('active');
-                menuItemUpgradable.setAttribute('data-badge','success');
-                menuItemUpgradable.innerHTML = numberPackages;
+                menuItemUpgradable.classList.remove('badge');
+                menuItemUpgradable.classList.remove('margin-left-6');
+                //menuItemUpgradable.setAttribute('data-badge','success');
+                menuItemUpgradable.innerHTML = '';
             }
 
             for (var i = 0; i < result.data.packages.length; i++) {

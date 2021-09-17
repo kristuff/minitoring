@@ -73,6 +73,15 @@ gulp.task('merge-js-minitoring-config', function () {
     .pipe(concat('minitoring.config.js'))
     .pipe(gulp.dest('build/js'));
 });
+gulp.task('merge-js-minitoring-auth', function () {
+    return gulp.src([
+        'js/core.js', 
+        'js/auth.js',
+    ])
+    .pipe(concat('minitoring.auth.js'))
+    .pipe(gulp.dest('build/js'));
+});
+
 gulp.task('min-js-minitoring', function () {
     return gulp.src('build/js/minitoring*.js')
     .pipe(uglify().on('error', function(e){
@@ -93,7 +102,7 @@ gulp.task('copy-minitoring-js', function () {
 gulp.task('build-minitoring', function(log) {
     runSequence(
         ['clean-dist-css-minitoring', 'clean-dist-js-minitoring'],
-        ['build-css-minitoring', 'merge-js-minitoring-core', 'merge-js-minitoring-setup', 'merge-js-minitoring-config'],
+        ['build-css-minitoring', 'merge-js-minitoring-core', 'merge-js-minitoring-auth', 'merge-js-minitoring-setup', 'merge-js-minitoring-config'],
         ['min-css-minitoring', 'min-js-minitoring'],
         ['copy-minitoring-css', 'copy-minitoring-js'],
 //        ['copy-minikit-css-to-minitoring', 'copy-minikit-js-to-minitoring'],

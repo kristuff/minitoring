@@ -164,11 +164,11 @@ Minitoring.Users = {
         } 
 
         html += '<tr class="data-row user" data-user-id="' + item.userId + '">';
-        html += ' <td data-column="Avatar"><img src="' + item.userAvatarUrl + '"/></td>';
+        html += ' <td data-column="Avatar"><img class="avatar" src="' + item.userAvatarUrl + '"/></td>';
         html += ' <td data-column="Name">' + item.userName + '</td>';
-        html += ' <td data-column="Actions" class="action-bar align-right no-padding">';
+        html += ' <td data-column="Actions" class="action-bar tab-align-right desk-align-right">';
         html += '<span class="row-actions visible-hover">';
-        html += '<a class="row-button action-link" title="Delete" data-action="delete" data-user-id="' + item.userId + '" ><i class="fa fa-trash"></i></a>';
+        html += '<a class="row-button action-link" title="Delete" data-action="delete" data-user-id="' + item.userId + '" ><i class="fa fa-trash"></i><span class="title">Delete</span></a>';
         html += '</span>';
         html += ' </td>';
         html += ' <td data-column="Type">' + item.userAccountTypeRendered + '</td>';

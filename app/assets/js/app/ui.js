@@ -41,4 +41,54 @@ Minitoring.UI = {
     getFormattedDate :function(value){
         return Minikit.isObj(value) ? Minikit.Format.date(value, '{DD}/{MM}/{YYYY} {hh}:{mm}', true) : '';  
     },
+
+    initTableSearch: function(){
+        Array.prototype.forEach.call(document.querySelectorAll('input.search[data-table-target]'), function(element){
+            tableFilter.init(element)
+        });
+    }
 }
+
+
+ // table filtering
+ var tableFilter = (function(Arr) {
+    var _input;
+
+    function _onInputEvent(e) {
+        _input = e.target;
+        var tableBody = document.querySelector('table#' + e.target.getAttribute('data-table-target') + ' tbody');
+        Arr.forEach.call(tableBody.rows, _filter);
+    }
+
+    function _filter(row) {
+        var text = row.textContent.toLowerCase(), val = _input.value.toLowerCase();
+        
+        if (_input.value == ""){
+            row.classList.remove('filter-show');
+            row.classList.remove('filter-hide');
+            return;
+        }
+        if (row.classList.contains('group-row')){
+            row.classList.add('filter-hide');
+            return;
+        } 
+
+        //row.style.display = text.indexOf(val) === -1 ? 'none' : 'table-row';
+        if (text.indexOf(val) === -1){
+            row.classList.remove('filter-show');
+            row.classList.add('filter-hide');
+        } else {
+            row.classList.add('filter-show');
+            row.classList.remove('filter-hide');
+        }
+
+    }
+
+    return {
+        init: function(input) {
+            if (input) {
+                input.oninput = _onInputEvent;
+            }
+        }
+    };
+})(Array.prototype);

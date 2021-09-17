@@ -1,8 +1,14 @@
-<section id="settings-services" class="view view anim-scale-increase" data-title="Services" data-refresh="Minitoring.Settings.Services.refresh" data-view="settings/services">
+<section id="settings-services" class="view view anim-scale-increase" data-title="<?php $this->echo('SETTINGS_SERVICES');?>" data-refresh="Minitoring.Settings.Services.refresh" data-view="settings/services">
     <div id="settings-services-feedback"></div>
 
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a class="" href="<?php echo $this->baseUrl;?>"><?php $this->echo('HOME');?></a></li>
+        <li class="breadcrumb-item"><a class="" href="<?php echo $this->baseUrl;?>settings/" data-view="settings"><?php $this->echo('SETTINGS'); ?></a></li>
+        <li class="breadcrumb-item active"><?php $this->echo('SETTINGS_SERVICES');?></li>
+    </ol>
+    <br>
     <section class="section">
-        <h6 class="highlight"><?php $this->echo('SETTINGS_SERVICES_REGISTERED_TITLE'); ?></h6>
+        <h5 class="color-accent text-light"><?php $this->echo('SETTINGS_SERVICES_REGISTERED_TITLE'); ?></h5>
         <table id="settings-services-table" class="data-table responsive XXalternative-row-style" data-dialog-delete-text="<?php $this->echo('SETTINGS_SERVICES_DELETE_MESSAGE'); ?>">
             <thead>
                 <tr class="table-header">
@@ -14,7 +20,7 @@
                     <th data-column="<?php $this->echo('SETTINGS_SERVICES_CHECK_ENABLED_HEADER'); ?>" class="align-center"><?php $this->echo('SETTINGS_SERVICES_CHECK_ENABLED_HEADER'); ?></th>
                 </tr>
             </thead>
-            <tbody class="color-light"></tbody>
+            <tbody class=""></tbody>
         </table>
     </section>
     <div id="settings-services-feedback"></div>

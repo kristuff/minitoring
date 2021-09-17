@@ -2,9 +2,15 @@
          data-view ="settings/customize" data-title="<?php $this->echo('SETTINGS_CUSTOMIZE') ;?>" 
          data-token="<?php echo $this->data('settingsToken'); ?>">
 
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a class="" href="<?php echo $this->baseUrl;?>"><?php $this->echo('HOME');?></a></li>
+        <li class="breadcrumb-item"><a class="" href="<?php echo $this->baseUrl;?>settings/" data-view="settings"><?php $this->echo('SETTINGS'); ?></a></li>
+        <li class="breadcrumb-item active"><?php $this->echo('SETTINGS_CUSTOMIZE');?></li>
+    </ol>
+    <br>
     <section class="section">
         <form class="small">
-            <h6><?php $this->echo('SETTINGS_CUSTOMIZE_LANGUAGE') ;?></h6>
+            <h5 class="color-accent text-light"><?php $this->echo('SETTINGS_CUSTOMIZE_LANGUAGE') ;?></h5>
             <div class="padding-bottom-6"><?php $this->echo('SETTINGS_CUSTOMIZE_LANGUAGE_FIELD') ;?></div>
             <div class="custom-select full-width">
                 <select id="select-language" data-bind="Minitoring.Settings.languageChanged">
@@ -17,7 +23,7 @@
     <br>
 
     <section class="section">
-        <h6 class="highlight"><?php $this->echo('SETTINGS_CUSTOMIZE_APPEARANCE') ;?></h6>
+        <h5 class="color-accent text-light"><?php $this->echo('SETTINGS_CUSTOMIZE_APPEARANCE') ;?></h5>
         <form class="small">
 
             <div class="padding-bottom-6"><?php $this->echo('SETTINGS_CUSTOMIZE_APPEARANCE_THEME_FIELD') ;?></div>
@@ -47,7 +53,7 @@
     <br>
 
     <section class="section">
-        <h6 class="highlight"><?php $this->echo('SETTINGS_CUSTOMIZE_RESET_TITLE') ;?></h6>
+        <h5 class="color-accent text-light"><?php $this->echo('SETTINGS_CUSTOMIZE_RESET_TITLE') ;?></h5>
         <form class="small">
             <div class="padding-bottom-6"><?php $this->echo('SETTINGS_CUSTOMIZE_RESET_TEXT') ;?></div>   
             <button id="reset-settings-button" class="button" data-bind="Minitoring.Settings.resetCurrent" data-dialog-text="<?php $this->echo('SETTINGS_CUSTOMIZE_RESET_DIALOG') ;?>"> 

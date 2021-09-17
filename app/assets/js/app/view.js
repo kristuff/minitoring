@@ -5,7 +5,7 @@ Minitoring.View = {
     htmlOverlay: {},
     htmlHeaderTitle: {}, 
     htmlHeaderSubTitle: {},
-    htmlBackButton: {},
+    //htmlBackButton: {},
     sideMenu: {},
   
     // navigate to given url
@@ -96,11 +96,11 @@ Minitoring.View = {
             });
 
             // set back button visibility
-            if (target != baseTarget) {
-                htmlBackButton.classList.add('active');
-            } else {
-                htmlBackButton.classList.remove('active');
-            }
+            //if (target != baseTarget) {
+            //    htmlBackButton.classList.add('active');
+            //} else {
+            //    htmlBackButton.classList.remove('active');
+            //}
             
             // auto action
             refreshAction = viewPanel.getAttribute('data-refresh');
@@ -136,7 +136,7 @@ Minitoring.View = {
         htmlOverlay     = document.querySelector('main-container > .overlay');
         htmlHeaderTitle = document.querySelector('#header-title');
      // htmlHeaderSubTitle = document.querySelector('#header-subtitle');
-        htmlBackButton  = document.querySelector('.back-trigger');
+     // htmlBackButton  = document.querySelector('.back-trigger');
         sideMenu        = document.querySelector('#side-menu');
 
         // detect links

@@ -36,6 +36,14 @@
             </a>
         </div>
 
+        <div class="rwd-box">
+            <a class="box-inner" href="<?php echo $this->baseUrl;?>settings/pings" data-view="settings/pings" role="button">
+               <span class="box-icon"><i class="fa fa-fw color-theme fa-2x fa-signal"></i></span>
+               <span class="box-title"><?php $this->echo('SETTINGS_PING'); ?></span>
+               <span class="box-subtitle"><?php $this->echo('SETTINGS_PING_SUMMARY'); ?></span>
+            </a>
+        </div>
+
                 <?php if (false === true ) { // skip for now... ?>
 
         <div class="rwd-box">
