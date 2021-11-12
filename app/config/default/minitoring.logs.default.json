@@ -426,6 +426,50 @@
             }
             
         ]
+    },
+    {
+        "name": "MariaDB Error",
+        "type": "mariadb_error",
+        "paths": [  
+            "/var/log/mysql/"
+        ],
+        "files": [
+            "error.log" 
+        ],
+        "default_file": "/var/log/mysql/error.log",
+        "columns": [
+            {
+                "code":"%t",
+                "name":"time",
+                "display":"Date"
+            },
+            {
+                "code":"%i",
+                "name":"tid",
+                "display":"Thread ID"
+            },
+            {
+                "code":"%l",
+                "name":"level",
+                "display":"Level"
+            },
+            {
+                "code":"%m",
+                "name":"message",
+                "display":"Message"
+            }
+        ],
+        "formats": [
+            {
+                "name": "default",
+                "format": "%t %i %l %m"
+            },
+            {
+                "name": "custom",
+                "format": ""
+            }
+            
+        ]
     }
     
 ]

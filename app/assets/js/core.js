@@ -11,15 +11,9 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.19
+ * @version    0.1.20
  * @copyright  2017-2021 Kristuff
  */
 
-/* register global namespace */
-//(function (w, d, p, undefined) {
-//    'use strict';
-
-    var Minitoring = Minitoring || {};
-//    w.Minitoring = Minitoring;
-
-//})(window, window.document, Element.prototype);
+/* global namespace */
+var Minitoring = Minitoring || {};

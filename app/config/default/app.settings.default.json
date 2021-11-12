@@ -6,6 +6,7 @@
     {"name": "DISKS_SHOW_FILE_SYSTEM", "value":1},
     {"name": "DISKS_SHOW_TMPFS", "value":0},
     {"name": "DISKS_SHOW_LOOP", "value":0},
+    {"name": "CPU_SHOW_TEMPERATURE", "value":0},
     {"name": "SERVICES_SHOW_PORT_NUMBER", "value":0},
     {"name": "IP_ACTION", "value":"abuseipdb"}
 ]

@@ -6,37 +6,18 @@ table#packages-table {
         vertical-align: top;
     }
 
-    tr.group-row{
-        cursor: pointer;
-    }
+    //tr.group-row{
+    //    cursor: pointer;
+    //}
 
     th.group {
         width: 26px;
     }
 
-    tr:not(.group-row).hidden {
-        display: none;
-    }
+    //tr:not(.group-row).hidden {
+    //    display: none;
+    //}
 
-    tr.group-row.expanded td a.toggle i {
-        cursor: pointer;
-        margin-right: 3px;
-
-        &:after {
-            // content: '\f068'; // fa-minus
-            // content: '\f0d7'; // fa-fa-caret-down
-            content: '\f078'; // fa-chevron-down
-        }
-    }
-
-    tr.group-row:not(.expanded) td a.toggle i {
-        cursor: pointer;
-        &:after {
-            // content: '\f067'; // fa-plus
-            // content: '\f0da'; // fa-fa-caret-right
-            content: '\f054'; // fa-chevron-right
-        }
-    }
 
     td[colspan] {
         &::before {

@@ -24,8 +24,10 @@ cp composer.json        debian/var/www/minitoring
 cp -R app               debian/var/www/minitoring
 cp -R public            debian/var/www/minitoring
 
-cp minitoring.service       debian/etc/systemd/system
 cp minitoring.apache.conf   debian/etc/apache2/conf-available/minitoring.conf
+cp minitoring-ws.service                debian/etc/systemd/system
+cp minitoring-hourly-script.service     debian/etc/systemd/system
+cp minitoring-hourly-script.timer       debian/etc/systemd/system
 
 # make sure data directory does not contain unwanted files
 rm -rf debian/var/www/minitoring/app/assets

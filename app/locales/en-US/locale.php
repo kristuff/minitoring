@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.19
+ * @version    0.1.20
  * @copyright  2017-2021 Kristuff
  */
 
@@ -129,9 +129,16 @@ return array(
 
     /* Sysusers */
     'SYS_USERS'                                         => 'Users',
+    'SYS_USERS_CONNECTED'                               => 'Connected user(s)',
 
     /* Services */
     'SERVICES'                                          => 'Services',
+
+     /* Network */
+    'NETWORK'                                           => 'Network',
+    'NETWORK_INTERFACE'                                 => 'Interface',
+    'NETWORK_RECEIVED'                                  => 'Received',
+    'NETWORK_TRANSMITTED'                               => 'Transmitted',
 
     /* Disks */
     'DISKS'                                             => 'Disks',
@@ -144,7 +151,16 @@ return array(
     /* Packages */
     'PACKAGES'                                          => 'Packages',
     'PACKAGES_UPGRADE_NONE'                             => 'All packages are up do date',
+    'PACKAGES_TOTAL'                                    => 'Total',
+    'PACKAGES_INSTALLED'                                => 'Installed',
+    'PACKAGES_UPGRADABLE'                               => 'Upgradable',
+    'PACKAGES_ERROR'                                    => 'Error',
   
+    /* Process */
+    'PROCESS'                                           => 'Process',
+    'PROCESS_TOTAL'                                     => 'Total',
+    'PROCESS_RUNNING'                                   => 'Running',
+
     /* Logs */
     'LOGS'                                              => 'Logs',
     'LOGS_REFRESH_NONE'                                 => 'No refresh',
@@ -303,7 +319,7 @@ return array(
     'SETTINGS_DISK_SHOW_TMPFS'                          => "Show tmpf",
     'SETTINGS_DISK_SHOW_LOOP'                           => "Show loop",
     'SETTINGS_DISK_SHOW_FILE_SYSTEM'                    => "Show file system",
-
+    'SETTINGS_CPU_SHOW_TEMPERATURE'                     => "Show temperature (may require additional packages like lm-sensors on Debian based distros).",
     'SETTINGS_DEFAULT_TITLE'                            => 'Default settings',
     'SETTINGS_DEFAULT_TEXT'                             => "Define default settings. Apply to login/recovery pages",
 

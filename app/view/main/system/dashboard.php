@@ -1,6 +1,5 @@
-<section id="section-dashboard" class="view anim-scale-increase section dashboard" data-view="overview"
-    data-title="<?php $this->echo('OVERVIEW'); ?>" data-refresh="Minitoring.Dashboard.refresh">
-    
+<section id="section-dashboard" class="view anim-scale-increase section dashboard" data-view="overview" data-title="<?php $this->echo('OVERVIEW'); ?>" data-refresh="Minitoring.Dashboard.refresh">
+
     <div class="dashboard">
 
         <!-- System -->
@@ -8,7 +7,7 @@
             <div class="header no-background">
                 <span class="title text-light"><?php $this->echo('GENERAL'); ?></span>
                 <ul class="action-bar">
-                    <li><a class="action-link" href="#" data-module="System" title="Refresh"><i class="fa fa-refresh"></i></a></li>
+                    <li><a class="action-link" href="#" data-bind="Minitoring.SystemInfos.get" title="<?php $this->echo('ACTION_REFRESH'); ?>"><i class="fa fa-refresh"></i></a></li>
                 </ul>
             </div>
             <div class="content no-background">
@@ -48,34 +47,34 @@
             <div class="header no-background">
                 <span class="title text-light"><?php $this->echo('CPU'); ?></span>
                 <ul class="action-bar">
-                    <li><a class="action-link" href="#" data-module="Cpu" title="Refresh"><i class="fa fa-refresh"></i></a></li>
+                    <li><a class="action-link" href="#" data-bind="Minitoring.Cpu.get" title="<?php $this->echo('ACTION_REFRESH'); ?>"><i class="fa fa-refresh"></i></a></li>
                 </ul>
             </div>
             <div class="content no-background">
-                <table class="data-table no-border">
+                <table id="dashboard_cpu_table" class="data-table no-border">
                     <tbody>
                         <tr>
-                            <td  class="color-light" data-column="title"><?php $this->echoField('MODEL'); ?></td>
+                            <td class="color-light" data-column="title"><?php $this->echoField('MODEL'); ?></td>
                             <td id="cpu-model" class="highlight"></td>
                         </tr>
                         <tr>
-                            <td  class="color-light" data-column="title"><?php $this->echoField('CORES'); ?></td>
+                            <td class="color-light" data-column="title"><?php $this->echoField('CORES'); ?></td>
                             <td id="cpu-cores" class="highlight"></td>
                         </tr>
                         <tr>
-                            <td  class="color-light" data-column="title"><?php $this->echoField('SPEED'); ?></td>
+                            <td class="color-light" data-column="title"><?php $this->echoField('SPEED'); ?></td>
                             <td id="cpu-speed" class="highlight"></td>
                         </tr>
                         <tr>
-                            <td  class="color-light" data-column="title"><?php $this->echoField('CACHE'); ?></td>
+                            <td class="color-light" data-column="title"><?php $this->echoField('CACHE'); ?></td>
                             <td id="cpu-cache" class="highlight"></td>
                         </tr>
                         <tr>
-                            <td  class="color-light" data-column="title"><?php $this->echoField('BOGOMIPS'); ?></td>
+                            <td class="color-light" data-column="title"><?php $this->echoField('BOGOMIPS'); ?></td>
                             <td id="cpu-bogomips" class="highlight"></td>
                         </tr>
                         <tr>
-                            <td  class="color-light" data-column="title"><?php $this->echoField('TEMPERATURE'); ?></td>
+                            <td class="color-light" data-column="title"><?php $this->echoField('TEMPERATURE'); ?></td>
                             <td id="cpu-temperature" class="highlight"></td>
                         </tr>
                     </tbody>
@@ -94,8 +93,7 @@
                     <span class="main color-status-ok" id="uptime-day">...</span>
                     <span class="right">days</span>
                 </p>
-                <p class="text-small">
-                    Last boot <span id="uptime-full"></span>
+                <p class="text-small"><?php $this->echoField('LAST_BOOT'); ?> <span id="uptime-full"></span>
                 </p>
                 <div id="dashboard-reboot-required"></div>
             </div>
@@ -106,41 +104,44 @@
         <div class="block col mob-whole tab-4 desk-3 desk-large-2 ">
             <div class="header no-background">
                 <span class="title text-light"><?php $this->echo('PACKAGES'); ?></span>
+                <ul class="action-bar">
+                    <li><a class="action-link" href="#" data-bind="Minitoring.Packages.refreshAll" title="<?php $this->echo('ACTION_REFRESH'); ?>"><i class="fa fa-refresh"></i></a></li>
+                </ul>
             </div>
             <div class="content align-left no-background">
                 <br>
-                <a href="<?php echo $this->baseUrl;?>packages" data-view="packages">
+                <a href="<?php echo $this->baseUrl; ?>packages" data-view="packages">
                     <table id="package-table" class="data-table no-border">
                         <tbody>
                             <tr>
-                                <td class="color-light">Total:</td>
+                                <td class="color-light"><?php $this->echoField('PACKAGES_TOTAL'); ?></td>
                                 <td class="align-right" id="dashboard_packages_total">...</td>
                             </tr>
                             <tr>
-                                <td class="color-light">Installed:</td>
+                                <td class="color-light"><?php $this->echoField('PACKAGES_INSTALLED'); ?></td>
                                 <td class="align-right" id="dashboard_packages_installed">...</td>
                             </tr>
                             <tr>
-                                <td class="color-light">Update available:</td>
+                                <td class="color-light"><?php $this->echoField('PACKAGES_UPGRADABLE'); ?></td>
                                 <td class="align-right" id="dashboard_packages_upgradable">...</td>
                             </tr>
                             <tr>
-                                <td class="color-light">Error:</td>
+                                <td class="color-light"><?php $this->echoField('PACKAGES_ERROR'); ?></td>
                                 <td class="align-right" id="dashboard_packages_error">...</td>
                             </tr>
                         </tbody>
                     </table>
-                </a>    
+                </a>
             </div>
         </div>
-        
+
         <!-- Load average -->
         <div class="block col mob-whole tab-8 desk-6  desk-large-4 ">
             <div class="header no-background">
                 <span class="title text-light">Load average</span>
                 <ul class="action-bar">
                     <li>
-                        <a class="action-link" href="#" data-bind="Minitoring.LoadAverage.get" title="Refresh">
+                        <a class="action-link" href="#" data-bind="Minitoring.LoadAverage.get" title="<?php $this->echo('ACTION_REFRESH'); ?>">
                             <i class="fa fa-refresh"></i>
                         </a>
                     </li>
@@ -165,7 +166,7 @@
                 <span class="title text-light">Memory</span>
                 <ul class="action-bar">
                     <li>
-                        <a class="action-link" href="#" data-bind="Minitoring.Memory.get" title="Refresh">
+                        <a class="action-link" href="#" data-bind="Minitoring.Memory.get" title="<?php $this->echo('ACTION_REFRESH'); ?>">
                             <i class="fa fa-refresh"></i>
                         </a>
                     </li>
@@ -184,7 +185,7 @@
                 <span class="title text-light">Swap</span>
                 <ul class="action-bar">
                     <li>
-                        <a class="action-link" href="#" data-bind="Minitoring.Swap.get" title="Refresh">
+                        <a class="action-link" href="#" data-bind="Minitoring.Swap.get" title="<?php $this->echo('ACTION_REFRESH'); ?>">
                             <i class="fa fa-refresh"></i>
                         </a>
                     </li>
@@ -197,21 +198,21 @@
             </div>
         </div>
 
-       
+
         <!-- Disks -->
         <div class="block col mob-whole tab-4 desk-3 desk-large-2 ">
             <div class="header no-background">
-                <span class="title text-light">Disks</span>
+                <span class="title text-light"><?php $this->echo('DISKS'); ?></span>
                 <ul class="action-bar">
                     <li>
-                        <a class="action-link" href="#" data-bind="Minitoring.Disks.getDisksUsage" title="Refresh">
+                        <a class="action-link" href="#" data-bind="Minitoring.Disks.getDisksUsage" title="<?php $this->echo('ACTION_REFRESH'); ?>">
                             <i class="fa fa-refresh"></i>
                         </a>
                     </li>
                 </ul>
             </div>
             <div class="content align-center no-background">
-                <a href="<?php echo $this->baseUrl;?>disks" data-view="disks">
+                <a href="<?php echo $this->baseUrl; ?>disks" data-view="disks">
                     <div id="disks-gauge" class="gauge-container gauge-medium" data-bottom="">
                         <div class="gauge-label-bottom"></div>
                     </div>
@@ -221,20 +222,20 @@
         </div>
 
 
-         <!-- Inodes -->
-         <div class="block col mob-whole tab-4 desk-3 desk-large-2 ">
+        <!-- Inodes -->
+        <div class="block col mob-whole tab-4 desk-3 desk-large-2 ">
             <div class="header no-background">
                 <span class="title text-light">Inodes</span>
                 <ul class="action-bar">
                     <li>
-                        <a class="action-link" href="#" data-bind="Minitoring.Disks.getInodesUsage" title="Refresh">
+                        <a class="action-link" href="#" data-bind="Minitoring.Disks.getInodesUsage" title="<?php $this->echo('ACTION_REFRESH'); ?>">
                             <i class="fa fa-refresh"></i>
                         </a>
                     </li>
                 </ul>
             </div>
             <div class="content align-center no-background">
-                <a href="<?php echo $this->baseUrl;?>disks" data-view="disks">
+                <a href="<?php echo $this->baseUrl; ?>disks" data-view="disks">
                     <div id="inodes-gauge" class="gauge-container gauge-medium" data-bottom="">
                         <div class="gauge-label-bottom"></div>
                     </div>
@@ -246,7 +247,7 @@
         <!-- Network -->
         <div class="block col mob-whole tab-8 desk-6 desk-large-4 ">
             <div class="header no-background">
-                <span class="title text-light">Network</span>
+                <span class="title text-light"><?php $this->echo('NETWORK'); ?></span>
                 <ul class="action-bar">
                     <li>
                         <a class="action-link" href="#" data-bind="Minitoring.Network.get">
@@ -259,26 +260,26 @@
                 <table id="network-table" class="data-table responsive no-border">
                     <thead>
                         <tr>
-                            <th class="light no-style">Interface</th>
+                            <th class="light no-style"><?php $this->echo('NETWORK_INTERFACE'); ?></th>
                             <th class="light no-style">IP</th>
-                            <th class="light no-style align-right padding-right-12">Receive</th>
-                            <th class="light no-style align-right padding-right-12">Transmit</th>
+                            <th class="light no-style align-right padding-right-12"><?php $this->echo('NETWORK_RECEIVED'); ?></th>
+                            <th class="light no-style align-right padding-right-12"><?php $this->echo('NETWORK_TRANSMITTED'); ?></th>
                         </tr>
                     </thead>
                     <tbody></tbody>
-                </table>    
+                </table>
             </div>
         </div>
 
 
-     
+
         <!-- System users -->
-         <div class="block col mob-whole tab-4 desk-3 desk-large-2 ">
+        <div class="block col mob-whole tab-4 desk-3 desk-large-2 ">
             <div class="header no-background">
-                <span class="title text-light">Users</span>
+                <span class="title text-light"><?php $this->echo('SYS_USERS'); ?></span>
                 <ul class="action-bar">
                     <li>
-                        <a class="action-link" href="#" data-bind="Minitoring.SystemUsers.getNumberActive" title="Refresh">
+                        <a class="action-link" href="#" data-bind="Minitoring.SystemUsers.getNumberActive" title="<?php $this->echo('ACTION_REFRESH'); ?>">
                             <i class="fa fa-refresh"></i>
                         </a>
                     </li>
@@ -287,21 +288,21 @@
             <div class="content align-center no-background">
                 <br>
                 <p>
-                    <a href="<?php echo $this->baseUrl;?>sysusers/currents" data-view="sysusers/currents">
+                    <a href="<?php echo $this->baseUrl; ?>sysusers/currents" data-view="sysusers/currents">
                         <span class="main color-status-ok" id="current-users-number"></span>
-                        <span class="right">connected user(s) </span>
+                        <span class="right"><?php $this->echo('SYS_USERS_CONNECTED'); ?></span>
                     </a>
                 </p>
             </div>
         </div>
 
-         <!-- Process -->
-         <div class="block col mob-whole tab-4 desk-3 desk-large-2 ">
+        <!-- Process -->
+        <div class="block col mob-whole tab-4 desk-3 desk-large-2 ">
             <div class="header no-background">
-                <span class="title text-light">Process</span>
+                <span class="title text-light"><?php $this->echo('PROCESS'); ?></span>
                 <ul class="action-bar">
                     <li>
-                        <a class="action-link" href="#" data-bind="Minitoring.Process.get" title="Refresh">
+                        <a class="action-link" href="#" data-bind="Minitoring.Process.get" title="<?php $this->echo('ACTION_REFRESH'); ?>">
                             <i class="fa fa-refresh"></i>
                         </a>
                     </li>
@@ -310,16 +311,16 @@
             <div class="content align-left no-background">
                 <br>
                 <table id="process-table" class="data-table no-border">
-                        <tbody>
-                            <tr>
-                                <td class="color-light">Total:</td>
-                                <td class="align-right" id="dashboard_process_total">...</td>
-                            </tr>
-                            <tr>
-                                <td class="color-light">Running:</td>
-                                <td class="align-right" id="dashboard_process_running">...</td>
-                            </tr>
-                        </tbody>
+                    <tbody>
+                        <tr>
+                            <td class="color-light"><?php $this->echoField('PROCESS_TOTAL'); ?></td>
+                            <td class="align-right" id="dashboard_process_total">...</td>
+                        </tr>
+                        <tr>
+                            <td class="color-light"><?php $this->echoField('PROCESS_RUNNING'); ?></td>
+                            <td class="align-right" id="dashboard_process_running">...</td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
         </div>
@@ -327,10 +328,10 @@
         <!-- Services -->
         <div class="block col mob-whole tab-8 desk-6  desk-large-4 ">
             <div class="header no-background">
-                <span class="title text-light">Services</span>
+                <span class="title text-light"><?php $this->echo('SERVICES'); ?></span>
                 <ul class="action-bar">
                     <li>
-                        <a class="action-link" href="#" data-bind="Minitoring.Services.refresh" title="Refresh">
+                        <a class="action-link" href="#" data-bind="Minitoring.Services.refresh" title="<?php $this->echo('ACTION_REFRESH'); ?>">
                             <i class="fa fa-refresh"></i>
                         </a>
                     </li>
@@ -345,13 +346,13 @@
         </div>
 
 
-          <!-- Ping -->
-          <div class="block col mob-whole tab-8 desk-6  desk-large-4 ">
+        <!-- Ping -->
+        <div class="block col mob-whole tab-8 desk-6  desk-large-4 ">
             <div class="header no-background">
                 <span class="title text-light">Ping</span>
                 <ul class="action-bar">
                     <li>
-                        <a class="action-link" href="#" data-bind="Minitoring.Ping.refresh" title="Refresh">
+                        <a class="action-link" href="#" data-bind="Minitoring.Ping.refresh" title="<?php $this->echo('ACTION_REFRESH'); ?>">
                             <i class="fa fa-refresh"></i>
                         </a>
                     </li>
@@ -364,8 +365,6 @@
                 </table>
             </div>
         </div>
-
-
 
     </div>
     <br>

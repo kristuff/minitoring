@@ -13,6 +13,7 @@ Minitoring.Disks = {
     },
    
     getDisksUsage: function () {
+        document.querySelector('#disks-table tbody').innerHTML = Minitoring.UI.getTableLoader(7);
         Minitoring.Api.get('api/system/disks', null, function (result) {
 
                 switch (Minitoring.View.getCurrentView()) {
@@ -66,6 +67,8 @@ Minitoring.Disks = {
     },
 
     getInodesUsage: function() {
+        document.querySelector('#inodes-table tbody').innerHTML = Minitoring.UI.getTableLoader(7);
+
         Minitoring.Api.get('api/system/inodes', null, function (result) {
             
             switch (Minitoring.View.getCurrentView()) {

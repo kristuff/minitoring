@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.19
+ * @version    0.1.20
  * @copyright  2017-2021 Kristuff
  */
 
@@ -85,7 +85,7 @@ class SocketServer implements MessageComponentInterface {
 
     protected function log(int $facility, string $message): void
     {
-        openlog($this->appName, LOG_PERROR | LOG_CONS, LOG_LOCAL0);
+        openlog($this->appName, LOG_PERROR | LOG_CONS | LOG_PID, LOG_USER);
         syslog($facility, $message);
         closelog();
     }

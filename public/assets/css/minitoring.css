@@ -1,0 +1,447 @@
+/*!
+ *        _      _ _           _
+ *  _ __ (_)_ _ (_) |_ ___ _ _(_)_ _  __ _
+ * | '  \| | ' \| |  _/ _ \ '_| | ' \/ _` |
+ * |_|_|_|_|_||_|_|\__\___/_| |_|_||_\__, |
+ *                                   |___/
+ * 
+ * This file is part of Kristuff\Minitoring.
+ * (c) Kristuff <kristuff@kristuff.fr>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ *
+ * @version    0.1.20
+ * @copyright  2017-2021 Kristuff
+ */
+@media only screen and (max-width:767px) {
+  #footer-auth {
+    display: none
+  }
+}
+#footer-auth {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0
+}
+.bg-tech {
+  background: linear-gradient(black,#000),url(../img/tech-bw.jpg);
+  background-position-x: 0,0;
+  background-position-y: 0,0;
+  background-repeat: repeat,repeat;
+  background-size: auto,auto;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: saturation
+}
+tr.table-loader {
+  border: none!important
+}
+tr.table-loader td {
+  border: none!important;
+  padding-top: 35px!important;
+  text-align: center!important;
+  padding-bottom: 35px!important
+}
+.loader {
+  padding-top: 40px;
+  text-align: center
+}
+.wizard {
+  background: 0 0!important;
+  border: none;
+  max-width: 750px
+}
+.wizard .wizard-inner .wizard-panel {
+  padding: 0
+}
+.wizard .wizard-inner .wizard-bottom {
+  padding-right: 0
+}
+.wizard .wizard-inner .wizard-button-next,
+.wizard .wizard-inner .wizard-button-prev {
+  min-width: 115px
+}
+.wizard-overlay {
+  background-color: rgba(0,0,0,.8)
+}
+table#fail2ban-jails,
+table#fail2ban-server {
+  display: table;
+  table-layout: auto;
+  font-size: 1.45rem
+}
+table#fail2ban-jails td[data-column=Status] .badge,
+table#fail2ban-server td[data-column=Status] .badge {
+  font-size: 1.3rem
+}
+table#ip6tables-data,
+table#iptables-data {
+  display: table;
+  table-layout: auto;
+  font-size: 1.45rem
+}
+table#ip6tables-data tr.group-row,
+table#iptables-data tr.group-row {
+  cursor: pointer
+}
+table#ip6tables-data th.group,
+table#iptables-data th.group {
+  width: 26px
+}
+table#ip6tables-data tr:not(.group-row).hidden,
+table#iptables-data tr:not(.group-row).hidden {
+  display: none
+}
+table#ip6tables-data td[colspan]::before,
+table#iptables-data td[colspan]::before {
+  content: "";
+  width: 0
+}
+@media only screen and (max-width:767px) {
+  table#ip6tables-data td[data-column=Group],
+  table#iptables-data td[data-column=Group] {
+    display: none
+  }
+}
+table#system-cron-list,
+table#system-timer-list,
+table#users-cron-list {
+  font-size: 1.45rem
+}
+@media only screen and (min-width:768px) {
+  table#system-cron-list td[data-column="Next Run Date"],
+  table#system-cron-list th[data-column="Next Run Date"],
+  table#system-timer-list td[data-column="Next Run Date"],
+  table#system-timer-list th[data-column="Next Run Date"],
+  table#users-cron-list td[data-column="Next Run Date"],
+  table#users-cron-list th[data-column="Next Run Date"] {
+    min-width: 165px;
+    max-width: 165px
+  }
+}
+#current-user {
+  float: right;
+  display: flex;
+  align-items: center;
+  padding: 0 10px;
+  height: 55px;
+  max-height: 55px
+}
+#current-user:hover {
+  background-color: rgba(0,0,0,.1)
+}
+#current-user img.avatar {
+  width: 25px;
+  height: 25px
+}
+#current-user .user-name {
+  line-height: 1.2;
+  display: none
+}
+#current-user .user-email {
+  display: none;
+  font-size: 75%;
+  line-height: 1.1
+}
+@media only screen and (min-width:768px) {
+  #current-user .user-name {
+    display: block
+  }
+  #current-user .user-email {
+    display: block
+  }
+  #current-user img.avatar {
+    float: left;
+    margin-right: 6px
+  }
+}
+[data-theme=dark] #current-user:hover {
+  background-color: rgba(255,255,255,.05)
+}
+.dashboard .block {
+  padding: 10px
+}
+@media only screen and (min-width:768px) {
+  .dashboard .block {
+    padding: 15px
+  }
+}
+@media only screen and (min-width:1024px) {
+  .dashboard .block {
+    padding: 20px
+  }
+}
+.dashboard .block .content {
+  min-height: 160px
+}
+.dashboard .block .content .main {
+  font-size: 60px;
+  padding-top: 10px
+}
+@media only screen and (min-width:768px) {
+  table#disks-table th,
+  table#inodes-table th {
+    position: sticky;
+    top: -10px
+  }
+}
+@media only screen and (max-width:767px) {
+  table#disks-table .progress-bar,
+  table#inodes-table .progress-bar {
+    display: inline-block;
+    min-width: 200px
+  }
+}
+table#disks-table td[colspan]::before,
+table#inodes-table td[colspan]::before {
+  content: "";
+  width: 0
+}
+.gauge-container {
+  padding: 10px 5px
+}
+.gauge-container:after {
+  display: block;
+  content: attr(data-bottom);
+  margin-top: -50px;
+  text-align: center;
+  font-size: 14px
+}
+#main-container,
+.subpanel,
+.view,
+body,
+html {
+  height: 100%!important
+}
+.footer {
+  height: 30px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 10px
+}
+.main-content {
+  height: calc(100% - 55px)
+}
+.side-menu ~ .main-content {
+  padding: 0
+}
+@media only screen and (min-width:768px) {
+  .side-menu ~ .main-content {
+    padding: 0
+  }
+}
+.subpanel,
+.view {
+  display: none;
+  overflow-y: auto;
+  padding: 10px 10px
+}
+.subpanel.open,
+.view.active {
+  display: block
+}
+@media only screen and (min-width:768px) {
+  .subpanel,
+  .view {
+    padding: 10px 15px
+  }
+}
+.anim-scale-increase {
+  -webkit-animation: anim-scale-increase .35s .3s both;
+  animation: anim-scale-increase .35s .3s both
+}
+@media only screen and (min-width:768px) {
+  .side-menu ~ .main-header {
+    padding-left: 10px
+  }
+  .side-menu ~ .main-header .back-trigger {
+    margin-left: -10px
+  }
+}
+form {
+  border: none
+}
+@media only screen and (min-width:768px) {
+  .side-menu ~ .main-header .back-trigger.active {
+    display: inline-block
+  }
+  .side-menu ~ .main-header .back-trigger.active ~ .side-menu-trigger {
+    display: none
+  }
+}
+.back-trigger {
+  display: none
+}
+.back-trigger.active {
+  display: block
+}
+.back-trigger.active ~ .side-menu-trigger {
+  display: none
+}
+.main-header .header-title {
+  font-size: 2.6rem
+}
+table#system-logs-table {
+  display: table;
+  table-layout: auto;
+  font-size: 1.45rem
+}
+table#system-logs-table td {
+  vertical-align: top
+}
+table#system-logs-table td[data-column=Level],
+table#system-logs-table td[data-column=Status] {
+  font-size: 1.3rem
+}
+table#system-logs-table td[data-column=Level] .badge,
+table#system-logs-table td[data-column=Status] .badge {
+  font-size: unset
+}
+@media only screen and (min-width:768px) {
+  table#system-logs-table th {
+    position: sticky;
+    top: -10px
+  }
+  table#system-logs-table td[data-column=Date],
+  table#system-logs-table th[data-column=Date] {
+    min-width: 150px;
+    max-width: 160px
+  }
+  table#system-logs-table td[data-column=Request],
+  table#system-logs-table th[data-column=Request] {
+    word-wrap: break-word
+  }
+  table#system-logs-table td[data-column="User Agent"] {
+    word-wrap: break-word
+  }
+  table#system-logs-table th[data-column=Size] {
+    min-width: 60px;
+    text-align: center
+  }
+  table#system-logs-table td[data-column=Size] {
+    min-width: 60px;
+    text-align: right
+  }
+  table#system-logs-table td[data-column="Log Name"],
+  table#system-logs-table th[data-column="Log Name"] {
+    display: none
+  }
+}
+table#settings-logs-table {
+  display: table;
+  font-size: 1.5rem
+}
+table#settings-logs-table tr {
+  min-height: 40px
+}
+@media only screen and (min-width:768px) {
+  table#settings-logs-table {
+    table-layout: fixed
+  }
+  table#settings-logs-table th {
+    position: sticky;
+    top: -10px
+  }
+  table#settings-logs-table td[data-column=Name],
+  table#settings-logs-table th[data-column=Name] {
+    width: 250px
+  }
+  table#settings-logs-table td[data-column=Actions],
+  table#settings-logs-table th[data-column=Actions] {
+    width: 126px
+  }
+  table#settings-logs-table td[data-column=Type],
+  table#settings-logs-table th[data-column=Type] {
+    width: 120px
+  }
+}
+table#packages-table {
+  font-size: 1.45rem
+}
+table#packages-table td {
+  vertical-align: top
+}
+table#packages-table th.group {
+  width: 26px
+}
+table#packages-table td[colspan]::before {
+  content: "";
+  width: 0
+}
+@media only screen and (max-width:767px) {
+  table#packages-table td[data-column=Group] {
+    display: none
+  }
+}
+@media only screen and (min-width:768px) {
+  table#packages-table th {
+    position: sticky;
+    top: -10px
+  }
+}
+#section-services table td[data-column=Actions],
+#section-services table th[data-column=Actions] {
+  min-width: 85px;
+  max-width: 85px
+}
+:not([data-current-view="sysusers/currents"]) td[data-column=Pid],
+:not([data-current-view="sysusers/currents"]) th[data-column=Pid] {
+  display: none
+}
+table#sysusers-table {
+  font-size: 1.45rem
+}
+@media only screen and (min-width:768px) {
+  table#sysusers-table th {
+    position: sticky;
+    top: -10px
+  }
+}
+table tr.filter-hide {
+  display: none
+}
+table tr.filter-show {
+  display: table-row!important
+}
+ul.toolbar li.search {
+  float: right;
+  min-width: 150px;
+  width: 150px
+}
+ul.toolbar li.search input {
+  width: 100%
+}
+@media only screen and (min-width:768px) {
+  ul.toolbar li.search {
+    min-width: 180px;
+    width: 180px
+  }
+}
+@media only screen and (min-width:1024px) {
+  ul.toolbar li.search {
+    min-width: 200px;
+    width: 200px
+  }
+}
+table#users-table {
+  font-size: 1.45rem
+}
+@media (min-width:768px) {
+  table#users-table td[data-column=Actions],
+  table#users-table th[data-column=Actions] {
+    min-width: 85px;
+    max-width: 85px
+  }
+}
+@media only screen and (min-width:768px) {
+  table#users-table th {
+    position: sticky;
+    top: -10px
+  }
+}

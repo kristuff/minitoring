@@ -78,4 +78,3 @@ Most config tasks are done by web installer or can be changed from web interface
 - Supposes Fail2ban used (**TODO** -> option).
 - Translation in progress
 - Logreader: To add a log file, webserver checks file exists first. To add log files like apache logs, located in `/var/log/apache2` on debian, you need to add `execute` permission to that directory (`chmod +x /var/log/apache2`), otherwise, app will refuse to add file saying it doesn't exist. Note: no need to add `read` permission to web server as file will be read by a service launch by root.
-- toggle password visibility do not display correctly on mobile (**TODO**).

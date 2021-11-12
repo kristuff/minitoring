@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.19
+ * @version    0.1.20
  * @copyright  2017-2021 Kristuff
  */
 
@@ -129,9 +129,16 @@ return array(
 
     /* Sysusers */
     'SYS_USERS'                                         => 'Utilisateurs',
-  
+    'SYS_USERS_CONNECTED'                               => 'Utilisateur(s) connecté(s)',
+
     /* Services */
     'SERVICES'                                          => 'Services',
+
+    /* Network */
+    'NETWORK'                                           => 'Réseau',
+    'NETWORK_INTERFACE'                                 => 'Interface',
+    'NETWORK_RECEIVED'                                  => 'Reçu',
+    'NETWORK_TRANSMITTED'                               => 'Transmis',
 
     /* Disks */
     'DISKS'                                             => 'Disques',
@@ -144,6 +151,15 @@ return array(
     /* Packages */
     'PACKAGES'                                          => 'Paquets',
     'PACKAGES_UPGRADE_NONE'                             => 'Tous les paquets sont à jour',
+    'PACKAGES_TOTAL'                                    => 'Total',
+    'PACKAGES_INSTALLED'                                => 'Installés',
+    'PACKAGES_UPGRADABLE'                               => 'Mises à jour disponibles',
+    'PACKAGES_ERROR'                                    => 'Erreurs',
+ 
+    /* Process */
+    'PROCESS'                                           => 'Processus',
+    'PROCESS_TOTAL'                                     => 'Total',
+    'PROCESS_RUNNING'                                   => 'En cours',
 
     /* Logs */
     'LOGS'                                              => 'Journaux',
@@ -304,6 +320,7 @@ return array(
     'SETTINGS_DISK_SHOW_TMPFS'                          => "Afficher les systèmes de fichiers temporaires (tmpfs)",
     'SETTINGS_DISK_SHOW_LOOP'                           => "Afficher les systèmes de fichiers loop",
     'SETTINGS_DISK_SHOW_FILE_SYSTEM'                    => "Afficher les systèmes de fichiers",
+    'SETTINGS_CPU_SHOW_TEMPERATURE'                     => "Afficher la température (peut nécessiter des packages supplémentaires comme lm-sensors sur les distributions basées sur Debian).",
     'SETTINGS_DEFAULT_TITLE'                            => 'Paramètres par défaut',
     'SETTINGS_DEFAULT_TEXT'                             => "Definit les paramètres par défaut. S'applique aux pages de connexion / récupération de mot de passe.",
 

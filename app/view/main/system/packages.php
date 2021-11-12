@@ -5,7 +5,6 @@
             <li class="tab-item <?php echo $this->data('currentAction') == 'upgradable'   ? 'current' : '' ?>"><a href="<?php echo $this->baseUrl; ?>packages/upgradable" data-view="packages/upgradable"><i class="fa fa-plus icon-left" aria-hidden="true"></i>Upgradable<span id="packages-upgradable-menuitem"></span></a></li>
         </ul>
     </section>
-    <br>
     <ul class="toolbar margin-top-6">
         <li>
             <a class="button button-small" href="#" data-bind="Minitoring.Packages.refresh">
@@ -17,7 +16,7 @@
         </li>
     </ul>
     <section class="section">
-        <table id="packages-table" class="data-table responsive">
+        <table id="packages-table" class="data-table grouped group-row-caret responsive">
             <thead>
                 <tr>
                     <th data-column="Name">Name</th>

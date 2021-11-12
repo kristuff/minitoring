@@ -15,7 +15,7 @@
         </li>
     </ul>
     <section class="section">
-        <table id="ip6tables-data" class="data-table responsive">
+        <table id="ip6tables-data" class="data-table grouped group-row-caret responsive">
             <thead>
                 <tr>
                     <th data-column="Group" class="group"></th>

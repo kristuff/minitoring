@@ -11,8 +11,7 @@
         <h5 class="color-accent text-light"><?php $this->echo('SETTINGS_SECURITY_TITLE') ;?></h5>
         <div class="container container-medium">
             <form>
-                <p><?php $this->echo('SETTINGS_TOKEN_TEXT');?></p>
-                <br>
+                <p class="margin-bottom-12"><?php $this->echo('SETTINGS_TOKEN_TEXT');?></p>
                 <label><?php $this->echo('SETTINGS_TOKEN_FIELD');?></label>
                 <input class="block" id="settings-websocket-token" type='text' value="<?php echo $this->data('websocketToken'); ?>" readonly />
                 <br>
@@ -25,20 +24,34 @@
     <br>
 
     <section class="section">
+        <h5 class="color-accent text-light"><?php $this->echo('CPU'); ?></h5>
+        <div class="container container-medium">
+
+            <div class="padding-top-6 position-relative">
+                <input id="cpu_show_temp" type="checkbox" class="switch"  <?php echo $this->data('appSettings')['CPU_SHOW_TEMPERATURE'] ? ' checked ' : ''; ?> data-bind="Minitoring.Admin.cpuShowTempChanged" data-bind-event="change"/>
+                <label for="cpu_show_temp"></label>
+                <label><?php $this->echo('SETTINGS_CPU_SHOW_TEMPERATURE'); ?></label>
+            </div>
+            
+        </div>
+    </section>
+    <br>
+
+    <section class="section">
         <h5 class="color-accent text-light"><?php $this->echo('DISKS'); ?></h5>
         <div class="container container-medium">
-            <div class="padding-top-6">
+            <div class="padding-top-6 position-relative">
                 <input id="disks_show_tmpfs" type="checkbox" class="switch"  <?php echo $this->data('appSettings')['DISKS_SHOW_TMPFS'] ? ' checked ' : ''; ?> data-bind="Minitoring.Admin.diskShowTmpfsChanged" data-bind-event="change"/>
                 <label for="disks_show_tmpfs"></label>
                 <label><?php $this->echo('SETTINGS_DISK_SHOW_TMPFS'); ?></label>
             </div>
-            <div class="padding-top-12">
+            <div class="padding-top-12 position-relative">
                 <input id="disks_show_loop" type="checkbox" class="switch"  <?php echo $this->data('appSettings')['DISKS_SHOW_LOOP'] ? ' checked ' : ''; ?> data-bind="Minitoring.Admin.diskShowLoopChanged" data-bind-event="change"/>
                 <label for="disks_show_loop"></label>
                 <label><?php $this->echo('SETTINGS_DISK_SHOW_LOOP'); ?></label>
             </div>
             
-            <div class="padding-top-12  need-active">
+            <div class="padding-top-12 position-relative need-active">
                 <input id="disks_show_fs" type="checkbox" class="switch" <?php echo $this->data('appSettings')['DISKS_SHOW_FILE_SYSTEM'] ? ' checked ' : ''; ?> data-bind="Minitoring.Admin.diskShowFileSystemChanged" data-bind-event="change"/>
                 <label for="disks_show_fs"></label>
                 <label><?php $this->echo('SETTINGS_DISK_SHOW_FILE_SYSTEM'); ?></label>
@@ -49,7 +62,7 @@
 
     <section class="section">
         <h5 class="color-accent text-light"><?php $this->echo('SERVICES'); ?></h5>
-        <div class="padding-top-6">
+        <div class="padding-top-6 position-relative">
             <input id="services_show_port" type="checkbox" class="switch" <?php echo $this->data('appSettings')['SERVICES_SHOW_PORT_NUMBER'] ? ' checked ' : ''; ?> data-bind="Minitoring.Admin.serviceShowPortChanged" data-bind-event="change"/>
             <label for="services_show_port"></label>
             <label><?php $this->echo('SETTINGS_SERVICES_SHOW_PORT_NUMBER'); ?></label>
@@ -88,6 +101,5 @@
     </div>
     </section>
     <br>
-
 
 </section>

@@ -8,10 +8,10 @@ if [ "$INIT_PROG" = "systemd" ]; then
     # enable the service (will start on reboot) en start the service
     echo "Reload system daemons ..."
     systemctl daemon-reload
-    echo "Enable minitoring.service ..."
-    systemctl enable minitoring.service
-    echo "Starting minitoring.service ..."
-    systemctl start minitoring.service
+    echo "Enable minitoring services ..."
+    systemctl enable minitoring-ws.service
+    echo "Starting minitoring services ..."
+    systemctl start minitoring-ws.service
 
 else
     # not systemd

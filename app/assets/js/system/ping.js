@@ -2,7 +2,7 @@
 Minitoring.Ping = {
 
     refresh: function(){
-        var tableBodyDashboard  = document.querySelector('#section-dashboard #ping-table tbody');
+        var tableBodyDashboard = document.querySelector('#section-dashboard #ping-table tbody');
         tableBodyDashboard.innerHTML= Minitoring.UI.getTableLoader(2);
         Minitoring.Api.get('api/pings/check', null,
             function (result) {
@@ -17,7 +17,7 @@ Minitoring.Ping = {
     getHtml: function (item) {
         var html = '<tr>';
         html += '<td data-column="Host" class="align-left">' + item.host + '</td>';
-        html += '<td data-column="Ping" class="align-right">' + item.ping + '</span></td>';
+        html += '<td data-column="Ping" class="align-right">' + item.ping + ' ms</span></td>';
         html += '</tr>';
         return html;
     },

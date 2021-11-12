@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.19
+ * @version    0.1.20
  * @copyright  2017-2021 Kristuff
  */
 
@@ -313,8 +313,8 @@ class CronTabModel extends SystemModel
                 $expr = '#^'.
                         '(?P<next>[a-zA-Z]+ [0-9\-]+ [0-9:]+ \w+)\s+'.
                         '(?P<left>.+left)\s+'.
-                        '(?P<last>[a-zA-Z]+ [0-9\-]+ [0-9:]+ \w+)\s+'.
-                        '(?P<passed>.+ago)\s+'.
+                        '(?P<last>([a-zA-Z]+ [0-9\-]+ [0-9:]+ \w+|))\s+'.
+                        '(?P<passed>(.+ago|))\s+'.
                         '(?P<unit>[^ ]+)\s+'.
                         '(?P<activates>[^ ]+)'.
                         '#';

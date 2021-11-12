@@ -1,6 +1,6 @@
 <section id="section-disks" class="view anim-scale-increase" data-view="disks" data-title="<?php $this->echo('DISKS'); ?>" data-refresh="Minitoring.Disks.refresh">
 
-    <ul class="toolbar">
+    <ul class="toolbar margin-bottom-6">
         <li>
             <a class="button button-small" href="#" data-bind="Minitoring.Disks.refresh">
                 <i class="fa fa-refresh icon-left"></i><span class="bt-title"><?php $this->echo('ACTION_REFRESH'); ?></span>

@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.19
+ * @version    0.1.20
  * @copyright  2017-2021 Kristuff
  */
 
@@ -62,7 +62,7 @@ class AuthController extends \Kristuff\Miniweb\Auth\Controller\AuthController
         // set common data
         $this->view->setData('APP_NAME',        Application::config('APP_NAME')); 
         $this->view->setData('APP_COPYRIGHT',   Application::config('APP_COPYRIGHT')); 
-        $this->view->setData('APP_VERSION',     Application::config('APP_VERSION')); 
+        $this->view->setData('APP_VERSION',     Application::VERSION); 
   
 
         $appSettings = AppSettingsModel::getAppSettings();

@@ -13,22 +13,14 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.19
+ * @version    0.1.20
  * @copyright  2017-2021 Kristuff
  */
 
 namespace Kristuff\Minitoring\Model\Log;
 
-use Kristuff\Miniweb\Data\Model\DatabaseModel;
-use Kristuff\Miniweb\Core\Filter;
-use Kristuff\Miniweb\Mvc\Model;
-use Kristuff\Minitoring\Model\Monitoring\LogsModel;
-use Kristuff\Miniweb\Mvc\TaskResponse;
-use Kristuff\Parselog\Software\SoftwareLogParser;
-use Kristuff\Parselog\LogParserFactory;
 use Kristuff\Miniweb\Core\Format;
 use Kristuff\Parselog\LogParser;
-use Kristuff\Miniweb\Core\Json;
 
 /** 
  * LogReader class
@@ -110,6 +102,7 @@ class LogReader
      * @param int   $limit
      * 
      * @return array
+     * //, ?string $lastAddedLineHash = null
      */
     public function getNewLines(int $limit = 100, ?string $lastLineHash = null): array
     {
@@ -121,6 +114,8 @@ class LogReader
         $linesError     = 0;
         $linesAdded     = 0;
         $newLastLineHash = null;                // the new lastlinehash used later to know if there are new lines
+        //$newLastAddedLineHash = null;           // the new lastlinehash used later to 
+        
         $fstats         = fstat($this->file);   // use to get infos about file
         
         for ( $x_pos = $startOffset , $ln = 0 , $line = '' , $still = true ; $still ; $x_pos-- ) {
@@ -160,6 +155,9 @@ class LogReader
                     try {
                         $log = $this->logParser->parse($deal);
                         $logs[] = $log;
+
+                        //$newLastAddedLineHash = $hash;
+
                         $linesAdded++;
                     } catch (\Exception $e) {
                         
@@ -197,6 +195,7 @@ class LogReader
             'linesFound'     => $linesFound,
             'linesError'     => $linesError,
             'linesAdded'     => $linesAdded,
+            'hasMoreLines'   => $still,
             'timeout'        => $timeoutReached,
             'lastLineHash'   => $newLastLineHash,
             'duration'       => (int)( ( microtime( true ) - $start ) * 1000 ),

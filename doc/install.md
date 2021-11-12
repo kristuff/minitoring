@@ -87,7 +87,7 @@ The directory `app/config/sample` contains a full vhost sample. The main points 
     ``` 
 
 
-### 4.  Restart `minitoring.service`, Enable apache modules, site and restart Apache:
+### 4.  Restart `minitoring-ws.service`, Enable apache modules, site and restart Apache:
 
 -   Enable the following Apache modules:
 
@@ -98,10 +98,10 @@ The directory `app/config/sample` contains a full vhost sample. The main points 
     a2enmod proxy_wstunnel
     ```
 
--   `minitoring.service` is started during install. If you have made changes to the default configuration (port, secure server), you need to restart service: 
+-   `minitoring-ws.service` is started during install. If you have made changes to the default configuration (port, secure server), you need to restart service: 
 
     ```
-    systemctl restart minitoring
+    systemctl restart minitoring-ws
     ```
 
 -   Restart Apache:

@@ -9,7 +9,7 @@
     </ul>
 
     <section class="section">
-        <h5 class="color-accent text-light"><?php $this->echo('CRONS_USER'); ?></h6>
+        <h5 class="color-accent text-light"><?php $this->echo('CRONS_USER'); ?></h5>
             <table id="users-cron-list" class="data-table responsive">
                 <thead>
                     <tr>
@@ -25,7 +25,7 @@
     <br>
 
     <section class="section">
-        <h5 class="color-accent text-light"><?php $this->echo('CRONS_SYSTEM'); ?></h6>
+        <h5 class="color-accent text-light"><?php $this->echo('CRONS_SYSTEM'); ?></h5>
             <table id="system-cron-list" class="data-table responsive">
                 <thead>
                     <tr>
@@ -42,7 +42,7 @@
     <br>
 
     <section class="section">
-        <h5 class="color-accent text-light"><?php $this->echo('CRONS_TIMER'); ?></h6>
+        <h5 class="color-accent text-light"><?php $this->echo('CRONS_TIMER'); ?></h5>
             <table id="system-timer-list" class="data-table responsive">
                 <thead>
                     <tr>

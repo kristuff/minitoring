@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.19
+ * @version    0.1.20
  * @copyright  2017-2021 Kristuff
  */
 
@@ -156,7 +156,8 @@ class ApiController extends \Kristuff\Miniweb\Auth\Controller\ApiController
                     break;
 
                 case 'cpu':
-                    $this->response = TaskResponse::create(200, '', System\CpuModel::getInfos());
+                    $showTemp = $this->appSettings['CPU_SHOW_TEMPERATURE'] ?? false; 
+                    $this->response = TaskResponse::create(200, '', System\CpuModel::getInfos($showTemp));
                     break;        
 
                 case 'memory':

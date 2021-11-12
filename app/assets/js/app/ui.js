@@ -34,7 +34,6 @@ Minitoring.UI = {
     },
  
     getTableLoader:function(colspan) {
-//      return '<tr class="table-loader no-style"><td class="align-center color-light" colspan="' + colspan + '"><i class="fa fa-2x fa-spinner fa-pulse"></i></td></tr>';
         return '<tr class="table-loader no-style"><td class="align-center color-light" colspan="' + colspan + '"><i class="fa fa-2x fa-circle-o-notch fa-spin fa-fw color-theme"></i></td></tr>';
     },
       

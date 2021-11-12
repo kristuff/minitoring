@@ -21,7 +21,7 @@
     </ul>
 
     <section class="section">
-        <table id="iptables-data" class="data-table responsive">
+        <table id="iptables-data" class="data-table grouped group-row-caret responsive">
                     <thead>
                         <tr>
                             <th data-column="Group"      class="group"></th>

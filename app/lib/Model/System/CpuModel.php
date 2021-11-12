@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.19
+ * @version    0.1.20
  * @copyright  2017-2021 Kristuff
  */
 
@@ -26,11 +26,6 @@ use Kristuff\Minitoring\Model\System\SystemModel;
  */
 class CpuModel extends SystemModel
 {
-
-
-    // TODO
-    private static $showCpuTemp = false;
-
     /** 
      * 
      *
@@ -39,7 +34,7 @@ class CpuModel extends SystemModel
      *
      * @return array
      */
-    public static function getInfos()
+    public static function getInfos(bool $showCpuTemp = false)
     {
         // Number of cores
         $numCores = self::getCpuCoresNumber();
@@ -94,7 +89,7 @@ class CpuModel extends SystemModel
         }
 
         // CPU Temp
-        if (self::$showCpuTemp){
+        if ($showCpuTemp){
             $temp = self::getCpuTemperature();
         }
 
@@ -129,6 +124,14 @@ class CpuModel extends SystemModel
         return 'N.A';
     }
 
+    /** 
+     * 
+     *
+     * @access public
+     * @static
+     *
+     * @return array
+     */
     public static function getLoadAverage()
     {
         if (!($loadTmp = shell_exec('cat /proc/loadavg | awk \'{print $1","$2","$3}\''))){

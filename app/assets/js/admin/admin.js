@@ -36,6 +36,9 @@ Minitoring.Admin = {
 
     diskShowFileSystemChanged: function(){
         Minitoring.Admin.updateAppSettingValue('DISKS_SHOW_FILE_SYSTEM', document.querySelector("#disks_show_fs").checked ? 1 : 0);
+    },
+    cpuShowTempChanged: function(){
+        Minitoring.Admin.updateAppSettingValue('CPU_SHOW_TEMPERATURE', document.querySelector("#cpu_show_temp").checked ? 1 : 0);
     }
 
 }

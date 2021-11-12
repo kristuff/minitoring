@@ -28,6 +28,7 @@ table#ip6tables-data {
         display: none;
     }
 
+/* 
     tr.group-row.expanded td a.toggle i {
         cursor: pointer;
         margin-right: 3px;
@@ -47,6 +48,8 @@ table#ip6tables-data {
             content: '\f054'; // fa-chevron-right
         }
     }
+
+*/
 
     td[colspan] {
         &::before {

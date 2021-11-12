@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0f6714d255060d0df6a4de5d49cca603",
+    "content-hash": "8ab495de0325865d1216d08cef33f446",
     "packages": [
         {
             "name": "cboden/ratchet",
@@ -178,16 +178,16 @@
         },
         {
             "name": "guzzlehttp/psr7",
-            "version": "1.8.2",
+            "version": "1.8.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/guzzle/psr7.git",
-                "reference": "dc960a912984efb74d0a90222870c72c87f10c91"
+                "reference": "1afdd860a2566ed3c2b0b4a3de6e23434a79ec85"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/guzzle/psr7/zipball/dc960a912984efb74d0a90222870c72c87f10c91",
-                "reference": "dc960a912984efb74d0a90222870c72c87f10c91",
+                "url": "https://api.github.com/repos/guzzle/psr7/zipball/1afdd860a2566ed3c2b0b4a3de6e23434a79ec85",
+                "reference": "1afdd860a2566ed3c2b0b4a3de6e23434a79ec85",
                 "shasum": ""
             },
             "require": {
@@ -225,12 +225,33 @@
             ],
             "authors": [
                 {
+                    "name": "Graham Campbell",
+                    "email": "hello@gjcampbell.co.uk",
+                    "homepage": "https://github.com/GrahamCampbell"
+                },
+                {
                     "name": "Michael Dowling",
                     "email": "mtdowling@gmail.com",
                     "homepage": "https://github.com/mtdowling"
                 },
                 {
+                    "name": "George Mponos",
+                    "email": "gmponos@gmail.com",
+                    "homepage": "https://github.com/gmponos"
+                },
+                {
+                    "name": "Tobias Nyholm",
+                    "email": "tobias.nyholm@gmail.com",
+                    "homepage": "https://github.com/Nyholm"
+                },
+                {
+                    "name": "Márk Sági-Kazár",
+                    "email": "mark.sagikazar@gmail.com",
+                    "homepage": "https://github.com/sagikazarmark"
+                },
+                {
                     "name": "Tobias Schultze",
+                    "email": "webmaster@tubo-world.de",
                     "homepage": "https://github.com/Tobion"
                 }
             ],
@@ -247,22 +268,36 @@
             ],
             "support": {
                 "issues": "https://github.com/guzzle/psr7/issues",
-                "source": "https://github.com/guzzle/psr7/tree/1.8.2"
+                "source": "https://github.com/guzzle/psr7/tree/1.8.3"
             },
-            "time": "2021-04-26T09:17:50+00:00"
+            "funding": [
+                {
+                    "url": "https://github.com/GrahamCampbell",
+                    "type": "github"
+                },
+                {
+                    "url": "https://github.com/Nyholm",
+                    "type": "github"
+                },
+                {
+                    "url": "https://tidelift.com/funding/github/packagist/guzzlehttp/psr7",
+                    "type": "tidelift"
+                }
+            ],
+            "time": "2021-10-05T13:56:00+00:00"
         },
         {
             "name": "kristuff/miniweb",
-            "version": "v0.9.13",
+            "version": "v0.9.14",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kristuff/miniweb.git",
-                "reference": "ea3dae21e8f8f031c931dcdbc55639174b04daaa"
+                "reference": "16863275001d6ae8e0146749e6a666a56c695523"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kristuff/miniweb/zipball/ea3dae21e8f8f031c931dcdbc55639174b04daaa",
-                "reference": "ea3dae21e8f8f031c931dcdbc55639174b04daaa",
+                "url": "https://api.github.com/repos/kristuff/miniweb/zipball/16863275001d6ae8e0146749e6a666a56c695523",
+                "reference": "16863275001d6ae8e0146749e6a666a56c695523",
                 "shasum": ""
             },
             "require": {
@@ -294,9 +329,9 @@
             "description": "Mini php web framework",
             "support": {
                 "issues": "https://github.com/kristuff/miniweb/issues",
-                "source": "https://github.com/kristuff/miniweb/tree/v0.9.13"
+                "source": "https://github.com/kristuff/miniweb/tree/v0.9.14"
             },
-            "time": "2021-09-12T13:52:06+00:00"
+            "time": "2021-10-02T17:26:04+00:00"
         },
         {
             "name": "kristuff/mishell",
@@ -346,16 +381,16 @@
         },
         {
             "name": "kristuff/parselog",
-            "version": "v0.7.1",
+            "version": "v0.7.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kristuff/parselog.git",
-                "reference": "8511c4e6159e54ad32d03f6c75723832760993b2"
+                "reference": "23b331458f62c8c78a3f75aa9bb6671d5c344431"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kristuff/parselog/zipball/8511c4e6159e54ad32d03f6c75723832760993b2",
-                "reference": "8511c4e6159e54ad32d03f6c75723832760993b2",
+                "url": "https://api.github.com/repos/kristuff/parselog/zipball/23b331458f62c8c78a3f75aa9bb6671d5c344431",
+                "reference": "23b331458f62c8c78a3f75aa9bb6671d5c344431",
                 "shasum": ""
             },
             "require": {
@@ -383,9 +418,9 @@
             "description": "Parse log library",
             "support": {
                 "issues": "https://github.com/kristuff/parselog/issues",
-                "source": "https://github.com/kristuff/parselog/tree/v0.7.1"
+                "source": "https://github.com/kristuff/parselog/tree/v0.7.2"
             },
-            "time": "2021-07-26T19:05:26+00:00"
+            "time": "2021-10-16T20:31:19+00:00"
         },
         {
             "name": "kristuff/patabase",
