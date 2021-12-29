@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# required in maintainer scripts
+set -e
+
 # systemd ?
 INIT_PROG=$(ps -p 1 -o comm=)
 

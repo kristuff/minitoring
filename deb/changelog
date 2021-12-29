@@ -1,0 +1,18 @@
+minitoring (0.1.20) unstable; urgency=medium
+
+  * New: support for MariaDb error log in logreader
+  * Fix: iptables/ip6tables reader skip some lines
+  * Fix: timers reader skip some lines
+  * Fix: remove unused VERSION in config
+  * Change: minitoring.service renamed minitoring-ws.service
+  * New: define CPU_SHOW_TEMPERATURE in app config
+  * Fix: WS server now log using LOG_USER facility
+  * Fix: improve translation
+
+ -- kristuff <kristuff@kristuff.fr>  Wed, 29 Dec 2021 13:00:00 +0200
+
+minitoring (0.1.19) unstable; urgency=medium
+
+  * initial release
+
+ -- kristuff <kristuff@kristuff.fr>  Fri, 17 Sep 2021 19:00:00 +0200

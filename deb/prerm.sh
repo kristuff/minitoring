@@ -1,5 +1,8 @@
 #!/bin/sh
 
+# required in maintainer scripts
+set -e
+
 # systemd ?
 INIT_PROG=$(ps -p 1 -o comm=)
 
@@ -18,5 +21,5 @@ if [ "$INIT_PROG" = "systemd" ]; then
 fi;
 
 
-echo "Remove minitoring-client from /usr/local/sbin ..."
-\rm -f /usr/local/sbin/minitoring
+echo "Remove minitoring-client from /usr/sbin ..."
+\rm -f /usr/sbin/minitoring

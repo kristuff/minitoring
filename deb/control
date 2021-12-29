@@ -2,7 +2,9 @@ Package: minitoring
 Version: 0.1.20
 Maintainer: kristuff <kristuff@kristuff.fr>
 Architecture: all
-Depends: apache2, php, php-sqlite3
-Description: Mini monitoring web-based app for Gnu/linux server
+Depends: apache2 | httpd, php, php-cli, php-sqlite3
+Description: Mini monitoring tool for Gnu/linux server
+ Minitoring comes with a web-based app and a cli tool to
+ check your server.  
 Priority: optional
 Section: utils
