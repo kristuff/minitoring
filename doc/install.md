@@ -38,7 +38,7 @@ The directory `app/config/sample` contains a full vhost sample. The main points 
 -   Setup Document root to `/usr/share/minitoring/public`
 
     ```apache-conf
-    DocumentRoot  /var/www/minitoring/public
+    DocumentRoot  /usr/share/minitoring/public
     ```
 
 -   Setup app rooter (require `mod_rewrite`): 
