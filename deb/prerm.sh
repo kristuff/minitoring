@@ -10,10 +10,10 @@ if [ "$INIT_PROG" = "systemd" ]; then
 
     # disable and remove minitoring.service
     echo "Stopping minitoring services ..."
-    systemctl stop minitoring-ws
+    systemctl stop minitoring-server
     systemctl list-timers | grep "minitoring-hourly-script" >/dev/null && systemctl stop minitoring-hourly-script.timer
     echo "Disable minitoring services ..."
-    systemctl disable minitoring-ws.service
+    systemctl disable minitoring-server.service
     systemctl list-timers | grep "minitoring-hourly-script" >/dev/null && systemctl disable minitoring-hourly-script.timer
 
 #else
@@ -21,5 +21,5 @@ if [ "$INIT_PROG" = "systemd" ]; then
 fi;
 
 
-echo "Remove minitoring-client from /usr/sbin ..."
-\rm -f /usr/sbin/minitoring
+echo "Remove minitoring-client from /usr/bin ..."
+\rm -f /usr/bin/minitoring

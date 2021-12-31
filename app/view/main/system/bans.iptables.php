@@ -12,7 +12,7 @@
     <ul class="toolbar">
             <li>
                 <a class="button button-small" href="#" data-bind="Minitoring.Iptables.refreshIptables">
-                    <i class="fa fa-refresh icon-left"></i><span class="bt-title"><?php $this->echo('ACTION_REFRESH');?></span>
+                    <i class="fa fa-refresh color-theme icon-left"></i><span class="bt-title"><?php $this->echo('ACTION_REFRESH');?></span>
                 </a>
             </li>
             <li class="search">

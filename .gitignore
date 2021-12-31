@@ -1,4 +1,5 @@
 app/vendor/*
 *.old*
+*.local
 *.local.php
 *.local.json

@@ -7,6 +7,19 @@ table#system-logs-table {
     table-layout: auto;
     font-size: 1.45rem;
 
+
+
+
+    tr.new-row {
+        border-left: 2px solid var(--color-theme);
+    }
+    //&:not(.new-row) {
+    //    border-left: 2px solid transparent;
+    //}
+
+
+
+
     td {
         vertical-align: top;
     }
@@ -57,6 +70,8 @@ table#settings-logs-table {
 
     tr {
         min-height: 40px;
+
+
     }
 
     @media only screen and (min-width:768px){

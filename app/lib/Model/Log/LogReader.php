@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.20
+ * @version    0.1.21
  * @copyright  2017-2021 Kristuff
  */
 
@@ -96,15 +96,19 @@ class LogReader
 
     /**
      * Gets new lines (read by the end)
-     * TODO:    implement lastlinehash 
+     * 
+     * Use $topLineHashor OR $lastLineHash 
+     * When $topLineHashor is set, get new lines added after this line, if any
+     * When $lastLineHash is set, get additional lines before this line 
      * 
      * @access public
-     * @param int   $limit
+     * @param int       $limit
+     * @param string    $topLineHash    The hash of the top line, if known  
+     * @param string    $lastLineHash   The hash of the last parsed line, if known  
      * 
      * @return array
-     * //, ?string $lastAddedLineHash = null
      */
-    public function getNewLines(int $limit = 100, ?string $lastLineHash = null): array
+    public function getNewLines(int $limit = 100, ?string $topLineHash = null, ?string $lastLineHash = null): array
     {
         $startOffset    = 0;                    // options ?
         $timeoutReached = false;                // indicates if timeout was reached
@@ -113,8 +117,8 @@ class LogReader
         $linesFound     = 0;
         $linesError     = 0;
         $linesAdded     = 0;
-        $newLastLineHash = null;                // the new lastlinehash used later to know if there are new lines
-        //$newLastAddedLineHash = null;           // the new lastlinehash used later to 
+        $newTopLineHash = null;                 // the new lastlinehash used later to know if there are new lines
+        $offsetLineHash = $lastLineHash;
         
         $fstats         = fstat($this->file);   // use to get infos about file
         
@@ -140,39 +144,46 @@ class LogReader
                 // Manage the new line
                 if ( $deal !== '' ) {
 
-                    // Get the last line of the file to compute the hash of this line
-                    // Compare to the known lastlinehash
+                    // Get the hash of this line
                     $hash = sha1( $deal );
-                    if ( empty($newLastLineHash) ) {
-                        $newLastLineHash = $hash;
+                    
+                    // Compare to the known toplinehash
+                    if (!empty($topLineHash) && $hash === $topLineHash){
+                        break;
                     }
 
-                    if ( !empty($lastLineHash) && $lastLineHash === $hash ) {
-                        break;
+                    // store the last (top) line hash
+                    if ( empty($newTopLineHash) ) {
+                        $newTopLineHash = $hash;
+                    }
+
+                    // skip line?
+                    if ( !empty($offsetLineHash)) {
+                        if ($offsetLineHash === $hash) {
+                            //reset offsetLineHash for future reads
+                            $offsetLineHash = null;
+                        }
+                        continue;
                     }    
 
                     // Parse the new line
                     try {
                         $log = $this->logParser->parse($deal);
                         $logs[] = $log;
-
-                        //$newLastAddedLineHash = $hash;
-
                         $linesAdded++;
                     } catch (\Exception $e) {
-                        
                         //TODO
                         $linesError++;
                     } finally {
                         $linesFound++;
                     }
                         
-                    // Break if we have found the wanted count of logs
+                    // Break if we have found the wanted number of lines
                     if ( $linesAdded >= $limit ){
                         break;
                     }
                     
-                    // timeout 
+                    // check for timeout 
                     if ((microtime(true) - $start) >= $this->timeoutSeconds){
                         $timeoutReached = true;
                         break;
@@ -197,7 +208,8 @@ class LogReader
             'linesAdded'     => $linesAdded,
             'hasMoreLines'   => $still,
             'timeout'        => $timeoutReached,
-            'lastLineHash'   => $newLastLineHash,
+            'lastLineHash'   => $hash,
+            'topLineHash'    => $newTopLineHash ?? $topLineHash,
             'duration'       => (int)( ( microtime( true ) - $start ) * 1000 ),
             'fileSizeBytes'  => $fstats['size'],
             'fileSize'       => Format::getSize($fstats['size']),

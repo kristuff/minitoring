@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.20
+ * @version    0.1.21
  * @copyright  2017-2021 Kristuff
  */
 
@@ -33,7 +33,7 @@ class Application extends Mvc\Application
     /** 
      * current version 
      */
-    const VERSION = "v0.1.20";
+    const VERSION = "v0.1.21";
 
     /** 
      * Constructor
@@ -62,7 +62,13 @@ class Application extends Mvc\Application
         // if file exists: Extract data and complete or overwrite default config
         $this->loadConfigFile(__DIR__ . '/../config/minitoring.conf.php');
         $this->loadConfigFile(__DIR__ . '/../config/minitoring.conf.local.php');
-       
+
+        // for package installation, look for overwides in /etc
+        //   /etc/minitoring/minitoring.ini
+        //   /etc/minitoring/minitoring.local 
+        $this->loadIniConfigFile('/etc/minitoring/minitoring.ini', false);
+        $this->loadIniConfigFile('/etc/minitoring/minitoring.local', false);
+        
         // load database config
         if (Model\SetupModel::isInstalled()){
             $this->setConfig(Model\SetupModel::getConfig());

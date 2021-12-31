@@ -70,6 +70,8 @@ Minitoring.View = {
             // Hide all view
             Array.prototype.forEach.call(document.querySelectorAll('.view[data-view]'), function (elmt) {
                 elmt.classList.remove('active');
+                // TODO 
+                Minitoring.Logs.cleanAutoRefresh(true);
             });
 
             // show current view and 

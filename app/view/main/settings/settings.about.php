@@ -14,12 +14,13 @@
         M<span class="color-theme">i</span>nitoring
     </div>
     <p class="">
-        Version <span class="badge" data-badge="info"><?php echo $this->data('APP_VERSION') ;?></span>
+        Version <span class="badge" data-badge="black"><?php echo $this->data('APP_VERSION') ;?></span>
         <br>Copyright <i class="fa fa-copyright"></i> <?php echo $this->data('APP_COPYRIGHT');?>
         <br>Made with <i class="fa fa-heart color-theme"></i> and <i class="fa fa-coffee color-theme"></i> in France.
+        <br>Source code on <i class="fa fa-github icon-left"></i>Github: <a class="link" href="https://github.com/kristuff/minitoring">kristuff/minitoring</a>
     </p>
     <br>
-
+    
     <section class="section">
         <h5 class="color-accent text-light"><?php $this->echo('SETTINGS_INFOS_DEPENDENCIES') ;?></h5>
         <form class="large">

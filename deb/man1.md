@@ -1,6 +1,6 @@
-% MINITORING(1) Version 0.1.20 | Minitoring User Manuals
+% MINITORING(1) Version 0.1.21 | Minitoring User Manuals
 % 
-% December 10, 2021
+% December 30, 2021
 
 # NAME
 
@@ -34,9 +34,6 @@ infos from the running host.
 
 -l, \--load
 :   Display load average
-
--f, \--f2b 
-:   Display Fail2ban stats
 
 -s, \--system
 :   Display all system infos related

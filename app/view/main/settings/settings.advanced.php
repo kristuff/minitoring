@@ -16,12 +16,11 @@
                 <input class="block" id="settings-websocket-token" type='text' value="<?php echo $this->data('websocketToken'); ?>" readonly />
                 <br>
                 <button class="button" data-color="theme" data-style="flat" data-bind="Minitoring.Admin.resetApiKey">
-                    <i class="fa fa-refresh icon-left color-theme"></i><?php $this->echo('SETTINGS_TOKEN_RESET_BUTTON');?>
+                    <i class="fa fa-refresh color-theme icon-left color-theme"></i><?php $this->echo('SETTINGS_TOKEN_RESET_BUTTON');?>
                 </button>
             </form>
         </div>
     </section>       
-    <br>
 
     <section class="section">
         <h5 class="color-accent text-light"><?php $this->echo('CPU'); ?></h5>
@@ -35,7 +34,6 @@
             
         </div>
     </section>
-    <br>
 
     <section class="section">
         <h5 class="color-accent text-light"><?php $this->echo('DISKS'); ?></h5>
@@ -58,7 +56,6 @@
             </div>
         </div>
     </section>
-    <br>
 
     <section class="section">
         <h5 class="color-accent text-light"><?php $this->echo('SERVICES'); ?></h5>
@@ -68,7 +65,6 @@
             <label><?php $this->echo('SETTINGS_SERVICES_SHOW_PORT_NUMBER'); ?></label>
         </div>
     </section>
-    <br>
 
     <section class="section">
         <h5 class="color-accent text-light"><?php $this->echo('SETTINGS_MISC_TITLE') ;?></h5>
@@ -83,22 +79,21 @@
             </div>
         </div>
     </section>
-    <br>
   
     <section class="section">
         <h5 class="color-accent text-light"><?php $this->echo('SETTINGS_DEFAULT_TITLE') ;?></h5>
         <div class="container container-medium">
-        <p><?php $this->echo('SETTINGS_DEFAULT_TEXT') ;?></p>
-        <form class="padding-top-12">
-            <div class="padding-bottom-6"><?php $this->echo('SETTINGS_CUSTOMIZE_LANGUAGE_FIELD') ;?></div>
-            <div class="custom-select full-width">
-                <select id="select-default-language" data-bind="Minitoring.Admin.defaultlangChanged">
-                    <option value="en-US" <?php echo $this->data('appSettings')['UI_LANG'] === 'en-US' ? ' selected' : '' ;?> >English (en-US)</option>
-                    <option value="fr-FR" <?php echo $this->data('appSettings')['UI_LANG'] === 'fr-FR'  ? ' selected' : '' ;?> >Français (fr-FR)</option>
-                </select>
-            </div>
-        </form>
-    </div>
+            <p><?php $this->echo('SETTINGS_DEFAULT_TEXT') ;?></p>
+            <form class="padding-top-12">
+                <div class="padding-bottom-6"><?php $this->echo('SETTINGS_CUSTOMIZE_LANGUAGE_FIELD') ;?></div>
+                <div class="custom-select full-width">
+                    <select id="select-default-language" data-bind="Minitoring.Admin.defaultlangChanged">
+                        <option value="en-US" <?php echo $this->data('appSettings')['UI_LANG'] === 'en-US' ? ' selected' : '' ;?> >English (en-US)</option>
+                        <option value="fr-FR" <?php echo $this->data('appSettings')['UI_LANG'] === 'fr-FR'  ? ' selected' : '' ;?> >Français (fr-FR)</option>
+                    </select>
+                </div>
+            </form>
+        </div>
     </section>
     <br>
 

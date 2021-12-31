@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.20
+ * @version    0.1.21
  * @copyright  2017-2021 Kristuff
  */
 
@@ -166,6 +166,7 @@ return array(
     'LOGS_REFRESH_NONE'                                 => 'No refresh',
     'LOGS_REFRESH_XSECONDS'                             => 'Refresh each %ss',
     'LOGS_DISPLAY_XLINES'                               => 'Display %s lines',
+    'LOGS_LOAD_MORE_BUTTON'                             => 'Load more lines...',
 
     /* Crons */
     'CRONS'                                             => "Scheduled tasks",

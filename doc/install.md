@@ -1,7 +1,7 @@
 # ![logo](../public/assets/img/favicon-32x32.png) minitoring
 
 
-## Install minitoring on debian buster server with Apache
+## Install minitoring on debian bullseye server with Apache
 
 > The following guide supposes:
 > - a debian based server with root access and running systemd
@@ -21,19 +21,21 @@ apt-get install minitoring
     
 Alternatively, you can download the latest `.deb` package from release tags and install it using `dpkg -i`.
 
-Minitoring  `app` and `public` folders are deployed to `/var/www/minitoring`.
+Minitoring library is deployed to `/usr/share/minitoring/`. A symlink to executable is created in `/usr/bin` and config (in INI format) is located in `/etc/minitoring/`.
+By default, a *data* directories are created in `/var/lib/minitoring/`.
 
+> ⚠️ In previous release, the whole app was deployed in `/var/www/minitoring`. If you upgrade and have data stored in that location, you need to move the content to `/var/lib/minitoring`. For example, `/var/www/minitoring/app/data/db.` becomes `/var/lib/minitoring/db`. The whole directory must be writable by webserver. You will also need to update your apache config with new DocumentRoot (see above) and change the database path in the `config/db.config.php`.  You may also need to change other optional config, see above. 
 
 ### 2. Optional config changes:
 
-Most config tasks are done with web installer or can be changed from web inerface. For advanced settings, like using a custom port for websocket service, see [config](/doc/config.md) 
+Most config tasks are done with web installer or can be changed from web interface. For advanced settings, like changing the data directories or using a custom port for websocket service, see [config](/doc/config.md) 
 
 
 ### 3. Configure Apache vhost:
 
 The directory `app/config/sample` contains a full vhost sample. The main points are the following: 
 
--   Setup Document root to `/var/www/minitoring/public`
+-   Setup Document root to `/usr/share/minitoring/public`
 
     ```apache-conf
     DocumentRoot  /var/www/minitoring/public
@@ -42,7 +44,7 @@ The directory `app/config/sample` contains a full vhost sample. The main points 
 -   Setup app rooter (require `mod_rewrite`): 
 
     ```apache-conf
-    <Directory /var/www/minitoring/public/>
+    <Directory /usr/share/minitoring/public/>
         Options +FollowSymLinks
         Options -Indexes -Includes
         AllowOverride None
@@ -54,12 +56,6 @@ The directory `app/config/sample` contains a full vhost sample. The main points 
         RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
     </Directory>
     ```
-
-    > You can enable the `minitoring` apache conf that contains the block code above
-    > 
-    > ```
-    > a2enconf minitoring
-    > ```
 
 -   Configure WebSocket API proxy for the url `/wssapi`:
 
@@ -87,7 +83,7 @@ The directory `app/config/sample` contains a full vhost sample. The main points 
     ``` 
 
 
-### 4.  Restart `minitoring-ws.service`, Enable apache modules, site and restart Apache:
+### 4.  Restart `minitoring-server.service`, Enable apache modules, site and restart Apache:
 
 -   Enable the following Apache modules:
 
@@ -98,10 +94,10 @@ The directory `app/config/sample` contains a full vhost sample. The main points 
     a2enmod proxy_wstunnel
     ```
 
--   `minitoring-ws.service` is started during install. If you have made changes to the default configuration (port, secure server), you need to restart service: 
+-   `minitoring-server.service` is started during install. If you have made changes to the default configuration (port, secure server), you need to restart service: 
 
     ```
-    systemctl restart minitoring-ws
+    systemctl restart minitoring-server
     ```
 
 -   Restart Apache:

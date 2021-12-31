@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.20
+ * @version    0.1.21
  * @copyright  2017-2021 Kristuff
  */
 
@@ -166,6 +166,7 @@ return array(
     'LOGS_REFRESH_NONE'                                 => 'Ne pas rafraîchir',
     'LOGS_REFRESH_XSECONDS'                             => 'Rafraîchir toutes les %ss',
     'LOGS_DISPLAY_XLINES'                               => 'Afficher %s lignes',
+    'LOGS_LOAD_MORE_BUTTON'                             => 'Charger plus de lignes...',
 
     /* Crons */
     'CRONS'                                             => "Tâches planifiées",

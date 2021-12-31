@@ -14,7 +14,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.20
+ * @version    0.1.21
  * @copyright  2017-2021 Kristuff
  */
 
@@ -22,7 +22,6 @@ require_once realpath(__DIR__) .'/../vendor/autoload.php';
 
 use Kristuff\Mishell\Console;
 use Kristuff\Minitoring\Model\System;
-use Kristuff\Minitoring\Model\System\Fail2banModel;
 use Kristuff\Minitoring\Application;
 
 // x    => no value
@@ -59,10 +58,6 @@ class Program
             exit(1);
         }
     
-        //Console::log();
-
-        // build report
-        // self::topBanner();
         if (self::inArguments($arguments, 'h', 'help', '', '')) {
             self::help();
             exit(0);
@@ -78,15 +73,6 @@ class Program
         if (self::inArguments($arguments, 'l', 'load'))     self::load();
         if (self::inArguments($arguments, 'n', 'network'))  self::networkInfos();
         if (self::inArguments($arguments, 'p', 'ping'))     self::pingInfos();
-      
-      
-        //todo
-        if (self::inArguments($arguments, 'f', 'f2b', 'NO-ALL!','NO-ALL!'))   self::fail2ban();
-
-        $jail = self::getArgumentValue($arguments, '', 'ftbstatus');
-        if (isset($jail)) {
-            self::fail2banStatus($jail);
-        }
 
         self::footer();
     }
@@ -160,17 +146,11 @@ class Program
      */
     protected static function banner(bool $delimiter = false, $title = false)
     {
-        //Console::log();    
-        //Console::log('  Minitoring version v0.1', 'darkgray'); 
-        //Console::log('  Made with ♥ in France', 'darkgray'); 
-        //Console::log('  © 2017-2021 Kristuff', 'darkgray'); 
-        //Console::log();  
         Console::log($delimiter ? '  --------------------------------------------------------------------': '', 'darkgray');    
         Console::log(
             Console::text('  Kristuff\Minitoring version v0.1 | Made with ', 'darkgray') . 
             Console::text('♥', 'red') . 
             Console::text(' in France | © 2017-2021 Kristuff', 'darkgray')); 
-            //        Console::log(' © 2017-2021 Kristuff', 'darkgray'); 
         Console::log();    
     }
 
@@ -201,7 +181,6 @@ class Program
         Console::log('   -i, --inodes    Prints inodes usage', 'normal');
         Console::log('   -m, --memory    Prints memory usage', 'normal');
         Console::log('   -l, --load      Prints load average', 'normal');
-        Console::log('   -f, --f2b       Prints Fail2ban stats', 'normal');
         Console::log('   -n, --network   Prints all system infos related', 'normal');
         Console::log('   -p, --ping      Prints ping stats', 'normal');
         Console::log('   -a, --all       Prints all infos messages', 'normal');
@@ -387,132 +366,6 @@ class Program
         Console::log();
     }
 
-    //TODO
-    static function fail2banStatus($jail)
-    {
-        self::sectionTitle('Fail2ban');
-        Console::log();
-
-        $status = Fail2banModel::getJailStatus($jail);
-
-        if (!empty($status)){
-            Console::log(' ' . Console::pad(' Status for the jail: ' . Console::text($jail, 'white', 'underlined'), 100, ' '));
-            Console::log();
-
-            Console::log(Console::text(Console::tableRowStart() . 
-                Console::tableRowCell(Console::text('Currently banned:',  'darkgray'), 30) .
-                Console::tableRowCell(Console::text( Console::text($status['currentlyBanned'], 'white'), 'darkgray'), 15, Console::ALIGN_RIGHT)
-            ));
-            Console::log(Console::text(Console::tableRowStart() . 
-                Console::tableRowCell(Console::text('Total banned:',  'darkgray'), 30) .
-                Console::tableRowCell(Console::text( Console::text($status['totalBanned'], 'white'), 'darkgray'), 15, Console::ALIGN_RIGHT)
-            ));
-
-
-     
-
-        }
-
-//        var_dump($status);
-
-    }
-
-     //TODO
-     static function fail2ban()
-     {
-        self::sectionTitle('Fail2ban');
-        $total = ['totalBanned'=>0,'totalFailed'=>0,'currentlyFailed'=>0,'currentlyBanned'=>0,];
-
-
-        Console::log();
-        Console::log(' '. Console::tableRow(['Version:' => 20, Console::text(Fail2banModel::getVersion(), 'white') => 50]));
-        Console::log('   Jails status:' );
-
-        $jails = Fail2banModel::getJailsInfos();
-        $rowHeaders = [
-                'Name'      => 25, 
-                'Status'    => 12,
-                //    'Bantime'   => 10, 
-                //    'Findtime'  => 10, 
-                //    'MaxRetry'  => 10, 
-                'X'      => 18, 
-                'Xs'      => 18, 
-                'Xss'      => 18, 
-                'Xsss'      => 18, 
-        ];
- 
-        Console::log(' '.Console::tableRowSeparator($rowHeaders, 'darkgray'));
-        Console::log(' ' . 
-            Console::text(
-                Console::tableRowStart() . 
-                Console::tableRowCell(Console::text('Name',  'darkgray'), 25) .
-                Console::tableRowCell(Console::text('Status', 'darkgray'), 12, Console::ALIGN_CENTER).  
-               // Console::tableRowCell(Console::text('Bantime', 'darkgray'), 10, Console::ALIGN_CENTER) .
-               // Console::tableRowCell(Console::text('Findtime', 'darkgray'), 10, Console::ALIGN_CENTER) .
-               // Console::tableRowCell(Console::text('MaxRetry', 'darkgray'), 10, Console::ALIGN_CENTER) .
-               Console::tableRowCell(Console::text('Currently failed', 'darkgray'), 18, Console::ALIGN_CENTER) .
-               Console::tableRowCell(Console::text('Currently banned', 'darkgray'), 18, Console::ALIGN_CENTER) .
-               Console::tableRowCell(Console::text('Total failed', 'darkgray'), 18, Console::ALIGN_CENTER) .
-               Console::tableRowCell(Console::text('Total banned', 'darkgray'), 18, Console::ALIGN_CENTER) 
-//                Console::tableRowCell(Console::text('Bans', 'darkgray'), 10, Console::ALIGN_CENTER) .
-//                Console::tableRowCell(Console::text('Logs', 'darkgray'), 50, Console::ALIGN_CENTER) 
-            )
-        );
-        Console::log(' '.Console::tableRowSeparator($rowHeaders, 'darkgray'));
-         
- 
-        foreach ($jails as $item){
-
-            $enabled = ($item['enabled'] == 1);
-            $status = $enabled ? Fail2banModel::getJailStatus($item['name'], false) : null;
-
-            Console::log(
-                ' ' .
-                Console::tableRowStart() .
-                Console::tableRowCell($item['name'], 25) .
-                Console::tableRowCell( $enabled ? 
-                                    Console::text('✓ ', 'green') . 'enabled' : 
-                                    Console::text('✗ ', 'red' ) . 'disabled',
-                                    11, Console::ALIGN_CENTER) .
-           //     Console::tableRowCell($item['bantime'], 10, Console::ALIGN_RIGHT) .
-           //     Console::tableRowCell($item['findtime'], 10, Console::ALIGN_RIGHT) .
-           //     Console::tableRowCell($item['maxretry'], 10, Console::ALIGN_RIGHT) .
-           Console::tableRowCell($enabled ? $status['currentlyFailed'] : '-', 18, Console::ALIGN_RIGHT) .
-           Console::tableRowCell($enabled ? $status['currentlyBanned'] : '-', 18, Console::ALIGN_RIGHT) .
-           Console::tableRowCell($enabled ? $status['totalFailed'] : '-', 18, Console::ALIGN_RIGHT) .
-           Console::tableRowCell($enabled ? $status['totalBanned'] : '-', 18, Console::ALIGN_RIGHT) 
-        );
-        
-        //           Console::tableRowCell('', 50) 
-            if ($enabled){
-                $total['currentlyFailed']   = $total['currentlyFailed'] + $status['currentlyFailed'];
-                $total['currentlyBanned']   = $total['currentlyBanned'] + $status['currentlyBanned'];
-                $total['totalFailed']       = $total['totalFailed']     + $status['totalFailed'];
-                $total['totalBanned']       = $total['totalBanned']     + $status['totalBanned'];
-            }
-
-
-        }
-        Console::log(' '.Console::tableRowSeparator($rowHeaders, 'darkgray'));
-
-        
-        Console::log(
-            ' ' .
-            Console::tableRowStart() .
-            Console::tableRowCell('TOTAL', 25) .
-            Console::tableRowCell('', 11, Console::ALIGN_CENTER) .
-       //     Console::tableRowCell($item['bantime'], 10, Console::ALIGN_RIGHT) .
-       //     Console::tableRowCell($item['findtime'], 10, Console::ALIGN_RIGHT) .
-       //     Console::tableRowCell($item['maxretry'], 10, Console::ALIGN_RIGHT) .
-            Console::tableRowCell($total['currentlyFailed'], 18, Console::ALIGN_RIGHT) .
-            Console::tableRowCell($total['currentlyBanned'], 18, Console::ALIGN_RIGHT) .
-            Console::tableRowCell($total['totalFailed'], 18, Console::ALIGN_RIGHT) .
-            Console::tableRowCell($total['totalBanned'], 18, Console::ALIGN_RIGHT) 
-    );
-//        Console::log(' '.Console::tableRowSeparator($rowHeaders, 'darkgray'));
-        Console::log();
-     }
-
     /**
      * Prints disks infos
      * 
@@ -692,9 +545,9 @@ class Program
       //  Console::log(' '. Console::tableRow(['5 min'  => 8, self::progressBar($load['load5'],  $load['load5AlertCode'],  21) => 25]));
       //  Console::log(' '. Console::tableRow(['15 min' => 8, self::progressBar($load['load15'], $load['load15AlertCode'], 21) => 25]));
       
-      Console::log('   1 min '  . self::progressBar($load['load1'],  $load['load1AlertCode'],  21) . 
-                   ' | 5 min '  . self::progressBar($load['load5'],  $load['load5AlertCode'],  21) . 
-                   ' | 15 min ' . self::progressBar($load['load15'], $load['load15AlertCode'], 21));
+      Console::log('   1 min '  . self::progressBar($load['load1'],  $load['load1AlertCode'],  18) . 
+                   ' | 5 min '  . self::progressBar($load['load5'],  $load['load5AlertCode'],  18) . 
+                   ' | 15 min ' . self::progressBar($load['load15'], $load['load15AlertCode'], 18));
         Console::log();
     }
 }

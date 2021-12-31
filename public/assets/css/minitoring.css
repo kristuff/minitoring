@@ -11,7 +11,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.20
+ * @version    0.1.21
  * @copyright  2017-2021 Kristuff
  */
 @media only screen and (max-width:767px) {
@@ -292,6 +292,9 @@ table#system-logs-table {
   table-layout: auto;
   font-size: 1.45rem
 }
+table#system-logs-table tr.new-row {
+  border-left: 2px solid var(--color-theme)
+}
 table#system-logs-table td {
   vertical-align: top
 }
@@ -389,6 +392,9 @@ table#packages-table td[colspan]::before {
 #section-services table th[data-column=Actions] {
   min-width: 85px;
   max-width: 85px
+}
+#settings-advanced .section + .section {
+  padding-top: 50px
 }
 :not([data-current-view="sysusers/currents"]) td[data-column=Pid],
 :not([data-current-view="sysusers/currents"]) th[data-column=Pid] {

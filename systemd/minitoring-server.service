@@ -11,8 +11,16 @@
 # file that was distributed with this source code.
 
 [Unit]
-Description=Minitoring scheduled checks
+Description=Minitoring WebSocket service
+After=network.target
+StartLimitIntervalSec=0
 
 [Service]
-Type=oneshot
-ExecStart=/usr/bin/env php /var/www/minitoring/app/bin/minitoring-cronjob
+Type=simple
+Restart=always
+RestartSec=1
+User=root
+ExecStart=/usr/bin/env php /usr/share/minitoring/app/bin/minitoring-server
+
+[Install]
+WantedBy=multi-user.target

@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.20
+ * @version    0.1.21
  * @copyright  2017-2021 Kristuff
  */
 
@@ -124,8 +124,16 @@ class SocketServer implements MessageComponentInterface {
             case 'logs':
                 $this->log(LOG_INFO, 'Request accepted from IP [' . $remoteIP . '] command [' . $request['command'] . ']');
                 $logId    = $request['logId'];
-                $max      = array_key_exists('maxLines', $request) ? intval($request['maxLines']) : 50;
-                $response = Log\LogReaderModel::read($logId, $max);
+                $max      = array_key_exists('maxLines', $request) && is_numeric($request['maxLines']) ? intval($request['maxLines']) : 50;
+                $toplineHash = array_key_exists('toplineHash', $request) && 
+                                  is_string($request['toplineHash']) && 
+                                  !empty($request['toplineHash']) ? $request['toplineHash'] : null;
+       
+                $lineOffsetHash = array_key_exists('lastlinehash', $request) && 
+                                  is_string($request['lastlinehash']) && 
+                                  !empty($request['lastlinehash']) ? $request['lastlinehash'] : null;
+                
+                $response = Log\LogReaderModel::read($logId, $max, $toplineHash, $lineOffsetHash);
                 break;
 
             case 'fail2ban_status':

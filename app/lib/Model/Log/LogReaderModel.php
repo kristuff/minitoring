@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.20
+ * @version    0.1.21
  * @copyright  2017-2021 Kristuff
  */
 
@@ -140,26 +140,27 @@ class LogReaderModel extends Model
      * @access public
      * @static
      * @param int       $logId      
-     * @param int       $limit      Default is 100
+     * @param int       $limit          Default is 100
+     * @param string    $topLineHash    The hash of the top line, if known  
+     * @param string    $lastLineHash   The hash of the last parsed line, if known  
      * 
      * @return array        
      */
-    public static function read(int $logId, int $limit = 100): TaskResponse
+    public static function read(int $logId, int $limit = 100, ?string $topLineHash = null, ?string $lastLineHash = null): TaskResponse
     {
-        $log      = LogsCollectionModel::getById($logId);
         $response = TaskResponse::create(200);
+        $log      = LogsCollectionModel::getById($logId);
 
         if ($response->assertTrue(isset($log), 500, 'Error when retrieving log info')){
  
-            // get parser and open file 
             $parser = LogParserFactory::getParser($log->logType, !empty($log->logFormat) ? $log->logFormat : null);
-            $logreader = new LogReader($parser, $log->logPath );
+            $reader = new LogReader($parser, $log->logPath );
                
             // Returns an error if could not open file
-            if ($response->assertTrue($logreader->open(), 500, "Error when opening file $log->logPath")){
+            if ($response->assertTrue($reader->open(), 500, "Error when opening file $log->logPath")){
 
                 // populates response with data
-                $data               = $logreader->getNewLines($limit);
+                $data               = $reader->getNewLines($limit, $topLineHash, $lastLineHash);
                 $data['columns']    = self::getColumns($log->logType, $parser->getFormat());
                 $data['logFormat']  = $parser->getFormat();
                 $data['logType']    = $log->logType;

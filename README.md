@@ -18,7 +18,7 @@ Get **Network** usage: displaying the IP address of each network interface with 
 Check **memory**/**swap** usage | ✔️| ✔️ |
 Check **disks**/**inodes** usage  | ✔️| ✔️ |
 Check **packages**: installed, upgradable, error (*.deb packages only*) | ✔️| - |
-Check **Fail2ban** status and get jails stats | ✔️ (*stats based on db*)| ✔️ (*currents bans, very slow*)|
+Check **Fail2ban** status and get jails stats | ✔️ (*stats based on db*)| -|
 Check **Iptables**/**Ip6tables** content | ✔️| - |
 Check **ping** stats for a configurable host list  | ✔️ | ✔️ |
 List all **cron jobs** (user/system crons, system timers) | ✔️| - |
@@ -57,11 +57,11 @@ For some features (logs reader, packages, fail2ban stats...), app must be run wi
 ## Install
 For now Minitoring is only available as `.deb` package. 
 
-See [Install minitoring on debian buster/bullseye with Apache](/doc/install.md).
+See [Install minitoring on debian bullseye with Apache](/doc/install.md).
 
 For others systems, you will have to build the package:
 - Install dependencies and build autoloader using `composer`.
-- Install dev dependencies and compile scss/js (requires `npm`)
+- \[Install dev dependencies and compile scss/js (requires `npm`)] *I try to keep the assets directory up to date*
 - Run and manage minitoring-server
 
 
@@ -79,5 +79,3 @@ Most config tasks are done by web installer or can be changed from web interface
 - Supposes systemd is init program: maintainer scripts take care to check that systemd is the init program before running scripts but there is for now no alternative. 
 - Translation in progress
 - Logreader: To add a log file, webserver checks file exists first. To add log files like apache logs, located in `/var/log/apache2` on debian, you need to add `execute` permission to that directory (`chmod +x /var/log/apache2`), otherwise, app will refuse to add file saying it doesn't exist. Note: no need to add `read` permission to web server as file will be read by a service launch by root.
-- minitoring-client is for now deployed in `/usr/sbin`. Admin permission is only required for fail2ban command, that is very very slow (**?** remove fail2ban command from client and move to `/usr/sbin`) 
-- App is currently deployed to `/var/www/minitoring` in deb package. (**TODO** deploy app somewhere else and only the `data` part in `/var`

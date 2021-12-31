@@ -17,5 +17,10 @@ if [ "$INIT_PROG" = "systemd" ]; then
 fi;
 
 
+#if [ "$1" = purge ] && [ -e /usr/share/debconf/confmodule ]; then
+#    . /usr/share/debconf/confmodule db_purge
+#fi
+
+
 echo "Minitoring is now uninstalled"
 

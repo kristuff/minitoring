@@ -1,3 +1,16 @@
+minitoring (0.1.21) unstable; urgency=medium
+
+  * New: Improve logs reader (load more button to add x more lines, auto
+  refresh now check only for new lines)
+  * Change: new deploy directories: 
+  lib is now deployed in /usr/share/minitoring, /var/lib/minitoring is 
+  now the data directory and /etc/minitoring is used for conf files
+  * Change: minitoring-ws.service renamed minitoring-server.service
+  * Remove: minitoring-apache.conf from /etc
+  * Remove fail2ban commands and now deploy minitoring-client to /usr/bin 
+    
+ -- kristuff <kristuff@kristuff.fr>  Thu, 30 Dec 2021 19:00:00 +0200
+
 minitoring (0.1.20) unstable; urgency=medium
 
   * New: support for MariaDb error log in logreader

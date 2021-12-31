@@ -3,7 +3,7 @@
     <ul class="toolbar">
             <li>
                 <a class="button button-small" href="#" data-bind="Minitoring.Logs.refresh">
-                    <i class="fa fa-refresh icon-left"></i><span class="bt-title"><?php $this->echo('ACTION_REFRESH');?></span>
+                    <i class="fa fa-refresh color-theme icon-left"></i><span class="bt-title"><?php $this->echo('ACTION_REFRESH');?></span>
                 </a>
             </li>
             <li class="search">
@@ -50,13 +50,17 @@
             </div>
         </div>
     </section>
-
     <table id="system-logs-table" class="data-table responsive XXalternative-row-style">
         <thead></thead>
         <tbody class=""></tbody>
     </table>                
     <section class="section">
         <div id="system-logs-msg" class="text-small"></div>
+    </section>
+    <section id="system-logs-loadmore" class="section need-active align-center">
+        <a class="button button-small" href="#" data-bind="Minitoring.Logs.loadMore">
+            <i class="fa fa-plus icon-left color-theme"></i><span class="bt-title"><?php $this->echo('LOGS_LOAD_MORE_BUTTON');?></span>
+        </a>
     </section>
  
 </section>

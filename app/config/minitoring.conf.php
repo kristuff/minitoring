@@ -13,7 +13,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  *
- * @version    0.1.20
+ * @version    0.1.21
  * @copyright  2017-2021 Kristuff
  */
 
@@ -68,12 +68,11 @@ return array(
     'APP_COPYRIGHT'             =>  '2017-' .date("Y") . ' Kristuff',
     'APP_LANGUAGE'              =>  'en-US',
  
-    'DATA_PATH'                 => __DIR__ . '/../data/',
-    'DATA_CONFIG_PATH'          => __DIR__ . '/../data/config/',
-    'DATA_DB_PATH'              => __DIR__ . '/../data/db/',
-    'DATA_LOG_PATH'             => __DIR__ . '/../data/log/',
-
-    'USER_AVATAR_PATH'          => __DIR__ . '/../data/avatar/',
+    'DATA_PATH'                 => __DIR__ . '/../../data/',
+    'DATA_CONFIG_PATH'          => __DIR__ . '/../../data/config/',
+    'DATA_DB_PATH'              => __DIR__ . '/../../data/db/',
+    'DATA_LOG_PATH'             => __DIR__ . '/../../data/log/',
+    'USER_AVATAR_PATH'          => __DIR__ . '/../../data/avatar/',
     'USER_AVATAR_URL'           => 'ressources/avatar/',
     'USER_AVATAR_DEFAULT_IMAGE' => 'default.jpg',
 
