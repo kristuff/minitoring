@@ -2,7 +2,7 @@
 
 ## Debian based distros
 
-`.deb` package deploy configuration file in **INI** format in `/etc/minitoring`. To change anything in configuration, first create a local config file named `/etc/minitoring/minitoring.local.php` and use it to overwrite the keys you want.
+`.deb` package deploy configuration file in **INI** format in `/etc/minitoring`. To change anything in configuration, first create a local config file named `/etc/minitoring/minitoring.local` and use it to overwrite the keys you want.
 
 This file won't be removed when you uninstall the `.deb` package with `dpkg --remove` or during update. To remove it use the `--purge` option.
 
