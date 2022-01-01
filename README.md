@@ -6,6 +6,10 @@
 
 ![preview_dark](/doc/img/overview_dark.png)
 
+![preview_logs](/doc/img/log_apache_access.png)
+
+![preview_packages](/doc/img/packages.png)
+
 ## Main features
 
 *Monitoring*
